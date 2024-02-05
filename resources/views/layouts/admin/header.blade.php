@@ -33,27 +33,27 @@
         <div class="d-flex">
 
 
-{{--            @php--}}
-{{--                $currentLocale = app(\Mcamara\LaravelLocalization\LaravelLocalization::class)->getCurrentLocale();--}}
-{{--            @endphp--}}
+            @php
+                $currentLocale = app(\Mcamara\LaravelLocalization\LaravelLocalization::class)->getCurrentLocale();
+            @endphp
 
 
 
-{{--            <div class="dropdown d-none d-sm-inline-block">--}}
-{{--                <button type="button" class="btn header-item waves-effect" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">--}}
-{{--                    <img class="" src="{{ asset('assets/images/flags/'.$currentLocale.'.jpg') }}" alt="Header Language" height="16">--}}
-{{--                </button>--}}
-{{--                <div class="dropdown-menu dropdown-menu-end">--}}
-{{--                    @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)--}}
-{{--                        @if($localeCode != $currentLocale)--}}
-{{--                            <a href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}" class="dropdown-item notify-item">--}}
-{{--                                <img src="{{ asset('assets/images/flags/' . $localeCode.'.jpg') }}" alt="user-image" class="me-1" height="12">--}}
-{{--                                <span class="align-middle">{{ $properties['native'] }}</span>--}}
-{{--                            </a>--}}
-{{--                        @endif--}}
-{{--                    @endforeach--}}
-{{--                </div>--}}
-{{--            </div>--}}
+            <div class="dropdown d-none d-sm-inline-block">
+                <button type="button" class="btn header-item waves-effect" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img class="" src="{{ asset('assets/images/flags/'.$currentLocale.'.jpg') }}" alt="Header Language" height="16">
+                </button>
+                <div class="dropdown-menu dropdown-menu-end">
+                    @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                        @if($localeCode != $currentLocale)
+                            <a href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}" class="dropdown-item notify-item">
+                                <img src="{{ asset('assets/images/flags/' . $localeCode.'.jpg') }}" alt="user-image" class="me-1" height="12">
+                                <span class="align-middle">{{ $properties['native'] }}</span>
+                            </a>
+                        @endif
+                    @endforeach
+                </div>
+            </div>
 
 
             <div class="dropdown d-none d-lg-inline-block ms-1">

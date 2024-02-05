@@ -1,6 +1,5 @@
 <!doctype html>
-{{--<html lang="en" dir="{{ LaravelLocalization::getCurrentLocale() =='ar'?'rtl':'' }}">--}}
-<html>
+<html lang="en" dir="{{ LaravelLocalization::getCurrentLocale() =='ar'?'rtl':'' }}">
 
 @include('layouts.admin.head')
 <body data-topbar="dark" style="background-color:#eff3f6; " >

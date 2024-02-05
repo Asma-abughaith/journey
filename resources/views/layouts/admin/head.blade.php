@@ -1,12 +1,10 @@
 <head>
     @php
-//    $lang=app(\Mcamara\LaravelLocalization\LaravelLocalization::class)->getCurrentLocale() =='ar'?'-rtl':'';
-        $lang='';
-
+        $lang=app(\Mcamara\LaravelLocalization\LaravelLocalization::class)->getCurrentLocale() =='ar'?'-rtl':'';
     @endphp
 
     <meta charset="utf-8" />
-    <title>Dashboard | Admin</title>
+    <title>@yield('title')</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
     <meta content="Themesdesign" name="author" />
@@ -29,6 +27,6 @@
     <!-- App Css-->
     <link href="{{asset('assets')}}/css/app{{$lang}}.min.css" id="app-style" rel="stylesheet" type="text/css" />
 
-{{--    @vite(['resources/sass/app.scss', 'resources/js/app.js'])--}}
+    {{--    @vite(['resources/sass/app.scss', 'resources/js/app.js'])--}}
 
 </head>
