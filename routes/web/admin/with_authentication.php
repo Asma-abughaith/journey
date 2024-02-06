@@ -48,4 +48,7 @@ Route::put('password', [PasswordController::class, 'update'])->name('password.up
 Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
     ->name('logout');
 
+//routes for permissions we should hide it after finish
+Route::resource('permissions',PermissionController::class);
+
 
