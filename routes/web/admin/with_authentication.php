@@ -7,6 +7,7 @@ use App\Http\Controllers\Web\Admin\AdminAuth\EmailVerificationPromptController;
 use App\Http\Controllers\Web\Admin\AdminAuth\PasswordController;
 use App\Http\Controllers\Web\Admin\AdminAuth\VerifyEmailController;
 use App\Http\Controllers\Web\Admin\AdminAuth\AuthenticatedSessionController;
+use App\Http\Controllers\Web\Admin\PermissionController;
 
 
 //use App\Http\Controllers\ProfileController;

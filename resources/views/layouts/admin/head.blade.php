@@ -26,7 +26,14 @@
     <link href="{{asset('assets')}}/css/icons{{$lang}}.min.css" rel="stylesheet" type="text/css" />
     <!-- App Css-->
     <link href="{{asset('assets')}}/css/app{{$lang}}.min.css" id="app-style" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
 
     {{--    @vite(['resources/sass/app.scss', 'resources/js/app.js'])--}}
+    <!-- DataTables -->
+    <link href="{{asset('assets')}}/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{asset('assets')}}/libs/datatables.net-select-bs4/css//select.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+
+    <!-- Responsive datatable examples -->
+    <link href="{{asset('assets')}}/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
 
 </head>
