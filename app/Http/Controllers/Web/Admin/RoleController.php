@@ -43,9 +43,9 @@ class RoleController extends Controller
      */
     public function create()
     {
-        $allPermission = $this->permissionUseCase->allPermissions();
-        $permissions = $this->permissionPresenter->presentAllPermissionsForRoles($allPermission);
-        return view('admin.roles.create',compact('permissions'));
+//        $allPermission = $this->permissionUseCase->allPermissions();
+//        $permissions = $this->permissionPresenter->presentAllPermissionsForRoles($allPermission);
+        return view('admin.roles.create');
     }
 
     /**
