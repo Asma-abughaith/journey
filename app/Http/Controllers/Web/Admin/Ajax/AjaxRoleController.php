@@ -20,6 +20,6 @@ class AjaxRoleController extends Controller
     public function index($guard_name)
     {
         $allPermissions = $this->permissionUseCase->allPermissionsBasedGuardName($guard_name);
-        return  $this->permissionPresenter->presentAllPermissionsForRoles($allPermissions);
+        return  $this->permissionPresenter->presentAllPermissionsForRolesAjax($allPermissions);
     }
 }

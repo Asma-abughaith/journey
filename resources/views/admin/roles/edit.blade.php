@@ -19,42 +19,52 @@
                             <form method="post" action="{{ route('admin.roles.store') }}">
                                 @csrf
                                 <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="mb-3">
-                                            <label class="form-label">{{ __('app.name-en') }}</label>
-                                            <input type="text" class="form-control" placeholder="{{ __('app.role-en') }}"
-                                                name='name_en' value="{{ old('name_en') }}" required>
+                                    @foreach ($role->getTranslations('name_i18n') as $key => $value)
+                                        <div class="col-md-4">
+                                            <div class="mb-3">
+                                                <label class="form-label">{{ __('app.name-' . $key) }}</label>
+                                                <input type="text" class="form-control"
+                                                    placeholder="{{ __('app.permission-' . $key) }}"
+                                                    name="name_{{ $key }}"
+                                                    value="{{ old('name_' . $key, $value) }}" required>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="mb-3">
-                                            <label class="form-label">{{ __('app.name-ar') }}</label>
-                                            <input type="text" class="form-control" placeholder="{{ __('app.role-ar') }}"
-                                                name='name_ar' value="{{ old('name_ar') }}" required>
-                                        </div>
-                                    </div>
+                                    @endforeach
                                     <div class="col-md-4">
                                         <div class="mb-3">
                                             <label class="form-label">{{ __('app.guard') }}</label>
-                                            <select class="form-select" name="guard" id="guard"
-                                                onchange="changeGuard()">
+                                            <select class="form-select" name="guard" id="guard" disabled>
                                                 <option selected>{{ __('app.select-one') }}</option>
-                                                <option value="admin">{{ __('app.admin') }}</option>
-                                                <option value="planner">{{ __('app.planner') }}</option>
-                                                <option value="user">{{ __('app.user') }}</option>
+                                                <option value="admin" @if ($role->guard_name == 'admin') selected @endif>
+                                                    {{ __('app.admin') }}</option>
+                                                <option value="planner" @if ($role->guard_name == 'planner') selected @endif>
+                                                    {{ __('app.planner') }}</option>
+                                                <option value="user" @if ($role->guard_name == 'user') selected @endif>
+                                                    {{ __('app.user') }}</option>
                                             </select>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="row d-none" id="labelPermission">
+                                <div class="row">
                                     <div class="col-md-12">
                                         <div class="mb-1">
                                             <label class="form-label">{{ __('app.permissions') }}</label>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row" id="permissions">
+                                <div class="row">
+                                    @foreach ($permissions as $key => $permission)
+                                        <div class="col-md-4">
+                                            <div class="form-check mb-3">
+                                                <input class="form-check-input" type="checkbox" name="permissions[]"
+                                                    id="formCheck{{ $key }}" value="{{ $permission['name'] }}"
+                                                    @if ($role->getAllPermissions()->pluck('name')->contains($permission['name'])) checked @endif>
+                                                <label class="form-check-label"
+                                                    for="formCheck{{ $key }}">{{ $permission['name_i18n'] }}</label>
+                                            </div>
+                                        </div>
+                                    @endforeach
 
                                 </div>
                                 <div>
@@ -73,7 +83,3 @@
         @include('layouts.admin.footer')
     </div>
 @endsection
-
-@push('script')
-    <script src="{{ asset('assets') }}/js/js/roles.js"></script>
-@endpush

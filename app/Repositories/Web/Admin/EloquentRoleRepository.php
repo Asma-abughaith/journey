@@ -30,15 +30,9 @@ class EloquentRoleRepository implements RoleRepositoryInterface
 
         return $eloquentRole ? $this->convertToEntity($eloquentRole) : null;
     }
-    
-    public function getRoleBind($role){
-        return $this->convertToEntity($role);
-
-    }
 
     public function getRole($role)
     {
-
         return $role ? $this->convertToEntity($role) : null;
     }
 
@@ -64,34 +58,18 @@ class EloquentRoleRepository implements RoleRepositoryInterface
     {
 
         if ($roleId) {
-            DB::table('permissions')->where('id',$roleId)->delete();
+            DB::table('permissions')->where('id', $roleId)->delete();
         }
-        return ;
+        return;
     }
 
     protected function convertToEntity(Role $eloquentRole)
     {
-        $permissions = $eloquentRole->getAllPermissions();
-        $permissionRole=[];
-        foreach ($permissions as $permission) {
-            $permissionRole[] = $this->covertPermissionToEntity($permission);
-        }
         $role = new RoleEntity();
         $role->setId($eloquentRole->id);
         $role->setName($eloquentRole->name);
         $role->setNameI18n($eloquentRole->name_i18n);
         $role->setGuardName($eloquentRole->guard_name);
-        $role->setPermission($permissionRole);
         return $role;
-    }
-
-    protected function covertPermissionToEntity(Permission $permissions){
-        $permission = new PermissionEntity();
-        $permission->setId($permissions->id);
-        $permission->setName($permissions->name);
-        $permission->setNameI18n($permissions->name_i18n);
-        $permission->setGuardName($permissions->guard_name);
-        return $permission;
-        
     }
 }

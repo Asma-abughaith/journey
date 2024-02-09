@@ -23,6 +23,16 @@ class PermissionPresenter
         foreach ($Permissions as $Permission) {
             $formattedPermissions[] = $this->formatPermissionForRole($Permission);
         }
+        return $formattedPermissions;
+    }
+
+    public function presentAllPermissionsForRolesAjax($Permissions)
+    {
+        $formattedPermissions = [];
+
+        foreach ($Permissions as $Permission) {
+            $formattedPermissions[] = $this->formatPermissionForRole($Permission);
+        }
         return $formattedPermissions != null ? response()->json(["status" => 200, "data" => [$formattedPermissions]]) : response()->json(["status" => 201,]);
     }
 

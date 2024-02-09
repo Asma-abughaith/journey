@@ -9,8 +9,6 @@ interface RoleRepositoryInterface
 
     public function getRoleById($roleId);
     
-    public function getRoleBind($role);
-
     public function createRole(array $roleData);
 
     public function updateRole($role, array $roleData);

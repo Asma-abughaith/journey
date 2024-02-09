@@ -18,12 +18,6 @@ class RolePresenter
 
     }
 
-
-    public function presentRole($role)
-    {
-        return $this->formatRole($role);
-    }
-
     protected function formatRole(RoleEntity $role)
     {
         $permissions = $role->getPermission();
