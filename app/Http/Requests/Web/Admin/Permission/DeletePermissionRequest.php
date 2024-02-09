@@ -36,6 +36,7 @@ class DeletePermissionRequest extends FormRequest
 
     protected function failedValidation(Validator $validator)
     {
+        dd($validator->errors()->all());
         $this->errors = $validator->errors();
 
     }

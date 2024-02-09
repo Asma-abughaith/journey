@@ -4,6 +4,7 @@ namespace App\Repositories\Web\Admin;
 
 use App\Entities\Web\Admin\PermissionEntity;
 use App\Interfaces\Gateways\Web\Admin\PermissionRepositoryInterface;
+use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Permission;
 
 
@@ -54,12 +55,11 @@ class EloquentPermissionRepository implements PermissionRepositoryInterface
 
     public function deletePermission($permissionId)
     {
-        $eloquentPermission = Permission::find($permissionId);
 
-        if ($eloquentPermission) {
-            $eloquentPermission->delete();
+        if ($permissionId) {
+            DB::table('permissions')->where('id',$permissionId)->delete();
         }
-        return $this->convertToEntity($eloquentPermission);
+        return ;
     }
 
     protected function convertToEntity(Permission $eloquentPermission)

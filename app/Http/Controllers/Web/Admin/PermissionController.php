@@ -3,10 +3,8 @@
 namespace App\Http\Controllers\Web\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Web\Admin\Permission\DeletePermissionRequest;
 use App\Http\Requests\Web\Admin\Permission\StorePermissionRequest;
 use App\Http\Requests\Web\Admin\Permission\UpdatePermissionRequest;
-use App\Interfaces\Gateways\Web\Admin\PermissionRepositoryInterface;
 use App\Interfaces\Presenters\Web\Admin\PermissionPresenter;
 use App\UseCases\Web\Admin\PermissionUseCase;
 use Brian2694\Toastr\Facades\Toastr;
@@ -92,7 +90,6 @@ class PermissionController extends Controller
             Toastr::success('Permission updated successfully!', 'Success');
             return redirect()->route('admin.permissions.index');
         } catch (\Exception $e) {
-            dd($e);
             Toastr::error($e->getMessage(), 'Error');
             return redirect()->back()->withInput();
         }
@@ -102,7 +99,7 @@ class PermissionController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(DeletePermissionRequest $request, $permissionId)
+    public function destroy($permissionId)
     {
         try {
             $this->permissionUseCase->deletePermission($permissionId);
