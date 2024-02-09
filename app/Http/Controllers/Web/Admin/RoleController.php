@@ -77,12 +77,10 @@ class RoleController extends Controller
     public function edit(Role $role)
     {
         $role = $this->roleUseCase->getRoleBind($role);
-        dd($role);
-
-        $roles = $this->rolePresenter->presentAllRole($role);
+        $roles = $this->rolePresenter->presentRole($role);
         $allPermission = $this->permissionUseCase->allPermissions();
         $permissions = $this->permissionPresenter->presentAllPermissionsForRoles($allPermission);
-        return view('admin.permissions.edit', compact('role', 'permissions'));
+        return view('admin.roles.edit', compact('role', 'permissions'));
     }
 
     /**
