@@ -24,11 +24,11 @@ class StorePermissionRequest extends FormRequest
      */
     public function rules(): array
     {
-        $currentPermissionId = request()->id?request()->id:null;
+        $currentPermissionId = null;
         return [
             'name_en' => ['required','min:3',new CheckNameAndGuardExistRule($currentPermissionId)],
             'name_ar' => ['required','min:3'],
-            'guard'=>['required','min:3',new CheckNameAndGuardExistRule($currentPermissionId)],
+            'guard'=>['required','min:3'],
         ];
     }
 

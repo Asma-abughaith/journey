@@ -20,15 +20,16 @@ class CheckNameAndGuardExistRule implements Rule
     public function passes($attribute, $value)
     {
         if($this->currentPermissionId){
+            dd(1);
             return !Permission::where('name', $value)->where('guard_name', request()->input('guard'))->where('id', '!=', $this->currentPermissionId) ->exists();
         }
-        return !Permission::where('name', $value)->where('guard_name', request()->input('guard'))->exists();
+        return Permission::where('name', $value)->where('guard_name', request()->input('guard'))->doesntExist();
 
 
     }
 
     public function message()
     {
-        return 'The combination of name_en and guard already exists.';
+        return 'The combination of name and guard already exists.';
     }
 }

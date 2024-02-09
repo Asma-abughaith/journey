@@ -30,7 +30,7 @@
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label  class="form-label">{{__('app.name-ar')}}</label>
-                                            <input type="text" class="form-control"  placeholder="{{__('app.permission-ar')}}" name="name_ar" value="{{ old('name_en') }}" required>
+                                            <input type="text" class="form-control"  placeholder="{{__('app.permission-ar')}}" name="name_ar" value="{{ old('name_ar') }}" required>
                                         </div>
                                     </div>
 
@@ -39,8 +39,8 @@
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label class="form-label">{{__('app.guard')}}</label>
-                                            <select class="form-select"  required="" name="guard">
-                                                <option value=""  selected>{{__('app.select-one')}}</option>
+                                            <select class="form-select"  required="" name="guard" >
+                                                <option  selected>{{__('app.select-one')}}</option>
                                                 <option value="admin" >{{__('app.admin')}}</option>
                                                 <option value="planner">{{__('app.planner')}}</option>
                                                 <option value="user">{{__('app.user')}}</option>

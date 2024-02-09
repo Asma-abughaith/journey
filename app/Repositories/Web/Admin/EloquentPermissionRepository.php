@@ -64,7 +64,6 @@ class EloquentPermissionRepository implements PermissionRepositoryInterface
 
     protected function convertToEntity(Permission $eloquentPermission)
     {
-
         $permission = new PermissionEntity();
         $permission->setId($eloquentPermission->id);
         $permission->setName($eloquentPermission->name);

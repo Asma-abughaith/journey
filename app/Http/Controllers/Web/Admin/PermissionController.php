@@ -16,12 +16,10 @@ use Spatie\Permission\Models\Permission;
 class PermissionController extends Controller
 {
 
-    protected $permissionRepository;
     protected $permissionPresenter;
     protected $permissionUseCase;
 
-    public function __construct(PermissionRepositoryInterface $permissionRepository, PermissionPresenter $permissionPresenter, PermissionUseCase $permissionUseCase) {
-        $this->permissionRepository = $permissionRepository;
+    public function __construct( PermissionPresenter $permissionPresenter, PermissionUseCase $permissionUseCase) {
         $this->permissionPresenter = $permissionPresenter;
         $this->permissionUseCase = $permissionUseCase;
 
@@ -81,12 +79,20 @@ class PermissionController extends Controller
      */
     public function update(UpdatePermissionRequest $request, Permission $permission)
     {
+//        if($request->errors){
+//            foreach ($request->errors as $error){
+//                Toastr::error($error, 'Error');
+//            }
+//            return redirect()->back()->withInput();
+//        }
+
 //        $request->errors;
         try {
             $this->permissionUseCase->updatePermission($permission, $request->validated());
             Toastr::success('Permission updated successfully!', 'Success');
             return redirect()->route('admin.permissions.index');
         } catch (\Exception $e) {
+            dd($e);
             Toastr::error($e->getMessage(), 'Error');
             return redirect()->back()->withInput();
         }

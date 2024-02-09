@@ -29,7 +29,7 @@ class UpdatePermissionRequest extends FormRequest
         return [
             'name_en' => ['required','min:3',new CheckNameAndGuardExistRule($currentPermissionId)],
             'name_ar' => ['required','min:3'],
-            'guard'=>['required','min:3',new CheckNameAndGuardExistRule($currentPermissionId)],
+            'guard'=>['required','min:3'],
         ];
     }
 
@@ -56,7 +56,9 @@ class UpdatePermissionRequest extends FormRequest
 
     protected function failedValidation(Validator $validator)
     {
-        $this->errors = $validator->errors();
+        $this->errors = $validator->errors()->all();
+
+
 
     }
 
