@@ -21,12 +21,12 @@ class RoleController extends Controller
 
     protected $permissionPresenter;
 
-    public function __construct( RolePresenter $rolePresenter, RoleUseCase $roleUseCase, PermissionUseCase $permissionUseCase ,PermissionPresenter $permissionPresenter) {
+    public function __construct(RolePresenter $rolePresenter, RoleUseCase $roleUseCase, PermissionUseCase $permissionUseCase, PermissionPresenter $permissionPresenter)
+    {
         $this->rolePresenter = $rolePresenter;
         $this->roleUseCase = $roleUseCase;
         $this->permissionUseCase = $permissionUseCase;
         $this->permissionPresenter = $permissionPresenter;
-
     }
     /**
      * Display a listing of the resource.
@@ -35,7 +35,7 @@ class RoleController extends Controller
     {
         $allRoles = $this->roleUseCase->allRoles();
         $roles = $this->rolePresenter->presentAllRole($allRoles);
-        return view('admin.roles.index',compact('roles'));
+        return view('admin.roles.index', compact('roles'));
     }
 
     /**
@@ -45,7 +45,7 @@ class RoleController extends Controller
     {
         $allPermission = $this->permissionUseCase->allPermissions();
         $permissions = $this->permissionPresenter->presentAllPermissionsForRoles($allPermission);
-        return view('admin.roles.create',compact('permissions'));
+        return view('admin.roles.create', compact('permissions'));
     }
 
     /**
@@ -54,7 +54,7 @@ class RoleController extends Controller
     public function store(StoreRoleRequest $request)
     {
         try {
-            $this->roleUseCase->createRole( $request->validated());
+            $this->roleUseCase->createRole($request->validated());
             Toastr::success('Permission created successfully!', 'Success');
             return redirect()->route('admin.permissions.index');
         } catch (\Exception $e) {
@@ -76,7 +76,13 @@ class RoleController extends Controller
      */
     public function edit(Role $role)
     {
-        //
+        $role = $this->roleUseCase->getRoleBind($role);
+        dd($role);
+
+        $roles = $this->rolePresenter->presentAllRole($role);
+        $allPermission = $this->permissionUseCase->allPermissions();
+        $permissions = $this->permissionPresenter->presentAllPermissionsForRoles($allPermission);
+        return view('admin.permissions.edit', compact('role', 'permissions'));
     }
 
     /**

@@ -8,6 +8,7 @@ class RoleEntity{
     private $name;
     private $name_i18n;
     private $guard_name;
+    private $permissions=[];
 
 
     // Constructor when make instance of class we should put those in side it..... we will see if we will make it or not
@@ -57,6 +58,17 @@ class RoleEntity{
     public function setGuardName($guard_name) {
         $this->guard_name = $guard_name;
     }
+
+     // Getter for guard_name
+     public function getPermission() {
+        return $this->permissions;
+    }
+
+    // Setter for guard_name
+    public function setPermission($permissions) {
+        $this->permissions = $permissions;
+    }
+
 
 
 }

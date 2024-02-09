@@ -24,9 +24,8 @@ use Livewire\Livewire;
 |
 */
 
-Route::get('/dashboard', function(){
+Route::get('/dashboard', function () {
     return view('admin.dashboard');
-
 })->name('dashboard');
 
 Route::get('verify-email', EmailVerificationPromptController::class)
@@ -51,10 +50,7 @@ Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
     ->name('logout');
 
 //routes for permissions we should hide it after finish
-Route::resource('permissions',PermissionController::class);
+Route::resource('permissions', PermissionController::class);
 
-Route::resource('roles',RoleController::class);
-
-
-
-
+//================= Routes For Role =================
+Route::resource('roles', RoleController::class);

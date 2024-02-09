@@ -2,9 +2,11 @@
 
 namespace App\Repositories\Web\Admin;
 
+use App\Entities\Web\Admin\PermissionEntity;
 use App\Entities\Web\Admin\RoleEntity;
 use App\Interfaces\Gateways\Web\Admin\RoleRepositoryInterface;
 use Illuminate\Support\Facades\DB;
+use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
 
@@ -27,6 +29,11 @@ class EloquentRoleRepository implements RoleRepositoryInterface
         $eloquentRole = Role::find($roleId);
 
         return $eloquentRole ? $this->convertToEntity($eloquentRole) : null;
+    }
+    
+    public function getRoleBind($role){
+        return $this->convertToEntity($role);
+
     }
 
     public function getRole($role)
@@ -64,11 +71,27 @@ class EloquentRoleRepository implements RoleRepositoryInterface
 
     protected function convertToEntity(Role $eloquentRole)
     {
+        $permissions = $eloquentRole->getAllPermissions();
+        $permissionRole=[];
+        foreach ($permissions as $permission) {
+            $permissionRole[] = $this->covertPermissionToEntity($permission);
+        }
         $role = new RoleEntity();
         $role->setId($eloquentRole->id);
         $role->setName($eloquentRole->name);
         $role->setNameI18n($eloquentRole->name_i18n);
         $role->setGuardName($eloquentRole->guard_name);
+        $role->setPermission($permissionRole);
         return $role;
+    }
+
+    protected function covertPermissionToEntity(Permission $permissions){
+        $permission = new PermissionEntity();
+        $permission->setId($permissions->id);
+        $permission->setName($permissions->name);
+        $permission->setNameI18n($permissions->name_i18n);
+        $permission->setGuardName($permissions->guard_name);
+        return $permission;
+        
     }
 }

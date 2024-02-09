@@ -14,7 +14,6 @@ class PermissionPresenter
             $formattedPermissions[] = $this->formatPermission($Permission);
         }
         return $formattedPermissions;
-
     }
 
     public function presentAllPermissionsForRoles($Permissions)
@@ -24,10 +23,8 @@ class PermissionPresenter
         foreach ($Permissions as $Permission) {
             $formattedPermissions[] = $this->formatPermissionForRole($Permission);
         }
-        return $formattedPermissions;
-
+        return $formattedPermissions != null ? response()->json(["status" => 200, "data" => [$formattedPermissions]]) : response()->json(["status" => 201,]);
     }
-
 
     public function presentPermission($permission)
     {
@@ -44,7 +41,8 @@ class PermissionPresenter
         ];
     }
 
-    protected function formatPermissionForRole(PermissionEntity $permission){
+    protected function formatPermissionForRole(PermissionEntity $permission)
+    {
         return [
             'name' => $permission->getName(),
             'name_i18n' => $permission->getNameI18n(),

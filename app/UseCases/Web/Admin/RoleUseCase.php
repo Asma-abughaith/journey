@@ -23,6 +23,9 @@ class RoleUseCase
         return $this->roleRepository->getRoleById($roleId);
 
     }
+    public function getRoleBind($role){
+        return $this->roleRepository->getRoleBind($role);
+    }
 
     public function createRole($request){
         $translator = ['en' => $request['name_en'], 'ar' => $request['name_ar']];

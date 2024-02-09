@@ -22,6 +22,18 @@ class EloquentPermissionRepository implements PermissionRepositoryInterface
         return $permissions;
     }
 
+    public function getAllPermissionsBasedGuardName($guard_name)
+    {
+        $eloquentPermissions = Permission::where('guard_name', $guard_name)->get();
+        $permissions = [];
+
+        foreach ($eloquentPermissions as $eloquentPermission) {
+            $permissions[] = $this->convertToEntity($eloquentPermission);
+        }
+
+        return $permissions;
+    }
+
     public function getPermissionById($permissionId)
     {
         $eloquentPermission = Permission::find($permissionId);
@@ -57,9 +69,9 @@ class EloquentPermissionRepository implements PermissionRepositoryInterface
     {
 
         if ($permissionId) {
-            DB::table('permissions')->where('id',$permissionId)->delete();
+            DB::table('permissions')->where('id', $permissionId)->delete();
         }
-        return ;
+        return;
     }
 
     protected function convertToEntity(Permission $eloquentPermission)
