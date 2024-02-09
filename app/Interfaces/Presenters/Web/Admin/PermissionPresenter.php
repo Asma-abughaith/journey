@@ -17,6 +17,17 @@ class PermissionPresenter
 
     }
 
+    public function presentAllPermissionsForRoles($Permissions)
+    {
+        $formattedPermissions = [];
+
+        foreach ($Permissions as $Permission) {
+            $formattedPermissions[] = $this->formatPermissionForRole($Permission);
+        }
+        return $formattedPermissions;
+
+    }
+
 
     public function presentPermission($permission)
     {
@@ -30,6 +41,13 @@ class PermissionPresenter
             'name' => $permission->getName(),
             'name_i18n' => $permission->getNameI18n(),
             'guard_name' => $permission->getGuardName(),
+        ];
+    }
+
+    protected function formatPermissionForRole(PermissionEntity $permission){
+        return [
+            'name' => $permission->getName(),
+            'name_i18n' => $permission->getNameI18n(),
         ];
     }
 }

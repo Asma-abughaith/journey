@@ -44,7 +44,7 @@ $admin = \Illuminate\Support\Facades\Auth::guard('admin')->user();
 {{--                </li>--}}
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect" @yield('permission-active')>
-                        <i class="ri-mail-send-line"></i>
+                        <i class="ri-user-settings-fill"></i>
                         <span>{{__('app.permissions')}}</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
@@ -54,7 +54,20 @@ $admin = \Illuminate\Support\Facades\Auth::guard('admin')->user();
                 </li>
 
 
-{{--                <li>--}}
+
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect" @yield('role-active')>
+                        <i class="ri-user-settings-fill"></i>
+                        <span>{{__('app.roles')}}</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{route('admin.roles.index')}}">{{__('app.all-roles')}}</a></li>
+                        <li><a href="{{route('admin.roles.create')}}">{{__('app.create-role')}}</a></li>
+                    </ul>
+                </li>
+
+
+                {{--                <li>--}}
 {{--                    <a href="javascript: void(0);" class="has-arrow waves-effect">--}}
 {{--                        <i class="ri-mail-send-line"></i>--}}
 {{--                        <span>Permissions and Roles</span>--}}

@@ -1,13 +1,13 @@
 @extends('admin.master')
-@section('title',"Admin | Permissions")
-@section('permission-active' , 'active')
+@section('title',"Admin | roles")
+@section('role-active' , 'active')
 @section('content')
 
     <div class="main-content">
         <div class="page-content">
             <div class="container-fluid">
                 <!-- start page title -->
-                @include('layouts.admin.title', ['title' => __('app.permissions')])
+                @include('layouts.admin.title', ['title' => __('app.roles')])
                 <!-- end page title -->
 
                 <div class="row" style="margin-top: 2.5%;">
@@ -30,14 +30,14 @@
 
 
                                     <tbody>
-                                    @foreach($permissions as $permission)
+                                    @foreach($roles as $role)
                                         <tr>
-                                            <td class="text-center col-1">{{ $permission['id'] }}</td>
-                                            <td class="text-center col-4">{{ $permission['name_i18n'] }}</td>
-                                            <td class="text-center col-4">{{ $permission['guard_name'] }}</td>
+                                            <td class="text-center col-1">{{ $role['id'] }}</td>
+                                            <td class="text-center col-4">{{ $role['name_i18n'] }}</td>
+                                            <td class="text-center col-4">{{ $role['guard_name'] }}</td>
                                             <td class="text-center col-3">
-                                                <a href="{{ route('admin.permissions.edit', $permission['id']) }}" class="edit btn btn-warning btn-sm"><i class="ri-edit-line"></i></a>
-                                                <form method="post" action="{{ route('admin.permissions.destroy', $permission['id']) }}" style="display:inline;">
+                                                <a href="{{ route('admin.roles.edit', $role['id']) }}" class="edit btn btn-warning btn-sm"><i class="ri-edit-line"></i></a>
+                                                <form method="post" action="{{ route('admin.roles.destroy', $role['id']) }}" style="display:inline;">
                                                     @csrf
                                                     @method('delete')
                                                     <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete?')"><i class="ri-delete-bin-line"></i></button>

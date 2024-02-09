@@ -18,7 +18,15 @@ return [
     'admin'=>'Admin',
     'planner'=>'Planner',
     'user'=>'User',
-    'all-permissions'=>'All Permissions'
+    'all-permissions'=>'All Permissions',
+    'id'=>'Id',
+    'name'=>'Name',
+    'action'=>'Action',
+    'role'=>'Role',
+    'roles'=>'Roles',
+    'all-roles'=>'All Roles',
+    'create-role'=>'Create Role',
+
 
 
 

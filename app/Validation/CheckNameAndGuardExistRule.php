@@ -20,7 +20,6 @@ class CheckNameAndGuardExistRule implements Rule
     public function passes($attribute, $value)
     {
         if($this->currentPermissionId){
-            dd(1);
             return !Permission::where('name', $value)->where('guard_name', request()->input('guard'))->where('id', '!=', $this->currentPermissionId) ->exists();
         }
         return Permission::where('name', $value)->where('guard_name', request()->input('guard'))->doesntExist();
