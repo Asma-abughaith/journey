@@ -23,7 +23,8 @@ class EloquentAdminRepository implements AdminRepositoryInterface
         return $admins;
     }
 
-    public function getAdmin($admin){
+    public function getAdmin($admin)
+    {
         return $this->convertToEntity($admin);
     }
 
@@ -34,22 +35,26 @@ class EloquentAdminRepository implements AdminRepositoryInterface
         return $eloquentPermission ? $this->convertToEntity($eloquentPermission) : null;
     }
 
-    public function createAdmin(array $adminData, array $imageData,$role)
+    public function createAdmin(array $adminData, array $imageData, $role)
     {
         $eloquentAdmin = Admin::create($adminData);
-        isset($imageData)??$eloquentAdmin->addMediaFromRequest('image')->toMediaCollection('admin_profile');
-        if(isset($role))$eloquentAdmin->assignRole($role);
+        isset($imageData) ?? $eloquentAdmin->addMediaFromRequest('image')->toMediaCollection('admin_profile');
+        if (isset($role)) $eloquentAdmin->assignRole($role);
         return $this->convertToEntity($eloquentAdmin);
     }
 
-    public function updateAdmin(array $adminData, array $imageData,$role)
+    public function updateAdmin(array $adminData, array $imageData, $role)
     {
         $eloquentAdmin = Admin::update($adminData);
-        dd($eloquentAdmin);
-        isset($imageData)??$eloquentAdmin->addMediaFromRequest('image')->toMediaCollection('admin_profile');
-        if(isset($role))$eloquentAdmin->assignRole($role);
+        $eloquentAdmin->update($adminData);
+        if (isset($imageData['image']) && $imageData['image'] != null) {
+            $eloquentAdmin->addMediaFromRequest('image')->toMediaCollection('admin_profile');
+        }
+
+
         return $this->convertToEntity($eloquentAdmin);
     }
+
 
     public function deleteAdmin($permissionId)
     {

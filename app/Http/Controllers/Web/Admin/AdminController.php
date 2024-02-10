@@ -23,11 +23,11 @@ class AdminController extends Controller
 
     protected $roleUseCase;
 
-    public function __construct(AdminPresenter $adminPresenter, AdminUseCase $adminUseCase,RoleUseCase $roleUseCase, RolePresenter $rolePresenter)
+    public function __construct(AdminPresenter $adminPresenter, AdminUseCase $adminUseCase, RoleUseCase $roleUseCase, RolePresenter $rolePresenter)
     {
         $this->adminPresenter = $adminPresenter;
         $this->adminUseCase = $adminUseCase;
-        $this->roleUseCase =$roleUseCase;
+        $this->roleUseCase = $roleUseCase;
         $this->rolePresenter = $rolePresenter;
     }
     /**
@@ -51,9 +51,9 @@ class AdminController extends Controller
     public function create()
     {
         try {
-        $allRoles = $this->roleUseCase->allRoles();
-        $roles = $this->rolePresenter->presentAllRole($allRoles);
-        return view('admin.admins.create',compact('roles'));
+            $allRoles = $this->roleUseCase->allRoles();
+            $roles = $this->rolePresenter->presentAllRole($allRoles);
+            return view('admin.admins.create', compact('roles'));
         } catch (\Exception $e) {
             Toastr::error($e->getMessage(), 'Error');
             return redirect()->back()->withInput();
@@ -93,7 +93,7 @@ class AdminController extends Controller
             $roles = $this->rolePresenter->presentAllRole($allRoles);
             $admin = $this->adminUseCase->getAdmin($admin);
             $admin = $this->adminPresenter->persentAdmin($admin);
-            return view('admin.admins.edit',compact('roles','admin'));
+            return view('admin.admins.edit', compact('roles', 'admin'));
         } catch (\Exception $e) {
             Toastr::error($e->getMessage(), 'Error');
             return redirect()->back()->withInput();
@@ -105,14 +105,12 @@ class AdminController extends Controller
      */
     public function update(UpdateAdminRequest $request, Admin $admin)
     {
-        try{
-            $admin = $this->adminUseCase->getAdmin($admin);
-            $admin = $this->adminPresenter->persentAdmin($admin);
+        try {
+            $this->adminUseCase->updateAdmin($admin, $request->validated());
         } catch (\Exception $e) {
             Toastr::error($e->getMessage(), 'Error');
             return redirect()->back()->withInput();
         }
-
     }
 
     /**

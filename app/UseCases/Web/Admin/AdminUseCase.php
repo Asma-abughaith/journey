@@ -37,21 +37,20 @@ class AdminUseCase
                 'email' =>  $request['email'],
                 'password' => $request['password'],
             ],
-            ['image' => isset($request['image'])?isset($request['image']):null],
+            ['image' => isset($request['image']) ? isset($request['image']) : null],
             $request['role']
         );
     }
 
-    public function updateAdmin($request)
+    public function updateAdmin($admin, $request)
     {
-
         return $this->adminRepository->updateAdmin(
             [
                 'name' => $request['name'],
                 'email' =>  $request['email'],
                 'password' => $request['password'],
             ],
-            ['image' => isset($request['image'])?isset($request['image']):null],
+            ['image' => isset($request['image']) ? isset($request['image']) : null],
             $request['role']
         );
     }
