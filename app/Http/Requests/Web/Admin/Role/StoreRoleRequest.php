@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Requests\Web\Admin\role;
+namespace App\Http\Requests\Web\Admin\Role;
 
+use App\Validation\CheckNameAndGuardExistRule;
 use App\Validation\CheckRoleNameAndGuardExistRule;
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateRoleRequest extends FormRequest
+class StoreRoleRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -18,7 +19,7 @@ class UpdateRoleRequest extends FormRequest
 
     public function rules(): array
     {
-        $currentPermissionId = request()->id;
+        $currentPermissionId = null;
         return [
             'name_en' => ['required','min:3',new CheckRoleNameAndGuardExistRule($currentPermissionId)],
             'name_ar' => ['required','min:3'],

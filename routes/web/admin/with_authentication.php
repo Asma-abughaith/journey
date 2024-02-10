@@ -9,8 +9,7 @@ use App\Http\Controllers\Web\Admin\AdminAuth\VerifyEmailController;
 use App\Http\Controllers\Web\Admin\AdminAuth\AuthenticatedSessionController;
 use App\Http\Controllers\Web\Admin\PermissionController;
 use App\Http\Controllers\Web\Admin\RoleController;
-use Livewire\Livewire;
-
+use App\Http\Controllers\Web\Admin\AdminController;
 //use App\Http\Controllers\ProfileController;
 
 /*
@@ -54,3 +53,6 @@ Route::resource('permissions', PermissionController::class);
 
 //================= Routes For Role =================
 Route::resource('roles', RoleController::class);
+
+//================= Routes For Admins =================
+Route::resource('admins', AdminController::class);

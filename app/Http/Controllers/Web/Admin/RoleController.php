@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Web\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Web\Admin\role\StoreRoleRequest;
-use App\Http\Requests\Web\Admin\role\UpdateRoleRequest;
+use App\Http\Requests\Web\Admin\Role\StoreRoleRequest;
+use App\Http\Requests\Web\Admin\Role\UpdateRoleRequest;
 use App\Interfaces\Presenters\Web\Admin\PermissionPresenter;
 use App\Interfaces\Presenters\Web\Admin\RolePresenter;
 use App\UseCases\Web\Admin\PermissionUseCase;
