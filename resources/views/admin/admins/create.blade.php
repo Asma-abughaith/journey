@@ -87,6 +87,30 @@
                                     </div>
                                 </div>
 
+{{--                                <div class="row">--}}
+{{--                                    <div class="col-md-6">--}}
+{{--                                        <div class="mb-3">--}}
+{{--                                            <label class="form-label" for="imageInput">{{ __('app.image') }}</label>--}}
+{{--                                            <div class="input-group">--}}
+{{--                                                <input type="file" class="form-control" name="image" id="imageInput">--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label class="form-label">{{__('app.role')}}</label>
+                                            <select class="form-select"  required="" name="role" >
+                                                @foreach($roles as $role)
+                                                    <option value="{{$role['name']}}" >{{$role['name_i18n']}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div style="text-align: end;">
                                     <button class="btn btn-primary" type="submit">{{ __('app.submit') }}</button>
                                 </div>

@@ -21,7 +21,12 @@ class AdminUseCase
 
     public function getAdmin($admin)
     {
-        return $this->adminRepository->getAdminById($admin);
+        return $this->adminRepository->getAdmin($admin);
+    }
+
+    public function getAdminById($adminId)
+    {
+        return $this->adminRepository->getAdminById($adminId);
     }
 
     public function createAdmin($request)
@@ -32,19 +37,23 @@ class AdminUseCase
                 'email' =>  $request['email'],
                 'password' => $request['password'],
             ],
-            ['image' => $request['image']]
+            ['image' => isset($request['image'])?isset($request['image']):null],
+            $request['role']
         );
     }
 
-    public function updateAdmin($permission, $request)
+    public function updateAdmin($request)
     {
-        $translator = ['en' => $request['name_en'], 'ar' => $request['name_ar']];
 
-        return $this->adminRepository->updateAdmin($permission, [
-            'name' => $request['name_en'],
-            'name_i18n' => $translator,
-            'guard_name' => $request['guard'],
-        ]);
+        return $this->adminRepository->updateAdmin(
+            [
+                'name' => $request['name'],
+                'email' =>  $request['email'],
+                'password' => $request['password'],
+            ],
+            ['image' => isset($request['image'])?isset($request['image']):null],
+            $request['role']
+        );
     }
 
     public function deleteAdmin($permissionId)

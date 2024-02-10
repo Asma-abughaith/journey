@@ -17,36 +17,66 @@
 
 
 
-                            <form method="post" action="{{route('admin.permissions.update',$permission)}}" >
+                            <form method="post" action="{{ route('admin.admins.update',$admin['id']) }}" enctype="multipart/form-data">
                                 @csrf
                                 @method('put')
-                                <input type="hidden" name="id" value="{{$permission->id}}">
+                                <input type="hidden" name="id" value="{{$admin['id']}}">
                                 <div class="row">
-                                    @foreach($permission->getTranslations('name_i18n') as $key =>$value)
-                                        <div class="col-md-6">
-                                            <div class="mb-3">
-                                                <label  class="form-label">{{__('app.name-' . $key)}}</label>
-                                                <input type="text" class="form-control" placeholder="{{__('app.permission-'.$key)}}" name="name_{{ $key }}" value="{{ old('name_' . $key, $value) }}" required >
-                                            </div>
-                                        </div>
-{{--                                        <x-input-error :messages="$errors->get('name_' . $key)" class="mt-2" />--}}
 
-                                    @endforeach
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="username">{{ __('app.username') }}</label>
+                                            <input type="text" class="form-control"
+                                                   placeholder="{{ __('app.enter-username') }}" name="name"  value="{{ old('name', $admin['name']) }}"
+                                                    id="username" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="email">{{ __('app.email') }}</label>
+                                            <input type="email" class="form-control"
+                                                   placeholder="{{ __('app.enter-email') }}" name="email"  value="{{ old('email', $admin['email']) }}"
+                                                   id="email" required>
+                                        </div>
+                                    </div>
                                 </div>
+
+
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="mb-3">
-                                            <label class="form-label">{{__('app.guard')}}</label>
-                                            <select class="form-select"  required="" name="guard">
-                                                <option value="admin" @if($permission->guard_name=="admin")selected @endif>{{__('app.admin')}}</option>
-                                                <option value="planner" @if($permission->guard_name=="planner")selected @endif>{{__('app.planner')}}</option>
-                                                <option value="user" @if($permission->guard_name=="user")selected @endif>{{__('app.user')}}</option>
+                                            <label class="form-label" for="imageInput">{{ __('app.image') }}</label>
+                                            <div class="input-group">
+                                                <input type="file" class="form-control" name="image" id="imageInput">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <img src="{{isset($admin['image'])?$admin['image']: asset('avatar.png') }}" alt="" id="previewImage"
+                                                 style="width: 100px; height: 100px;">
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label class="form-label">{{__('app.role')}}</label>
+                                            <select class="form-select"  required="" name="role" >
+                                                @foreach($roles as $role)
+                                                    <option value="{{$role['name']}}" @if($admin['role'] ==$role['name']) checked @endif>{{$role['name_i18n']}}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
                                 </div>
-                                <div>
-                                    <button class="btn btn-primary" type="submit">{{__('app.submit')}}</button>
+
+                                <div style="text-align: end;">
+                                    <button class="btn btn-primary" type="submit">{{ __('app.submit') }}</button>
                                 </div>
                             </form>
                         </div>

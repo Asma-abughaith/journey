@@ -11,6 +11,8 @@ class AdminEntity
     private $lang;
     private $image;
 
+    private $role;
+
     public function getId()
     {
         return $this->id;
@@ -68,5 +70,14 @@ class AdminEntity
     public function setImage($image)
     {
         $this->image = $image;
+    }
+
+    public function getRole(){
+        return $this->role;
+    }
+
+    public function setRole($role)
+    {
+        $this->role = $role;
     }
 }

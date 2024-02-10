@@ -24,6 +24,7 @@
                                             <th class="text-center">{{ __('app.image') }}</th>
                                             <th class="text-center">{{ __('app.name') }}</th>
                                             <th class="text-center">{{ __('app.email') }}</th>
+                                            <th class="text-center">{{ __('app.role') }}</th>
                                             <th class="text-center">{{ __('app.action') }}</th>
                                         </tr>
                                     </thead>
@@ -39,6 +40,7 @@
                                                 </td>
                                                 <td class="text-center col-4">{{ $admin['name'] }}</td>
                                                 <td class="text-center col-4">{{ $admin['email'] }}</td>
+                                                <td class="text-center col-4">{{ $admin['role'] }}</td>
                                                 <td class="text-center col-3">
                                                     <a href="{{ route('admin.admins.edit', $admin['id']) }}"
                                                         class="edit btn btn-warning btn-sm"><i class="ri-edit-line"></i></a>

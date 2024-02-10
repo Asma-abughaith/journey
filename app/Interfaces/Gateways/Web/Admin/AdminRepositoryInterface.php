@@ -9,9 +9,11 @@ interface AdminRepositoryInterface
 
     public function getAdminById($adminId);
 
-    public function createAdmin(array $adminData, array $imageData);
+    public function getAdmin($admin);
 
-    public function updateAdmin($role, array $adminData);
+    public function createAdmin(array $adminData, array $imageData, $role);
+
+    public function updateAdmin(array $adminData, array $imageData, $role);
 
     public function deleteAdmin($adminId);
 }

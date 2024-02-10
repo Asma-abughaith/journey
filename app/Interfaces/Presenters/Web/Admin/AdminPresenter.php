@@ -17,6 +17,10 @@ class AdminPresenter
         return $formattedAdmins;
     }
 
+    public function persentAdmin($admin){
+        return $this->formatAdmin($admin);
+    }
+
     public function presentAllPermissionsForRoles($Permissions)
     {
         $formattedPermissions = [];
@@ -50,6 +54,7 @@ class AdminPresenter
             'email' => $admin->getEmail(),
             'lang' => $admin->getLang(),
             'image' => $admin->getImage(),
+            'role'=>$admin->getRole(),
         ];
     }
 

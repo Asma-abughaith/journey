@@ -25,10 +25,11 @@ class StoreAdminRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|unique:admins',
+            'name' => 'required',
             'email' => 'required|unique:admins',
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'image' => 'max:1024'
+            'image' => ['nullable','max:1024'],
+            'role'=>'required',
         ];
     }
 

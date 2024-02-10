@@ -6,8 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Web\Admin\Admin\StoreAdminRequest;
 use App\Http\Requests\Web\Admin\Admin\UpdateAdminRequest;
 use App\Interfaces\Presenters\Web\Admin\AdminPresenter;
+use App\Interfaces\Presenters\Web\Admin\RolePresenter;
 use App\Models\Admin;
 use App\UseCases\Web\Admin\AdminUseCase;
+use App\UseCases\Web\Admin\RoleUseCase;
 use Brian2694\Toastr\Facades\Toastr;
 
 
@@ -17,10 +19,16 @@ class AdminController extends Controller
     protected $adminPresenter;
     protected $adminUseCase;
 
-    public function __construct(AdminPresenter $adminPresenter, AdminUseCase $adminUseCase)
+    protected $rolePresenter;
+
+    protected $roleUseCase;
+
+    public function __construct(AdminPresenter $adminPresenter, AdminUseCase $adminUseCase,RoleUseCase $roleUseCase, RolePresenter $rolePresenter)
     {
         $this->adminPresenter = $adminPresenter;
         $this->adminUseCase = $adminUseCase;
+        $this->roleUseCase =$roleUseCase;
+        $this->rolePresenter = $rolePresenter;
     }
     /**
      * Display a listing of the resource.
@@ -42,7 +50,14 @@ class AdminController extends Controller
      */
     public function create()
     {
-        return view('admin.admins.create');
+        try {
+        $allRoles = $this->roleUseCase->allRoles();
+        $roles = $this->rolePresenter->presentAllRole($allRoles);
+        return view('admin.admins.create',compact('roles'));
+        } catch (\Exception $e) {
+            Toastr::error($e->getMessage(), 'Error');
+            return redirect()->back()->withInput();
+        }
     }
 
     /**
@@ -73,7 +88,16 @@ class AdminController extends Controller
      */
     public function edit(Admin $admin)
     {
-        //
+        try {
+            $allRoles = $this->roleUseCase->allRoles();
+            $roles = $this->rolePresenter->presentAllRole($allRoles);
+            $admin = $this->adminUseCase->getAdmin($admin);
+            $admin = $this->adminPresenter->persentAdmin($admin);
+            return view('admin.admins.edit',compact('roles','admin'));
+        } catch (\Exception $e) {
+            Toastr::error($e->getMessage(), 'Error');
+            return redirect()->back()->withInput();
+        }
     }
 
     /**
@@ -81,7 +105,14 @@ class AdminController extends Controller
      */
     public function update(UpdateAdminRequest $request, Admin $admin)
     {
-        //
+        try{
+            $admin = $this->adminUseCase->getAdmin($admin);
+            $admin = $this->adminPresenter->persentAdmin($admin);
+        } catch (\Exception $e) {
+            Toastr::error($e->getMessage(), 'Error');
+            return redirect()->back()->withInput();
+        }
+
     }
 
     /**

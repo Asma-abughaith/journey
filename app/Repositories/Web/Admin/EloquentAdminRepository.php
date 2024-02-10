@@ -23,6 +23,10 @@ class EloquentAdminRepository implements AdminRepositoryInterface
         return $admins;
     }
 
+    public function getAdmin($admin){
+        return $this->convertToEntity($admin);
+    }
+
     public function getAdminById($permissionId)
     {
         $eloquentPermission = Permission::find($permissionId);
@@ -30,20 +34,21 @@ class EloquentAdminRepository implements AdminRepositoryInterface
         return $eloquentPermission ? $this->convertToEntity($eloquentPermission) : null;
     }
 
-    public function createAdmin(array $adminData, array $imageData)
+    public function createAdmin(array $adminData, array $imageData,$role)
     {
-        $eloquentPermission = Admin::create($adminData);
-        $eloquentPermission->addMediaFromRequest('image')->toMediaCollection('admin_profile');
-        return $this->convertToEntity($eloquentPermission);
+        $eloquentAdmin = Admin::create($adminData);
+        isset($imageData)??$eloquentAdmin->addMediaFromRequest('image')->toMediaCollection('admin_profile');
+        if(isset($role))$eloquentAdmin->assignRole($role);
+        return $this->convertToEntity($eloquentAdmin);
     }
 
-    public function updateAdmin($permission, array $permissionData)
+    public function updateAdmin(array $adminData, array $imageData,$role)
     {
-        if ($permission) {
-            $permission->update($permissionData);
-            $permission->setTranslations('name_i18n', $permissionData['name_i18n']);
-        }
-        return $this->convertToEntity($permission);
+        $eloquentAdmin = Admin::update($adminData);
+        dd($eloquentAdmin);
+        isset($imageData)??$eloquentAdmin->addMediaFromRequest('image')->toMediaCollection('admin_profile');
+        if(isset($role))$eloquentAdmin->assignRole($role);
+        return $this->convertToEntity($eloquentAdmin);
     }
 
     public function deleteAdmin($permissionId)
@@ -63,6 +68,7 @@ class EloquentAdminRepository implements AdminRepositoryInterface
         $admin->setEmail($eloquentAdmin->email);
         $admin->setLang($eloquentAdmin->lang);
         $admin->setImage($eloquentAdmin->getFirstMediaUrl('admin_profile', 'image'));
+        $admin->setRole($eloquentAdmin->getRoleNames()[0]);
         return $admin;
     }
 }

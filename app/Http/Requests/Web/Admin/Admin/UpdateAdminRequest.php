@@ -3,6 +3,8 @@
 namespace App\Http\Requests\Web\Admin\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Validation\Rule;
 
 class UpdateAdminRequest extends FormRequest
 {
@@ -11,7 +13,7 @@ class UpdateAdminRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,8 +23,18 @@ class UpdateAdminRequest extends FormRequest
      */
     public function rules(): array
     {
+        $adminId =request()->id;
+
         return [
-            //
+            'name' => 'required',
+            'email' => ['required',Rule::unique('admins', 'email')->ignore($adminId)],
+            'image' => ['nullable','max:1024'],
+            'role'=>'required',
         ];
+    }
+
+    protected function failedValidation(Validator $validator)
+    {
+        $this->errors = $validator->errors();
     }
 }
