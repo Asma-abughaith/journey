@@ -2,70 +2,51 @@
 
 namespace App\Repositories\Web\Admin;
 
-use App\Entities\Web\Admin\PermissionEntity;
-use App\Interfaces\Gateways\Web\Admin\PermissionRepositoryInterface;
+use App\Entities\Web\Admin\AdminEntity;
+use App\Interfaces\Gateways\Web\Admin\AdminRepositoryInterface;
+use App\Models\Admin;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Permission;
 
 
-class EloquentAdminRepository implements PermissionRepositoryInterface
+class EloquentAdminRepository implements AdminRepositoryInterface
 {
-    public function getAllPermissions()
+    public function getAllAdmins()
     {
-        $eloquentPermissions = Permission::all();
-        $permissions = [];
+        $eloquentAdmins = Admin::all();
+        $admins = [];
 
-        foreach ($eloquentPermissions as $eloquentPermission) {
-            $permissions[] = $this->convertToEntity($eloquentPermission);
+        foreach ($eloquentAdmins as $eloquentAdmin) {
+            $admins[] = $this->convertToEntity($eloquentAdmin);
         }
 
-        return $permissions;
+        return $admins;
     }
 
-    public function getAllPermissionsBasedGuardName($guard_name)
-    {
-        $eloquentPermissions = Permission::where('guard_name', $guard_name)->get();
-        $permissions = [];
-
-        foreach ($eloquentPermissions as $eloquentPermission) {
-            $permissions[] = $this->convertToEntity($eloquentPermission);
-        }
-
-        return $permissions;
-    }
-
-    public function getPermissionById($permissionId)
+    public function getAdminById($permissionId)
     {
         $eloquentPermission = Permission::find($permissionId);
 
         return $eloquentPermission ? $this->convertToEntity($eloquentPermission) : null;
     }
 
-    public function getPermission($permission)
+    public function createAdmin(array $adminData, array $imageData)
     {
-
-        return $permission ? $this->convertToEntity($permission) : null;
-    }
-
-    public function createPermission(array $permissionData)
-    {
-        $eloquentPermission = Permission::create($permissionData);
-        $eloquentPermission->setTranslations('name_i18n', $permissionData['name_i18n']);
-
+        $eloquentPermission = Admin::create($adminData);
+        $eloquentPermission->addMediaFromRequest('image')->toMediaCollection('admin_profile');
         return $this->convertToEntity($eloquentPermission);
     }
 
-    public function updatePermission($permission, array $permissionData)
+    public function updateAdmin($permission, array $permissionData)
     {
         if ($permission) {
             $permission->update($permissionData);
             $permission->setTranslations('name_i18n', $permissionData['name_i18n']);
         }
-
         return $this->convertToEntity($permission);
     }
 
-    public function deletePermission($permissionId)
+    public function deleteAdmin($permissionId)
     {
 
         if ($permissionId) {
@@ -74,13 +55,14 @@ class EloquentAdminRepository implements PermissionRepositoryInterface
         return;
     }
 
-    protected function convertToEntity(Permission $eloquentPermission)
+    protected function convertToEntity(Admin $eloquentAdmin)
     {
-        $permission = new PermissionEntity();
-        $permission->setId($eloquentPermission->id);
-        $permission->setName($eloquentPermission->name);
-        $permission->setNameI18n($eloquentPermission->name_i18n);
-        $permission->setGuardName($eloquentPermission->guard_name);
-        return $permission;
+        $admin = new AdminEntity();
+        $admin->setId($eloquentAdmin->id);
+        $admin->setName($eloquentAdmin->name);
+        $admin->setEmail($eloquentAdmin->email);
+        $admin->setLang($eloquentAdmin->lang);
+        $admin->setImage($eloquentAdmin->getFirstMediaUrl('admin_profile', 'image'));
+        return $admin;
     }
 }

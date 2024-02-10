@@ -26,10 +26,17 @@ return [
     'roles' => 'Roles',
     'all-roles' => 'All Roles',
     'create-role' => 'Create Role',
-    'no-permissions-found' => 'No Permissions Found'
-
-
-
-
-
+    'no-permissions-found' => 'No Permissions Found',
+    "admins" => "Admins",
+    'all-admins' => "All Admins",
+    'create-admin' => 'Create Admin',
+    'email' => 'Email',
+    'username' => 'Username',
+    'enter-username' => 'Please Enter Username',
+    'enter-email' => 'Please Enter Email',
+    'enter-password' => 'Please Enter Password',
+    'password' => 'Password',
+    'confirm-password' => 'Confirm Password',
+    'enter-confirm-password' => 'Please Confirm Your Password',
+    'image' => 'Admin Image'
 ];

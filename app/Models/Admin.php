@@ -10,10 +10,14 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Admin extends Authenticatable implements MustVerifyEmail
+
+class Admin extends Authenticatable implements MustVerifyEmail, HasMedia
 {
-    use HasApiTokens, HasFactory, Notifiable,HasRoles;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles, InteractsWithMedia;
 
     public function sendPasswordResetNotification($token)
     {
@@ -57,4 +61,14 @@ class Admin extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('admin_profile')->singleFile()->registerMediaConversions(function (Media $media) {
+            $this
+                ->addMediaConversion('image')
+                ->width(250)
+                ->height(250);
+        });
+    }
 }

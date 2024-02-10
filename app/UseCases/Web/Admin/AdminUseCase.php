@@ -3,64 +3,59 @@
 namespace App\UseCases\Web\Admin;
 
 use App\Entities\Web\Admin\PermissionEntity;
-use App\Interfaces\Gateways\Web\Admin\PermissionRepositoryInterface;
+use App\Interfaces\Gateways\Web\Admin\AdminRepositoryInterface;
 
 class AdminUseCase
 {
-    protected $permissionRepository;
+    protected $adminRepository;
 
-    public function __construct(PermissionRepositoryInterface $permissionRepository)
+    public function __construct(AdminRepositoryInterface $adminRepository)
     {
-        $this->permissionRepository = $permissionRepository;
+        $this->adminRepository = $adminRepository;
     }
 
-    public function allPermissions()
+    public function allAdmins()
     {
-        return $this->permissionRepository->getAllPermissions();
+        return $this->adminRepository->getAllAdmins();
     }
 
-    public function allPermissionsBasedGuardName($guard_name)
+    public function getAdmin($admin)
     {
-        return $this->permissionRepository->getAllPermissionsBasedGuardName($guard_name);
+        return $this->adminRepository->getAdminById($admin);
     }
 
-
-    public function getPermission($permission)
+    public function createAdmin($request)
     {
-        return $this->permissionRepository->getPermission($permission);
+        return $this->adminRepository->createAdmin(
+            [
+                'name' => $request['name'],
+                'email' =>  $request['email'],
+                'password' => $request['password'],
+            ],
+            ['image' => $request['image']]
+        );
     }
 
-    public function createPermission($request)
+    public function updateAdmin($permission, $request)
     {
         $translator = ['en' => $request['name_en'], 'ar' => $request['name_ar']];
 
-        return $this->permissionRepository->createPermission([
+        return $this->adminRepository->updateAdmin($permission, [
             'name' => $request['name_en'],
             'name_i18n' => $translator,
             'guard_name' => $request['guard'],
         ]);
     }
 
-    public function updatePermission($permission, $request)
-    {
-        $translator = ['en' => $request['name_en'], 'ar' => $request['name_ar']];
-
-        return $this->permissionRepository->updatePermission($permission, [
-            'name' => $request['name_en'],
-            'name_i18n' => $translator,
-            'guard_name' => $request['guard'],
-        ]);
-    }
-
-    public function deletePermission($permissionId)
+    public function deleteAdmin($permissionId)
     {
 
-        return $this->permissionRepository->deletePermission($permissionId);
+        return $this->adminRepository->deleteAdmin($permissionId);
     }
     //all method for use case
     public function execute(PermissionEntity $permission)
     {
-        return $this->permissionRepository->createPermission([
+        return $this->adminRepository->createAdmin([
             'name' => $permission->getName(),
             'name_i18n' => $permission->getNameI18n(),
             'guard_name' => $permission->getGuardName(),

@@ -2,18 +2,19 @@
 
 namespace App\Interfaces\Presenters\Web\Admin;
 
+use App\Entities\Web\Admin\AdminEntity;
 use App\Entities\Web\Admin\PermissionEntity;
 
 class AdminPresenter
 {
-    public function presentAllPermissions($Permissions)
+    public function presentAllAdmins($admins)
     {
-        $formattedPermissions = [];
+        $formattedAdmins = [];
 
-        foreach ($Permissions as $Permission) {
-            $formattedPermissions[] = $this->formatPermission($Permission);
+        foreach ($admins as $admin) {
+            $formattedAdmins[] = $this->formatAdmin($admin);
         }
-        return $formattedPermissions;
+        return $formattedAdmins;
     }
 
     public function presentAllPermissionsForRoles($Permissions)
@@ -38,16 +39,17 @@ class AdminPresenter
 
     public function presentPermission($permission)
     {
-        return $this->formatPermission($permission);
+        return $this->formatAdmin($permission);
     }
 
-    protected function formatPermission(PermissionEntity $permission)
+    protected function formatAdmin(AdminEntity $admin)
     {
         return [
-            'id' => $permission->getId(),
-            'name' => $permission->getName(),
-            'name_i18n' => $permission->getNameI18n(),
-            'guard_name' => $permission->getGuardName(),
+            'id' => $admin->getId(),
+            'name' => $admin->getName(),
+            'email' => $admin->getEmail(),
+            'lang' => $admin->getLang(),
+            'image' => $admin->getImage(),
         ];
     }
 

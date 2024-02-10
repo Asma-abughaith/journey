@@ -17,20 +17,20 @@ class AdminController extends Controller
     protected $adminPresenter;
     protected $adminUseCase;
 
-    public function __construct( AdminPresenter $adminPresenter, AdminUseCase $adminUseCase) {
+    public function __construct(AdminPresenter $adminPresenter, AdminUseCase $adminUseCase)
+    {
         $this->adminPresenter = $adminPresenter;
         $this->adminUseCase = $adminUseCase;
-
     }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        try{
-            $allAdmins = $this->adminUseCase->allPermissions();
-            $admins = $this->adminPresenter->presentAllPermissions($allAdmins);
-            return view('admin.admins.index',compact('admins'));
+        try {
+            $allAdmins = $this->adminUseCase->allAdmins();
+            $admins = $this->adminPresenter->presentAllAdmins($allAdmins);
+            return view('admin.admins.index', compact('admins'));
         } catch (\Exception $e) {
             Toastr::error($e->getMessage(), 'Error');
             return redirect()->back()->withInput();
@@ -42,7 +42,7 @@ class AdminController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.admins.create');
     }
 
     /**
@@ -50,7 +50,14 @@ class AdminController extends Controller
      */
     public function store(StoreAdminRequest $request)
     {
-        //
+        try {
+            $this->adminUseCase->createAdmin($request->validated());
+            Toastr::success('Admin created successfully!', 'Success');
+            return redirect()->route('admin.admins.index');
+        } catch (\Exception $e) {
+            Toastr::error($e->getMessage(), 'Error');
+            return redirect()->back()->withInput();
+        }
     }
 
     /**

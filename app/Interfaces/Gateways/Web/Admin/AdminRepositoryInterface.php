@@ -5,13 +5,13 @@ namespace App\Interfaces\Gateways\Web\Admin;
 
 interface AdminRepositoryInterface
 {
-    public function getAllRoles();
+    public function getAllAdmins();
 
-    public function getRoleById($roleId);
+    public function getAdminById($adminId);
 
-    public function createRole(array $roleData);
+    public function createAdmin(array $adminData, array $imageData);
 
-    public function updateRole($role, array $roleData);
+    public function updateAdmin($role, array $adminData);
 
-    public function deleteRole($roleId);
+    public function deleteAdmin($adminId);
 }
