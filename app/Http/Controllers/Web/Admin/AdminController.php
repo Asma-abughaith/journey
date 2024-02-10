@@ -107,6 +107,8 @@ class AdminController extends Controller
     {
         try {
             $this->adminUseCase->updateAdmin($admin, $request->validated());
+            Toastr::success('Admin updated successfully!', 'Success');
+            return redirect()->route('admin.admins.index');
         } catch (\Exception $e) {
             Toastr::error($e->getMessage(), 'Error');
             return redirect()->back()->withInput();

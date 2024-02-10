@@ -45,10 +45,10 @@ class AdminUseCase
     public function updateAdmin($admin, $request)
     {
         return $this->adminRepository->updateAdmin(
+            $admin,
             [
                 'name' => $request['name'],
                 'email' =>  $request['email'],
-                'password' => $request['password'],
             ],
             ['image' => isset($request['image']) ? isset($request['image']) : null],
             $request['role']

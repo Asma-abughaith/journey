@@ -13,7 +13,7 @@ interface AdminRepositoryInterface
 
     public function createAdmin(array $adminData, array $imageData, $role);
 
-    public function updateAdmin(array $adminData, array $imageData, $role);
+    public function updateAdmin($admin, array $adminData, array $imageData, $role);
 
     public function deleteAdmin($adminId);
 }

@@ -43,22 +43,19 @@ class EloquentAdminRepository implements AdminRepositoryInterface
         return $this->convertToEntity($eloquentAdmin);
     }
 
-    public function updateAdmin(array $adminData, array $imageData, $role)
+    public function updateAdmin($admin, array $adminData, array $imageData, $role)
     {
-        $eloquentAdmin = Admin::update($adminData);
-        $eloquentAdmin->update($adminData);
+        $admin->update($adminData);
         if (isset($imageData['image']) && $imageData['image'] != null) {
-            $eloquentAdmin->addMediaFromRequest('image')->toMediaCollection('admin_profile');
+            $admin->addMediaFromRequest('image')->toMediaCollection('admin_profile');
         }
-
-
-        return $this->convertToEntity($eloquentAdmin);
+        $admin->syncRoles($role);
+        return $this->convertToEntity($admin);
     }
 
 
     public function deleteAdmin($permissionId)
     {
-
         if ($permissionId) {
             DB::table('permissions')->where('id', $permissionId)->delete();
         }
