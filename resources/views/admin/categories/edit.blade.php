@@ -1,6 +1,6 @@
 @extends('admin.master')
-@section('title',"Admin | Permissions")
-@section('permission-active' , 'active')
+@section('title', 'Admin | Category')
+@section('category-active', 'active')
 @section('content')
 
     <div class="main-content">
@@ -17,22 +17,27 @@
 
 
 
-                            <form method="post" action="{{route('admin.categories.update',$category['id'])}}" enctype="multipart/form-data"  >
+                            <form method="post" action="{{ route('admin.categories.update', $category['id']) }}"
+                                enctype="multipart/form-data">
                                 @csrf
                                 @method('put')
-                                <input type="hidden" name="id" value="{{$category['id']}}">
+                                <input type="hidden" name="id" value="{{ $category['id'] }}">
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="mb-3">
-                                            <label  class="form-label">{{__('app.name-en')}}</label>
-                                            <input type="text" class="form-control"  placeholder="{{__('app.category-en')}}" name="name_en" value="{{ old('name_en',$category['name_en']) }}" required >
+                                            <label class="form-label" for="name_en">{{ __('app.name-en') }}</label>
+                                            <input type="text" class="form-control"
+                                                placeholder="{{ __('app.category-en') }}" id="name_en" name="name_en"
+                                                value="{{ old('name_en', $category['name_en']) }}" required>
                                         </div>
                                     </div>
 
                                     <div class="col-md-6">
                                         <div class="mb-3">
-                                            <label  class="form-label">{{__('app.name-ar')}}</label>
-                                            <input type="text" class="form-control"  placeholder="{{__('app.category-ar')}}" name="name_ar" value="{{ old('name_ar',$category['name_ar']) }}" required >
+                                            <label class="form-label" for="name_ar">{{ __('app.name-ar') }}</label>
+                                            <input type="text" class="form-control"
+                                                placeholder="{{ __('app.category-ar') }}" id="name_ar" name="name_ar"
+                                                value="{{ old('name_ar', $category['name_ar']) }}" required>
                                         </div>
                                     </div>
                                 </div>
@@ -40,8 +45,11 @@
 
                                     <div class="col-md-6">
                                         <div class="mb-3">
-                                            <label  class="form-label">{{__('app.priority')}}</label>
-                                            <input type="number" class="form-control" id="priority" placeholder="{{ __('app.priority') }}" name="priority" value="{{ old('priority',$category['priority']) }}" required min="1">
+                                            <label class="form-label">{{ __('app.priority') }}</label>
+                                            <input type="number" class="form-control" id="priority"
+                                                placeholder="{{ __('app.priority-order') }}" name="priority"
+                                                value="{{ old('priority', $category['priority']) }}" required
+                                                min="1">
                                         </div>
                                     </div>
 
@@ -55,16 +63,19 @@
                                     </div>
 
                                     <div class="col-md-6">
+                                    </div>
+
+                                    <div class="col-md-6">
                                         <div class="mb-3">
                                             <img src="{{ $category['image'] != null ? asset($category['image']) : asset('category.jpg') }}"
-                                                 alt="{{ $category['image'] != null ? $category['name'] : 'avatar' }}"
-                                                 id="previewImage" style="width: 80px; height: 80px;">
+                                                alt="{{ $category['image'] != null ? $category['name'] : 'avatar' }}"
+                                                id="previewImage" style="width: 80px; height: 80px;">
                                         </div>
                                     </div>
                                 </div>
 
-                                <div>
-                                    <button class="btn btn-primary" type="submit">{{__('app.submit')}}</button>
+                                <div style="text-align: end">
+                                    <button class="btn btn-primary" type="submit">{{ __('app.update') }}</button>
                                 </div>
                             </form>
                         </div>
@@ -98,5 +109,3 @@
         });
     </script>
 @endpush
-
-

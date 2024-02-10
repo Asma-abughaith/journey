@@ -12,6 +12,7 @@ use App\Http\Controllers\Web\Admin\RoleController;
 use App\Http\Controllers\Web\Admin\AdminController;
 //use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Web\Admin\CategoryController;
+use App\Models\Admin;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,7 +26,8 @@ use App\Http\Controllers\Web\Admin\CategoryController;
 */
 
 Route::get('/dashboard', function () {
-    return view('admin.dashboard');
+    $admins = Admin::all()->count();
+    return view('admin.dashboard', compact('admins'));
 })->name('dashboard');
 
 Route::get('verify-email', EmailVerificationPromptController::class)

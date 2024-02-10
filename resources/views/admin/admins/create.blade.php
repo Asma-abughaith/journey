@@ -81,32 +81,21 @@
 
                                     <div class="col-md-6">
                                         <div class="mb-3">
-                                            <img src="{{ asset('avatar.png') }}" alt="" id="previewImage"
-                                                style="width: 100px; height: 100px;">
+                                            <label class="form-label">{{ __('app.role') }}</label>
+                                            <select class="form-select" required="" name="role">
+                                                @foreach ($roles as $role)
+                                                    <option value="{{ $role['name'] }}">{{ $role['name_i18n'] }}</option>
+                                                @endforeach
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
 
-{{--                                <div class="row">--}}
-{{--                                    <div class="col-md-6">--}}
-{{--                                        <div class="mb-3">--}}
-{{--                                            <label class="form-label" for="imageInput">{{ __('app.image') }}</label>--}}
-{{--                                            <div class="input-group">--}}
-{{--                                                <input type="file" class="form-control" name="image" id="imageInput">--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="mb-3">
-                                            <label class="form-label">{{__('app.role')}}</label>
-                                            <select class="form-select"  required="" name="role" >
-                                                @foreach($roles as $role)
-                                                    <option value="{{$role['name']}}" >{{$role['name_i18n']}}</option>
-                                                @endforeach
-                                            </select>
+                                            <img src="{{ asset('avatar.png') }}" alt="" id="previewImage"
+                                                style="width: 80px; height: 80px;">
                                         </div>
                                     </div>
                                 </div>

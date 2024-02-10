@@ -1,13 +1,13 @@
 @extends('admin.master')
-@section('title', 'Admin | Permissions')
-@section('permission-active', 'active')
+@section('title', 'Admin | Admins')
+@section('admin-active', 'active')
 @section('content')
 
     <div class="main-content">
         <div class="page-content">
             <div class="container-fluid">
                 <!-- start page title -->
-                @include('layouts.admin.title', ['title' => __('app.permissions')])
+                @include('layouts.admin.title', ['title' => __('app.admins')])
                 <!-- end page title -->
 
                 <div class="row" style="margin-top: 2.5%;">
@@ -33,25 +33,29 @@
                                         @foreach ($admins as $key => $admin)
                                             <tr style="text-align: center">
                                                 <td class="text-center col-1">{{ ++$key }}</td>
-                                                <td class="text-center col-4"><img
+                                                <td class="text-center col-2"><img
                                                         src="{{ $admin['image'] != null ? asset($admin['image']) : asset('avatar.png') }}"
                                                         alt="{{ $admin['image'] != null ? $admin['name'] : 'avatar' }}"
                                                         width="50px" height="50px">
                                                 </td>
-                                                <td class="text-center col-4">{{ $admin['name'] }}</td>
-                                                <td class="text-center col-4">{{ $admin['email'] }}</td>
-                                                <td class="text-center col-4">{{ $admin['role'] }}</td>
-                                                <td class="text-center col-3">
-                                                    <a href="{{ route('admin.admins.edit', $admin['id']) }}"
-                                                        class="edit btn btn-warning btn-sm"><i class="ri-edit-line"></i></a>
+                                                <td class="text-center col-2">{{ $admin['name'] }}</td>
+                                                <td class="text-center col-2">{{ $admin['email'] }}</td>
+                                                <td class="text-center col-2">{{ $admin['role'] }}</td>
+                                                <td class="text-center col-2">
+                                                    <a class="btn btn-outline-warning btn-sm edit" title="Edit"
+                                                        href="{{ route('admin.admins.edit', $admin['id']) }}">
+                                                        <i class="fas fa-pencil-alt" title="Edit"></i>
+                                                    </a>
                                                     <form method="post"
                                                         action="{{ route('admin.admins.destroy', $admin['id']) }}"
                                                         style="display:inline;">
                                                         @csrf
                                                         @method('delete')
-                                                        <button type="submit" class="btn btn-danger btn-sm"
-                                                            onclick="return confirm('Are you sure you want to delete?')"><i
-                                                                class="ri-delete-bin-line"></i></button>
+                                                        <button type="submit" class="btn btn-outline-danger btn-sm"
+                                                            title="Delete" style="padding-bottom: 1px;"
+                                                            onclick="return confirm('Are you sure you want to delete?')">
+                                                            <i class="ri-delete-bin-line" title="Edit"></i>
+                                                        </button>
                                                     </form>
                                                 </td>
                                             </tr>

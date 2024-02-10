@@ -1,13 +1,13 @@
 @extends('admin.master')
-@section('title', 'Admin | Permissions')
-@section('permission-active', 'active')
+@section('title', 'Admin | Admins')
+@section('admin-active', 'active')
 @section('content')
 
     <div class="main-content">
         <div class="page-content">
             <div class="container-fluid">
                 <!-- start page title -->
-                @include('layouts.admin.title', ['title' => __('app.edit-permission')])
+                @include('layouts.admin.title', ['title' => __('app.edit-admin')])
                 <!-- end page title -->
 
                 <div class="col-xl-12 mx-auto" style="margin-top: 2.5%;">
@@ -56,17 +56,6 @@
 
                                     <div class="col-md-6">
                                         <div class="mb-3">
-                                            <img src="{{ $admin['image'] != null ? asset($admin['image']) : asset('avatar.png') }}"
-                                                alt="{{ $admin['image'] != null ? $admin['name'] : 'avatar' }}"
-                                                id="previewImage" style="width: 80px; height: 80px;">
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
                                             <label class="form-label">{{ __('app.role') }}</label>
                                             <select class="form-select" required="" name="role">
                                                 @foreach ($roles as $role)
@@ -75,6 +64,17 @@
                                                         {{ $role['name_i18n'] }}</option>
                                                 @endforeach
                                             </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <img src="{{ $admin['image'] != null ? asset($admin['image']) : asset('avatar.png') }}"
+                                                alt="{{ $admin['image'] != null ? $admin['name'] : 'avatar' }}"
+                                                id="previewImage" style="width: 80px; height: 80px;">
                                         </div>
                                     </div>
                                 </div>

@@ -1,15 +1,13 @@
 @extends('admin.master')
-
 @section('title', 'Admin | roles')
-
-@section('permission-active', 'active')
+@section('role-active', 'active')
 
 @section('content')
     <div class="main-content">
         <div class="page-content">
             <div class="container-fluid">
                 <!-- start page title -->
-                @include('layouts.admin.title', ['title' => __('app.create-permission')])
+                @include('layouts.admin.title', ['title' => __('app.create-role')])
                 <!-- end page title -->
                 <div class="col-xl-12 mx-auto" style="margin-top: 2.5%;">
                     <div class="card">
@@ -19,21 +17,21 @@
                             <form method="post" action="{{ route('admin.roles.store') }}">
                                 @csrf
                                 <div class="row">
-                                    <div class="col-md-4">
+                                    <div class="col-md-6">
                                         <div class="mb-3">
-                                            <label class="form-label">{{ __('app.name-en') }}</label>
+                                            <label class="form-label" for="name_en">{{ __('app.name-en') }}</label>
                                             <input type="text" class="form-control" placeholder="{{ __('app.role-en') }}"
-                                                name='name_en' value="{{ old('name_en') }}" required>
+                                                name='name_en' id='name_en' value="{{ old('name_en') }}" required>
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-6">
                                         <div class="mb-3">
                                             <label class="form-label">{{ __('app.name-ar') }}</label>
                                             <input type="text" class="form-control" placeholder="{{ __('app.role-ar') }}"
                                                 name='name_ar' value="{{ old('name_ar') }}" required>
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-6">
                                         <div class="mb-3">
                                             <label class="form-label">{{ __('app.guard') }}</label>
                                             <select class="form-select" name="guard" id="guard"
@@ -48,17 +46,19 @@
                                 </div>
 
                                 <div class="row d-none" id="labelPermission">
+                                    <hr>
                                     <div class="col-md-12">
                                         <div class="mb-1">
-                                            <label class="form-label">{{ __('app.permissions') }}</label>
+                                            <label class="form-label"
+                                                style="font-size:16px;font-weight:bold">{{ __('app.permissions') }}</label>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row" id="permissions">
 
                                 </div>
-                                <div>
-                                    <button class="btn btn-primary" type="submit">{{ __('app.submit') }}</button>
+                                <div style="text-align: end">
+                                    <button class="btn btn-primary" type="submit">{{ __('app.create') }}</button>
                                 </div>
                             </form>
 
