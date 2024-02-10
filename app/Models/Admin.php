@@ -65,10 +65,7 @@ class Admin extends Authenticatable implements MustVerifyEmail, HasMedia
     public function registerMediaCollections(): void
     {
         $this->addMediaCollection('admin_profile')->singleFile()->registerMediaConversions(function (Media $media) {
-            $this
-                ->addMediaConversion('image')
-                ->width(250)
-                ->height(250);
+            $this->addMediaConversion('image')->width(250)->height(250);
         });
     }
 }

@@ -69,6 +69,16 @@
                     </ul>
                 </li>
 
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect" @yield('category-active')>
+                        <i class="ri-list-ordered"></i>
+                        <span>{{ __('app.categories') }}</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{ route('admin.categories.index') }}">{{ __('app.all-categories') }}</a></li>
+                        <li><a href="{{ route('admin.categories.create') }}">{{ __('app.create-category') }}</a></li>
+                    </ul>
+                </li>
 
             </ul>
         </div>

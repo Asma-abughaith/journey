@@ -11,6 +11,7 @@ use App\Http\Controllers\Web\Admin\PermissionController;
 use App\Http\Controllers\Web\Admin\RoleController;
 use App\Http\Controllers\Web\Admin\AdminController;
 //use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Web\Admin\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -56,3 +57,6 @@ Route::resource('roles', RoleController::class);
 
 //================= Routes For Admins =================
 Route::resource('admins', AdminController::class);
+
+//================= Routes For Categories =================
+Route::resource('categories', CategoryController::class);
