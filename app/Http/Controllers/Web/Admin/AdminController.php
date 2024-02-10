@@ -120,6 +120,14 @@ class AdminController extends Controller
      */
     public function destroy(Admin $admin)
     {
-        //
+        try {
+            $this->adminUseCase->deleteAdmin($admin);
+            Toastr::success('The Admin Deleted successfully!', 'Delete');
+            return redirect()->route('admin.admins.index');
+        } catch (\Exception $e) {
+            Toastr::error($e->getMessage(), 'Error');
+            return redirect()->back()->withInput();
+        }
+
     }
 }

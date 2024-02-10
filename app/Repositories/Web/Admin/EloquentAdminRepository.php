@@ -54,10 +54,10 @@ class EloquentAdminRepository implements AdminRepositoryInterface
     }
 
 
-    public function deleteAdmin($permissionId)
+    public function deleteAdmin($admin)
     {
-        if ($permissionId) {
-            DB::table('permissions')->where('id', $permissionId)->delete();
+        if ($admin) {
+            $admin->delete();
         }
         return;
     }

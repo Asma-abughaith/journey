@@ -55,10 +55,10 @@ class AdminUseCase
         );
     }
 
-    public function deleteAdmin($permissionId)
+    public function deleteAdmin($admin)
     {
 
-        return $this->adminRepository->deleteAdmin($permissionId);
+        return $this->adminRepository->deleteAdmin($admin);
     }
     //all method for use case
     public function execute(PermissionEntity $permission)
