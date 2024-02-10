@@ -43,13 +43,14 @@ class RoleUseCase
             'name' => $request['name_en'],
             'name_i18n' => $translator,
             'guard_name'=>$request['guard'],
+            'permissions'=>$request['permissions'],
         ]);
     }
 
-    public function deleteRole( $roleId)
+    public function deleteRole( $role)
     {
 
-        return $this->roleRepository->deleteRole($roleId);
+        return $this->roleRepository->deleteRole($role);
     }
     //all method for use case
 //    public function execute(PermissionEntity $permission)

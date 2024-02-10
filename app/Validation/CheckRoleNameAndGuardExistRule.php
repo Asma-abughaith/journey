@@ -20,7 +20,7 @@ class CheckRoleNameAndGuardExistRule implements Rule
     public function passes($attribute, $value)
     {
         if($this->roleId){
-            return !Role::where('name', $value)->where('guard_name', request()->input('guard'))->where('id', '!=', $this->roleId) ->exists();
+            return Role::where('name', $value)->where('guard_name', request()->input('guard'))->where('id', '!=', $this->roleId)->doesntExist();
         }
         return Role::where('name', $value)->where('guard_name', request()->input('guard'))->doesntExist();
 

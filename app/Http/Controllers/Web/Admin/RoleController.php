@@ -33,9 +33,14 @@ class RoleController extends Controller
      */
     public function index()
     {
-        $allRoles = $this->roleUseCase->allRoles();
-        $roles = $this->rolePresenter->presentAllRole($allRoles);
-        return view('admin.roles.index', compact('roles'));
+        try {
+            $allRoles = $this->roleUseCase->allRoles();
+            $roles = $this->rolePresenter->presentAllRole($allRoles);
+            return view('admin.roles.index', compact('roles'));
+        } catch (\Exception $e) {
+            Toastr::error($e->getMessage(), 'Error');
+            return redirect()->back()->withInput();
+        }
     }
 
     /**
@@ -43,9 +48,14 @@ class RoleController extends Controller
      */
     public function create()
     {
+        try{
         $allPermission = $this->permissionUseCase->allPermissions();
         $permissions = $this->permissionPresenter->presentAllPermissionsForRoles($allPermission);
         return view('admin.roles.create', compact('permissions'));
+        } catch (\Exception $e) {
+            Toastr::error($e->getMessage(), 'Error');
+            return redirect()->back()->withInput();
+        }
     }
 
     /**
@@ -56,7 +66,7 @@ class RoleController extends Controller
         try {
             $this->roleUseCase->createRole($request->validated());
             Toastr::success('Permission created successfully!', 'Success');
-            return redirect()->route('admin.permissions.index');
+            return redirect()->route('admin.roles.index');
         } catch (\Exception $e) {
             Toastr::error($e->getMessage(), 'Error');
             return redirect()->back()->withInput();
@@ -76,9 +86,14 @@ class RoleController extends Controller
      */
     public function edit(Role $role)
     {
+        try {
         $allPermission = $this->permissionUseCase->allPermissions();
         $permissions = $this->permissionPresenter->presentAllPermissionsForRoles($allPermission);
         return view('admin.roles.edit', compact('role', 'permissions'));
+        } catch (\Exception $e) {
+            Toastr::error($e->getMessage(), 'Error');
+            return redirect()->back()->withInput();
+        }
     }
 
     /**
@@ -86,7 +101,14 @@ class RoleController extends Controller
      */
     public function update(UpdateRoleRequest $request, Role $role)
     {
-        //
+        try {
+            $this->roleUseCase->updateRole($role, $request->validated());
+            Toastr::success('Role updated successfully!', 'Success');
+            return redirect()->route('admin.roles.index');
+        } catch (\Exception $e) {
+            Toastr::error($e->getMessage(), 'Error');
+            return redirect()->back()->withInput();
+        }
     }
 
     /**
@@ -94,6 +116,13 @@ class RoleController extends Controller
      */
     public function destroy(Role $role)
     {
-        //
+        try {
+            $this->roleUseCase->deleteRole($role);
+            Toastr::success('The Role Deleted successfully!', 'Delete');
+            return redirect()->route('admin.roles.index');
+        } catch (\Exception $e) {
+            Toastr::error($e->getMessage(), 'Error');
+            return redirect()->back()->withInput();
+        }
     }
 }

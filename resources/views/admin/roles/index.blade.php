@@ -30,9 +30,9 @@
 
 
                                     <tbody>
-                                    @foreach($roles as $role)
+                                    @foreach($roles as $key => $role)
                                         <tr>
-                                            <td class="text-center col-1">{{ $role['id'] }}</td>
+                                            <td class="text-center col-1">{{ ++$key }}</td>
                                             <td class="text-center col-4">{{ $role['name_i18n'] }}</td>
                                             <td class="text-center col-4">{{ $role['guard_name'] }}</td>
                                             <td class="text-center col-3">

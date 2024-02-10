@@ -30,9 +30,9 @@
 
 
                                     <tbody>
-                                    @foreach($permissions as $permission)
+                                    @foreach($permissions as $key => $permission)
                                         <tr>
-                                            <td class="text-center col-1">{{ $permission['id'] }}</td>
+                                            <td class="text-center col-1">{{ ++$key }}</td>
                                             <td class="text-center col-4">{{ $permission['name_i18n'] }}</td>
                                             <td class="text-center col-4">{{ $permission['guard_name'] }}</td>
                                             <td class="text-center col-3">

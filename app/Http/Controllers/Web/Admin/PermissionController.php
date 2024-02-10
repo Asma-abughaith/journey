@@ -28,9 +28,14 @@ class PermissionController extends Controller
      */
     public function index()
     {
+        try{
         $allPermissions = $this->permissionUseCase->allPermissions();
         $permissions = $this->permissionPresenter->presentAllPermissions($allPermissions);
         return view('admin.permissions.index',compact('permissions'));
+        } catch (\Exception $e) {
+            Toastr::error($e->getMessage(), 'Error');
+            return redirect()->back()->withInput();
+        }
     }
 
     /**
@@ -77,14 +82,6 @@ class PermissionController extends Controller
      */
     public function update(UpdatePermissionRequest $request, Permission $permission)
     {
-//        if($request->errors){
-//            foreach ($request->errors as $error){
-//                Toastr::error($error, 'Error');
-//            }
-//            return redirect()->back()->withInput();
-//        }
-
-//        $request->errors;
         try {
             $this->permissionUseCase->updatePermission($permission, $request->validated());
             Toastr::success('Permission updated successfully!', 'Success');

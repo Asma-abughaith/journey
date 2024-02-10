@@ -49,16 +49,19 @@ class EloquentRoleRepository implements RoleRepositoryInterface
         if ($role) {
             $role->update($roleData);
             $role->setTranslations('name_i18n', $roleData['name_i18n']);
+            $role->syncPermissions($roleData['permissions']);
         }
 
         return $this->convertToEntity($role);
     }
 
-    public function deleteRole($roleId)
+    public function deleteRole($role)
     {
 
-        if ($roleId) {
-            DB::table('permissions')->where('id', $roleId)->delete();
+        if ($role) {
+            $role->syncPermissions();
+            $role->delete();
+//            DB::table('permissions')->where('id', $roleId)->delete();
         }
         return;
     }

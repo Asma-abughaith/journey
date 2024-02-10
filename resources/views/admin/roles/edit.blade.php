@@ -16,8 +16,10 @@
                         <div class="card-body">
                             <h4 class="card-title"></h4>
 
-                            <form method="post" action="{{ route('admin.roles.store') }}">
+                            <form method="post" action="{{ route('admin.roles.update',$role) }}">
                                 @csrf
+                                @method('put')
+                                <input type="hidden" name="id" value="{{$role->id}}">
                                 <div class="row">
                                     @foreach ($role->getTranslations('name_i18n') as $key => $value)
                                         <div class="col-md-4">
@@ -33,14 +35,10 @@
                                     <div class="col-md-4">
                                         <div class="mb-3">
                                             <label class="form-label">{{ __('app.guard') }}</label>
-                                            <select class="form-select" name="guard" id="guard" disabled>
-                                                <option selected>{{ __('app.select-one') }}</option>
-                                                <option value="admin" @if ($role->guard_name == 'admin') selected @endif>
-                                                    {{ __('app.admin') }}</option>
-                                                <option value="planner" @if ($role->guard_name == 'planner') selected @endif>
-                                                    {{ __('app.planner') }}</option>
-                                                <option value="user" @if ($role->guard_name == 'user') selected @endif>
-                                                    {{ __('app.user') }}</option>
+                                            <select class="form-select" name="guard" id="guard" readonly>
+                                                <option value="{{$role->guard_name}}" selected >
+                                                    {{$role->guard_name}}</option>
+
                                             </select>
                                         </div>
                                     </div>
