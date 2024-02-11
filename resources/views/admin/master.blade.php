@@ -1,9 +1,9 @@
 <!doctype html>
 @php
-    $lang = \Illuminate\Support\Facades\Auth::guard('admin')->user()->lang;
-    $lang = $lang == 'ar' ? 'rtl' : '';
+    $lang = app()->getLocale();
+   $dir = $lang == 'ar' ? 'rtl' : '';
 @endphp
-<html lang="en" dir="{{$lang=='ar'?'rtl':'' }}">
+<html lang="en" dir="{{$dir }}">
 
 @include('layouts.admin.head')
 <body data-topbar="dark" style="background-color:#eff3f6; " >
