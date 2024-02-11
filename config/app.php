@@ -85,8 +85,8 @@ return [
 
     'locale' => 'en',
     'available_locales' => [
-        'en' => 'en',
-        'ar' => 'ar'
+        'en' => 'English',
+        'ar' => 'العربية'
     ],
 
 

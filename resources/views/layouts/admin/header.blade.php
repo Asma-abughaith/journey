@@ -51,7 +51,7 @@
 
                             <a href="{{ route('admin.language.switch', ['lang' => $langKey]) }}" class="dropdown-item notify-item">
                                 <img src="{{ asset('assets/images/flags/' . $langKey . '.jpg') }}" alt="user-image"
-                                    class="me-1" height="12">
+                                    class="me-1" height="12"><span>{{$langText}}</span>
                             </a>
                         @endif
                     @endforeach
