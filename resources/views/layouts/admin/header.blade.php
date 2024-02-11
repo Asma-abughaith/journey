@@ -4,21 +4,21 @@
             <!-- LOGO -->
             <div class="navbar-brand-box">
                 <a href="index.html" class="logo logo-dark">
-                                <span class="logo-sm">
-                                    <img src="{{asset('assets')}}/images/logo-sm.png" alt="logo-sm" height="22">
-                                </span>
+                    <span class="logo-sm">
+                        <img src="{{ asset('assets') }}/images/logo-sm.png" alt="logo-sm" height="22">
+                    </span>
                     <span class="logo-lg">
-                                    <img src="{{asset('assets')}}/images/logo-dark.png" alt="logo-dark" height="20">
-                                </span>
+                        <img src="{{ asset('assets') }}/images/logo-dark.png" alt="logo-dark" height="20">
+                    </span>
                 </a>
 
                 <a href="index.html" class="logo logo-light">
-                                <span class="logo-sm">
-                                    <img src="{{asset('assets')}}/images/logo-sm.png" alt="logo-sm-light" height="22">
-                                </span>
+                    <span class="logo-sm">
+                        <img src="{{ asset('assets') }}/images/logo-sm.png" alt="logo-sm-light" height="22">
+                    </span>
                     <span class="logo-lg">
-                                    <img src="{{asset('assets')}}/images/logo-light.png" alt="logo-light" height="20">
-                                </span>
+                        <img src="{{ asset('assets') }}/images/logo-light.png" alt="logo-light" height="20">
+                    </span>
                 </a>
             </div>
 
@@ -34,21 +34,24 @@
 
 
             @php
-                $currentLocale = app(\Mcamara\LaravelLocalization\LaravelLocalization::class)->getCurrentLocale();
+                $currentLocale = app()->getLocale();
             @endphp
 
 
 
             <div class="dropdown d-none d-sm-inline-block">
-                <button type="button" class="btn header-item waves-effect" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <img class="" src="{{ asset('assets/images/flags/'.$currentLocale.'.jpg') }}" alt="Header Language" height="16">
+                <button type="button" class="btn header-item waves-effect" data-bs-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    <img class="" src="{{ asset('assets/images/flags/' . $currentLocale . '.jpg') }}"
+                        alt="Header Language" height="16">
                 </button>
                 <div class="dropdown-menu dropdown-menu-end">
-                    @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
-                        @if($localeCode != $currentLocale)
-                            <a href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}" class="dropdown-item notify-item">
-                                <img src="{{ asset('assets/images/flags/' . $localeCode.'.jpg') }}" alt="user-image" class="me-1" height="12">
-                                <span class="align-middle">{{ $properties['native'] }}</span>
+                    @foreach (config()->get('app.available_locales') as $langKey => $langText)
+                        {{ dd($langKey, $langText) }}
+                        @if (app()->getLocale() !== $langKey)
+                            <a href="{{ getSameWithNewLanguage($langKey) }}" class="dropdown-item notify-item">
+                                <img src="{{ asset('assets/images/flags/' . $langKey . '.jpg') }}" alt="user-image"
+                                    class="me-1" height="12">
                             </a>
                         @endif
                     @endforeach
@@ -63,13 +66,13 @@
             </div>
 
             <div class="dropdown d-inline-block">
-                <button type="button" class="btn header-item noti-icon waves-effect" id="page-header-notifications-dropdown"
-                        data-bs-toggle="dropdown" aria-expanded="false">
+                <button type="button" class="btn header-item noti-icon waves-effect"
+                    id="page-header-notifications-dropdown" data-bs-toggle="dropdown" aria-expanded="false">
                     <i class="ri-notification-3-line"></i>
                     <span class="noti-dot"></span>
                 </button>
                 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0"
-                     aria-labelledby="page-header-notifications-dropdown">
+                    aria-labelledby="page-header-notifications-dropdown">
                     <div class="p-3">
                         <div class="row align-items-center">
                             <div class="col">
@@ -84,9 +87,9 @@
                         <a href="" class="text-reset notification-item">
                             <div class="d-flex">
                                 <div class="avatar-xs me-3">
-                                                <span class="avatar-title bg-primary rounded-circle font-size-16">
-                                                    <i class="ri-shopping-cart-line"></i>
-                                                </span>
+                                    <span class="avatar-title bg-primary rounded-circle font-size-16">
+                                        <i class="ri-shopping-cart-line"></i>
+                                    </span>
                                 </div>
                                 <div class="flex-1">
                                     <h6 class="mb-1">Your order is placed</h6>
@@ -110,21 +113,26 @@
 
             <div class="dropdown d-inline-block user-dropdown">
                 <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
-                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <img class="rounded-circle header-profile-user" src="{{asset('assets')}}/images/users/avatar-1.jpg"
-                         alt="Header Avatar">
-                    <span class="d-none d-xl-inline-block ms-1">{{explode(" ",\Illuminate\Support\Facades\Auth::guard('admin')->user()->name)[0]}}</span>
+                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img class="rounded-circle header-profile-user"
+                        src="{{ asset('assets') }}/images/users/avatar-1.jpg" alt="Header Avatar">
+                    <span
+                        class="d-none d-xl-inline-block ms-1">{{ explode(' ', \Illuminate\Support\Facades\Auth::guard('admin')->user()->name)[0] }}</span>
                     <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
                 </button>
                 <div class="dropdown-menu dropdown-menu-end">
                     <!-- item-->
-                    <a class="dropdown-item" href="#"><i class="ri-user-line align-middle me-1"></i> Profile</a>
+                    <a class="dropdown-item" href="#"><i class="ri-user-line align-middle me-1"></i>
+                        Profile</a>
 
-                    <a class="dropdown-item d-block" href="#"><span class="badge bg-success float-end mt-1">11</span><i class="ri-settings-2-line align-middle me-1"></i> Settings</a>
+                    <a class="dropdown-item d-block" href="#"><span
+                            class="badge bg-success float-end mt-1">11</span><i
+                            class="ri-settings-2-line align-middle me-1"></i> Settings</a>
                     <div class="dropdown-divider"></div>
-                    <form action="{{route('admin.logout')}}" method="post">
+                    <form action="{{ route('admin.logout') }}" method="post">
                         @csrf
-                        <button type="submit" class="dropdown-item text-danger" ><i class="ri-shut-down-line align-middle me-1 text-danger"></i> Logout</button>
+                        <button type="submit" class="dropdown-item text-danger"><i
+                                class="ri-shut-down-line align-middle me-1 text-danger"></i> Logout</button>
 
                     </form>
                 </div>
