@@ -40,6 +40,7 @@ class Admin extends Authenticatable implements MustVerifyEmail, HasMedia
         'name',
         'email',
         'password',
+        'lang',
     ];
 
     /**

@@ -13,6 +13,7 @@ use App\Http\Controllers\Web\Admin\AdminController;
 //use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Web\Admin\CategoryController;
 use App\Models\Admin;
+use App\Http\Controllers\Web\Setting\LanguageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -62,3 +63,7 @@ Route::resource('admins', AdminController::class);
 
 //================= Routes For Categories =================
 Route::resource('categories', CategoryController::class);
+
+//================= Routes For Categories =================
+Route::get('/language/{lang}', [LanguageController::class, 'switchLanguage'])->name('language.switch');
+

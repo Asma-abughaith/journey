@@ -1,5 +1,9 @@
 <!doctype html>
-<html lang="en" dir="{{ LaravelLocalization::getCurrentLocale() =='ar'?'rtl':'' }}">
+@php
+    $lang = \Illuminate\Support\Facades\Auth::guard('admin')->user()->lang;
+    $lang = $lang == 'ar' ? 'rtl' : '';
+@endphp
+<html lang="en" dir="{{$lang=='ar'?'rtl':'' }}">
 
 @include('layouts.admin.head')
 <body data-topbar="dark" style="background-color:#eff3f6; " >

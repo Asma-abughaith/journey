@@ -47,9 +47,9 @@
                 </button>
                 <div class="dropdown-menu dropdown-menu-end">
                     @foreach (config()->get('app.available_locales') as $langKey => $langText)
-                        {{ dd($langKey, $langText) }}
                         @if (app()->getLocale() !== $langKey)
-                            <a href="{{ getSameWithNewLanguage($langKey) }}" class="dropdown-item notify-item">
+
+                            <a href="{{ route('admin.language.switch', ['lang' => $langKey]) }}" class="dropdown-item notify-item">
                                 <img src="{{ asset('assets/images/flags/' . $langKey . '.jpg') }}" alt="user-image"
                                     class="me-1" height="12">
                             </a>
