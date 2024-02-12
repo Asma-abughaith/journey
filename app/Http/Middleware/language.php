@@ -18,7 +18,12 @@ class language
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $lang = Auth::guard('admin')->user()->lang;
+        if(Auth::guard('admin')->user())
+            $lang = Auth::guard('admin')->user()->lang;
+        else
+            $lang ="en";
+
+
         if($lang){
             App::setLocale($lang);
         }
