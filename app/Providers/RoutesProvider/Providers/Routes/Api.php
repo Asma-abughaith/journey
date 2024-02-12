@@ -13,7 +13,21 @@ class Api implements IRoutesProvider
 
     public function mapping($namespace = "App\Http\Controllers\Api")
     {
-//        when you reach to api you should edit this file
+
+        $middleware = ['api'];
+
+        Route::middleware($middleware)->group(function () {
+            Route::prefix('api')->name('api.')->group(function () {
+                // Admin Group
+                Route::middleware("guest")->prefix('/{lang}/')->group(function () {
+                    Route::group([], base_path('routes/api/user/without_authentication.php'));
+                });
+
+//                Route::middleware("auth")->group(function () {
+//                    Route::group([], base_path('routes/api/user/with_authentication.php'));
+//                });
+            });
+        });
 
 
 

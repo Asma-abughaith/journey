@@ -1,0 +1,23 @@
+<?php
+
+namespace App\UseCases\Api\User;
+
+
+use App\Interfaces\Gateways\Api\User\CategoryApiRepositoryInterface;
+
+class CategoryApiUseCase
+{
+    protected $categoryRepository;
+
+    public function __construct(CategoryApiRepositoryInterface $categoryRepository)
+    {
+        $this->categoryRepository = $categoryRepository;
+    }
+
+    public function allCategories()
+    {
+        return $this->categoryRepository->getAllCategories();
+    }
+
+
+}

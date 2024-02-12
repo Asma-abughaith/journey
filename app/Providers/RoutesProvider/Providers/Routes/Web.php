@@ -12,8 +12,6 @@ class Web implements IRoutesProvider
 {
     public function mapping($namespace = "App\Http\Controllers\Web")
     {
-
-
         $middleware = ['web'];
 
         Route::middleware($middleware)->group(function () {
