@@ -9,8 +9,7 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\Translatable\HasTranslations;
 
-
-class Category extends Model implements HasMedia
+class SubCategory extends Model implements HasMedia
 {
     use HasFactory,InteractsWithMedia;
 
@@ -21,16 +20,16 @@ class Category extends Model implements HasMedia
 
     public function registerMediaCollections(): void
     {
-        $this->addMediaCollection('category')
+        $this->addMediaCollection('subcategory')
             ->singleFile()
             ->registerMediaConversions(function (Media $media) {
-                $this->addMediaConversion('category_app')->width(80)->height(80)->format('webp');
-                $this->addMediaConversion('category_website')->width(250)->height(250)->format('webp');
+                $this->addMediaConversion('subcategory_app')->width(80)->height(80)->format('webp');
+                $this->addMediaConversion('subcategory_website')->width(250)->height(250)->format('webp');
             });
     }
 
-    public function subcategories(){
-        return $this->hasMany(SubCategory::class);
+    public function category(){
+        return $this->belongsTo(Category::class);
     }
 
 }
