@@ -6,7 +6,7 @@ use App\Helpers\ApiResponse;
 use App\Http\Controllers\Controller;
 use App\Interfaces\Presenters\Api\User\CategoryApiPresenter;
 use App\UseCases\Api\User\CategoryApiUseCase;
-
+use Illuminate\Http\Response;
 
 
 class CategoryApiController extends Controller
@@ -31,7 +31,7 @@ class CategoryApiController extends Controller
             $categories =$categories? $categories:null;
             return ApiResponse::sendResponse(200, 'Categories Retrieved Successfully', $categories);
         } catch (\Exception $e) {
-            return ApiResponse::sendResponse(500, "Something Went Wrong", $e->getMessage());
+            return ApiResponse::sendResponse(Response::HTTP_BAD_REQUEST, "Something Went Wrong", $e->getMessage());
         }
     }
 

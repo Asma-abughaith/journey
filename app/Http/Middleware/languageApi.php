@@ -25,7 +25,8 @@ class languageApi
             return $next($request);
         } else {
             return response()->json([
-                'error' => 'This language is not supported.'
+                'status'=>Response::HTTP_BAD_REQUEST,
+                'msg' => 'This language is not supported.'
             ], Response::HTTP_BAD_REQUEST);
         }
     }
