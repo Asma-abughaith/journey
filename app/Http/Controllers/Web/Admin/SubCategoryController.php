@@ -3,13 +3,13 @@
 namespace App\Http\Controllers\Web\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\SubCategory;
-use App\Http\Requests\StoreSubCategoryRequest;
-use App\Http\Requests\UpdateSubCategoryRequest;
-use App\Interfaces\Presenters\Web\Admin\SubCategoryPresenter;
-use App\UseCases\Web\Admin\SubCategoryUseCase;
+use App\Http\Requests\Web\Admin\SubCategory\StoreSubCategoryRequest;
+use App\Http\Requests\Web\Admin\SubCategory\UpdateSubCategoryRequest;
 use App\Interfaces\Presenters\Web\Admin\CategoryPresenter;
+use App\Interfaces\Presenters\Web\Admin\SubCategoryPresenter;
+use App\Models\SubCategory;
 use App\UseCases\Web\Admin\CategoryUseCase;
+use App\UseCases\Web\Admin\SubCategoryUseCase;
 use Brian2694\Toastr\Facades\Toastr;
 
 class SubCategoryController extends Controller
