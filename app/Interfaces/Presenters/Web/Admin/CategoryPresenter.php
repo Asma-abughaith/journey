@@ -18,7 +18,18 @@ class CategoryPresenter
         return $formattedCategories;
     }
 
-    public function persentCategory($category){
+    public function presentAllCategoriesForSubCategories($categories)
+    {
+        $formattedCategories = [];
+
+        foreach ($categories as $category) {
+            $formattedCategories[] = $this->formatCategoryForSubCategories($category);
+        }
+        return $formattedCategories;
+    }
+
+    public function persentCategory($category)
+    {
         return $this->formatCategory($category);
     }
 
@@ -27,10 +38,20 @@ class CategoryPresenter
         return [
             'id' => $category->getId(),
             'name' => $category->getName(),
-            'name_en'=>$category->getNameEn(),
-            'name_ar'=>$category->getNameAr(),
+            'name_en' => $category->getNameEn(),
+            'name_ar' => $category->getNameAr(),
             'image' => $category->getImage(),
-            'priority'=>$category->getPriority(),
+            'priority' => $category->getPriority(),
+        ];
+    }
+
+    protected function formatCategoryForSubCategories(CategoryEntity $category)
+    {
+        $lang = app()->getLocale();
+        $nameLang = 'getName' . ucfirst($lang);
+        return [
+            'id' => $category->getId(),
+            'name' => $category->$nameLang(),
         ];
     }
 }

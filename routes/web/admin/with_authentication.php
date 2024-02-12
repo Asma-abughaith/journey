@@ -12,6 +12,7 @@ use App\Http\Controllers\Web\Admin\RoleController;
 use App\Http\Controllers\Web\Admin\AdminController;
 //use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Web\Admin\CategoryController;
+use App\Http\Controllers\Web\Admin\SubCategoryController;
 use App\Models\Admin;
 use App\Http\Controllers\Web\Setting\LanguageController;
 
@@ -67,3 +68,5 @@ Route::resource('categories', CategoryController::class);
 //================= Routes For Categories =================
 Route::get('/language/{lang}', [LanguageController::class, 'switchLanguage'])->name('language.switch');
 
+//================= Routes For SubCategories =================
+Route::resource('/sub_categories', SubCategoryController::class);

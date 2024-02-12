@@ -80,6 +80,17 @@
                     </ul>
                 </li>
 
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect" @yield('subCategory-active')>
+                        <i class="ri-list-ordered"></i>
+                        <span>{{ __('app.sub-categories') }}</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{ route('admin.sub_categories.index') }}">{{ __('app.all-sub-categories') }}</a></li>
+                        <li><a href="{{ route('admin.sub_categories.create') }}">{{ __('app.create-sub-categories') }}</a></li>
+                    </ul>
+                </li>
+
             </ul>
         </div>
         <!-- Sidebar -->

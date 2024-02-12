@@ -2,38 +2,36 @@
 
 namespace App\UseCases\Web\Admin;
 
-use App\Entities\Web\Admin\PermissionEntity;
-use App\Interfaces\Gateways\Web\Admin\AdminRepositoryInterface;
-use App\Interfaces\Gateways\Web\Admin\CategoryRepositoryInterface;
+use App\Interfaces\Gateways\Web\Admin\SubCategoryRepositoryInterface;
 
 class SubCategoryUseCase
 {
     protected $subCategoryRepository;
 
-    public function __construct(CategoryRepositoryInterface $categoryRepository)
+    public function __construct(SubCategoryRepositoryInterface $subCategoryRepository)
     {
-        $this->categoryRepository = $categoryRepository;
+        $this->subCategoryRepository = $subCategoryRepository;
     }
 
-    public function allCategories()
+    public function allSubCategories()
     {
-        return $this->categoryRepository->getAllCategories();
+        return $this->subCategoryRepository->getAllSubCategories();
     }
 
-    public function getCategory($category)
+    public function getSubCategory($subCategory)
     {
-        return $this->categoryRepository->getCategory($category);
+        return $this->subCategoryRepository->getSubCategory($subCategory);
     }
 
-    public function getCategoryById($categoryId)
+    public function getSubCategoryById($subCategoryId)
     {
-        return $this->categoryRepository->getCategoryById($categoryId);
+        return $this->subCategoryRepository->getSubCategoryById($subCategoryId);
     }
 
-    public function createCategory($request)
+    public function createSubCategory($request)
     {
         $translator = ['en' => $request['name_en'], 'ar' => $request['name_ar']];
-        return $this->categoryRepository->createCategory(
+        return $this->subCategoryRepository->createSubCategory(
             [
                 'name' => $translator,
                 'priority' =>  $request['priority'],
@@ -42,11 +40,11 @@ class SubCategoryUseCase
         );
     }
 
-    public function updateCategory($category, $request)
+    public function updateSubCategory($subCategory, $request)
     {
         $translator = ['en' => $request['name_en'], 'ar' => $request['name_ar']];
-        return $this->categoryRepository->updateCategory(
-            $category,
+        return $this->subCategoryRepository->updateSubCategory(
+            $subCategory,
             [
                 'name' => $translator,
                 'priority' =>  $request['priority'],
@@ -55,9 +53,8 @@ class SubCategoryUseCase
         );
     }
 
-    public function deleteCategory($category)
+    public function deleteCategory($subCategory)
     {
-        return $this->categoryRepository->deleteCategory($category);
+        return $this->subCategoryRepository->deleteSubCategory($subCategory);
     }
-
 }

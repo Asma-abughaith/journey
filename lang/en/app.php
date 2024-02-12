@@ -47,6 +47,7 @@ return [
     'update-role' => 'Update Role',
     'edit-admin' => 'Edit Admin',
     'categories' => 'Categories',
+    'category' => 'Category',
     'priority' => 'Priority',
     'all-categories' => "All Categories",
     'create-categories' => "Create Categories",
@@ -56,4 +57,8 @@ return [
     'priority-order' => 'Please Enter The Number Of Priority',
     'edit-category' => 'Edit Category',
     'Admin_Login' => 'Admin Login',
+    'sub-categories' => "Sub Categories",
+    'sub-category' => "Sub Category",
+    'all-sub-categories' => "All Sub Categories",
+    'create-sub-categories' => "Create Sub Categories"
 ];
