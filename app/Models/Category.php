@@ -24,7 +24,7 @@ class Category extends Model implements HasMedia
         $this->addMediaCollection('category')
             ->singleFile()
             ->registerMediaConversions(function (Media $media) {
-                $this->addMediaConversion('category_app')->width(250)->height(250)->format('webp');
+                $this->addMediaConversion('category_app')->width(80)->height(80)->format('webp');
                 $this->addMediaConversion('category_website')->width(250)->height(250)->format('webp');
             });
     }
