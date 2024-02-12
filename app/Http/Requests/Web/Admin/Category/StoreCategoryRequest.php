@@ -8,6 +8,8 @@ use Illuminate\Validation\Rule;
 
 class StoreCategoryRequest extends FormRequest
 {
+    public $errors;
+
     /**
      * Determine if the user is authorized to make this request.
      */
@@ -41,7 +43,7 @@ class StoreCategoryRequest extends FormRequest
             'name_ar.min' => 'Arabic name must be at least :min characters.',
             'priority.required' => 'Priority is required.',
             'priority.min' => 'priority must be at least :min characters.',
-            'image.required'=>'image is required',
+            'image.required' => 'image is required',
         ];
     }
 
@@ -58,6 +60,5 @@ class StoreCategoryRequest extends FormRequest
     protected function failedValidation(Validator $validator)
     {
         $this->errors = $validator->errors();
-
     }
 }

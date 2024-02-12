@@ -17,7 +17,8 @@
 
 
 
-                            <form method="post" action="{{ route('admin.categories.store') }}" enctype="multipart/form-data">
+                            <form method="post" action="{{ route('admin.sub_categories.store') }}"
+                                enctype="multipart/form-data">
                                 @csrf
 
                                 <div class="row">
@@ -26,7 +27,7 @@
                                             <label class="form-label" for="name_en">{{ __('app.name-en') }}</label>
                                             <input type="text" class="form-control"
                                                 placeholder="{{ __('app.category-en') }}" name="name_en"
-                                                value="{{ old('name_en') }}" id="name_en" required>
+                                                value="{{ old('name_en') }}" id="name_en" >
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -34,7 +35,7 @@
                                             <label class="form-label" for="name_ar">{{ __('app.name-ar') }}</label>
                                             <input type="text" class="form-control"
                                                 placeholder="{{ __('app.category-ar') }}" name="name_ar"
-                                                value="{{ old('name_ar') }}" id="name_ar" required>
+                                                value="{{ old('name_ar') }}" id="name_ar" >
                                         </div>
                                     </div>
 
@@ -45,7 +46,7 @@
                                         <div class="mb-3">
                                             <label class="form-label" for="category_id">{{ __('app.categories') }}</label>
                                             <select class="form-select" name="category_id" id="category_id">
-                                                <option selected>{{ __('app.select-one') }}</option>
+                                                <option value="" selected>{{ __('app.select-one') }}</option>
                                                 @foreach ($sub_categories as $sub_category)
                                                     <option value="{{ $sub_category['id'] }}">{{ $sub_category['name'] }}
                                                     </option>
@@ -58,7 +59,7 @@
                                             <label class="form-label" for="priority">{{ __('app.priority') }}</label>
                                             <input type="number" class="form-control" id="priority"
                                                 placeholder="{{ __('app.priority-order') }}" name="priority"
-                                                value="{{ old('priority') }}" required min="1">
+                                                value="{{ old('priority') }}"  min="1">
                                         </div>
                                     </div>
                                 </div>

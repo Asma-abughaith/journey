@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Web\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Web\Admin\SubCategory\StoreSubCategoryRequest;
-use App\Http\Requests\Web\Admin\SubCategory\UpdateSubCategoryRequest;
 use App\Interfaces\Presenters\Web\Admin\CategoryPresenter;
 use App\Interfaces\Presenters\Web\Admin\SubCategoryPresenter;
 use App\Models\SubCategory;
@@ -62,7 +61,14 @@ class SubCategoryController extends Controller
      */
     public function store(StoreSubCategoryRequest $request)
     {
-        dd($request->all());
+        try {
+            // $this->categoryUseCase->createCategory($request->validated());
+            Toastr::success('Category created successfully!', 'Success');
+            return redirect()->route('admin.sub_categories.create');
+        } catch (\Exception $e) {
+            Toastr::error($e->getMessage(), 'Error');
+            return redirect()->back()->withInput();
+        }
     }
 
     /**
