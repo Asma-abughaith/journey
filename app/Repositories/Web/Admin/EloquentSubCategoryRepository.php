@@ -14,7 +14,7 @@ class EloquentSubCategoryRepository implements SubCategoryRepositoryInterface
 {
     public function getAllSubCategories()
     {
-        $eloquentSubCategories = SubCategory::all();
+        $eloquentSubCategories = SubCategory::with('category')->get();
         $subCategories = [];
 
         foreach ($eloquentSubCategories as $eloquentSubCategory) {
@@ -38,11 +38,11 @@ class EloquentSubCategoryRepository implements SubCategoryRepositoryInterface
 
     public function createSubCategory(array $subCategoryData, ?array $imageData)
     {
-        $eloquentSubCategory = Category::create($subCategoryData);
+        $eloquentSubCategory = SubCategory::create($subCategoryData);
         $eloquentSubCategory->setTranslations('name', $subCategoryData['name']);
 
         if ($imageData !== null) {
-            $eloquentSubCategory->addMediaFromRequest('image')->toMediaCollection('category');
+            $eloquentSubCategory->addMediaFromRequest('image')->toMediaCollection('subcategory');
         }
 
         return $this->convertToEntity($eloquentSubCategory);
@@ -54,7 +54,7 @@ class EloquentSubCategoryRepository implements SubCategoryRepositoryInterface
         $subCategory->update($subCategoryData);
         $subCategory->setTranslations('name', $subCategoryData['name']);
         if (isset($imageData['image']) && $imageData['image'] != null) {
-            $subCategory->addMediaFromRequest('image')->toMediaCollection('category');
+            $subCategory->addMediaFromRequest('image')->toMediaCollection('subcategory');
         }
         return $this->convertToEntity($subCategory);
     }
@@ -78,7 +78,7 @@ class EloquentSubCategoryRepository implements SubCategoryRepositoryInterface
         $subCategory->setNameAr($names['ar']);
         $subCategory->setImage($eloquentSubCategory->getFirstMediaUrl('subcategory', 'subcategory_app'));
         $subCategory->setPriority($eloquentSubCategory->priority);
-        $subCategory->setCategory($eloquentSubCategory->category());
+        $subCategory->setCategory($eloquentSubCategory->category->name);
         return $subCategory;
     }
 }

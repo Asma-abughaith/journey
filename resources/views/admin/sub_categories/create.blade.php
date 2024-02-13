@@ -7,7 +7,7 @@
         <div class="page-content">
             <div class="container-fluid">
                 <!-- start page title -->
-                @include('layouts.admin.title', ['title' => __('app.create-category')])
+                @include('layouts.admin.title', ['title' => __('app.create-subcategory')])
                 <!-- end page title -->
 
                 <div class="col-xl-12 mx-auto" style="margin-top: 2.5%;">
@@ -45,10 +45,10 @@
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label class="form-label" for="category_id">{{ __('app.categories') }}</label>
-                                            <select class="form-select" name="category_id" id="category_id">
+                                            <select class="form-select" name="category_id" id="category_id" >
                                                 <option value="" selected>{{ __('app.select-one') }}</option>
-                                                @foreach ($sub_categories as $sub_category)
-                                                    <option value="{{ $sub_category['id'] }}">{{ $sub_category['name'] }}
+                                                @foreach ($categories as $category)
+                                                    <option value="{{ $category['id'] }}">{{ $category['name'] }}
                                                     </option>
                                                 @endforeach
                                             </select>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Web\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Web\Admin\SubCategory\StoreSubCategoryRequest;
+use App\Http\Requests\Web\Admin\SubCategory\UpdateSubCategoryRequest;
 use App\Interfaces\Presenters\Web\Admin\CategoryPresenter;
 use App\Interfaces\Presenters\Web\Admin\SubCategoryPresenter;
 use App\Models\SubCategory;
@@ -47,9 +48,9 @@ class SubCategoryController extends Controller
     public function create()
     {
         try {
-            $allSubCategories = $this->categoryUseCase->allCategories();
-            $sub_categories = $this->categoryPresenter->presentAllCategoriesForSubCategories($allSubCategories);
-            return view('admin.sub_categories.create', compact('sub_categories'));
+            $allCategories = $this->categoryUseCase->allCategories();
+            $categories = $this->categoryPresenter->presentAllCategoriesForSubCategories($allCategories);
+            return view('admin.sub_categories.create', compact('categories'));
         } catch (\Exception $e) {
             Toastr::error($e->getMessage(), 'Error');
             return redirect()->back()->withInput();
@@ -62,21 +63,22 @@ class SubCategoryController extends Controller
     public function store(StoreSubCategoryRequest $request)
     {
         try {
-            // $this->categoryUseCase->createCategory($request->validated());
-            Toastr::success('Category created successfully!', 'Success');
-            return redirect()->route('admin.sub_categories.create');
+            $this->subCategoryUseCase->createSubCategory($request->validated());
+            Toastr::success('Sub Category created successfully!', 'Success');
+            return redirect()->route('admin.sub_categories.index');
         } catch (\Exception $e) {
             Toastr::error($e->getMessage(), 'Error');
-            return redirect()->back()->withInput();
+            return redirect()->back()->withErrors($request->errors)->withInput();
         }
     }
+
 
     /**
      * Display the specified resource.
      */
     public function show(SubCategory $subCategory)
     {
-        //
+
     }
 
     /**
@@ -84,7 +86,16 @@ class SubCategoryController extends Controller
      */
     public function edit(SubCategory $subCategory)
     {
-        //
+        try {
+            $allCategories = $this->categoryUseCase->allCategories();
+            $categories = $this->categoryPresenter->presentAllCategoriesForSubCategories($allCategories);
+            $subCategory = $this->subCategoryUseCase->getSubCategory($subCategory);
+            $subCategory = $this->subCategoryPresenter->persentSubCategory($subCategory);
+            return view('admin.sub_categories.edit',compact('subCategory','categories'));
+        } catch (\Exception $e) {
+            Toastr::error($e->getMessage(), 'Error');
+            return redirect()->back()->withInput();
+        }
     }
 
     /**
@@ -92,7 +103,14 @@ class SubCategoryController extends Controller
      */
     public function update(UpdateSubCategoryRequest $request, SubCategory $subCategory)
     {
-        //
+        try {
+            $this->subCategoryUseCase->updateSubCategory($subCategory, $request->validated());
+            Toastr::success('SubCategories updated successfully!', 'Success');
+            return redirect()->route('admin.sub_categories.index');
+        } catch (\Exception $e) {
+            Toastr::error($e->getMessage(), 'Error');
+            return redirect()->back()->withInput();
+        }
     }
 
     /**
@@ -100,6 +118,13 @@ class SubCategoryController extends Controller
      */
     public function destroy(SubCategory $subCategory)
     {
-        //
+        try {
+            $this->subCategoryUseCase->deleteSubCategory($subCategory);
+            Toastr::success('The Sub Category Deleted successfully!', 'Delete');
+            return redirect()->route('admin.sub_categories.index');
+        } catch (\Exception $e) {
+            Toastr::error($e->getMessage(), 'Error');
+            return redirect()->back()->withInput();
+        }
     }
 }

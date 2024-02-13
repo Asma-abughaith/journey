@@ -35,8 +35,10 @@ class SubCategoryUseCase
             [
                 'name' => $translator,
                 'priority' =>  $request['priority'],
+                'category_id'=>$request['category_id']
             ],
-            ['image' => isset($request['image']) ? isset($request['image']) : null]
+            ['image' => isset($request['image']) ? isset($request['image']) : null],
+
         );
     }
 
@@ -48,12 +50,13 @@ class SubCategoryUseCase
             [
                 'name' => $translator,
                 'priority' =>  $request['priority'],
+                'category_id'=>$request['category_id']
             ],
             ['image' => isset($request['image']) ? isset($request['image']) : null]
         );
     }
 
-    public function deleteCategory($subCategory)
+    public function deleteSubCategory($subCategory)
     {
         return $this->subCategoryRepository->deleteSubCategory($subCategory);
     }

@@ -22,17 +22,46 @@
                                         <tr>
                                             <th class="text-center">{{ __('app.id') }}</th>
                                             <th class="text-center">{{ __('app.name') }}</th>
-                                            <th class="text-center">{{ __('app.image') }}</th>
                                             <th class="text-center">{{ __('app.category') }}</th>
                                             <th class="text-center">{{ __('app.priority') }}</th>
+                                            <th class="text-center">{{ __('app.image') }}</th>
                                             <th class="text-center">{{ __('app.action') }}</th>
                                         </tr>
                                     </thead>
 
 
                                     <tbody>
-                                        @foreach ($sub_categories as $key => $category)
-                                            <tr></tr>
+                                        @foreach ($sub_categories as $key => $sub_category)
+                                            <tr>
+                                                <td class="text-center col-1">{{ ++$key }}</td>
+                                                <td class="text-center col-2">{{ $sub_category['name'] }}</td>
+
+                                                <td class="text-center col-2">{{ $sub_category['category'] }}</td>
+                                                <td class="text-center col-2">{{ $sub_category['priority'] }}</td>
+                                                <td class="text-center col-2"><img
+                                                        src="{{ $sub_category['image'] != null ? asset($sub_category['image']) : asset('category.jpg') }}"
+                                                        alt="{{ $sub_category['image'] != null ? $sub_category['name'] : 'avatar' }}"
+                                                        width="50px" height="50px">
+                                                </td>
+                                                <td class="text-center col-2">
+                                                    <a class="btn btn-outline-warning btn-sm edit" title="Edit"
+                                                       href="{{ route('admin.sub_categories.edit', $sub_category['id']) }}">
+                                                        <i class="fas fa-pencil-alt" title="Edit"></i>
+                                                    </a>
+                                                    <form method="post"
+                                                          action="{{ route('admin.sub_categories.destroy', $sub_category['id']) }}"
+                                                          style="display:inline;">
+                                                        @csrf
+                                                        @method('delete')
+                                                        <button type="submit" class="btn btn-outline-danger btn-sm"
+                                                                title="Delete" style="padding-bottom: 1px;"
+                                                                onclick="return confirm('Are you sure you want to delete?')">
+                                                            <i class="ri-delete-bin-line" title="Edit"></i>
+                                                        </button>
+                                                    </form>
+                                                </td>
+
+                                            </tr>
                                         @endforeach
 
 

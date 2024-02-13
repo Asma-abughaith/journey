@@ -17,18 +17,18 @@
 
 
 
-                            <form method="post" action="{{ route('admin.categories.update', $category['id']) }}"
+                            <form method="post" action="{{ route('admin.sub_categories.update', $subCategory['id']) }}"
                                 enctype="multipart/form-data">
                                 @csrf
                                 @method('put')
-                                <input type="hidden" name="id" value="{{ $category['id'] }}">
+                                <input type="hidden" name="id" value="{{ $subCategory['id'] }}">
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label class="form-label" for="name_en">{{ __('app.name-en') }}</label>
                                             <input type="text" class="form-control"
                                                 placeholder="{{ __('app.category-en') }}" id="name_en" name="name_en"
-                                                value="{{ old('name_en', $category['name_en']) }}" required>
+                                                value="{{ old('name_en', $subCategory['name_en']) }}" required>
                                         </div>
                                     </div>
 
@@ -37,22 +37,36 @@
                                             <label class="form-label" for="name_ar">{{ __('app.name-ar') }}</label>
                                             <input type="text" class="form-control"
                                                 placeholder="{{ __('app.category-ar') }}" id="name_ar" name="name_ar"
-                                                value="{{ old('name_ar', $category['name_ar']) }}" required>
+                                                value="{{ old('name_ar', $subCategory['name_ar']) }}" required>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
-
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="category_id">{{ __('app.categories') }}</label>
+                                            <select class="form-select" name="category_id" id="category_id" >
+                                                <option value="" selected>{{ __('app.select-one') }}</option>
+                                                @foreach ($categories as $category)
+                                                    <option value="{{ $category['id'] }}" @if($category['name'] ==$subCategory['category']) selected @endif>{{ $category['name'] }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label class="form-label">{{ __('app.priority') }}</label>
                                             <input type="number" class="form-control" id="priority"
                                                 placeholder="{{ __('app.priority-order') }}" name="priority"
-                                                value="{{ old('priority', $category['priority']) }}" required
+                                                value="{{ old('priority', $subCategory['priority']) }}" required
                                                 min="1">
                                         </div>
                                     </div>
 
+
+                                </div>
+                                <div class="row">
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label class="form-label" for="imageInput">{{ __('app.image') }}</label>
@@ -67,9 +81,9 @@
 
                                     <div class="col-md-6">
                                         <div class="mb-3">
-                                            <img src="{{ $category['image'] != null ? asset($category['image']) : asset('category.jpg') }}"
-                                                alt="{{ $category['image'] != null ? $category['name'] : 'avatar' }}"
-                                                id="previewImage" style="width: 80px; height: 80px;">
+                                            <img src="{{ $subCategory['image'] != null ? asset($subCategory['image']) : asset('category.jpg') }}"
+                                                 alt="{{ $subCategory['image'] != null ? $subCategory['name'] : 'avatar' }}"
+                                                 id="previewImage" style="width: 80px; height: 80px;">
                                         </div>
                                     </div>
                                 </div>

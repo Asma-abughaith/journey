@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests\Web\Admin\SubCategory;
 
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateSubCategoryRequest extends FormRequest
 {
@@ -11,7 +13,7 @@ class UpdateSubCategoryRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,8 +23,46 @@ class UpdateSubCategoryRequest extends FormRequest
      */
     public function rules(): array
     {
+        $subCategoryId =request()->id;
         return [
-            //
+            'name_en' => ['required', 'string', 'min:3', Rule::unique('sub_categories', 'name->en')->ignore($subCategoryId)],
+            'name_ar' => ['required', 'string', 'min:3', Rule::unique('sub_categories', 'name->ar')->ignore($subCategoryId)],
+            'category_id'=>['required'],
+            'priority' => ['required', Rule::unique('sub_categories')->ignore($subCategoryId)],
+            'image' => ['nullable','max:1024'],
+
         ];
     }
+//
+    public function messages(): array
+    {
+        return [
+            'name_en.required' => 'English name is required.',
+            'name_en.min' => 'English name must be at least :min characters.',
+            'name_ar.required' => 'Arabic name is required.',
+            'name_ar.min' => 'Arabic name must be at least :min characters.',
+            'priority.required' => 'Priority is required.',
+            'priority.min' => 'priority must be at least :min characters.',
+//            'image' => 'required|image|max:5120',
+
+        ];
+    }
+
+    public function attributes()
+    {
+        return [
+            'name_en' => 'English Name',
+            'name_ar' => 'Arabic Name',
+            'category_id'=>'Category',
+//            'image'=>'Image'
+
+        ];
+    }
+
+    protected function failedValidation(Validator $validator)
+    {
+        $this->errors = $validator->errors();
+
+    }
+
 }
