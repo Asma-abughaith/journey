@@ -19,6 +19,12 @@ class CategoryController extends Controller
         $this->categoryPresenter = $categoryPresenter;
         $this->categoryUseCase = $categoryUseCase;
 
+//        $this->middleware('checkPermission:view categories')->only(['index']);
+//        $this->middleware('checkPermission:create category')->only(['create', 'store']);
+//        $this->middleware('checkPermission:view categories')->only(['show']);
+//        $this->middleware('checkPermission:edit category')->only(['edit', 'update']);
+//        $this->middleware('checkPermission:delete category')->only(['destroy']);
+
     }
     /**
      * Display a listing of the resource.

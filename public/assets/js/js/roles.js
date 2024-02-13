@@ -10,7 +10,7 @@ $(document).ready(function () {
             },
             type: "get",
             dataType: "json",
-            url: baseUrl + "/en/admin/ajax/role/get_role_based/" + guard_name,
+            url: baseUrl + "/admin/ajax/role/get_role_based/" + guard_name,
             success: function (response) {
                 if (response["status"] === 200) {
                     $("#labelPermission").removeClass("d-none");

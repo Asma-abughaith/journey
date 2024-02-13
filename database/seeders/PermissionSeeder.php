@@ -32,7 +32,7 @@ class PermissionSeeder extends Seeder
                 'guard_name' => 'admin',
             ],
             [
-                'name' => 'show admins',
+                'name' => 'view admins',
                 'translations' => [
                     'ar' => 'عرض المشرفين',
                     'en' => 'show admins',
@@ -66,7 +66,7 @@ class PermissionSeeder extends Seeder
                 'guard_name' => 'admin',
             ],
             [
-                'name' => 'show roles',
+                'name' => 'view roles',
                 'translations' => [
                     'ar' => 'عرض الأدوار',
                     'en' => 'show roles',
@@ -100,7 +100,7 @@ class PermissionSeeder extends Seeder
                 'guard_name' => 'admin',
             ],
             [
-                'name' => 'show categories',
+                'name' => 'view categories',
                 'translations' => [
                     'ar' => 'عرض الفئات',
                     'en' => 'show categories',
@@ -134,7 +134,7 @@ class PermissionSeeder extends Seeder
                 'guard_name' => 'admin',
             ],
             [
-                'name' => 'show subcategories',
+                'name' => 'view subcategories',
                 'translations' => [
                     'ar' => 'عرض الفئات الفرعية',
                     'en' => 'show subcategories',
@@ -168,7 +168,7 @@ class PermissionSeeder extends Seeder
                 'guard_name' => 'admin',
             ],
             [
-                'name' => 'show permissions',
+                'name' => 'view permissions',
                 'translations' => [
                     'ar' => 'عرض الصلاحيات',
                     'en' => 'show permissions',

@@ -29,6 +29,12 @@ class AdminController extends Controller
         $this->adminUseCase = $adminUseCase;
         $this->roleUseCase = $roleUseCase;
         $this->rolePresenter = $rolePresenter;
+
+//        $this->middleware('checkPermission:view admins')->only(['index']);
+//        $this->middleware('checkPermission:create admin')->only(['create', 'store']);
+//        $this->middleware('checkPermission:view admins')->only(['show']);
+//        $this->middleware('checkPermission:edit admin')->only(['edit', 'update']);
+//        $this->middleware('checkPermission:delete admin')->only(['destroy']);
     }
     /**
      * Display a listing of the resource.

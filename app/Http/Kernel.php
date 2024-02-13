@@ -69,7 +69,7 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'admin' => \App\Http\Middleware\Admin::class,
 
-        'checkPermission'=>\App\Http\Middleware\CheckPermission::class,
+        'checkPermission'=>\App\Http\Middleware\AdminCheckPermission::class,
         'lang'=> \App\Http\Middleware\language::class,
         'langApi'=> \App\Http\Middleware\languageApi::class,
 

@@ -25,6 +25,12 @@ class SubCategoryController extends Controller
         $this->subCategoryUseCase = $subCategoryUseCase;
         $this->categoryPresenter = $categoryPresenter;
         $this->categoryUseCase = $categoryUseCase;
+
+//        $this->middleware('checkPermission:view subcategories')->only(['index']);
+//        $this->middleware('checkPermission:create category')->only(['create', 'store']);
+//        $this->middleware('checkPermission:view subcategories')->only(['show']);
+//        $this->middleware('checkPermission:edit category')->only(['edit', 'update']);
+//        $this->middleware('checkPermission:delete category')->only(['destroy']);
     }
 
     /**

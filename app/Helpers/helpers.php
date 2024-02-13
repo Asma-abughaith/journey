@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 
-function permission($permission)
+function AdminPermission($permission)
 {
     return Auth::guard('admin')->user()->hasAnyPermission($permission);
 }

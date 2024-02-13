@@ -21,6 +21,12 @@ class PermissionController extends Controller
         $this->permissionPresenter = $permissionPresenter;
         $this->permissionUseCase = $permissionUseCase;
 
+//        $this->middleware('check_permission:view permissions')->only(['index']);
+//        $this->middleware('check_permission:create permission')->only(['create', 'store']);
+//        $this->middleware('check_permission:view permissions')->only(['show']);
+//        $this->middleware('check_permission:edit permission')->only(['edit', 'update']);
+//        $this->middleware('check_permission:delete permission')->only(['destroy']);
+
     }
 
     /**

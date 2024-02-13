@@ -27,6 +27,12 @@ class RoleController extends Controller
         $this->roleUseCase = $roleUseCase;
         $this->permissionUseCase = $permissionUseCase;
         $this->permissionPresenter = $permissionPresenter;
+
+//        $this->middleware('checkPermission:view roles')->only(['index']);
+//        $this->middleware('checkPermission:create role')->only(['create', 'store']);
+//        $this->middleware('checkPermission:view roles')->only(['show']);
+//        $this->middleware('checkPermission:edit role')->only(['edit', 'update']);
+//        $this->middleware('checkPermission:delete role')->only(['destroy']);
     }
     /**
      * Display a listing of the resource.
