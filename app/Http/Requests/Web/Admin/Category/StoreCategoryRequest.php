@@ -2,9 +2,11 @@
 
 namespace App\Http\Requests\Web\Admin\Category;
 
+use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class StoreCategoryRequest extends FormRequest
 {
@@ -55,6 +57,17 @@ class StoreCategoryRequest extends FormRequest
             'priority' => 'Priority',
             'image' => 'Image',
         ];
+    }
+
+    protected function failedValidation(Validator $validator)
+    {
+        $errors = $validator->errors()->all();
+        foreach ($errors as $error){
+            Toastr::error($error, 'Error');
+        }
+        throw new HttpResponseException(
+            redirect()->back()->withInput()->withErrors($validator)
+        );
     }
 
 
