@@ -19,7 +19,6 @@ class EloquentAdminRepository implements AdminRepositoryInterface
         foreach ($eloquentAdmins as $eloquentAdmin) {
             $admins[] = $this->convertToEntity($eloquentAdmin);
         }
-
         return $admins;
     }
 
@@ -71,8 +70,6 @@ class EloquentAdminRepository implements AdminRepositoryInterface
         $admin->setLang($eloquentAdmin->lang);
         $admin->setImage($eloquentAdmin->getFirstMediaUrl('admin_profile', 'image'));
         $admin->setRole($eloquentAdmin->getRoleNames()[0]);
-//                $admin->setRole('super admin');
-
         return $admin;
     }
 }

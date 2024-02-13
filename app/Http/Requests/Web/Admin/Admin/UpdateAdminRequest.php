@@ -5,6 +5,8 @@ namespace App\Http\Requests\Web\Admin\Admin;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Validation\Rule;
+use Illuminate\Http\Exceptions\HttpResponseException;
+use Brian2694\Toastr\Facades\Toastr;
 
 class UpdateAdminRequest extends FormRequest
 {
@@ -23,18 +25,24 @@ class UpdateAdminRequest extends FormRequest
      */
     public function rules(): array
     {
-        $adminId =request()->id;
+        $adminId = request()->id;
 
         return [
             'name' => 'required',
-            'email' => ['required',Rule::unique('admins', 'email')->ignore($adminId)],
-            'image' => ['nullable','max:1024'],
-            'role'=>'required',
+            'email' => ['required', Rule::unique('admins', 'email')->ignore($adminId)],
+            'image' => ['nullable', 'max:1024'],
+            'role' => 'required',
         ];
     }
 
     protected function failedValidation(Validator $validator)
     {
-        $this->errors = $validator->errors();
+        $errors = $validator->errors()->all();
+        foreach ($errors as $error) {
+            Toastr::error($error, 'Error');
+        }
+        throw new HttpResponseException(
+            redirect()->back()->withInput()->withErrors($validator)
+        );
     }
 }

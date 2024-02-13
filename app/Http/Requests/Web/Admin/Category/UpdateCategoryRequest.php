@@ -4,6 +4,9 @@ namespace App\Http\Requests\Web\Admin\Category;
 
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
+use Brian2694\Toastr\Facades\Toastr;
+use Illuminate\Http\Exceptions\HttpResponseException;
+
 use Illuminate\Validation\Rule;
 
 class UpdateCategoryRequest extends FormRequest
@@ -23,10 +26,10 @@ class UpdateCategoryRequest extends FormRequest
      */
     public function rules(): array
     {
-        $categoryId =request()->id;
+        $categoryId = request()->id;
         return [
-            'name_en' => ['required','min:3',Rule::unique('categories', 'name->en')->ignore($categoryId)],
-            'name_ar' => ['required','min:3',Rule::unique('categories', 'name->ar')->ignore($categoryId)],
+            'name_en' => ['required', 'min:3', Rule::unique('categories', 'name->en')->ignore($categoryId)],
+            'name_ar' => ['required', 'min:3', Rule::unique('categories', 'name->ar')->ignore($categoryId)],
             'priority' => ['required', Rule::unique('categories', 'priority')->ignore($categoryId)],
             'image' => ['required', 'image', 'mimes:jpeg,png,jpg,gif,svg'],
         ];
@@ -41,7 +44,7 @@ class UpdateCategoryRequest extends FormRequest
             'name_ar.min' => 'Arabic name must be at least :min characters.',
             'priority.required' => 'Priority is required.',
             'priority.min' => 'priority must be at least :min characters.',
-            'image.required'=>'image is required',
+            'image.required' => 'image is required',
         ];
     }
 
@@ -57,7 +60,12 @@ class UpdateCategoryRequest extends FormRequest
 
     protected function failedValidation(Validator $validator)
     {
-        $this->errors = $validator->errors();
-
+        $errors = $validator->errors()->all();
+        foreach ($errors as $error) {
+            Toastr::error($error, 'Error');
+        }
+        throw new HttpResponseException(
+            redirect()->back()->withInput()->withErrors($validator)
+        );
     }
 }

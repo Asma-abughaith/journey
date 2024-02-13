@@ -6,10 +6,10 @@ use App\Validation\CheckNameAndGuardExistRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Brian2694\Toastr\Facades\Toastr;
 
 class UpdatePermissionRequest extends FormRequest
 {
-    public $errors;
     /**
      * Determine if the user is authorized to make this request.
      */
@@ -27,9 +27,9 @@ class UpdatePermissionRequest extends FormRequest
     {
         $currentPermissionId = request()->id;
         return [
-            'name_en' => ['required','min:3',new CheckNameAndGuardExistRule($currentPermissionId)],
-            'name_ar' => ['required','min:3'],
-            'guard'=>['required','min:3'],
+            'name_en' => ['required', 'min:3', new CheckNameAndGuardExistRule($currentPermissionId)],
+            'name_ar' => ['required', 'min:3'],
+            'guard' => ['required', 'min:3'],
         ];
     }
 
@@ -56,11 +56,12 @@ class UpdatePermissionRequest extends FormRequest
 
     protected function failedValidation(Validator $validator)
     {
-        $this->errors = $validator->errors()->all();
-
-
-
+        $errors = $validator->errors()->all();
+        foreach ($errors as $error) {
+            Toastr::error($error, 'Error');
+        }
+        throw new HttpResponseException(
+            redirect()->back()->withInput()->withErrors($validator)
+        );
     }
-
-
 }

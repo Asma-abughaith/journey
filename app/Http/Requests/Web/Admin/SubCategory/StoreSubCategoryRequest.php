@@ -5,10 +5,11 @@ namespace App\Http\Requests\Web\Admin\SubCategory;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Brian2694\Toastr\Facades\Toastr;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class StoreSubCategoryRequest extends FormRequest
 {
-    public $errors;
     /**
      * Determine if the user is authorized to make this request.
      */
@@ -27,13 +28,13 @@ class StoreSubCategoryRequest extends FormRequest
         return [
             'name_en' => ['required', 'string', 'min:3', Rule::unique('sub_categories', 'name->en')],
             'name_ar' => ['required', 'string', 'min:3', Rule::unique('sub_categories', 'name->ar')],
-            'category_id'=>['required'],
+            'category_id' => ['required'],
             'priority' => ['required', Rule::unique('sub_categories')],
             'image' => 'required',
 
         ];
     }
-//
+
     public function messages(): array
     {
         return [
@@ -43,8 +44,8 @@ class StoreSubCategoryRequest extends FormRequest
             'name_ar.min' => 'Arabic name must be at least :min characters.',
             'priority.required' => 'Priority is required.',
             'priority.min' => 'priority must be at least :min characters.',
-            'image' => 'required|image|max:5120',
-
+            'image.required' => 'The Image is required.',
+            'image.max' => 'The image size must be 1024.',
         ];
     }
 
@@ -53,16 +54,20 @@ class StoreSubCategoryRequest extends FormRequest
         return [
             'name_en' => 'English Name',
             'name_ar' => 'Arabic Name',
-            'category_id'=>'Category',
-            'image'=>'Image'
+            'category_id' => 'Category',
+            'image' => 'Image'
 
         ];
     }
 
     protected function failedValidation(Validator $validator)
     {
-        $this->errors = $validator->errors();
-
+        $errors = $validator->errors()->all();
+        foreach ($errors as $error) {
+            Toastr::error($error, 'Error');
+        }
+        throw new HttpResponseException(
+            redirect()->back()->withInput()->withErrors($validator)
+        );
     }
-
 }

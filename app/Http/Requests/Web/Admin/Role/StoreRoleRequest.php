@@ -2,10 +2,11 @@
 
 namespace App\Http\Requests\Web\Admin\Role;
 
-use App\Validation\CheckNameAndGuardExistRule;
 use App\Validation\CheckRoleNameAndGuardExistRule;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
+use Brian2694\Toastr\Facades\Toastr;
 
 class StoreRoleRequest extends FormRequest
 {
@@ -21,10 +22,10 @@ class StoreRoleRequest extends FormRequest
     {
         $currentPermissionId = null;
         return [
-            'name_en' => ['required','min:3',new CheckRoleNameAndGuardExistRule($currentPermissionId)],
-            'name_ar' => ['required','min:3'],
-            'guard'=>['required','min:3'],
-            'permissions.*'=>['required'],
+            'name_en' => ['required', 'min:3', new CheckRoleNameAndGuardExistRule($currentPermissionId)],
+            'name_ar' => ['required', 'min:3'],
+            'guard' => ['required', 'min:3'],
+            'permissions.*' => ['required'],
         ];
     }
 
@@ -37,7 +38,7 @@ class StoreRoleRequest extends FormRequest
             'name_ar.min' => 'Arabic name must be at least :min characters.',
             'guard.required' => 'Guard is required.',
             'guard.min' => 'Guard must be at least :min characters.',
-            'permissions.required'=>'you should at least to choose one permission',
+            'permissions.required' => 'you should at least to choose one permission',
         ];
     }
 
@@ -52,7 +53,12 @@ class StoreRoleRequest extends FormRequest
 
     protected function failedValidation(Validator $validator)
     {
-        $this->errors = $validator->errors();
-
+        $errors = $validator->errors()->all();
+        foreach ($errors as $error) {
+            Toastr::error($error, 'Error');
+        }
+        throw new HttpResponseException(
+            redirect()->back()->withInput()->withErrors($validator)
+        );
     }
 }

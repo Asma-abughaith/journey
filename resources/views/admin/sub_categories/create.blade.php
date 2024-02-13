@@ -1,6 +1,6 @@
 @extends('admin.master')
 @section('title', 'Admin | Category')
-@section('category-active', 'active')
+@section('subCategory-active', 'active')
 @section('content')
 
     <div class="main-content">

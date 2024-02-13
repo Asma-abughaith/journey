@@ -36,7 +36,7 @@
                                             <label class="form-label">{{ __('app.guard') }}</label>
                                             <select class="form-select" name="guard" id="guard"
                                                 onchange="changeGuard()">
-                                                <option selected>{{ __('app.select-one') }}</option>
+                                                <option value="">{{ __('app.select-one') }}</option>
                                                 <option value="admin">{{ __('app.admin') }}</option>
                                                 <option value="planner">{{ __('app.planner') }}</option>
                                                 <option value="user">{{ __('app.user') }}</option>

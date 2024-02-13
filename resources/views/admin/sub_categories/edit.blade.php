@@ -1,13 +1,13 @@
 @extends('admin.master')
-@section('title', 'Admin | Category')
-@section('category-active', 'active')
+@section('title', 'Admin | SubCategory')
+@section('subCategory-active', 'active')
 @section('content')
 
     <div class="main-content">
         <div class="page-content">
             <div class="container-fluid">
                 <!-- start page title -->
-                @include('layouts.admin.title', ['title' => __('app.edit-category')])
+                @include('layouts.admin.title', ['title' => __('app.edit-sub-category')])
                 <!-- end page title -->
 
                 <div class="col-xl-12 mx-auto" style="margin-top: 2.5%;">
@@ -45,10 +45,12 @@
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label class="form-label" for="category_id">{{ __('app.categories') }}</label>
-                                            <select class="form-select" name="category_id" id="category_id" >
+                                            <select class="form-select" name="category_id" id="category_id">
                                                 <option value="" selected>{{ __('app.select-one') }}</option>
                                                 @foreach ($categories as $category)
-                                                    <option value="{{ $category['id'] }}" @if($category['name'] ==$subCategory['category']) selected @endif>{{ $category['name'] }}
+                                                    <option value="{{ $category['id'] }}"
+                                                        @if ($category['name'] == $subCategory['category']) selected @endif>
+                                                        {{ $category['name'] }}
                                                     </option>
                                                 @endforeach
                                             </select>
@@ -82,8 +84,8 @@
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <img src="{{ $subCategory['image'] != null ? asset($subCategory['image']) : asset('category.jpg') }}"
-                                                 alt="{{ $subCategory['image'] != null ? $subCategory['name'] : 'avatar' }}"
-                                                 id="previewImage" style="width: 80px; height: 80px;">
+                                                alt="{{ $subCategory['image'] != null ? $subCategory['name'] : 'avatar' }}"
+                                                id="previewImage" style="width: 80px; height: 80px;">
                                         </div>
                                     </div>
                                 </div>

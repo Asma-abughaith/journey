@@ -10,8 +10,6 @@ use Illuminate\Http\Exceptions\HttpResponseException;
 
 class StoreCategoryRequest extends FormRequest
 {
-    public $errors;
-
     /**
      * Determine if the user is authorized to make this request.
      */
@@ -62,13 +60,11 @@ class StoreCategoryRequest extends FormRequest
     protected function failedValidation(Validator $validator)
     {
         $errors = $validator->errors()->all();
-        foreach ($errors as $error){
+        foreach ($errors as $error) {
             Toastr::error($error, 'Error');
         }
         throw new HttpResponseException(
             redirect()->back()->withInput()->withErrors($validator)
         );
     }
-
-
 }

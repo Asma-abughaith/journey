@@ -36,7 +36,7 @@
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label class="form-label">{{ __('app.guard') }}</label>
-                                            <select class="form-select" required="" name="guard">
+                                            <select class="form-select" name="guard" required>
                                                 <option value="admin" @if ($permission->guard_name == 'admin') selected @endif>
                                                     {{ __('app.admin') }}</option>
                                                 <option value="planner" @if ($permission->guard_name == 'planner') selected @endif>

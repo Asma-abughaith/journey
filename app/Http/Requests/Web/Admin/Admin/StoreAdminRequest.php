@@ -5,10 +5,11 @@ namespace App\Http\Requests\Web\Admin\Admin;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules;
+use Illuminate\Http\Exceptions\HttpResponseException;
+use Brian2694\Toastr\Facades\Toastr;
 
 class StoreAdminRequest extends FormRequest
 {
-    public $errors;
     /**
      * Determine if the user is authorized to make this request.
      */
@@ -28,13 +29,20 @@ class StoreAdminRequest extends FormRequest
             'name' => 'required',
             'email' => 'required|unique:admins',
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'image' => ['nullable','max:1024'],
-            'role'=>'required',
+            'password_confirmation' => 'required',
+            'image' => ['nullable', 'max:1024'],
+            'role' => 'required',
         ];
     }
 
     protected function failedValidation(Validator $validator)
     {
-        $this->errors = $validator->errors();
+        $errors = $validator->errors()->all();
+        foreach ($errors as $error) {
+            Toastr::error($error, 'Error');
+        }
+        throw new HttpResponseException(
+            redirect()->back()->withInput()->withErrors($validator)
+        );
     }
 }

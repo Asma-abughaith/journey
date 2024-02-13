@@ -21,7 +21,7 @@
                                             <label class="form-label" for="name_en">{{ __('app.name-en') }}</label>
                                             <input type="text" class="form-control"
                                                 placeholder="{{ __('app.permission-en') }}" name="name_en"
-                                                value="{{ old('name_en') }}" id="name_en" required>
+                                                value="{{ old('name_en') }}" id="name_en" >
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -29,7 +29,7 @@
                                             <label class="form-label" for="name_ar">{{ __('app.name-ar') }}</label>
                                             <input type="text" class="form-control"
                                                 placeholder="{{ __('app.permission-ar') }}" name="name_ar"
-                                                value="{{ old('name_ar') }}" id="name_ar" required>
+                                                value="{{ old('name_ar') }}" id="name_ar" >
                                         </div>
                                     </div>
 
@@ -38,8 +38,8 @@
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label class="form-label">{{ __('app.guard') }}</label>
-                                            <select class="form-select" required="" name="guard">
-                                                <option selected>{{ __('app.select-one') }}</option>
+                                            <select class="form-select" name="guard">
+                                                <option value="">{{ __('app.select-one') }}</option>
                                                 <option value="admin">{{ __('app.admin') }}</option>
                                                 <option value="planner">{{ __('app.planner') }}</option>
                                                 <option value="user">{{ __('app.user') }}</option>

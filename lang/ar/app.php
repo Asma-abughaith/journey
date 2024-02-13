@@ -55,5 +55,7 @@ return [
     'category-ar' => 'يرجى إدخال فئة بالعربية',
     'priority-order' => 'يرجى إدخال رقم الأولوية',
     'edit-category' => 'تعديل الفئة',
-    'Admin_Login' => 'تسجيل الدخول للمشرف'
+    'Admin_Login' => 'تسجيل الدخول للمشرف',
+    'create-subcategory' => 'إنشاء فئة فرعية',
+    'edit-sub-category' => 'تعديل الفئة الفرعية'
 ];

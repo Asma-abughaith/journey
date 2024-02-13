@@ -60,6 +60,7 @@ class AdminUseCase
 
         return $this->adminRepository->deleteAdmin($admin);
     }
+
     //all method for use case
     public function execute(PermissionEntity $permission)
     {

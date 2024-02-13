@@ -60,5 +60,7 @@ return [
     'sub-categories' => "Sub Categories",
     'sub-category' => "Sub Category",
     'all-sub-categories' => "All Sub Categories",
-    'create-sub-categories' => "Create Sub Categories"
+    'create-sub-categories' => "Create Sub Categories",
+    'create-subcategory' => 'Create Subcategory',
+    'edit-sub-category' => 'Edit Sub Category'
 ];
