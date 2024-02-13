@@ -60,6 +60,9 @@ class EloquentCategoryRepository implements CategoryRepositoryInterface
     public function deleteCategory($category)
     {
         if ($category) {
+            foreach ($category->subcategories as $subcategory) {
+                $subcategory->delete();
+            }
             $category->delete();
         }
         return;
