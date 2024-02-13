@@ -57,8 +57,5 @@ class StoreCategoryRequest extends FormRequest
         ];
     }
 
-    protected function failedValidation(Validator $validator)
-    {
-        $this->errors = $validator->errors();
-    }
+
 }
