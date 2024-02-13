@@ -13,8 +13,11 @@ use App\Http\Controllers\Web\Admin\AdminController;
 //use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Web\Admin\CategoryController;
 use App\Http\Controllers\Web\Admin\SubCategoryController;
+use App\Http\Controllers\Web\Admin\RegionController;
+
 use App\Models\Admin;
 use App\Http\Controllers\Web\Setting\LanguageController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -70,3 +73,6 @@ Route::get('/language/{lang}', [LanguageController::class, 'switchLanguage'])->n
 
 //================= Routes For SubCategories =================
 Route::resource('/sub_categories', SubCategoryController::class);
+
+//================= Routes For Region =================
+Route::resource('/regions', RegionController::class);

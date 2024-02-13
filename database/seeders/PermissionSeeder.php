@@ -35,7 +35,7 @@ class PermissionSeeder extends Seeder
                 'name' => 'view admins',
                 'translations' => [
                     'ar' => 'عرض المشرفين',
-                    'en' => 'show admins',
+                    'en' => 'view admins',
                 ],
                 'guard_name' => 'admin',
             ],
@@ -69,7 +69,7 @@ class PermissionSeeder extends Seeder
                 'name' => 'view roles',
                 'translations' => [
                     'ar' => 'عرض الأدوار',
-                    'en' => 'show roles',
+                    'en' => 'view roles',
                 ],
                 'guard_name' => 'admin',
             ],
@@ -103,7 +103,7 @@ class PermissionSeeder extends Seeder
                 'name' => 'view categories',
                 'translations' => [
                     'ar' => 'عرض الفئات',
-                    'en' => 'show categories',
+                    'en' => 'view categories',
                 ],
                 'guard_name' => 'admin',
             ],
@@ -137,7 +137,7 @@ class PermissionSeeder extends Seeder
                 'name' => 'view subcategories',
                 'translations' => [
                     'ar' => 'عرض الفئات الفرعية',
-                    'en' => 'show subcategories',
+                    'en' => 'view subcategories',
                 ],
                 'guard_name' => 'admin',
             ],
@@ -171,7 +171,7 @@ class PermissionSeeder extends Seeder
                 'name' => 'view permissions',
                 'translations' => [
                     'ar' => 'عرض الصلاحيات',
-                    'en' => 'show permissions',
+                    'en' => 'view permissions',
                 ],
                 'guard_name' => 'admin',
             ],
@@ -183,6 +183,41 @@ class PermissionSeeder extends Seeder
                 ],
                 'guard_name' => 'admin',
             ],
+
+            // Permissions for regions CRUD operations
+            [
+                'name' => 'create region',
+                'translations' => [
+                    'ar' => 'إنشاء منطقة',
+                    'en' => 'create region',
+                ],
+                'guard_name' => 'admin',
+            ],
+            [
+                'name' => 'edit region',
+                'translations' => [
+                    'ar' => 'تعديل منطقة',
+                    'en' => 'edit region',
+                ],
+                'guard_name' => 'admin',
+            ],
+            [
+                'name' => 'view regions',
+                'translations' => [
+                    'ar' => 'عرض المناطق',
+                    'en' => 'view regions',
+                ],
+                'guard_name' => 'admin',
+            ],
+            [
+                'name' => 'delete region',
+                'translations' => [
+                    'ar' => 'حذف منطقة',
+                    'en' => 'delete region',
+                ],
+                'guard_name' => 'admin',
+            ],
+
         ];
 
         foreach ($permissions as $permissionData) {

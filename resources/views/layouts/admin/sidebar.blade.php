@@ -119,6 +119,25 @@
                 </li>
 {{--                @endif--}}
 
+
+{{--                @if(AdminPermission('view regions')||AdminPermission('create region') )--}}
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect" @yield('region-active')>
+                        <i class="dripicons-location"></i>
+                        <span>{{ __('app.regions') }}</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        {{--                        @if(AdminPermission('view regions'))--}}
+                        <li><a href="{{ route('admin.regions.index') }}">{{ __('app.all-regions') }}</a></li>
+                        {{--                        @endif--}}
+                        {{--                            @if(AdminPermission('create region'))--}}
+                        <li><a href="{{ route('admin.regions.create') }}">{{ __('app.create-region') }}</a></li>
+                        {{--                    @endif--}}
+                    </ul>
+                </li>
+{{--                @endif--}}
+
+
             </ul>
         </div>
         <!-- Sidebar -->

@@ -7,7 +7,7 @@ use App\Interfaces\Gateways\Api\User\CategoryApiRepositoryInterface;
 use App\Models\Category;
 
 
-class EloquentCategoryApiApiRepository implements CategoryApiRepositoryInterface
+class EloquentCategoryApiRepository implements CategoryApiRepositoryInterface
 {
     public function getAllCategories()
     {
