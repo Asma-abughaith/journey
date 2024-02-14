@@ -138,6 +138,24 @@
 {{--                @endif--}}
 
 
+{{--                @if(AdminPermission('view features')||AdminPermission('create feature') )--}}
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect" @yield('feature-active')>
+                        <i class="mdi mdi-offer"></i>
+                        <span>{{ __('app.features') }}</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        {{--                        @if(AdminPermission('view feature'))--}}
+                        <li><a href="{{ route('admin.features.index') }}">{{ __('app.all-features') }}</a></li>
+                        {{--                        @endif--}}
+                        {{--                            @if(AdminPermission('create feature'))--}}
+                        <li><a href="{{ route('admin.features.create') }}">{{ __('app.create-feature') }}</a></li>
+                        {{--                    @endif--}}
+                    </ul>
+                </li>
+{{--                @endif--}}
+
+
             </ul>
         </div>
         <!-- Sidebar -->

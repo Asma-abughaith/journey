@@ -17,18 +17,18 @@
 
 
 
-                            <form method="post" action="{{ route('admin.regions.update', $region['id']) }}"
+                            <form method="post" action="{{ route('admin.features.update', $feature['id']) }}"
                                 enctype="multipart/form-data">
                                 @csrf
                                 @method('put')
-                                <input type="hidden" name="id" value="{{ $region['id'] }}">
+                                <input type="hidden" name="id" value="{{ $feature['id'] }}">
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label class="form-label" for="name_en">{{ __('app.name-en') }}</label>
                                             <input type="text" class="form-control"
-                                                placeholder="{{ __('app.region-en') }}" id="name_en" name="name_en"
-                                                value="{{ old('name_en', $region['name_en']) }}" required>
+                                                placeholder="{{ __('app.feature-en') }}" id="name_en" name="name_en"
+                                                value="{{ old('name_en', $feature['name_en']) }}" required>
                                         </div>
                                     </div>
 
@@ -36,8 +36,18 @@
                                         <div class="mb-3">
                                             <label class="form-label" for="name_ar">{{ __('app.name-ar') }}</label>
                                             <input type="text" class="form-control"
-                                                placeholder="{{ __('app.region-ar') }}" id="name_ar" name="name_ar"
-                                                value="{{ old('name_ar', $region['name_ar']) }}" required>
+                                                placeholder="{{ __('app.feature-ar') }}" id="name_ar" name="name_ar"
+                                                value="{{ old('name_ar', $feature['name_ar']) }}" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="icon">{{ __('app.icon') }}</label>
+                                            <input type="text" class="form-control"
+                                                   placeholder="{{ __('app.feature-icon') }}" name="icon"
+                                                   value="{{ old('icon',$feature['icon']) }}" id="icon" required>
                                         </div>
                                     </div>
                                 </div>

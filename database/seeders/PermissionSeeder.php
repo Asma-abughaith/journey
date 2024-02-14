@@ -218,6 +218,41 @@ class PermissionSeeder extends Seeder
                 'guard_name' => 'admin',
             ],
 
+            // Permissions for features CRUD operations
+            [
+                'name' => 'create feature',
+                'translations' => [
+                    'ar' => 'إنشاء ميزة',
+                    'en' => 'create feature',
+                ],
+                'guard_name' => 'admin',
+            ],
+            [
+                'name' => 'edit feature',
+                'translations' => [
+                    'ar' => 'تعديل ميزة',
+                    'en' => 'edit feature',
+                ],
+                'guard_name' => 'admin',
+            ],
+            [
+                'name' => 'view features',
+                'translations' => [
+                    'ar' => 'عرض ميزات',
+                    'en' => 'view features',
+                ],
+                'guard_name' => 'admin',
+            ],
+            [
+                'name' => 'delete feature',
+                'translations' => [
+                    'ar' => 'حذف ميزة',
+                    'en' => 'delete feature',
+                ],
+                'guard_name' => 'admin',
+            ],
+
+
         ];
 
         foreach ($permissions as $permissionData) {

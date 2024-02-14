@@ -7,7 +7,7 @@
         <div class="page-content">
             <div class="container-fluid">
                 <!-- start page title -->
-                @include('layouts.admin.title', ['title' => __('app.create-region')])
+                @include('layouts.admin.title', ['title' => __('app.create-Feature')])
                 <!-- end page title -->
 
                 <div class="col-xl-12 mx-auto" style="margin-top: 2.5%;">
@@ -17,7 +17,7 @@
 
 
 
-                            <form method="post" action="{{ route('admin.regions.store') }}" enctype="multipart/form-data">
+                            <form method="post" action="{{ route('admin.features.store') }}" enctype="multipart/form-data">
                                 @csrf
 
                                 <div class="row">
@@ -25,7 +25,7 @@
                                         <div class="mb-3">
                                             <label class="form-label" for="name_en">{{ __('app.name-en') }}</label>
                                             <input type="text" class="form-control"
-                                                placeholder="{{ __('app.region-en') }}" name="name_en"
+                                                placeholder="{{ __('app.feature-en') }}" name="name_en"
                                                 value="{{ old('name_en') }}" id="name_en" required>
                                         </div>
                                     </div>
@@ -33,11 +33,22 @@
                                         <div class="mb-3">
                                             <label class="form-label" for="name_er">{{ __('app.name-ar') }}</label>
                                             <input type="text" class="form-control"
-                                                placeholder="{{ __('app.region-ar') }}" name="name_ar"
+                                                placeholder="{{ __('app.feature-ar') }}" name="name_ar"
                                                 value="{{ old('name_ar') }}" id="name_ar" required>
                                         </div>
                                     </div>
 
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="icon">{{ __('app.icon') }}</label>
+                                            <input type="text" class="form-control"
+                                                   placeholder="{{ __('app.feature-icon') }}" name="icon"
+                                                   value="{{ old('icon') }}" id="icon" required>
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <div style="text-align: end">
@@ -54,5 +65,4 @@
         @include('layouts.admin.footer')
     </div>
 @endsection
-
 

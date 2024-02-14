@@ -10,10 +10,10 @@ use App\Http\Controllers\Web\Admin\AdminAuth\AuthenticatedSessionController;
 use App\Http\Controllers\Web\Admin\PermissionController;
 use App\Http\Controllers\Web\Admin\RoleController;
 use App\Http\Controllers\Web\Admin\AdminController;
-//use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Web\Admin\CategoryController;
 use App\Http\Controllers\Web\Admin\SubCategoryController;
 use App\Http\Controllers\Web\Admin\RegionController;
+use App\Http\Controllers\Web\Admin\FeatureController;
 
 use App\Models\Admin;
 use App\Http\Controllers\Web\Setting\LanguageController;
@@ -76,3 +76,6 @@ Route::resource('/sub_categories', SubCategoryController::class);
 
 //================= Routes For Region =================
 Route::resource('/regions', RegionController::class);
+
+//================= Routes For Features =================
+Route::resource('/features', FeatureController::class);
