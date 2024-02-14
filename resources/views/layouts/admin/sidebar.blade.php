@@ -155,6 +155,23 @@
                 </li>
 {{--                @endif--}}
 
+                {{--                @if(AdminPermission('view tags')||AdminPermission('create tag') )--}}
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect" @yield('tag-active')>
+                        <i class="mdi mdi-offer"></i>
+                        <span>{{ __('app.tags') }}</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        {{--                        @if(AdminPermission('view tags'))--}}
+                        <li><a href="{{ route('admin.tags.index') }}">{{ __('app.all-tags') }}</a></li>
+                        {{--                        @endif--}}
+                        {{--                            @if(AdminPermission('create tag'))--}}
+                        <li><a href="{{ route('admin.tags.create') }}">{{ __('app.create-tag') }}</a></li>
+                        {{--                    @endif--}}
+                    </ul>
+                </li>
+                {{--                @endif--}}
+
 
             </ul>
         </div>

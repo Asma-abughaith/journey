@@ -253,6 +253,41 @@ class PermissionSeeder extends Seeder
             ],
 
 
+            // Permissions for Tags CRUD operations
+            [
+                'name' => 'create tag',
+                'translations' => [
+                    'ar' => 'إنشاء وسم',
+                    'en' => 'create tag',
+                ],
+                'guard_name' => 'admin',
+            ],
+            [
+                'name' => 'edit tag',
+                'translations' => [
+                    'ar' => 'تعديل وسم',
+                    'en' => 'edit tag',
+                ],
+                'guard_name' => 'admin',
+            ],
+            [
+                'name' => 'view tags',
+                'translations' => [
+                    'ar' => 'عرض الاوسمة',
+                    'en' => 'view tags',
+                ],
+                'guard_name' => 'admin',
+            ],
+            [
+                'name' => 'delete tag',
+                'translations' => [
+                    'ar' => 'حذف وسم',
+                    'en' => 'delete tag',
+                ],
+                'guard_name' => 'admin',
+            ],
+
+
         ];
 
         foreach ($permissions as $permissionData) {

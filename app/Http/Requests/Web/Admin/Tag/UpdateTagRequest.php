@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Web\Admin\Feature;
+namespace App\Http\Requests\Web\Admin\Tag;
 
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Contracts\Validation\Validator;
@@ -8,7 +8,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Validation\Rule;
 
-class UpdateFeatureRequest extends FormRequest
+class UpdateTagRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,10 +25,10 @@ class UpdateFeatureRequest extends FormRequest
      */
     public function rules(): array
     {
-        $featureId = request()->id;
+        $regionId = request()->id;
         return [
-            'name_en' => ['required', 'min:3', Rule::unique('features', 'name->en')->ignore($featureId)],
-            'name_ar' => ['required', 'min:3', Rule::unique('features', 'name->ar')->ignore($featureId)],
+            'name_en' => ['required', 'min:3', Rule::unique('tags', 'name->en')->ignore($regionId)],
+            'name_ar' => ['required', 'min:3', Rule::unique('tags', 'name->ar')->ignore($regionId)],
             'icon'=>['required']
 
         ];
