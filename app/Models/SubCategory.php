@@ -11,12 +11,10 @@ use Spatie\Translatable\HasTranslations;
 
 class SubCategory extends Model implements HasMedia
 {
-    use HasFactory,InteractsWithMedia;
-
-    use HasTranslations;
+    use HasFactory, InteractsWithMedia, HasTranslations;
 
     public $translatable = ['name'];
-    public $guarded=[];
+    public $guarded = [];
 
     public function registerMediaCollections(): void
     {
@@ -28,8 +26,8 @@ class SubCategory extends Model implements HasMedia
             });
     }
 
-    public function category(){
+    public function category()
+    {
         return $this->belongsTo(Category::class);
     }
-
 }

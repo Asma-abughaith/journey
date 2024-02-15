@@ -13,7 +13,7 @@ interface PlaceRepositoryInterface
 
     public function createPlace(array $placeData, array $imageData, array $imageGallery);
 
-    public function updatePlace($place, array $placeData, array $imageData , array $imageGallery);
+    public function updatePlace($place, array $placeData, array $imageData, array $imageGallery);
 
-    public function deleteSubCategory($place);
+    public function deletePlace($place);
 }

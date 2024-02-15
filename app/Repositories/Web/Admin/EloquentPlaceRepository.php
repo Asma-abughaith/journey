@@ -2,83 +2,120 @@
 
 namespace App\Repositories\Web\Admin;
 
-use App\Entities\Web\Admin\CategoryEntity;
-use App\Entities\Web\Admin\SubCategoryEntity;
-use App\Interfaces\Gateways\Web\Admin\CategoryRepositoryInterface;
-use App\Interfaces\Gateways\Web\Admin\SubCategoryRepositoryInterface;
-use App\Models\Category;
-use App\Models\SubCategory;
+use App\Entities\Web\Admin\PlaceEntity;
+use App\Interfaces\Gateways\Web\Admin\PlaceRepositoryInterface;
+use App\Models\Place;
 
-
-class EloquentPlaceRepository implements SubCategoryRepositoryInterface
+class EloquentPlaceRepository implements PlaceRepositoryInterface
 {
-    public function getAllSubCategories()
-    {
-        $eloquentSubCategories = SubCategory::with('category')->get();
-        $subCategories = [];
 
-        foreach ($eloquentSubCategories as $eloquentSubCategory) {
-            $subCategories[] = $this->convertToEntity($eloquentSubCategory);
+    public function getAllPlaces()
+    {
+        $eloquentPlaces = Place::with('subCategory')->get();
+        $places = [];
+
+        foreach ($eloquentPlaces as $eloquentPlace) {
+            $places[] = $this->convertToEntity($eloquentPlace);
         }
 
-        return $subCategories;
+        return $places;
     }
 
-    public function getSubCategory($subCategory)
+    public function getPlace($places)
     {
-        return $this->convertToEntity($subCategory);
+        return $this->convertToEntity($places);
     }
 
-    public function getSubCategoryById($subCategoryId)
+    public function getPlaceById($placeId)
     {
-        $eloquentSubCategory = SubCategory::find($subCategoryId);
+        $eloquentPlace = Place::find($placeId);
 
-        return $eloquentSubCategory ? $this->convertToEntity($eloquentSubCategory) : null;
+        return $eloquentPlace ? $this->convertToEntity($eloquentPlace) : null;
     }
 
-    public function createSubCategory(array $subCategoryData, ?array $imageData)
+    public function createPlace(array $placeData, array $imageData, array $imageGallery)
     {
-        $eloquentSubCategory = SubCategory::create($subCategoryData);
-        $eloquentSubCategory->setTranslations('name', $subCategoryData['name']);
+        $eloquentPlace = Place::create($placeData);
+        $eloquentPlace->setTranslations('name', $placeData['name']);
+        $eloquentPlace->setTranslations('description', $placeData['description']);
+        $eloquentPlace->setTranslations('address', $placeData['address']);
 
         if ($imageData !== null) {
-            $eloquentSubCategory->addMediaFromRequest('image')->toMediaCollection('subcategory');
+            $eloquentPlace->addMediaFromRequest('image')->toMediaCollection('main_place');
         }
 
-        return $this->convertToEntity($eloquentSubCategory);
+        if ($imageGallery !== null) {
+            foreach ($imageGallery as $key => $singleImage) {
+                $eloquentPlace->addMediaFromRequest('image')->toMediaCollection('place_gallery');
+            }
+        }
+
+        return $this->convertToEntity($eloquentPlace);
     }
 
-    public function updateSubCategory($subCategory, array $subCategoryData, array $imageData)
+    public function updatePlace($place, array $placeData, array $imageData, array $imageGallery)
     {
 
-        $subCategory->update($subCategoryData);
-        $subCategory->setTranslations('name', $subCategoryData['name']);
+        $place->update($placeData);
+        $place->setTranslations('name', $placeData['name']);
+        $place->setTranslations('description', $placeData['description']);
+        $place->setTranslations('address', $placeData['address']);
+
         if (isset($imageData['image']) && $imageData['image'] != null) {
-            $subCategory->addMediaFromRequest('image')->toMediaCollection('subcategory');
+            $place->addMediaFromRequest('image')->toMediaCollection('main_place');
         }
-        return $this->convertToEntity($subCategory);
+
+        // In Process
+        if (isset($imageGallery['image']) && $imageGallery['image'] != null) {
+            $place->addMediaFromRequest('image')->toMediaCollection('place_gallery');
+        }
+
+        return $this->convertToEntity($place);
     }
 
-
-    public function deleteSubCategory($subCategory)
+    public function deletePlace($place)
     {
-        if ($subCategory) {
-            $subCategory->delete();
+        if ($place) {
+            $place->delete();
         }
         return;
     }
 
-    protected function convertToEntity(SubCategory $eloquentSubCategory)
+    protected function convertToEntity(Place $eloquentPlace)
     {
-        $names =$eloquentSubCategory->getTranslations('name');
-        $subCategory = new SubCategoryEntity();
-        $subCategory->setId($eloquentSubCategory->id);
-        $subCategory->setName($eloquentSubCategory->name);
-        $subCategory->setNameEn($names['en']);
-        $subCategory->setNameAr($names['ar']);
-        $subCategory->setImage($eloquentSubCategory->getFirstMediaUrl('subcategory', 'subcategory_app'));
-        $subCategory->setPriority($eloquentSubCategory->priority);
-        $subCategory->setCategory($eloquentSubCategory->category->name);
-        return $subCategory;
+        $names = $eloquentPlace->getTranslations('name');
+        $descriptions = $eloquentPlace->getTranslations('description');
+        $addresses = $eloquentPlace->getTranslations('address');
+
+        $place = new PlaceEntity();
+        $place->setId($eloquentPlace->id);
+        $place->setName($eloquentPlace->name);
+        $place->setNameEn($names['en']);
+        $place->setNameAr($names['ar']);
+        $place->setDescription($eloquentPlace->description);
+        $place->setDescriptionEn($descriptions['en']);
+        $place->setDescriptionAr($descriptions['ar']);
+        $place->setAddress($eloquentPlace->address);
+        $place->setAddressEn($addresses['en']);
+        $place->setAddressAr($addresses['ar']);
+        $place->setBusinessStatus($eloquentPlace->business_status);
+        $place->setGoogleMapUrl($eloquentPlace->google_map_url);
+        $place->setLongitude($eloquentPlace->longitude);
+        $place->setLatitude($eloquentPlace->latitude);
+        $place->setPhoneNumber($eloquentPlace->phone_number);
+        $place->setPriceLevel($eloquentPlace->price_level);
+        $place->setWebsite($eloquentPlace->website);
+        $place->setRating($eloquentPlace->rating);
+        $place->setTotalUserRating($eloquentPlace->total_user_rating);
+        $place->setRegion($eloquentPlace->region);
+        $place->setSubCategory($eloquentPlace->sub_category);
+
+        // in process
+        $place->setBusinessStatusEn('');
+        $place->setBusinessStatusAr('');
+        $place->setMainImage($eloquentPlace->main_image);
+        $place->setGallery($eloquentPlace->gallery);
+
+        return $place;
     }
 }
