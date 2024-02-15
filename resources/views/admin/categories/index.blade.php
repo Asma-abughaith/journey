@@ -1,5 +1,5 @@
 @extends('admin.master')
-@section('title', 'Admin | Category')
+@section('title', __('app.dashboard-category'))
 @section('category-active', 'active')
 @section('content')
 
@@ -41,10 +41,13 @@
                                                 </td>
                                                 <td class="text-center col-2">{{ $category['priority'] }}</td>
                                                 <td class="text-center col-2">
+{{--                                                    @if(AdminPermission('edit category'))--}}
                                                     <a class="btn btn-outline-warning btn-sm edit" title="Edit"
                                                         href="{{ route('admin.categories.edit', $category['id']) }}">
                                                         <i class="fas fa-pencil-alt" title="Edit"></i>
                                                     </a>
+{{--                                                    @endif--}}
+{{--                                                    @if(AdminPermission('delete category'))--}}
                                                     <form method="post"
                                                         action="{{ route('admin.categories.destroy', $category['id']) }}"
                                                         style="display:inline;">
@@ -56,6 +59,7 @@
                                                             <i class="ri-delete-bin-line" title="Edit"></i>
                                                         </button>
                                                     </form>
+{{--                                                    @endif--}}
                                                 </td>
 
                                             </tr>

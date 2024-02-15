@@ -1,6 +1,6 @@
 @extends('admin.master')
-@section('title', 'Admin | Category')
-@section('category-active', 'active')
+@section('title', __('app.dashboard-feature'))
+@section('feature-active', 'active')
 @section('content')
 
     <div class="main-content">

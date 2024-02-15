@@ -186,6 +186,39 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'name' => 'Name',
+        'name-en' => 'English Name',
+        'name-ar' => 'Arabic Name',
+        'email' => 'Email',
+        'password' => 'Password',
+        'image' => 'Image',
+        'priority' => 'Priority',
+        'password_confirmation' => 'Password Confirmation',
+        'role' => 'Role',
+    ],
+    "msg"=>[
+        "admin-updated-successfully"=>'Admin Updated Successfully!',
+        'admin-deleted-successfully'=>'Admin Deleted Successfully!',
+        'success'=>'Success',
+        'delete'=>'Delete',
+        'admin-created-successfully'=>'Admin Creted Successfully',
+        'english-name-required' => 'English name is required.',
+        'english-name-min-characters' => 'English name must be at least :min characters.',
+        'arabic-name-required' => 'Arabic name is required.',
+        'arabic-name-min-characters' => 'Arabic name must be at least :min characters.',
+        'priority-required' => 'Priority is required.',
+        'priority-min-characters' => 'Priority must be at least :min characters.',
+        'image-required' => 'Image is required.',
+        'name-required' => 'Name is required.',
+        'email-required' => 'Email is required.',
+        'email-already-exists' => 'Email already exists.',
+        'email-should-be-email-format' => 'Email should be in email format.',
+        'password-confirmation-required' => 'Password confirmation is required.',
+        'role-required' => 'Role is required.',
+        'category-created-successfully!' => 'Category created successfully!',
+        'categories-updated-successfully!' => 'Categories Updated Successfully!',
+        'categories-deleted-successfully!' => 'Categories Deleted Successfully!'
+    ]
 
 ];

@@ -73,7 +73,7 @@ class AdminController extends Controller
     {
         try {
             $this->adminUseCase->createAdmin($request->validated());
-            Toastr::success('Admin created successfully!', 'Success');
+            Toastr::success(__('validation.msg.admin-created-successfully'), __('validation.msg.success'));
             return redirect()->route('admin.admins.index');
         } catch (\Exception $e) {
             Toastr::error($e->getMessage(), 'Error');
@@ -113,13 +113,14 @@ class AdminController extends Controller
     {
         try {
             $this->adminUseCase->updateAdmin($admin, $request->validated());
-            Toastr::success('Admin updated successfully!', 'Success');
+            Toastr::success(__('validation.msg.admin-updated-successfully'), __('validation.msg.success'));
             return redirect()->route('admin.admins.index');
         } catch (\Exception $e) {
             Toastr::error($e->getMessage(), 'Error');
             return redirect()->back()->withInput();
         }
     }
+
 
     /**
      * Remove the specified resource from storage.
@@ -128,7 +129,7 @@ class AdminController extends Controller
     {
         try {
             $this->adminUseCase->deleteAdmin($admin);
-            Toastr::success('The Admin Deleted successfully!', 'Delete');
+            Toastr::success(__('validation.msg.admin-deleted-successfully'), __('validation.msg.delete'));
             return redirect()->route('admin.admins.index');
         } catch (\Exception $e) {
             Toastr::error($e->getMessage(), 'Error');

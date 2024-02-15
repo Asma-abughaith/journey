@@ -188,4 +188,8 @@ return [
 
     'attributes' => [],
 
+    "msg"=>[
+        "admin-updated-successfully"=>'تم تعديل المشرف بنجاح!',
+    ]
+
 ];

@@ -1,5 +1,5 @@
 @extends('admin.master')
-@section('title', 'Admin | Admins')
+@section('title', __('app.dashboard-admins'))
 @section('admin-active', 'active')
 @section('content')
 
@@ -42,10 +42,14 @@
                                                 <td class="text-center col-2">{{ $admin['email'] }}</td>
                                                 <td class="text-center col-2">{{ $admin['role'] }}</td>
                                                 <td class="text-center col-2">
+{{--                                                    @if(AdminPermission('edit admin'))--}}
                                                     <a class="btn btn-outline-warning btn-sm edit" title="Edit"
                                                         href="{{ route('admin.admins.edit', $admin['id']) }}">
                                                         <i class="fas fa-pencil-alt" title="Edit"></i>
                                                     </a>
+{{--                                                    @endif--}}
+
+{{--                                                    @if(AdminPermission('delete admin'))--}}
                                                     <form method="post"
                                                         action="{{ route('admin.admins.destroy', $admin['id']) }}"
                                                         style="display:inline;">
@@ -57,6 +61,7 @@
                                                             <i class="ri-delete-bin-line" title="Edit"></i>
                                                         </button>
                                                     </form>
+{{--                                                        @endif--}}
                                                 </td>
                                             </tr>
                                         @endforeach

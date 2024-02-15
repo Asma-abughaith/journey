@@ -1,5 +1,5 @@
 @extends('admin.master')
-@section('title', 'Admin | Feature')
+@section('title', __('app.dashboard-feature'))
 @section('feature-active', 'active')
 @section('content')
 
@@ -35,10 +35,13 @@
                                                 <td class="text-center col-2">{{ $feature['name'] }}</td>
                                                 <td class="text-center col-2"> <i class="{{ $feature['icon'] }}"></i></td>
                                                 <td class="text-center col-2">
+{{--                                                    @if(AdminPermission('edit feature'))--}}
                                                     <a class="btn btn-outline-warning btn-sm edit" title="Edit"
                                                         href="{{ route('admin.features.edit', $feature['id']) }}">
                                                         <i class="fas fa-pencil-alt" title="Edit"></i>
                                                     </a>
+{{--                                                    @endif--}}
+{{--                                                    @if(AdminPermission('delete feature'))--}}
                                                     <form method="post"
                                                         action="{{ route('admin.features.destroy', $feature['id']) }}"
                                                         style="display:inline;">
@@ -50,6 +53,7 @@
                                                             <i class="ri-delete-bin-line" title="Edit"></i>
                                                         </button>
                                                     </form>
+{{--                                                        @endif--}}
                                                 </td>
 
                                             </tr>

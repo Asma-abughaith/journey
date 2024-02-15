@@ -62,5 +62,12 @@ return [
     'all-sub-categories' => "All Sub Categories",
     'create-sub-categories' => "Create Sub Categories",
     'create-subcategory' => 'Create Subcategory',
-    'edit-sub-category' => 'Edit Sub Category'
+    'edit-sub-category' => 'Edit Sub Category',
+    'dashboard-admins'=>'Dashboard | Admins',
+    'dashboard-feature'=>'Dashboard | Feature',
+    'dashboard-permission'=>'Dashboard | Permission',
+    'dashboard-region'=>'Dashboard | Region',
+    'dashboard-role'=>'Dashboard | Role',
+    'dashboard-subCategory'=>'Dashboard | SubCategory',
+
 ];

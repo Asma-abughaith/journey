@@ -57,5 +57,7 @@ return [
     'edit-category' => 'تعديل الفئة',
     'Admin_Login' => 'تسجيل الدخول للمشرف',
     'create-subcategory' => 'إنشاء فئة فرعية',
-    'edit-sub-category' => 'تعديل الفئة الفرعية'
+    'edit-sub-category' => 'تعديل الفئة الفرعية',
+    'dashboard-admins'=>'لوحة التحكم | المشرفين'
+
 ];

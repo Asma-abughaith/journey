@@ -1,5 +1,5 @@
 @extends('admin.master')
-@section('title', 'Admin | SubCategory')
+@section('title', __('app.dashboard-subCategory'))
 @section('subCategory-active', 'active')
 @section('content')
 
@@ -44,10 +44,14 @@
                                                         width="50px" height="50px">
                                                 </td>
                                                 <td class="text-center col-2">
+{{--                                                    @if(AdminPermission('edit subcategory'))--}}
                                                     <a class="btn btn-outline-warning btn-sm edit" title="Edit"
                                                        href="{{ route('admin.sub_categories.edit', $sub_category['id']) }}">
                                                         <i class="fas fa-pencil-alt" title="Edit"></i>
                                                     </a>
+{{--                                                    @endif--}}
+
+{{--                                                        @if(AdminPermission('delete subcategory'))--}}
                                                     <form method="post"
                                                           action="{{ route('admin.sub_categories.destroy', $sub_category['id']) }}"
                                                           style="display:inline;">
@@ -59,6 +63,7 @@
                                                             <i class="ri-delete-bin-line" title="Edit"></i>
                                                         </button>
                                                     </form>
+{{--                                                            @endif--}}
                                                 </td>
 
                                             </tr>

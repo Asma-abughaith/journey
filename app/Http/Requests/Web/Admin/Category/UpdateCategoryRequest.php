@@ -28,33 +28,31 @@ class UpdateCategoryRequest extends FormRequest
     {
         $categoryId = request()->id;
         return [
-            'name_en' => ['required', 'min:3', Rule::unique('categories', 'name->en')->ignore($categoryId)],
-            'name_ar' => ['required', 'min:3', Rule::unique('categories', 'name->ar')->ignore($categoryId)],
+            'name_en' => ['required', 'string' ,'min:3', Rule::unique('categories', 'name->en')->ignore($categoryId)],
+            'name_ar' => ['required', 'string' ,'min:3', Rule::unique('categories', 'name->ar')->ignore($categoryId)],
             'priority' => ['required', Rule::unique('categories', 'priority')->ignore($categoryId)],
-            'image' => ['required', 'image', 'mimes:jpeg,png,jpg,gif,svg'],
+            'image' => ['image', 'mimes:jpeg,png,jpg,gif,svg'],
         ];
     }
 
     public function messages(): array
     {
         return [
-            'name_en.required' => 'English name is required.',
-            'name_en.min' => 'English name must be at least :min characters.',
-            'name_ar.required' => 'Arabic name is required.',
-            'name_ar.min' => 'Arabic name must be at least :min characters.',
-            'priority.required' => 'Priority is required.',
-            'priority.min' => 'priority must be at least :min characters.',
-            'image.required' => 'image is required',
+            'name_en.required' => __('validation.msg.english-name-required'),
+            'name_en.min' => __('validation.msg.english-name-min-characters'),
+            'name_ar.required' => __('validation.msg.arabic-name-required'),
+            'name_ar.min' => __('validation.msg.arabic-name-min-characters'),
+            'priority.required' => __('validation.msg.priority-required'),
+            'priority.min' => __('validation.msg.priority-min-characters'),
         ];
     }
 
     public function attributes()
     {
         return [
-            'name_en' => 'English Name',
-            'name_ar' => 'Arabic Name',
-            'priority' => 'Priority',
-            'image' => 'Image',
+            'name_en' => __('validation.attributes.name-en'),
+            'name_ar' => __('validation.attributes.name-ar'),
+            'priority' => __('validation.attributes.priority'),
         ];
     }
 

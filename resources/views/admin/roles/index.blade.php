@@ -1,5 +1,5 @@
 @extends('admin.master')
-@section('title', 'Admin | roles')
+@section('title', __('app.dashboard-role'))
 @section('role-active', 'active')
 @section('content')
 
@@ -32,10 +32,13 @@
                                                 <td class="text-center col-4">{{ $role['name_i18n'] }}</td>
                                                 <td class="text-center col-4">{{ $role['guard_name'] }}</td>
                                                 <td class="text-center col-3">
+{{--                                                    @if(AdminPermission('edit role'))--}}
                                                     <a class="btn btn-outline-warning btn-sm edit" title="Edit"
                                                         href="{{ route('admin.roles.edit', $role['id']) }}">
                                                         <i class="fas fa-pencil-alt" title="Edit"></i>
                                                     </a>
+{{--                                                    @endif--}}
+{{--                                                    @if(AdminPermission('delete role'))--}}
                                                     <form method="post"
                                                         action="{{ route('admin.roles.destroy', $role['id']) }}"
                                                         style="display:inline;">
@@ -47,6 +50,7 @@
                                                             <i class="ri-delete-bin-line" title="Edit"></i>
                                                         </button>
                                                     </form>
+{{--                                                        @endif--}}
                                                 </td>
 
                                             </tr>

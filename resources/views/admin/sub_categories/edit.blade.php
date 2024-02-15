@@ -1,5 +1,5 @@
 @extends('admin.master')
-@section('title', 'Admin | SubCategory')
+@section('title', __('app.dashboard-subCategory'))
 @section('subCategory-active', 'active')
 @section('content')
 

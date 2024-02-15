@@ -1,5 +1,5 @@
 @extends('admin.master')
-@section('title', 'Admin | roles')
+@section('title', __('app.dashboard-role'))
 @section('role-active', 'active')
 
 @section('content')

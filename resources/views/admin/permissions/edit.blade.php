@@ -1,5 +1,5 @@
 @extends('admin.master')
-@section('title', 'Admin | Permissions')
+@section('title', __('app.dashboard-permission'))
 @section('permission-active', 'active')
 @section('content')
 

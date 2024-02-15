@@ -1,5 +1,5 @@
 @extends('admin.master')
-@section('title', 'Admin | Permissions')
+@section('title', __('app.dashboard-permission'))
 @section('permission-active', 'active')
 @section('content')
 
@@ -33,10 +33,13 @@
                                                 <td class="text-center col-4">{{ $permission['name_i18n'] }}</td>
                                                 <td class="text-center col-4">{{ $permission['guard_name'] }}</td>
                                                 <td class="text-center col-3">
+{{--                                                    @if(AdminPermission('edit permission'))--}}
                                                     <a class="btn btn-outline-warning btn-sm edit" title="Edit"
                                                         href="{{ route('admin.permissions.edit', $permission['id']) }}">
                                                         <i class="fas fa-pencil-alt" title="Edit"></i>
                                                     </a>
+{{--                                                    @endif--}}
+{{--                                                    @if(AdminPermission('delete permission'))--}}
                                                     <form method="post"
                                                         action="{{ route('admin.permissions.destroy', $permission['id']) }}"
                                                         style="display:inline;">
@@ -48,6 +51,7 @@
                                                             <i class="ri-delete-bin-line" title="Edit"></i>
                                                         </button>
                                                     </form>
+{{--                                                        @endif--}}
                                                 </td>
 
                                             </tr>

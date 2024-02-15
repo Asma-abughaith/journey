@@ -25,10 +25,10 @@ class UpdateTagRequest extends FormRequest
      */
     public function rules(): array
     {
-        $regionId = request()->id;
+        $tagId = request()->id;
         return [
-            'name_en' => ['required', 'min:3', Rule::unique('tags', 'name->en')->ignore($regionId)],
-            'name_ar' => ['required', 'min:3', Rule::unique('tags', 'name->ar')->ignore($regionId)],
+            'name_en' => ['required', 'min:3', Rule::unique('tags', 'name->en')->ignore($tagId)],
+            'name_ar' => ['required', 'min:3', Rule::unique('tags', 'name->ar')->ignore($tagId)],
             'icon'=>['required']
 
         ];

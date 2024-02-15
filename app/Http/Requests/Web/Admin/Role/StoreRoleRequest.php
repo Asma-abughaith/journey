@@ -20,9 +20,9 @@ class StoreRoleRequest extends FormRequest
 
     public function rules(): array
     {
-        $currentPermissionId = null;
+        $currentRoleId = null;
         return [
-            'name_en' => ['required', 'min:3', new CheckRoleNameAndGuardExistRule($currentPermissionId)],
+            'name_en' => ['required', 'min:3', new CheckRoleNameAndGuardExistRule($currentRoleId)],
             'name_ar' => ['required', 'min:3'],
             'guard' => ['required', 'min:3'],
             'permissions.*' => ['required'],

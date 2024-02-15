@@ -70,7 +70,7 @@
 
 {{--                @if(AdminPermission('view admins')||AdminPermission('create admins') )--}}
                 <li>
-                    <a href="javascript: void(0);" class="has-arrow waves-effect" @yield('admins-active')>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect @yield('admins-active')" >
                         <i class="ri-admin-line"></i>
                         <span>{{ __('app.admins') }}</span>
                     </a>

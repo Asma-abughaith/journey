@@ -1,5 +1,5 @@
 @extends('admin.master')
-@section('title', 'Admin | Tag')
+@section('title', __('app.dashboard-tag'))
 @section('tag-active', 'active')
 @section('content')
 
@@ -7,7 +7,7 @@
         <div class="page-content">
             <div class="container-fluid">
                 <!-- start page title -->
-                @include('layouts.admin.title', ['title' => __('app.create-Tag')])
+                @include('layouts.admin.title', ['title' => __('app.create-tag')])
                 <!-- end page title -->
 
                 <div class="col-xl-12 mx-auto" style="margin-top: 2.5%;">

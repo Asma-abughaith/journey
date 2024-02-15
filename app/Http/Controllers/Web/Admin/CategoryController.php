@@ -56,7 +56,7 @@ class CategoryController extends Controller
     {
         try {
             $this->categoryUseCase->createCategory( $request->validated());
-            Toastr::success('Category created successfully!', 'Success');
+            Toastr::success(__('validation.msg.category-created-successfully!'), __('validation.msg.success'));
             return redirect()->route('admin.categories.index');
         } catch (\Exception $e) {
             Toastr::error($e->getMessage(), 'Error');
@@ -94,7 +94,7 @@ class CategoryController extends Controller
     {
         try {
             $this->categoryUseCase->updateCategory($category, $request->validated());
-            Toastr::success('Categories updated successfully!', 'Success');
+            Toastr::success(__('validation.msg.categories-updated-successfully!'), __('validation.msg.success'));
             return redirect()->route('admin.categories.index');
         } catch (\Exception $e) {
             Toastr::error($e->getMessage(), 'Error');
@@ -109,7 +109,7 @@ class CategoryController extends Controller
     {
         try {
             $this->categoryUseCase->deleteCategory($category);
-            Toastr::success('The Category Deleted successfully!', 'Delete');
+            Toastr::success(__('validation.msg.categories-deleted-successfully!'), __('validation.msg.delete'));
             return redirect()->route('admin.categories.index');
         } catch (\Exception $e) {
             Toastr::error($e->getMessage(), 'Error');

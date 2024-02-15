@@ -1,5 +1,5 @@
 @extends('admin.master')
-@section('title', 'Admin | Region')
+@section('title', __('app.dashboard-region'))
 @section('region-active', 'active')
 @section('content')
 
@@ -33,10 +33,13 @@
                                                 <td class="text-center col-1">{{ ++$key }}</td>
                                                 <td class="text-center col-2">{{ $region['name'] }}</td>
                                                 <td class="text-center col-2">
+{{--                                                    @if(AdminPermission('edit region'))--}}
                                                     <a class="btn btn-outline-warning btn-sm edit" title="Edit"
                                                         href="{{ route('admin.regions.edit', $region['id']) }}">
                                                         <i class="fas fa-pencil-alt" title="Edit"></i>
                                                     </a>
+{{--                                                    @endif--}}
+{{--                                                    @if(AdminPermission('delete region'))--}}
                                                     <form method="post"
                                                         action="{{ route('admin.regions.destroy', $region['id']) }}"
                                                         style="display:inline;">
@@ -48,6 +51,7 @@
                                                             <i class="ri-delete-bin-line" title="Edit"></i>
                                                         </button>
                                                     </form>
+{{--                                                        @endif--}}
                                                 </td>
 
                                             </tr>

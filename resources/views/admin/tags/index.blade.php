@@ -1,5 +1,5 @@
 @extends('admin.master')
-@section('title', 'Admin | Tag')
+@section('title', __('app.dashboard-tag'))
 @section('tag-active', 'active')
 @section('content')
 
@@ -7,7 +7,7 @@
         <div class="page-content">
             <div class="container-fluid">
                 <!-- start page title -->
-                @include('layouts.admin.title', ['title' => __('app.Tag')])
+                @include('layouts.admin.title', ['title' => __('app.tag')])
                 <!-- end page title -->
 
                 <div class="row" style="margin-top: 2.5%;">
@@ -35,10 +35,13 @@
                                                 <td class="text-center col-2">{{ $tag['name'] }}</td>
                                                 <td class="text-center col-2"> <i class="{{ $tag['icon'] }}"></i></td>
                                                 <td class="text-center col-2">
+{{--                                                    @if(AdminPermission('edit tag'))--}}
                                                     <a class="btn btn-outline-warning btn-sm edit" title="Edit"
                                                         href="{{ route('admin.tags.edit', $tag['id']) }}">
                                                         <i class="fas fa-pencil-alt" title="Edit"></i>
                                                     </a>
+{{--                                                    @endif--}}
+{{--                                                    @if(AdminPermission('delete tag'))--}}
                                                     <form method="post"
                                                         action="{{ route('admin.tags.destroy', $tag['id']) }}"
                                                         style="display:inline;">
@@ -50,6 +53,7 @@
                                                             <i class="ri-delete-bin-line" title="Edit"></i>
                                                         </button>
                                                     </form>
+{{--                                                        @endif--}}
                                                 </td>
 
                                             </tr>

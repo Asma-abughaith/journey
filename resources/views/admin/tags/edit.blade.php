@@ -1,5 +1,5 @@
 @extends('admin.master')
-@section('title', 'Admin | Tag')
+@section('title', __('app.dashboard-tag'))
 @section('tag-active', 'active')
 @section('content')
 
