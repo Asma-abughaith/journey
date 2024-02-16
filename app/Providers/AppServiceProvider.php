@@ -6,6 +6,7 @@ use App\Interfaces\Gateways\Web\Admin\AdminRepositoryInterface;
 use App\Interfaces\Gateways\Web\Admin\CategoryRepositoryInterface;
 use App\Interfaces\Gateways\Web\Admin\FeatureRepositoryInterface;
 use App\Interfaces\Gateways\Web\Admin\PermissionRepositoryInterface;
+use App\Interfaces\Gateways\Web\Admin\PlaceRepositoryInterface;
 use App\Interfaces\Gateways\Web\Admin\RegionRepositoryInterface;
 use App\Interfaces\Gateways\Web\Admin\RoleRepositoryInterface;
 use App\Interfaces\Gateways\Web\Admin\TagRepositoryInterface;
@@ -14,6 +15,7 @@ use App\Repositories\Web\Admin\EloquentAdminRepository;
 use App\Repositories\Web\Admin\EloquentCategoryRepository;
 use App\Repositories\Web\Admin\EloquentFeatureRepository;
 use App\Repositories\Web\Admin\EloquentPermissionRepository;
+use App\Repositories\Web\Admin\EloquentPlaceRepository;
 use App\Repositories\Web\Admin\EloquentRegionRepository;
 use App\Repositories\Web\Admin\EloquentRoleRepository;
 use App\Repositories\Web\Admin\EloquentTagRepository;
@@ -41,6 +43,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(RegionRepositoryInterface::class, EloquentRegionRepository::class);
         $this->app->bind(FeatureRepositoryInterface::class, EloquentFeatureRepository::class);
         $this->app->bind(TagRepositoryInterface::class, EloquentTagRepository::class);
+        $this->app->bind(PlaceRepositoryInterface::class, EloquentPlaceRepository::class);
 
 
     }

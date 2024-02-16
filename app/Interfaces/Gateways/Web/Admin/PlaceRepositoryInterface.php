@@ -11,7 +11,7 @@ interface PlaceRepositoryInterface
 
     public function getPlace($place);
 
-    public function createPlace(array $placeData, array $imageData, array $imageGallery);
+    public function createPlace(array $placeData, array $imageData, array $imageGallery,array $tags);
 
     public function updatePlace($place, array $placeData, array $imageData, array $imageGallery);
 

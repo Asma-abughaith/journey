@@ -2,62 +2,78 @@
 
 namespace App\UseCases\Web\Admin;
 
+use App\Interfaces\Gateways\Web\Admin\PlaceRepositoryInterface;
 use App\Interfaces\Gateways\Web\Admin\SubCategoryRepositoryInterface;
 
 class PlaceUseCase
 {
-    protected $subCategoryRepository;
+    protected $placeRepository;
 
-    public function __construct(SubCategoryRepositoryInterface $subCategoryRepository)
+    public function __construct(PlaceRepositoryInterface $placeRepository)
     {
-        $this->subCategoryRepository = $subCategoryRepository;
+        $this->placeRepository = $placeRepository;
     }
 
-    public function allSubCategories()
+    public function allPlaces()
     {
-        return $this->subCategoryRepository->getAllSubCategories();
+        return $this->placeRepository->getAllPlaces();
     }
 
-    public function getSubCategory($subCategory)
+    public function getPlace($place)
     {
-        return $this->subCategoryRepository->getSubCategory($subCategory);
+        return $this->placeRepository->getPlace($place);
     }
 
-    public function getSubCategoryById($subCategoryId)
+    public function getPlaceById($placeId)
     {
-        return $this->subCategoryRepository->getSubCategoryById($subCategoryId);
+        return $this->placeRepository->getPlaceById($placeId);
     }
 
-    public function createSubCategory($request)
+    public function createPlace($request)
     {
         $translator = ['en' => $request['name_en'], 'ar' => $request['name_ar']];
-        return $this->subCategoryRepository->createSubCategory(
+        $translatorDescription = ['en' => $request['description_en'], 'ar' => $request['description_ar']];
+        $translatorAddress = ['en' => $request['address_en'], 'ar' => $request['address_ar']];
+
+        return $this->placeRepository->createPlace(
             [
                 'name' => $translator,
-                'priority' =>  $request['priority'],
-                'category_id'=>$request['category_id']
+                'description'=>$translatorDescription,
+                'address'=>$translatorAddress,
+                'google_map_url'=>$request['google_map_url'],
+                'longitude'=>$request['longitude'],
+                'latitude'=>$request['latitude'],
+                'phone_number'=>$request['phone_number'],
+                'price_level'=>$request['price_level'],
+                'website'=>$request['website'],
+                'rating'=>$request['rating'],
+                'total_user_rating'=>$request['total_user_rating'],
+                'region_id'=>$request['region_id'],
+                'sub_category_id'=>$request['sub_category_id'],
+                'business_status'=>$request['business_status'],
             ],
-            ['image' => isset($request['image']) ? isset($request['image']) : null],
+            ['main_image' => isset($request['main_image']) ? isset($request['main_image']) : null],
+            ['gallery_images' => isset($request['gallery_images']) ? isset($request['gallery_images']) : null],
+            ['tags'=>[1,2]],
 
         );
     }
 
-    public function updateSubCategory($subCategory, $request)
+    public function updatePlace($place, $request)
     {
         $translator = ['en' => $request['name_en'], 'ar' => $request['name_ar']];
-        return $this->subCategoryRepository->updateSubCategory(
-            $subCategory,
+        return $this->placeRepository->updatePlace(
+            $place,
             [
                 'name' => $translator,
-                'priority' =>  $request['priority'],
-                'category_id'=>$request['category_id']
             ],
+            ['image' => isset($request['image']) ? isset($request['image']) : null],
             ['image' => isset($request['image']) ? isset($request['image']) : null]
         );
     }
 
-    public function deleteSubCategory($subCategory)
+    public function deletePlace($place)
     {
-        return $this->subCategoryRepository->deleteSubCategory($subCategory);
+        return $this->placeRepository->deletePlace($place);
     }
 }

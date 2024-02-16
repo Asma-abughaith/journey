@@ -69,5 +69,7 @@ return [
     'dashboard-region'=>'Dashboard | Region',
     'dashboard-role'=>'Dashboard | Role',
     'dashboard-subCategory'=>'Dashboard | SubCategory',
+    'dashboard-place'=>'Dashboard | Place',
+
 
 ];

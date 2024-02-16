@@ -287,6 +287,41 @@ class PermissionSeeder extends Seeder
                 'guard_name' => 'admin',
             ],
 
+            // Permissions for Places CRUD operations
+            [
+                'name' => 'create place',
+                'translations' => [
+                    'ar' => 'إنشاء منطقة',
+                    'en' => 'create place',
+                ],
+                'guard_name' => 'admin',
+            ],
+            [
+                'name' => 'edit place',
+                'translations' => [
+                    'ar' => 'تعديل منطقة',
+                    'en' => 'edit place',
+                ],
+                'guard_name' => 'admin',
+            ],
+            [
+                'name' => 'view places',
+                'translations' => [
+                    'ar' => 'عرض المناطق',
+                    'en' => 'view places',
+                ],
+                'guard_name' => 'admin',
+            ],
+            [
+                'name' => 'delete place',
+                'translations' => [
+                    'ar' => 'حذف منطقة',
+                    'en' => 'delete place',
+                ],
+                'guard_name' => 'admin',
+            ],
+
+
 
         ];
 

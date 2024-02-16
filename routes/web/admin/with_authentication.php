@@ -15,6 +15,7 @@ use App\Http\Controllers\Web\Admin\SubCategoryController;
 use App\Http\Controllers\Web\Admin\RegionController;
 use App\Http\Controllers\Web\Admin\FeatureController;
 use App\Http\Controllers\Web\Admin\TagController;
+use App\Http\Controllers\Web\Admin\PlaceController;
 
 use App\Models\Admin;
 use App\Http\Controllers\Web\Setting\LanguageController;
@@ -83,3 +84,6 @@ Route::resource('/features', FeatureController::class);
 
 //================= Routes For Tags =================
 Route::resource('/tags', TagController::class);
+
+//================= Routes For Tags =================
+Route::resource('/places', PlaceController::class);

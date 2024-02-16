@@ -26,7 +26,9 @@ return new class extends Migration
             $table->decimal('rating', 3, 2);
             $table->integer('total_user_rating');
             $table->unsignedBigInteger('region_id');
+            $table->unsignedBigInteger('sub_category_id');
             $table->foreign('region_id')->references('id')->on('regions')->cascadeOnUpdate();
+            $table->foreign('sub_category_id')->references('id')->on('sub_categories')->cascadeOnUpdate();
             $table->timestamps();
         });
     }

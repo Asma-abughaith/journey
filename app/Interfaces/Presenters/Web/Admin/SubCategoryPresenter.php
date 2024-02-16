@@ -35,4 +35,21 @@ class SubCategoryPresenter
             'category'=>$subCategory->getCategory(),
         ];
     }
+
+    public function presentAllSubCategoriesForOtherControllers($subCategories){
+        $formattedSubCategories = [];
+
+        foreach ($subCategories as $subCategory) {
+            $formattedSubCategories[] = $this->formatSubCategoryForOtherControllers($subCategory);
+        }
+        return $formattedSubCategories;
+    }
+
+    public function formatSubCategoryForOtherControllers(SubCategoryEntity $subCategory)
+    {
+        return [
+            'id' => $subCategory->getId(),
+            'name' => $subCategory->getName(),
+        ];
+    }
 }

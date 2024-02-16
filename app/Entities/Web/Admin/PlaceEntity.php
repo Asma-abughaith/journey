@@ -30,6 +30,7 @@ class PlaceEntity
     private $main_image;
     private $sub_category;
     private $gallery;
+    private $tags=[];
 
     /**
      * @return mixed
@@ -429,6 +430,14 @@ class PlaceEntity
     public function setGallery($gallery): void
     {
         $this->gallery = $gallery;
+    }
+
+    public function setTags($tags){
+        return $this->tags= $tags;
+    }
+
+    public function getTags(){
+        return $this->tags;
     }
 
 

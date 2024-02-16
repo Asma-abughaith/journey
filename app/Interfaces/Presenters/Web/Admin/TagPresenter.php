@@ -33,4 +33,21 @@ class TagPresenter
         ];
     }
 
+    public function presentAllTagsForOthersControllers($tags){
+        $formattedTags = [];
+
+        foreach ($tags as $tag) {
+            $formattedTags[] = $this->formatTagControllers($tag);
+        }
+        return $formattedTags;
+    }
+
+    protected function formatTagControllers(TagEntity $tag)
+    {
+        return [
+            'id' => $tag->getId(),
+            'name' => $tag->getName(),
+        ];
+    }
+
 }

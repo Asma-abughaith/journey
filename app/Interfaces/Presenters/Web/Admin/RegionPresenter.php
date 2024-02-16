@@ -32,4 +32,21 @@ class RegionPresenter
         ];
     }
 
+    public function presentAllRegionsForOthersControllers($regions){
+        $formattedRegions = [];
+
+        foreach ($regions as $region) {
+            $formattedRegions[] = $this->formatRegionControllers($region);
+        }
+        return $formattedRegions;
+    }
+
+    protected function formatRegionControllers(RegionEntity $region)
+    {
+        return [
+            'id' => $region->getId(),
+            'name' => $region->getName(),
+        ];
+    }
+
 }

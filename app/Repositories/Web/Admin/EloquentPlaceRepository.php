@@ -11,7 +11,7 @@ class EloquentPlaceRepository implements PlaceRepositoryInterface
 
     public function getAllPlaces()
     {
-        $eloquentPlaces = Place::with('subCategory')->get();
+        $eloquentPlaces = Place::with('subCategory')->with('region')->get();
         $places = [];
 
         foreach ($eloquentPlaces as $eloquentPlace) {
@@ -21,9 +21,9 @@ class EloquentPlaceRepository implements PlaceRepositoryInterface
         return $places;
     }
 
-    public function getPlace($places)
+    public function getPlace($place)
     {
-        return $this->convertToEntity($places);
+        return $this->convertToEntity($place);
     }
 
     public function getPlaceById($placeId)
@@ -33,20 +33,21 @@ class EloquentPlaceRepository implements PlaceRepositoryInterface
         return $eloquentPlace ? $this->convertToEntity($eloquentPlace) : null;
     }
 
-    public function createPlace(array $placeData, array $imageData, array $imageGallery)
+    public function createPlace(array $placeData, array $imageData, array $imageGallery,array $tags)
     {
         $eloquentPlace = Place::create($placeData);
         $eloquentPlace->setTranslations('name', $placeData['name']);
         $eloquentPlace->setTranslations('description', $placeData['description']);
         $eloquentPlace->setTranslations('address', $placeData['address']);
+//        $eloquentPlace->tags()->attach($tags);
 
         if ($imageData !== null) {
-            $eloquentPlace->addMediaFromRequest('image')->toMediaCollection('main_place');
+            $eloquentPlace->addMediaFromRequest('main_image')->toMediaCollection('main_place');
         }
 
         if ($imageGallery !== null) {
-            foreach ($imageGallery as $key => $singleImage) {
-                $eloquentPlace->addMediaFromRequest('image')->toMediaCollection('place_gallery');
+            foreach ($imageGallery as $key=> $image) {
+                $eloquentPlace->addMediaFromRequest('gallery_images')->toMediaCollection('place_gallery');
             }
         }
 
@@ -83,9 +84,11 @@ class EloquentPlaceRepository implements PlaceRepositoryInterface
 
     protected function convertToEntity(Place $eloquentPlace)
     {
+        $lang = getLang();
         $names = $eloquentPlace->getTranslations('name');
         $descriptions = $eloquentPlace->getTranslations('description');
         $addresses = $eloquentPlace->getTranslations('address');
+
 
         $place = new PlaceEntity();
         $place->setId($eloquentPlace->id);
@@ -98,7 +101,6 @@ class EloquentPlaceRepository implements PlaceRepositoryInterface
         $place->setAddress($eloquentPlace->address);
         $place->setAddressEn($addresses['en']);
         $place->setAddressAr($addresses['ar']);
-        $place->setBusinessStatus($eloquentPlace->business_status);
         $place->setGoogleMapUrl($eloquentPlace->google_map_url);
         $place->setLongitude($eloquentPlace->longitude);
         $place->setLatitude($eloquentPlace->latitude);
@@ -107,12 +109,15 @@ class EloquentPlaceRepository implements PlaceRepositoryInterface
         $place->setWebsite($eloquentPlace->website);
         $place->setRating($eloquentPlace->rating);
         $place->setTotalUserRating($eloquentPlace->total_user_rating);
-        $place->setRegion($eloquentPlace->region);
-        $place->setSubCategory($eloquentPlace->sub_category);
 
-        // in process
-        $place->setBusinessStatusEn('');
-        $place->setBusinessStatusAr('');
+        $place->setRegion($eloquentPlace->region->name);
+        $place->setSubCategory($eloquentPlace->sub_category->name);
+
+        $place->setBusinessStatus(businessStatusTranslation($lang,$eloquentPlace->business_status));
+        $place->setBusinessStatusEn(businessStatusTranslation('en',$eloquentPlace->business_status));
+        $place->setBusinessStatusAr(businessStatusTranslation('ar',$eloquentPlace->business_status));
+
+        $place->getTags($eloquentPlace->tags);
         $place->setMainImage($eloquentPlace->main_image);
         $place->setGallery($eloquentPlace->gallery);
 
