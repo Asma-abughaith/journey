@@ -6,12 +6,14 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Web\Admin\Place\StorePlaceRequest;
 use App\Http\Requests\Web\Admin\Place\UpdatePlaceRequest;
 use App\Interfaces\Presenters\Web\Admin\CategoryPresenter;
+use App\Interfaces\Presenters\Web\Admin\FeaturePresenter;
 use App\Interfaces\Presenters\Web\Admin\PlacePresenter;
 use App\Interfaces\Presenters\Web\Admin\RegionPresenter;
 use App\Interfaces\Presenters\Web\Admin\SubCategoryPresenter;
 use App\Interfaces\Presenters\Web\Admin\TagPresenter;
 use App\Models\Place;
 use App\UseCases\Web\Admin\CategoryUseCase;
+use App\UseCases\Web\Admin\FeatureUseCase;
 use App\UseCases\Web\Admin\PlaceUseCase;
 use App\UseCases\Web\Admin\RegionUseCase;
 use App\UseCases\Web\Admin\SubCategoryUseCase;
@@ -28,8 +30,10 @@ class PlaceController extends Controller
     protected $regionUseCase;
     protected $tagUseCase;
     protected $tagPresenter;
+    protected $featureUseCase;
+    protected $featurePresenter;
 
-    public function __construct(SubCategoryPresenter $subCategoryPresenter, SubCategoryUseCase $subCategoryUseCase,RegionUseCase $regionUseCase, RegionPresenter $regionPresenter, PlaceUseCase $placeUseCase, PlacePresenter $placePresenter,TagUseCase $tagUseCase,TagPresenter $tagPresenter)
+    public function __construct(SubCategoryPresenter $subCategoryPresenter, SubCategoryUseCase $subCategoryUseCase,RegionUseCase $regionUseCase, RegionPresenter $regionPresenter, PlaceUseCase $placeUseCase, PlacePresenter $placePresenter,TagUseCase $tagUseCase,TagPresenter $tagPresenter,FeatureUseCase $featureUseCase , FeaturePresenter $featurePresenter)
     {
         $this->placePresenter= $placePresenter;
         $this->placeUseCase= $placeUseCase;
@@ -39,6 +43,8 @@ class PlaceController extends Controller
         $this->regionPresenter =$regionPresenter;
         $this->tagUseCase = $tagUseCase;
         $this->tagPresenter =$tagPresenter;
+        $this->featureUseCase = $featureUseCase;
+        $this->featurePresenter =$featurePresenter;
 
 //        $this->middleware('checkPermission:view places')->only(['index']);
 //        $this->middleware('checkPermission:create place')->only(['create', 'store']);
@@ -68,6 +74,9 @@ class PlaceController extends Controller
     {
         //tags , regions , subcategories
         try {
+            $features = $this->featureUseCase->allFeatures();
+            $features = $this->featurePresenter->presentAllFeaturesForOtherControllers($features);
+
             $tags = $this->tagUseCase->allTags();
             $tags = $this->tagPresenter->presentAllTagsForOthersControllers($tags);
 
@@ -77,7 +86,7 @@ class PlaceController extends Controller
             $subCategories = $this->subCategoryUseCase->allSubCategories();
             $subCategories = $this->subCategoryPresenter->presentAllSubCategoriesForOtherControllers($subCategories);
 
-            return view('admin.places.create', compact('tags','regions','subCategories'));
+            return view('admin.places.create', compact('tags','regions','subCategories','features'));
         } catch (\Exception $e) {
             Toastr::error($e->getMessage(), 'Error');
             return redirect()->back()->withInput();

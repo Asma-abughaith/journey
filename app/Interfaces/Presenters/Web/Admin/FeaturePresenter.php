@@ -33,4 +33,21 @@ class FeaturePresenter
         ];
     }
 
+    public function presentAllFeaturesForOtherControllers($features)
+    {
+        $formattedFeatures = [];
+
+        foreach ($features as $feature) {
+            $formattedFeatures[] = $this->formatFeatureForOtherControllers($feature);
+        }
+        return $formattedFeatures;
+    }
+    protected function formatFeatureForOtherControllers(FeatureEntity $feature)
+    {
+        return [
+            'id' => $feature->getId(),
+            'name' => $feature->getName(),
+        ];
+    }
+
 }
