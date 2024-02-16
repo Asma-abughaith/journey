@@ -102,6 +102,32 @@ class StorePlaceRequest extends FormRequest
         ];
     }
 
+    public function attributes()
+    {
+        return [
+            'name_en' => __('validation.attributes.name-en'),
+            'name_ar' => __('validation.attributes.name-ar'),
+            'description_en' => __('validation.attributes.description-en'),
+            'description_ar' => __('validation.attributes.description-ar'),
+            'address_en' => __('validation.attributes.address-en'),
+            'address_ar' => __('validation.attributes.address-ar'),
+            'google_map_url' => __('validation.attributes.google-map-url'),
+            'phone_number' => __('validation.attributes.phone-number'),
+            'longitude' => __('validation.attributes.longitude'),
+            'latitude' => __('validation.attributes.latitude'),
+            'price_level' => __('validation.attributes.price-level'),
+            'website' => __('validation.attributes.website'),
+            'rating' => __('validation.attributes.rating'),
+            'total_user_rating' => __('validation.attributes.total-user-rating'),
+            'sub_category_id' => __('validation.attributes.sub-category-id'),
+            'region_id' => __('validation.attributes.region-id'),
+            'business_status' => __('validation.attributes.business-status'),
+            'tags_id' => __('validation.attributes.tags-id'),
+            'main_image' => __('validation.attributes.main-image'),
+            'gallery_images' => __('validation.attributes.gallery-images'),
+        ];
+    }
+
     /**
      * Handle a failed validation attempt.
      *

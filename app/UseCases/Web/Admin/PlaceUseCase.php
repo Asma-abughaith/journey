@@ -3,7 +3,6 @@
 namespace App\UseCases\Web\Admin;
 
 use App\Interfaces\Gateways\Web\Admin\PlaceRepositoryInterface;
-use App\Interfaces\Gateways\Web\Admin\SubCategoryRepositoryInterface;
 
 class PlaceUseCase
 {

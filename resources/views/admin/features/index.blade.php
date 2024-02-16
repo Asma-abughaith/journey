@@ -7,7 +7,7 @@
         <div class="page-content">
             <div class="container-fluid">
                 <!-- start page title -->
-                @include('layouts.admin.title', ['title' => __('app.Feature')])
+                @include('layouts.admin.title', ['title' => __('app.feature')])
                 <!-- end page title -->
 
                 <div class="row" style="margin-top: 2.5%;">
