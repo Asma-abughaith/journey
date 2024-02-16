@@ -36,6 +36,11 @@ class Place extends Model implements HasMedia
         return $this->belongsTo(SubCategory::class);
     }
 
+    public function features()
+    {
+        return $this->belongsToMany(Feature::class);
+    }
+
     public function registerMediaCollections(): void
     {
         $this->addMediaCollection('main_place')

@@ -12,4 +12,9 @@ class Feature extends Model
 
     public $translatable = ['name'];
     public $guarded=[];
+
+    public function places()
+    {
+        return $this->belongsToMany(Place::class);
+    }
 }
