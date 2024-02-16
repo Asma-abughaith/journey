@@ -45,18 +45,21 @@
                                         <div class="mb-3">
                                             <label class="form-label"
                                                 for="validationTooltip03">{{ __('app.description-en') }}</label>
-                                            <input required type="text" class="form-control"
-                                                placeholder="{{ __('app.description-enter-en') }}" name="description_en"
-                                                value="{{ old('description_en') }}" id="validationTooltip03">
+                                            <div>
+                                                <textarea required name="description_en" class="form-control" rows="3" id="validationTooltip03"
+                                                    placeholder="{{ __('app.description-enter-en') }}">{{ old('description_en') }}</textarea>
+                                            </div>
                                         </div>
                                     </div>
+
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label class="form-label"
                                                 for="validationTooltip04">{{ __('app.description-ar') }}</label>
-                                            <input required type="text" class="form-control"
-                                                placeholder="{{ __('app.description-enter-ar') }}" name="description_ar"
-                                                value="{{ old('description_ar') }}" id="validationTooltip04">
+                                            <div>
+                                                <textarea required name="description_ar" class="form-control" rows="3" id="validationTooltip04"
+                                                    placeholder="{{ __('app.description-enter-ar') }}">{{ old('description_ar') }}</textarea>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -87,7 +90,7 @@
                                         <div class="mb-3">
                                             <label class="form-label"
                                                 for="validationTooltip07">{{ __('app.google-map-url') }}</label>
-                                            <input required type="text" class="form-control"
+                                            <input required type="url" class="form-control"
                                                 placeholder="{{ __('app.google-map-url-enter') }}" name="google_map_url"
                                                 value="{{ old('google_map_url') }}" id="validationTooltip07">
                                         </div>
@@ -131,14 +134,15 @@
                                                 for="validationTooltip11">{{ __('app.price-level') }}</label>
                                             <input required type="number" class="form-control"
                                                 placeholder="{{ __('app.price-level-enter') }}" name="price_level"
-                                                value="{{ old('price_level') }}" id="validationTooltip11" max="4" min="0">
+                                                value="{{ old('price_level') }}" id="validationTooltip11" max="4"
+                                                min="0">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label class="form-label"
                                                 for="validationTooltip12">{{ __('app.website') }}</label>
-                                            <input required type="text" class="form-control"
+                                            <input required type="url" class="form-control"
                                                 placeholder="{{ __('app.website-enter') }}" name="website"
                                                 value="{{ old('website') }}" id="validationTooltip12">
                                         </div>
@@ -152,17 +156,18 @@
                                                 for="validationTooltip13">{{ __('app.rating') }}</label>
                                             <input required type="number" class="form-control"
                                                 placeholder="{{ __('app.rating-enter') }}" name="rating"
-                                                value="{{ old('rating') }}" id="validationTooltip13" step="0.1" max="">
+                                                value="{{ old('rating') }}" id="validationTooltip13" step="0.1"
+                                                max="5" min="1">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label class="form-label"
                                                 for="validationTooltip14">{{ __('app.total-user-rating') }}</label>
-                                            <input required type="text" class="form-control"
+                                            <input required type="number" class="form-control"
                                                 placeholder="{{ __('app.total-user-rating-enter') }}"
                                                 name="total_user_rating" value="{{ old('total_user_rating') }}"
-                                                id="validationTooltip14">
+                                                id="validationTooltip14" min="0">
                                         </div>
                                     </div>
                                 </div>

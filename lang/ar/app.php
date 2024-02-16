@@ -130,5 +130,19 @@ return [
     'choose...' => 'اختر...',
     'choose-a-main-image-for-your-category.' => 'اختر صورة رئيسية لفئتك.',
     'dashboard-category' => "لوحة التحكم | الفئة",
-    'dashboard-tag' => 'لوحة التحكم | العلامة'
+    'dashboard-tag' => 'لوحة التحكم | العلامة',
+    'day-of-week' => 'ايام الأسبوع',
+    'monday' => 'الاثنين',
+    'tuesday' => 'الثلاثاء',
+    'wednesday' => 'الأربعاء',
+    'thursday' => 'الخميس',
+    'friday' => 'الجمعة',
+    'saturday' => 'السبت',
+    'sunday' => 'الأحد',
+    'opening-time' => 'وقت الافتتاح',
+    'closing-time' => 'وقت الإغلاق',
+    'add' => 'إضافة',
+    'at-least-on-day' => 'الرجاء تحديد يوم واحد على الأقل من الأيام',
+    'remove' => 'إزالة',
+
 ];

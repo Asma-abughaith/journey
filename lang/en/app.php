@@ -131,7 +131,7 @@ return [
     'choose-a-main-image-for-your-category.' => 'Choose a main image for your category.',
     'dashboard-category' => "Dashboard | Category",
     'dashboard-tag' => 'Dashboard | Tag',
-    'day-of-week' => 'Day Of Week',
+    'day-of-week' => 'Day Of Weeks',
     'monday' => 'Monday',
     'tuesday' => 'Tuesday',
     'wednesday' => 'Wednesday',
@@ -143,5 +143,5 @@ return [
     'closing-time' => 'Closing Time',
     'add' => 'Add',
     'at-least-on-day' => 'Please Select At Least One Day Of Week',
-    'remove' => 'remove'
+    'remove' => 'Remove'
 ];
