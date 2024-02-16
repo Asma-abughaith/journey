@@ -31,3 +31,7 @@
 <script src="{{ asset('assets') }}/libs/select2/js/select2.min.js"></script>
 <script src="{{ asset('assets') }}/js/pages/form-advanced.init.js"></script>
 <script src="{{ asset('assets') }}/js/pages/form-validation.init.js"></script>
+
+<script src="{{ asset('assets') }}/libs/sweetalert2/sweetalert2.min.js"></script>
+<!-- Sweet alert init js-->
+<script src="{{ asset('assets') }}/js/pages/sweet-alerts.init.js"></script>

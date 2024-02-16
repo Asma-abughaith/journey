@@ -229,6 +229,60 @@
                                 </div>
 
                                 <div class="row">
+                                    <input type="hidden" id="count" value="0">
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label class="form-label"
+                                                for="day_of_week0">{{ __('app.day-of-week') }}</label>
+                                            <select class="select2 form-control select2-multiple" name="day_of_week[]"
+                                                id="day_of_week0" multiple data-placeholder="{{ __('app.choose...') }}"
+                                                required onchange="check(0)">
+                                                <option value="Monday">{{ __('app.monday') }}</option>
+                                                <option value="Tuesday">{{ __('app.tuesday') }}</option>
+                                                <option value="Wednesday">{{ __('app.wednesday') }}</option>
+                                                <option value="Thursday">{{ __('app.thursday') }}</option>
+                                                <option value="Friday">{{ __('app.friday') }}</option>
+                                                <option value="Saturday">{{ __('app.saturday') }}</option>
+                                                <option value="Sunday">{{ __('app.sunday') }}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="mb-3">
+                                            <label class="form-label"
+                                                for="opening_time">{{ __('app.opening-time') }}</label>
+                                            <input type="time" class="form-control" name="opening_hours[]"
+                                                value="{{ old('opening_time') }}" id="opening_time" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="mb-3">
+                                            <label class="form-label"
+                                                for="closing_time">{{ __('app.closing-time') }}</label>
+                                            <input type="time" class="form-control" name="closing_hours[]"
+                                                value="{{ old('closing_time') }}" id="closing_time" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="mb-3 text-center">
+                                            <label class="form-label"
+                                                for="validationTooltip13">{{ __('app.add') }}</label>
+                                            <br>
+                                            <button class="icon-button" onclick="addWeekDay()"
+                                                style="background: none; border: none; padding: 0; cursor: pointer;"
+                                                type="button">
+                                                <i class="ri-add-circle-fill"
+                                                    style="font-size: 24px; color: #1eb137;"></i>
+                                            </button>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div id="add_week_day">
+                                </div>
+
+                                <div class="row">
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label class="form-label"
@@ -274,8 +328,149 @@
 @endsection
 
 @push('script')
-    <script src="https://cdn.jsdelivr.net/npm/@yaireo/tagify"></script>
     <script type="text/javascript">
+        function addWeekDay() {
+            let counter = $('#count').val();
+            let days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+
+            let old_days = [];
+            for (let index = 0; index <= counter; index++) {
+                let dayValue = $('#day_of_week' + index).val();
+                if (dayValue) {
+                    if (dayValue.length === 0) {
+                        Swal.fire({
+                            icon: 'error',
+                            text: "{{ __('app.at-least-on-day') }}",
+                        });
+                        return;
+                    }
+                    if (dayValue && Array.isArray(dayValue)) {
+                        old_days = old_days.concat(dayValue);
+                    } else if (dayValue && typeof dayValue === 'string') {
+                        old_days.push(dayValue);
+                    }
+                }
+            }
+
+            let new_days = days.filter(day => !old_days.includes(day));
+
+            if (new_days.length == 0) {
+                return;
+            }
+
+            counter++;
+
+            $("#add_week_day").append(`
+                 <div class="row" id="remove${counter}">
+                     <div class="col-md-6">
+                         <div class="mb-3">
+                             <label class="form-label" for="day_of_week${counter}">{{ __('app.day-of-week') }}</label>
+                             <select class="select2 form-control select2-multiple" name="day_of_week[]"
+                                 id="day_of_week${counter}" multiple data-placeholder="{{ __('app.choose...') }}" onchange="check(${counter})" required>
+                                 ${new_days.map(day => `<option value="${day}">${day}</option>`).join('')}
+                             </select>
+                         </div>
+                     </div>
+                     <div class="col-md-2">
+                         <div class="mb-3">
+                             <label class="form-label" for="opening_time${counter}">{{ __('app.opening-time') }}</label>
+                             <input type="time" class="form-control" name="opening_hours[]" value="{{ old('opening_time') }}" id="opening_time${counter}" required>
+                         </div>
+                     </div>
+                     <div class="col-md-2">
+                         <div class="mb-3">
+                             <label class="form-label" for="closing_time${counter}">{{ __('app.closing-time') }}</label>
+                             <input type="time" class="form-control" name="closing_hours[]" value="{{ old('closing_time') }}" id="closing_time${counter}" required>
+                         </div>
+                     </div>
+                     <div class="col-md-2">
+                         <div class="mb-3 text-center">
+                             <label class="form-label" for="validationTooltip13">{{ __('app.remove') }}</label><br>
+                             <button class="icon-button" onclick="remove((${counter}))"
+                                 style="background: none; border: none; padding: 0; cursor: pointer;" type="button">
+                                 <i class="ri-delete-bin-fill" style="font-size: 24px; color: rgb(177, 37, 30);"></i>
+                             </button>
+                         </div>
+                     </div>
+                 </div>
+            `);
+            $(`#day_of_week${counter}`).select2();
+            $('#count').val(counter);
+        }
+
+        function check(id) {
+            let counter = $('#count').val();
+            let days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+
+            let new_days = [];
+            for (let index = 0; index <= counter; index++) {
+                let new_values = $('#day_of_week' + index).val();
+                if (new_values) {
+                    for (let innerIndex = 0; innerIndex < new_values.length; innerIndex++) {
+                        new_days.push(new_values[innerIndex]);
+                    }
+                }
+            }
+
+            for (let index = 0; index <= counter; index++) {
+                let old_values = $('#day_of_week' + index).val();
+                if (old_values) {
+                    let new_array = days.filter(day => !new_days.includes(day));
+
+                    $('#day_of_week' + index).empty();
+
+                    old_values.forEach(old_value => {
+                        $('#day_of_week' + index).append($('<option></option>').attr('value', old_value).text(
+                                old_value)
+                            .prop('selected', true));
+                    });
+
+                    new_array.forEach(new_value => {
+                        $('#day_of_week' + index).append($('<option></option>').attr('value', new_value).text(
+                            new_value));
+                    });
+                }
+            }
+        }
+
+        function remove(id) {
+            let counter = $('#count').val();
+            let days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+
+            $("#remove" + id).remove();
+
+            let new_days = [];
+            for (let index = 0; index <= counter; index++) {
+                let new_values = $('#day_of_week' + index).val();
+                if (new_values) {
+                    for (let innerIndex = 0; innerIndex < new_values.length; innerIndex++) {
+                        new_days.push(new_values[innerIndex]);
+                    }
+                }
+            }
+
+            for (let index = 0; index <= counter; index++) {
+                let old_values = $('#day_of_week' + index).val();
+                if (old_values) {
+                    let new_array = days.filter(day => !new_days.includes(day));
+
+                    $('#day_of_week' + index).empty();
+
+                    old_values.forEach(old_value => {
+                        $('#day_of_week' + index).append($('<option></option>').attr('value', old_value).text(
+                                old_value)
+                            .prop('selected', true));
+                    });
+
+                    new_array.forEach(new_value => {
+                        $('#day_of_week' + index).append($('<option></option>').attr('value', new_value).text(
+                            new_value));
+                    });
+                }
+            }
+        }
+
+
         $(document).ready(function() {
             $("#validationTooltip17").select2({
                 placeholder: "{{ __('app.select-one') }}",
@@ -294,7 +489,7 @@
                 displayImagePreview(this, '#mainPreviewImage');
             });
 
-            $('#galleryImagesInput').change(function() {
+            $('#galleryInput').change(function() {
                 displayGalleryPreview(this, '#galleryPreview');
             });
 

@@ -130,5 +130,18 @@ return [
     'choose...' => 'Choose...',
     'choose-a-main-image-for-your-category.' => 'Choose a main image for your category.',
     'dashboard-category' => "Dashboard | Category",
-    'dashboard-tag' => 'Dashboard | Tag'
+    'dashboard-tag' => 'Dashboard | Tag',
+    'day-of-week' => 'Day Of Week',
+    'monday' => 'Monday',
+    'tuesday' => 'Tuesday',
+    'wednesday' => 'Wednesday',
+    'thursday' => 'Thursday',
+    'friday' => 'Friday',
+    'saturday' => 'Saturday',
+    'sunday' => 'Sunday',
+    'opening-time' => 'Opening Time',
+    'closing-time' => 'Closing Time',
+    'add' => 'Add',
+    'at-least-on-day' => 'Please Select At Least One Day Of Week',
+    'remove' => 'remove'
 ];
