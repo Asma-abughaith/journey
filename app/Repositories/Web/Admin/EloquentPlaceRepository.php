@@ -33,24 +33,22 @@ class EloquentPlaceRepository implements PlaceRepositoryInterface
         return $eloquentPlace ? $this->convertToEntity($eloquentPlace) : null;
     }
 
-    public function createPlace(array $placeData, array $imageData, array $imageGallery,array $tags)
+    public function createPlace(array $placeData, array $imageData, array $imageGallery,array $tags,array $opening_hours)
     {
         $eloquentPlace = Place::create($placeData);
         $eloquentPlace->setTranslations('name', $placeData['name']);
         $eloquentPlace->setTranslations('description', $placeData['description']);
         $eloquentPlace->setTranslations('address', $placeData['address']);
-//        $eloquentPlace->tags()->attach($tags);
+//        $eloquentPlace->tags()->sync([1,2]);
+        $eloquentPlace->tags()->attach(array_values($tags));
+        $eloquentPlace->openingHours()->attach(array_values($opening_hours));
 
         if ($imageData !== null) {
             $eloquentPlace->addMediaFromRequest('main_image')->toMediaCollection('main_place');
         }
-
-        if ($imageGallery !== null) {
-            foreach ($imageGallery as $key=> $image) {
-                $eloquentPlace->addMediaFromRequest('gallery_images')->toMediaCollection('place_gallery');
-            }
-        }
-
+        $eloquentPlace->addMultipleMediaFromRequest(['gallery_images'])->each(function ($singleImageGallery) {
+                $singleImageGallery->toMediaCollection('place_gallery');
+            });
         return $this->convertToEntity($eloquentPlace);
     }
 

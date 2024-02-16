@@ -45,7 +45,10 @@
     <!-- Responsive datatable examples -->
     <link href="{{ asset('assets') }}/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css"
         rel="stylesheet" type="text/css" />
+<<<<<<< HEAD
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.css">
 
     <link href="{{ asset('assets') }}/libs/sweetalert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
+=======
+>>>>>>> 2eda6e2e78e9c4cc86d5a47eb1caecd3790030a1
 </head>

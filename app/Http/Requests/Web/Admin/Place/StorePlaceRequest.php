@@ -36,19 +36,21 @@ class StorePlaceRequest extends FormRequest
             'address_ar' => 'required|string|min:3',
             'google_map_url' => 'required|url',
             'phone_number' => 'required|string',
-            'longitude' => 'required',
-            'latitude' => 'required',
-            'price_level' => 'required|string',
+
+            'longitude' => 'required|numeric',
+            'latitude' => 'required|numeric',
+            'price_level' => 'required||numeric',
             'website' => 'required|url',
-            'rating' => 'required',
-            'total_user_rating' => 'required',
+            'rating' => 'required|numeric',
+            'total_user_rating' => 'required|numeric',
             'sub_category_id' => 'required|exists:sub_categories,id',
             'region_id' => 'required|exists:regions,id',
             'business_status' => 'required|string',
             'tags_id' => 'required|array',
             'tags_id.*' => 'exists:tags,id',
-            'main_image' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
-            'gallery_images.*' => 'image|mimes:jpeg,png,jpg,gif,svg',
+            'main_image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp',
+            'gallery_images.*' => 'image|mimes:jpeg,png,jpg,gif,svg,webp',
+            'opening_hours'=>'nullable'
         ];
     }
 

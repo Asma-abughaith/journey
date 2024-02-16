@@ -51,9 +51,10 @@ class PlaceUseCase
                 'sub_category_id'=>$request['sub_category_id'],
                 'business_status'=>$request['business_status'],
             ],
-            ['main_image' => isset($request['main_image']) ? isset($request['main_image']) : null],
-            ['gallery_images' => isset($request['gallery_images']) ? isset($request['gallery_images']) : null],
-            ['tags'=>[1,2]],
+            ['main_image' => isset($request['main_image']) ?$request['main_image']: null],
+            $request['gallery_images'],
+            $request['tags_id'],
+            $request['opening_hours']
 
         );
     }
