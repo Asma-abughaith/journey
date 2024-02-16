@@ -108,18 +108,18 @@
                                         <div class="mb-3">
                                             <label class="form-label"
                                                 for="validationTooltip09">{{ __('app.longitude') }}</label>
-                                            <input required type="text" class="form-control"
+                                            <input required type="number" class="form-control"
                                                 placeholder="{{ __('app.longitude-enter') }}" name="longitude"
-                                                value="{{ old('longitude') }}" id="validationTooltip09">
+                                                value="{{ old('longitude') }}" id="validationTooltip09" step="0.1">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label class="form-label"
                                                 for="validationTooltip10">{{ __('app.latitude') }}</label>
-                                            <input required type="text" class="form-control"
+                                            <input required type="number" class="form-control"
                                                 placeholder="{{ __('app.latitude-enter') }}" name="latitude"
-                                                value="{{ old('latitude') }}" id="validationTooltip10">
+                                                value="{{ old('latitude') }}" id="validationTooltip10" step="0.1">
                                         </div>
                                     </div>
                                 </div>
@@ -129,9 +129,9 @@
                                         <div class="mb-3">
                                             <label class="form-label"
                                                 for="validationTooltip11">{{ __('app.price-level') }}</label>
-                                            <input required type="text" class="form-control"
+                                            <input required type="number" class="form-control"
                                                 placeholder="{{ __('app.price-level-enter') }}" name="price_level"
-                                                value="{{ old('price_level') }}" id="validationTooltip11">
+                                                value="{{ old('price_level') }}" id="validationTooltip11" max="4" min="0">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -150,9 +150,9 @@
                                         <div class="mb-3">
                                             <label class="form-label"
                                                 for="validationTooltip13">{{ __('app.rating') }}</label>
-                                            <input required type="text" class="form-control"
+                                            <input required type="number" class="form-control"
                                                 placeholder="{{ __('app.rating-enter') }}" name="rating"
-                                                value="{{ old('rating') }}" id="validationTooltip13">
+                                                value="{{ old('rating') }}" id="validationTooltip13" step="0.1" max="">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -274,7 +274,6 @@
 @endsection
 
 @push('script')
-    <script src="https://cdn.jsdelivr.net/npm/@yaireo/tagify"></script>
     <script type="text/javascript">
         $(document).ready(function() {
             $("#validationTooltip17").select2({
