@@ -288,6 +288,27 @@
                                 </div>
 
                                 <div class="row">
+                                    <input type="hidden" id="count" value="0">
+                                    <div class="col-md-12">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="day_of_week0">{{ __('app.features') }}</label>
+                                        </div>
+                                    </div>
+                                    @foreach ($features as $key => $feature)
+                                        <div class="col-md-2">
+                                            <div class="form-check mb-3">
+                                                <input class="form-check-input" type="checkbox"
+                                                    id="feature{{ $key }}" value="{{ $feature['id'] }}"
+                                                    name="feature_id[]">
+                                                <label class="form-check-label" for="feature{{ $key }}">
+                                                    {{ $feature['name'] }}
+                                                </label>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
+
+                                <div class="row">
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label class="form-label"

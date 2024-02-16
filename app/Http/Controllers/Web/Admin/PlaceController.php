@@ -33,24 +33,24 @@ class PlaceController extends Controller
     protected $featureUseCase;
     protected $featurePresenter;
 
-    public function __construct(SubCategoryPresenter $subCategoryPresenter, SubCategoryUseCase $subCategoryUseCase,RegionUseCase $regionUseCase, RegionPresenter $regionPresenter, PlaceUseCase $placeUseCase, PlacePresenter $placePresenter,TagUseCase $tagUseCase,TagPresenter $tagPresenter,FeatureUseCase $featureUseCase , FeaturePresenter $featurePresenter)
+    public function __construct(SubCategoryPresenter $subCategoryPresenter, SubCategoryUseCase $subCategoryUseCase, RegionUseCase $regionUseCase, RegionPresenter $regionPresenter, PlaceUseCase $placeUseCase, PlacePresenter $placePresenter, TagUseCase $tagUseCase, TagPresenter $tagPresenter, FeatureUseCase $featureUseCase, FeaturePresenter $featurePresenter)
     {
-        $this->placePresenter= $placePresenter;
-        $this->placeUseCase= $placeUseCase;
+        $this->placePresenter = $placePresenter;
+        $this->placeUseCase = $placeUseCase;
         $this->subCategoryPresenter = $subCategoryPresenter;
         $this->subCategoryUseCase = $subCategoryUseCase;
         $this->regionUseCase = $regionUseCase;
-        $this->regionPresenter =$regionPresenter;
+        $this->regionPresenter = $regionPresenter;
         $this->tagUseCase = $tagUseCase;
-        $this->tagPresenter =$tagPresenter;
+        $this->tagPresenter = $tagPresenter;
         $this->featureUseCase = $featureUseCase;
-        $this->featurePresenter =$featurePresenter;
+        $this->featurePresenter = $featurePresenter;
 
-//        $this->middleware('checkPermission:view places')->only(['index']);
-//        $this->middleware('checkPermission:create place')->only(['create', 'store']);
-//        $this->middleware('checkPermission:view places')->only(['show']);
-//        $this->middleware('checkPermission:edit place')->only(['edit', 'update']);
-//        $this->middleware('checkPermission:delete place')->only(['destroy']);
+        //        $this->middleware('checkPermission:view places')->only(['index']);
+        //        $this->middleware('checkPermission:create place')->only(['create', 'store']);
+        //        $this->middleware('checkPermission:view places')->only(['show']);
+        //        $this->middleware('checkPermission:edit place')->only(['edit', 'update']);
+        //        $this->middleware('checkPermission:delete place')->only(['destroy']);
     }
     /**
      * Display a listing of the resource.
@@ -81,12 +81,12 @@ class PlaceController extends Controller
             $tags = $this->tagPresenter->presentAllTagsForOthersControllers($tags);
 
             $regions = $this->regionUseCase->allRegions();
-            $regions= $this->regionPresenter->presentAllRegionsForOthersControllers($regions);
+            $regions = $this->regionPresenter->presentAllRegionsForOthersControllers($regions);
 
             $subCategories = $this->subCategoryUseCase->allSubCategories();
             $subCategories = $this->subCategoryPresenter->presentAllSubCategoriesForOtherControllers($subCategories);
 
-            return view('admin.places.create', compact('tags','regions','subCategories','features'));
+            return view('admin.places.create', compact('tags', 'regions', 'subCategories', 'features'));
         } catch (\Exception $e) {
             Toastr::error($e->getMessage(), 'Error');
             return redirect()->back()->withInput();
@@ -98,15 +98,15 @@ class PlaceController extends Controller
      */
     public function store(StorePlaceRequest $request)
     {
+        dd($request->all());
         try {
-            $this->placeUseCase->createPlace( $request->validated());
+            $this->placeUseCase->createPlace($request->validated());
             Toastr::success(__('validation.msg.place-created-successfully!'), __('validation.msg.success'));
             return redirect()->route('admin.places.index');
         } catch (\Exception $e) {
             Toastr::error($e->getMessage(), 'Error');
             return redirect()->back()->withInput();
         }
-
     }
 
     /**
