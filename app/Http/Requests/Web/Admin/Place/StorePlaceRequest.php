@@ -36,7 +36,6 @@ class StorePlaceRequest extends FormRequest
             'address_ar' => 'required|string|min:3',
             'google_map_url' => 'required|url',
             'phone_number' => 'required|string',
-
             'longitude' => 'required|numeric',
             'latitude' => 'required|numeric',
             'price_level' => 'required||numeric',
@@ -50,7 +49,10 @@ class StorePlaceRequest extends FormRequest
             'tags_id.*' => 'exists:tags,id',
             'main_image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp',
             'gallery_images.*' => 'image|mimes:jpeg,png,jpg,gif,svg,webp',
-            'opening_hours'=>'nullable'
+            'day_of_week' => 'nullable',
+            'opening_hours' => 'nullable',
+            'closing_hours' => 'nullable',
+            'feature_id' => 'nullable|array',
         ];
     }
 

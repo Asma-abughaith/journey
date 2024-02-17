@@ -29,8 +29,10 @@ class PlaceEntity
     private $region;
     private $main_image;
     private $sub_category;
-    private $gallery;
-    private $tags=[];
+    private $gallery = [];
+    private $tags = [];
+    private $features = [];
+    private $openingHours = [];
 
     /**
      * @return mixed
@@ -425,23 +427,64 @@ class PlaceEntity
     }
 
     /**
-     * @param mixed $gallery
+     * @param mixed $gallery=[]
      */
-    public function setGallery($gallery): void
+    public function setGallery($gallery)
     {
-        $this->gallery = $gallery;
+        foreach ($gallery as $img) {
+            $this->gallery[] = $img->getUrl();
+        }
     }
 
-    public function setTags($tags){
-        return $this->tags= $tags;
+    public function setTags($tags)
+    {
+        foreach ($tags as $tag) {
+            $this->tags[] = [
+                'id' => $tag->id,
+                'name' => $tag->name,
+            ];
+        }
     }
 
-    public function getTags(){
+    public function getTags()
+    {
         return $this->tags;
     }
 
+    public function setFeatures($features)
+    {
+        foreach ($features as $feature) {
+            $this->features[] = [
+                'id' => $feature->id,
+                'name' => $feature->name,
+            ];
+        }
+    }
+
+    public function getFeatures()
+    {
+        return $this->features;
+    }
+
+    public function setOpeningHours($openingHours)
+    {
+        $this->openingHours = [];
+
+        foreach ($openingHours as $key => $openingHour) {
+            foreach ($openingHour as $day_key => $day) {
+                $this->openingHours[$key][$day_key] = [
+                    'id' => $day->id,
+                    'day_of_week' => $day->day_of_week,
+                    'opening_time' => $day->opening_time,
+                    'closing_time' => $day->closing_time,
+                ];
+            }
+        }
+    }
 
 
-
-
+    public function getOpeningHours()
+    {
+        return $this->openingHours;
+    }
 }

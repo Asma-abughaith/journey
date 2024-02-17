@@ -37,25 +37,29 @@ class PlaceUseCase
         return $this->placeRepository->createPlace(
             [
                 'name' => $translator,
-                'description'=>$translatorDescription,
-                'address'=>$translatorAddress,
-                'google_map_url'=>$request['google_map_url'],
-                'longitude'=>$request['longitude'],
-                'latitude'=>$request['latitude'],
-                'phone_number'=>$request['phone_number'],
-                'price_level'=>$request['price_level'],
-                'website'=>$request['website'],
-                'rating'=>$request['rating'],
-                'total_user_rating'=>$request['total_user_rating'],
-                'region_id'=>$request['region_id'],
-                'sub_category_id'=>$request['sub_category_id'],
-                'business_status'=>$request['business_status'],
+                'description' => $translatorDescription,
+                'address' => $translatorAddress,
+                'google_map_url' => $request['google_map_url'],
+                'longitude' => $request['longitude'],
+                'latitude' => $request['latitude'],
+                'phone_number' => $request['phone_number'],
+                'price_level' => $request['price_level'],
+                'website' => $request['website'],
+                'rating' => $request['rating'],
+                'total_user_rating' => $request['total_user_rating'],
+                'region_id' => $request['region_id'],
+                'sub_category_id' => $request['sub_category_id'],
+                'business_status' => $request['business_status'],
             ],
-            ['main_image' => isset($request['main_image']) ?$request['main_image']: null],
+            ['main_image' => isset($request['main_image']) ? $request['main_image'] : null],
             $request['gallery_images'],
             $request['tags_id'],
-            $request['opening_hours']
-
+            [
+                'day_of_week' => $request['day_of_week'],
+                'opening_hours' => $request['opening_hours'],
+                'closing_hours' => $request['closing_hours']
+            ],
+            $request['feature_id'],
         );
     }
 

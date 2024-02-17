@@ -98,7 +98,6 @@ class PlaceController extends Controller
      */
     public function store(StorePlaceRequest $request)
     {
-        dd($request->all());
         try {
             $this->placeUseCase->createPlace($request->validated());
             Toastr::success(__('validation.msg.place-created-successfully!'), __('validation.msg.success'));
@@ -138,6 +137,13 @@ class PlaceController extends Controller
      */
     public function destroy(Place $place)
     {
-        //
+        try {
+            $this->placeUseCase->deletePlace($place);
+            Toastr::success('place Deleted successfully!', 'Delete');
+            return redirect()->route('admin.places.index');
+        } catch (\Exception $e) {
+            Toastr::error($e->getMessage(), 'Error');
+            return redirect()->back()->withInput();
+        }
     }
 }

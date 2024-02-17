@@ -4,6 +4,7 @@ namespace App\Repositories\Web\Admin;
 
 use App\Entities\Web\Admin\PlaceEntity;
 use App\Interfaces\Gateways\Web\Admin\PlaceRepositoryInterface;
+use App\Models\OpeningHour;
 use App\Models\Place;
 
 class EloquentPlaceRepository implements PlaceRepositoryInterface
@@ -11,7 +12,7 @@ class EloquentPlaceRepository implements PlaceRepositoryInterface
 
     public function getAllPlaces()
     {
-        $eloquentPlaces = Place::with('subCategory')->with('region')->get();
+        $eloquentPlaces = Place::with('subCategory')->with(['region', 'subCategory'])->get();
         $places = [];
 
         foreach ($eloquentPlaces as $eloquentPlace) {
@@ -33,22 +34,36 @@ class EloquentPlaceRepository implements PlaceRepositoryInterface
         return $eloquentPlace ? $this->convertToEntity($eloquentPlace) : null;
     }
 
-    public function createPlace(array $placeData, array $imageData, array $imageGallery,array $tags,array $opening_hours)
+    public function createPlace(array $placeData, array $imageData, array $imageGallery, array $tags, array $opening_hours, $features)
     {
         $eloquentPlace = Place::create($placeData);
         $eloquentPlace->setTranslations('name', $placeData['name']);
         $eloquentPlace->setTranslations('description', $placeData['description']);
         $eloquentPlace->setTranslations('address', $placeData['address']);
-//        $eloquentPlace->tags()->sync([1,2]);
         $eloquentPlace->tags()->attach(array_values($tags));
-        $eloquentPlace->openingHours()->attach(array_values($opening_hours));
+
+        foreach ($opening_hours['day_of_week'] as $key => $value) {
+            foreach (array_values($value) as $day) {
+                $openingHour = new OpeningHour();
+                $openingHour->day_of_week = $day;
+                $openingHour->opening_time = $opening_hours['opening_hours'][$key];
+                $openingHour->closing_time = $opening_hours['closing_hours'][$key];
+                $eloquentPlace->openingHours()->save($openingHour);
+            }
+        }
+
+        $eloquentPlace->features()->attach(array_values($features));
 
         if ($imageData !== null) {
             $eloquentPlace->addMediaFromRequest('main_image')->toMediaCollection('main_place');
         }
-        $eloquentPlace->addMultipleMediaFromRequest(['gallery_images'])->each(function ($singleImageGallery) {
-                $singleImageGallery->toMediaCollection('place_gallery');
-            });
+
+        if ($imageGallery !== null) {
+            foreach ($imageGallery as $image) {
+                $eloquentPlace->addMedia($image)->toMediaCollection('place_gallery');
+            }
+        }
+
         return $this->convertToEntity($eloquentPlace);
     }
 
@@ -87,6 +102,8 @@ class EloquentPlaceRepository implements PlaceRepositoryInterface
         $descriptions = $eloquentPlace->getTranslations('description');
         $addresses = $eloquentPlace->getTranslations('address');
 
+        $openingHours = $eloquentPlace->openingHours->groupBy('opening_time');
+        $openingHours = $openingHours->values();
 
         $place = new PlaceEntity();
         $place->setId($eloquentPlace->id);
@@ -107,17 +124,16 @@ class EloquentPlaceRepository implements PlaceRepositoryInterface
         $place->setWebsite($eloquentPlace->website);
         $place->setRating($eloquentPlace->rating);
         $place->setTotalUserRating($eloquentPlace->total_user_rating);
-
         $place->setRegion($eloquentPlace->region->name);
-        $place->setSubCategory($eloquentPlace->sub_category->name);
-
-        $place->setBusinessStatus(businessStatusTranslation($lang,$eloquentPlace->business_status));
-        $place->setBusinessStatusEn(businessStatusTranslation('en',$eloquentPlace->business_status));
-        $place->setBusinessStatusAr(businessStatusTranslation('ar',$eloquentPlace->business_status));
-
-        $place->getTags($eloquentPlace->tags);
-        $place->setMainImage($eloquentPlace->main_image);
-        $place->setGallery($eloquentPlace->gallery);
+        $place->setSubCategory($eloquentPlace->subCategory->name);
+        $place->setBusinessStatus(businessStatusTranslation($lang, $eloquentPlace->business_status));
+        $place->setBusinessStatusEn(businessStatusTranslation('en', $eloquentPlace->business_status));
+        $place->setBusinessStatusAr(businessStatusTranslation('ar', $eloquentPlace->business_status));
+        $place->setTags($eloquentPlace->tags);
+        $place->setFeatures($eloquentPlace->features);
+        $place->setOpeningHours($openingHours);
+        $place->setMainImage($eloquentPlace->getFirstMediaUrl('main_place', 'main_place_website'));
+        $place->setGallery($eloquentPlace->getMedia('place_gallery'));
 
         return $place;
     }

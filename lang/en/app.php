@@ -143,5 +143,8 @@ return [
     'closing-time' => 'Closing Time',
     'add' => 'Add',
     'at-least-on-day' => 'Please Select At Least One Day Of Week',
-    'remove' => 'Remove'
+    'remove' => 'Remove',
+    'description' => 'Description',
+    'address' => ' Address',
+    'place Deleted successfully!' => 'Place Deleted successfully!'
 ];

@@ -53,7 +53,7 @@ class Place extends Model implements HasMedia
         $this->addMediaCollection('place_gallery')
             ->registerMediaConversions(function (Media $media) {
                 $this->addMediaConversion('place_gallery_app')->width(419)->height(419)->format('jpg');
-//                $this->addMediaConversion('place_gallery_website')->width(250)->height(250)->format('webp');
+               $this->addMediaConversion('place_gallery_website')->width(250)->height(250)->format('webp');
             });
     }
 }

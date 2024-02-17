@@ -17,7 +17,8 @@ class PlacePresenter
         return $formattedPlaces;
     }
 
-    public function presentPlace($place){
+    public function presentPlace($place)
+    {
         return $this->formatPlace($place);
     }
 
@@ -49,7 +50,10 @@ class PlacePresenter
             'main_image' => $place->getMainImage(),
             'sub_category' => $place->getSubCategory(),
             'gallery' => $place->getGallery(),
+            'gallery' => $place->getGallery(),
+            'tags' => $place->getTags(),
+            'features' => $place->getFeatures(),
+            'opening_hours' => $place->getOpeningHours()
         ];
     }
-
 }

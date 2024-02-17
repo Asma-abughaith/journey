@@ -7,9 +7,7 @@ class TagEntity
 
     private $id;
     private $name;
-
     private $name_en;
-
     private $name_ar;
     private $icon;
 

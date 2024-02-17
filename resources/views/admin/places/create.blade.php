@@ -239,7 +239,7 @@
                                         <div class="mb-3">
                                             <label class="form-label"
                                                 for="day_of_week0">{{ __('app.day-of-week') }}</label>
-                                            <select class="select2 form-control select2-multiple" name="day_of_week[]"
+                                            <select class="select2 form-control select2-multiple" name="day_of_week[0][]"
                                                 id="day_of_week0" multiple data-placeholder="{{ __('app.choose...') }}"
                                                 required onchange="check(0)">
                                                 <option value="Monday">{{ __('app.monday') }}</option>
@@ -288,10 +288,9 @@
                                 </div>
 
                                 <div class="row">
-                                    <input type="hidden" id="count" value="0">
                                     <div class="col-md-12">
-                                        <div class="mb-3">
-                                            <label class="form-label" for="day_of_week0">{{ __('app.features') }}</label>
+                                        <div class="mb-2">
+                                            <label class="form-label" for="features">{{ __('app.features') }}</label>
                                         </div>
                                     </div>
                                     @foreach ($features as $key => $feature)
@@ -386,12 +385,12 @@
 
             counter++;
 
-            $("#add_week_day").append(`
+            $("#add_week_day").append(`git
                  <div class="row" id="remove${counter}">
                      <div class="col-md-6">
                          <div class="mb-3">
                              <label class="form-label" for="day_of_week${counter}">{{ __('app.day-of-week') }}</label>
-                             <select class="select2 form-control select2-multiple" name="day_of_week[]"
+                             <select class="select2 form-control select2-multiple" name="day_of_week[${counter}][]"
                                  id="day_of_week${counter}" multiple data-placeholder="{{ __('app.choose...') }}" onchange="check(${counter})" required>
                                  ${new_days.map(day => `<option value="${day}">${day}</option>`).join('')}
                              </select>
@@ -495,7 +494,6 @@
                 }
             }
         }
-
 
         $(document).ready(function() {
             $("#validationTooltip17").select2({
