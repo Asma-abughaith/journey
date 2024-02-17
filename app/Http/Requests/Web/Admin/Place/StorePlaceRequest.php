@@ -52,8 +52,8 @@ class StorePlaceRequest extends FormRequest
             'gallery_images.*' => 'image|mimes:jpeg,png,jpg,gif,svg,webp',
             'day_of_week' => 'nullable|array',
             'opening_hours' => 'nullable',
-            'closing_hours' => 'nullable',
-            'feature_id' => 'nullable|array',
+            'closing_hours' => new OpenCloseTimeRule(),
+            'feature_id' => new OpenCloseTimeRule(),
         ];
     }
 

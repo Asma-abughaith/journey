@@ -18,7 +18,8 @@ class OpenCloseTimeRule implements Rule
         $closingHours=request()->input('opening_hours');
         $weekDays = request()->input('day_of_week');
 
-        if($weekDays == null && $openingHours[0] == null && $closingHours[0] == null){
+
+        if(!isset($weekDays) && isset($openingHours) && isset($closingHours)){
             return true;
         }
 
