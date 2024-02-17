@@ -3,6 +3,7 @@
 
 namespace App\Http\Requests\Web\Admin\Place;
 
+use App\Validation\OpenCloseTimeRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
@@ -49,21 +50,11 @@ class StorePlaceRequest extends FormRequest
             'tags_id.*' => 'exists:tags,id',
             'main_image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp',
             'gallery_images.*' => 'image|mimes:jpeg,png,jpg,gif,svg,webp',
-            'day_of_week' => 'nullable',
-            'opening_hours' => $this->getOpeningHoursRule(),
-            'closing_hours' => $this->getClosingHoursRule(),
+            'day_of_week' => 'nullable|array',
+            'opening_hours' => 'nullable',
+            'closing_hours' => 'nullable',
             'feature_id' => 'nullable|array',
         ];
-    }
-
-    protected function getOpeningHoursRule()
-    {
-        return $this->input('day_of_week') ? 'nullable' : 'required_if:day_of_week,null';
-    }
-
-    protected function getClosingHoursRule()
-    {
-        return $this->input('day_of_week') ? 'nullable' : 'required_if:day_of_week,null';
     }
 
     /**

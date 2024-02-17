@@ -59,7 +59,7 @@ class PlaceUseCase
                 'opening_hours' => isset($request['opening_hours'])?$request['opening_hours']:null,
                 'closing_hours' => isset($request['closing_hours'])?$request['closing_hours']:null
             ],
-            $request['feature_id'],
+            isset($request['feature_id'])?$request['feature_id']:null,
         );
     }
 

@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 return new class extends Migration
 {
@@ -30,6 +31,10 @@ return new class extends Migration
             $table->foreign('region_id')->references('id')->on('regions')->cascadeOnUpdate();
             $table->foreign('sub_category_id')->references('id')->on('sub_categories')->cascadeOnUpdate();
             $table->timestamps();
+            $table->string('name_unique')->virtualAs('JSON_UNQUOTE(JSON_EXTRACT(`name`, "$.en"))');
+
+            // Creating a unique constraint on the computed column along with longitude and latitude
+            $table->unique(['name_unique', 'longitude', 'latitude'], 'unique_name_en_longitude_latitude');
 
         });
     }

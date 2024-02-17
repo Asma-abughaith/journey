@@ -259,7 +259,7 @@
                                                 <label class="form-label"
                                                     for="opening_time">{{ __('app.opening-time') }}</label>
                                                 <input type="time" class="form-control" name="opening_hours[]"
-                                                    value="{{ old('opening_time') }}" id="opening_time">
+                                                    value="{{ old('opening_time') }}" id="opening_time0">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
@@ -267,7 +267,7 @@
                                                 <label class="form-label"
                                                     for="closing_time">{{ __('app.closing-time') }}</label>
                                                 <input type="time" class="form-control" name="closing_hours[]"
-                                                    value="{{ old('closing_time') }}" id="closing_time">
+                                                    value="{{ old('closing_time') }}" id="closing_time0">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
@@ -436,7 +436,9 @@
             if ($('#day_of_week' + id).val().length != 0) {
                 $('#timeDiv' + id).removeClass('d-none');
             } else {
-                $('#timeDiv' + id).addClass('d-none')
+                $('#timeDiv' + id).addClass('d-none');
+                $('#opening_time' + id).empty();
+                $('#closing_time' + id).empty();
             }
 
             let new_days = [];

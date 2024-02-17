@@ -54,7 +54,9 @@ class EloquentPlaceRepository implements PlaceRepositoryInterface
             }
         }
 
-        $eloquentPlace->features()->attach(array_values($features));
+        if(isset($features)){
+            $eloquentPlace->features()->attach(array_values($features));
+        }
 
         if ($imageData !== null) {
             $eloquentPlace->addMediaFromRequest('main_image')->toMediaCollection('main_place');
