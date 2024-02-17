@@ -50,7 +50,7 @@ class PlacePresenter
             'main_image' => $place->getMainImage(),
             'sub_category' => $place->getSubCategory(),
             'gallery' => $place->getGallery(),
-            'gallery' => $place->getGallery(),
+//            'gallery' => $place->getGallery(),
             'tags' => $place->getTags(),
             'features' => $place->getFeatures(),
             'opening_hours' => $place->getOpeningHours()

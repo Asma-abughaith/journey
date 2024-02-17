@@ -113,7 +113,15 @@ class PlaceController extends Controller
      */
     public function show(Place $place)
     {
-        //
+        try {
+            $place = $this->placeUseCase->getPlace($place);
+            $place = $this->placePresenter->presentPlace($place);
+            return view('admin.places.show', compact('place'));
+        } catch (\Exception $e) {
+            Toastr::error($e->getMessage(), 'Error');
+            return redirect()->back()->withInput();
+        }
+
     }
 
     /**
