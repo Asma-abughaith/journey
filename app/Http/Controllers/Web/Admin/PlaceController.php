@@ -60,7 +60,7 @@ class PlaceController extends Controller
         try {
             $allPlaces = $this->placeUseCase->allPlaces();
             $places = $this->placePresenter->presentAllPlace($allPlaces);
-            return view('admin.places.index', compact('places'));
+            return view('admin.places.indexv2', compact('places'));
         } catch (\Exception $e) {
             Toastr::error($e->getMessage(), 'Error');
             return redirect()->back()->withInput();
