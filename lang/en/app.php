@@ -146,5 +146,6 @@ return [
     'remove' => 'Remove',
     'description' => 'Description',
     'address' => ' Address',
-    'place Deleted successfully!' => 'Place Deleted successfully!'
+    'place Deleted successfully!' => 'Place Deleted successfully!',
+    'we-do-not-know' => 'We Do Not tKnow'
 ];
