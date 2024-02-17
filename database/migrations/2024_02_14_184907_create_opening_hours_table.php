@@ -19,6 +19,7 @@ return new class extends Migration
             $table->time('closing_time');
             $table->foreign('place_id')->references('id')->on('places')->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
+            $table->unique(['place_id', 'day_of_week']);
         });
     }
 

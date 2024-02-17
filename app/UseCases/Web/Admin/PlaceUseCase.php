@@ -52,12 +52,12 @@ class PlaceUseCase
                 'business_status' => $request['business_status'],
             ],
             ['main_image' => isset($request['main_image']) ? $request['main_image'] : null],
-            $request['gallery_images'],
+            isset($request['gallery_images'])?$request['gallery_images']:null,
             $request['tags_id'],
             [
-                'day_of_week' => $request['day_of_week'],
-                'opening_hours' => $request['opening_hours'],
-                'closing_hours' => $request['closing_hours']
+                'day_of_week' => isset($request['day_of_week'])?$request['day_of_week']:null,
+                'opening_hours' => isset($request['opening_hours'])?$request['opening_hours']:null,
+                'closing_hours' => isset($request['closing_hours'])?$request['closing_hours']:null
             ],
             $request['feature_id'],
         );

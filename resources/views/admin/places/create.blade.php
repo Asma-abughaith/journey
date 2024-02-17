@@ -99,7 +99,7 @@
                                         <div class="mb-3">
                                             <label class="form-label"
                                                 for="validationTooltip08">{{ __('app.phone-number') }}</label>
-                                            <input required type="text" class="form-control"
+                                            <input  type="text" class="form-control"
                                                 placeholder="{{ __('app.phone-number-enter') }}" name="phone_number"
                                                 value="{{ old('phone_number') }}" id="validationTooltip08">
                                         </div>
@@ -113,7 +113,7 @@
                                                 for="validationTooltip09">{{ __('app.longitude') }}</label>
                                             <input required type="number" class="form-control"
                                                 placeholder="{{ __('app.longitude-enter') }}" name="longitude"
-                                                value="{{ old('longitude') }}" id="validationTooltip09" step="0.1">
+                                                value="{{ old('longitude') }}" id="validationTooltip09" step="0.0000001">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -122,7 +122,7 @@
                                                 for="validationTooltip10">{{ __('app.latitude') }}</label>
                                             <input required type="number" class="form-control"
                                                 placeholder="{{ __('app.latitude-enter') }}" name="latitude"
-                                                value="{{ old('latitude') }}" id="validationTooltip10" step="0.1">
+                                                value="{{ old('latitude') }}" id="validationTooltip10" step="0.0000001">
                                         </div>
                                     </div>
                                 </div>
@@ -132,7 +132,7 @@
                                         <div class="mb-3">
                                             <label class="form-label"
                                                 for="validationTooltip11">{{ __('app.price-level') }}</label>
-                                            <input required type="number" class="form-control"
+                                            <input  type="number" class="form-control"
                                                 placeholder="{{ __('app.price-level-enter') }}" name="price_level"
                                                 value="{{ old('price_level') }}" id="validationTooltip11" max="4"
                                                 min="0">
@@ -142,7 +142,7 @@
                                         <div class="mb-3">
                                             <label class="form-label"
                                                 for="validationTooltip12">{{ __('app.website') }}</label>
-                                            <input required type="url" class="form-control"
+                                            <input  type="url" class="form-control"
                                                 placeholder="{{ __('app.website-enter') }}" name="website"
                                                 value="{{ old('website') }}" id="validationTooltip12">
                                         </div>
@@ -207,11 +207,12 @@
                                             <label class="form-label"
                                                 for="validationTooltip17">{{ __('app.business-status') }}</label>
                                             <select class="form-select" name="business_status" id="validationTooltip17"
-                                                required>
+                                                >
                                                 <option value="">{{ __('app.select-one') }}</option>
                                                 <option value="operational">{{ __('app.operational') }}</option>
                                                 <option value="closed">{{ __('app.closed') }}</option>
                                                 <option value="temporary_closed">{{ __('app.temporary_closed') }}</option>
+                                                <option value="do_not_know">{{ __('app.we-do-not-know') }}</option>
                                             </select>
                                         </div>
                                     </div>
@@ -241,7 +242,7 @@
                                                 for="day_of_week0">{{ __('app.day-of-week') }}</label>
                                             <select class="select2 form-control select2-multiple" name="day_of_week[0][]"
                                                 id="day_of_week0" multiple data-placeholder="{{ __('app.choose...') }}"
-                                                required onchange="check(0)">
+                                                 onchange="check(0)">
                                                 <option value="Monday">{{ __('app.monday') }}</option>
                                                 <option value="Tuesday">{{ __('app.tuesday') }}</option>
                                                 <option value="Wednesday">{{ __('app.wednesday') }}</option>
@@ -257,7 +258,7 @@
                                             <label class="form-label"
                                                 for="opening_time">{{ __('app.opening-time') }}</label>
                                             <input type="time" class="form-control" name="opening_hours[]"
-                                                value="{{ old('opening_time') }}" id="opening_time" required>
+                                                value="{{ old('opening_time') }}" id="opening_time" >
                                         </div>
                                     </div>
                                     <div class="col-md-2">
@@ -265,7 +266,7 @@
                                             <label class="form-label"
                                                 for="closing_time">{{ __('app.closing-time') }}</label>
                                             <input type="time" class="form-control" name="closing_hours[]"
-                                                value="{{ old('closing_time') }}" id="closing_time" required>
+                                                value="{{ old('closing_time') }}" id="closing_time" >
                                         </div>
                                     </div>
                                     <div class="col-md-2">
@@ -331,7 +332,7 @@
                                 <div class="mb-3">
                                     <label class="form-label" for="galleryInput">{{ __('app.gallery-images') }}</label>
                                     <input type="file" class="form-control" name="gallery_images[]" id="galleryInput"
-                                        multiple required>
+                                        multiple >
                                 </div>
 
                                 <div id="galleryPreview">

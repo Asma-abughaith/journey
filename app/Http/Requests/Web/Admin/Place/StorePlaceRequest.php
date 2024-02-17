@@ -35,25 +35,35 @@ class StorePlaceRequest extends FormRequest
             'address_en' => 'required|string|min:3',
             'address_ar' => 'required|string|min:3',
             'google_map_url' => 'required|url',
-            'phone_number' => 'required|string',
+            'phone_number' => 'nullable|string',
             'longitude' => 'required|numeric',
             'latitude' => 'required|numeric',
-            'price_level' => 'required||numeric',
-            'website' => 'required|url',
+            'price_level' => 'nullable|numeric',
+            'website' => 'nullable|url',
             'rating' => 'required|numeric',
             'total_user_rating' => 'required|numeric',
             'sub_category_id' => 'required|exists:sub_categories,id',
             'region_id' => 'required|exists:regions,id',
-            'business_status' => 'required|string',
+            'business_status' => 'nullable|string',
             'tags_id' => 'required|array',
             'tags_id.*' => 'exists:tags,id',
             'main_image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp',
             'gallery_images.*' => 'image|mimes:jpeg,png,jpg,gif,svg,webp',
             'day_of_week' => 'nullable',
-            'opening_hours' => 'nullable',
-            'closing_hours' => 'nullable',
+            'opening_hours' => $this->getOpeningHoursRule(),
+            'closing_hours' => $this->getClosingHoursRule(),
             'feature_id' => 'nullable|array',
         ];
+    }
+
+    protected function getOpeningHoursRule()
+    {
+        return $this->input('day_of_week') ? 'nullable' : 'required_if:day_of_week,null';
+    }
+
+    protected function getClosingHoursRule()
+    {
+        return $this->input('day_of_week') ? 'nullable' : 'required_if:day_of_week,null';
     }
 
     /**

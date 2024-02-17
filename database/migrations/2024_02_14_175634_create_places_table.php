@@ -16,12 +16,12 @@ return new class extends Migration
             $table->json('name');
             $table->json('description');
             $table->json('address');
-            $table->enum('business_status', ['closed', 'operational', 'temporary_closed']);
+            $table->enum('business_status', ['closed', 'operational', 'temporary_closed','do_not_know'])->default('do_not_know');
             $table->text('google_map_url');
-            $table->decimal('longitude',10,6);
-            $table->decimal('latitude',10,6);
+            $table->decimal('longitude',10,7);
+            $table->decimal('latitude',10,7);
             $table->string('phone_number')->nullable();
-            $table->enum('price_level', ['-1','0','1', '2', '3','4'])->comment('-1 do not know 0 Free 1 Inexpensive 2 Moderate 3 Expensive 4 Very Expensive');
+            $table->enum('price_level', ['-1','0','1', '2', '3','4'])->comment('-1 do not know 0 Free 1 Inexpensive 2 Moderate 3 Expensive 4 Very Expensive')->default('-1');
             $table->string('website')->nullable();
             $table->decimal('rating', 3, 2);
             $table->integer('total_user_rating');
@@ -30,6 +30,7 @@ return new class extends Migration
             $table->foreign('region_id')->references('id')->on('regions')->cascadeOnUpdate();
             $table->foreign('sub_category_id')->references('id')->on('sub_categories')->cascadeOnUpdate();
             $table->timestamps();
+
         });
     }
 

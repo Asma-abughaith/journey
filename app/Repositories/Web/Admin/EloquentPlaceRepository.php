@@ -34,7 +34,7 @@ class EloquentPlaceRepository implements PlaceRepositoryInterface
         return $eloquentPlace ? $this->convertToEntity($eloquentPlace) : null;
     }
 
-    public function createPlace(array $placeData, array $imageData, array $imageGallery, array $tags, array $opening_hours, $features)
+    public function createPlace( $placeData,  $imageData,  $imageGallery,  $tags,  $opening_hours, $features)
     {
         $eloquentPlace = Place::create($placeData);
         $eloquentPlace->setTranslations('name', $placeData['name']);
@@ -42,13 +42,15 @@ class EloquentPlaceRepository implements PlaceRepositoryInterface
         $eloquentPlace->setTranslations('address', $placeData['address']);
         $eloquentPlace->tags()->attach(array_values($tags));
 
-        foreach ($opening_hours['day_of_week'] as $key => $value) {
-            foreach (array_values($value) as $day) {
-                $openingHour = new OpeningHour();
-                $openingHour->day_of_week = $day;
-                $openingHour->opening_time = $opening_hours['opening_hours'][$key];
-                $openingHour->closing_time = $opening_hours['closing_hours'][$key];
-                $eloquentPlace->openingHours()->save($openingHour);
+        if(isset($opening_hours['day_of_week'])){
+            foreach ($opening_hours['day_of_week'] as $key => $value) {
+                foreach (array_values($value) as $day) {
+                    $openingHour = new OpeningHour();
+                    $openingHour->day_of_week = $day;
+                    $openingHour->opening_time = $opening_hours['opening_hours'][$key];
+                    $openingHour->closing_time = $opening_hours['closing_hours'][$key];
+                    $eloquentPlace->openingHours()->save($openingHour);
+                }
             }
         }
 
