@@ -129,7 +129,25 @@ class PlaceController extends Controller
      */
     public function edit(Place $place)
     {
-        //
+        try {
+            $features = $this->featureUseCase->allFeatures();
+            $features = $this->featurePresenter->presentAllFeaturesForOtherControllers($features);
+
+            $tags = $this->tagUseCase->allTags();
+            $tags = $this->tagPresenter->presentAllTagsForOthersControllers($tags);
+
+            $regions = $this->regionUseCase->allRegions();
+            $regions = $this->regionPresenter->presentAllRegionsForOthersControllers($regions);
+
+            $subCategories = $this->subCategoryUseCase->allSubCategories();
+            $subCategories = $this->subCategoryPresenter->presentAllSubCategoriesForOtherControllers($subCategories);
+            $place = $this->placeUseCase->getPlace($place);
+            $place = $this->placePresenter->presentPlace($place);
+            return view('admin.places.edit', compact('place','tags', 'regions', 'subCategories', 'features'));
+        } catch (\Exception $e) {
+            Toastr::error($e->getMessage(), 'Error');
+            return redirect()->back()->withInput();
+        }
     }
 
     /**
