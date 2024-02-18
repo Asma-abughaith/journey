@@ -6,6 +6,7 @@ use App\Entities\Web\Admin\PlaceEntity;
 use App\Interfaces\Gateways\Web\Admin\PlaceRepositoryInterface;
 use App\Models\OpeningHour;
 use App\Models\Place;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class EloquentPlaceRepository implements PlaceRepositoryInterface
 {
@@ -95,6 +96,13 @@ class EloquentPlaceRepository implements PlaceRepositoryInterface
     {
         if ($place) {
             $place->delete();
+        }
+        return;
+    }
+
+    public function deleteImage($id){
+        if ($id) {
+            Media::find($id)->delete();
         }
         return;
     }

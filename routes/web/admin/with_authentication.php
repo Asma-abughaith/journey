@@ -87,3 +87,7 @@ Route::resource('/tags', TagController::class);
 
 //================= Routes For Tags =================
 Route::resource('/places', PlaceController::class);
+
+//================= Routes For Tags =================
+Route::delete('/delete/image/gallery/{id}', [PlaceController::class,'deleteImage'])->name('image.destroy');
+

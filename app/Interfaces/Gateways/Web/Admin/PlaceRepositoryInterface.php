@@ -16,4 +16,5 @@ interface PlaceRepositoryInterface
     public function updatePlace($place, array $placeData, array $imageData, array $imageGallery);
 
     public function deletePlace($place);
+    public function deleteImage($id);
 }

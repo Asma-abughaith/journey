@@ -233,9 +233,17 @@
                                     @foreach($place['gallery'] as $image)
                                         <div class="col-md-3 mb-3">
                                             <div class="card">
-                                                <img src="{{ $image }}" class="card-img-top" alt="Gallery Image" style="width: 100%; height: 200px; object-fit: cover;">
+                                                <img src="{{ $image['url'] }}" class="card-img-top"  id = "{{ $image['id'] }}" alt="Gallery Image" style="width: 100%; height: 200px; object-fit: cover;">
                                                 <div class="card-body">
-                                                    <button class="btn btn-danger delete-image" data-url="{{ $image }}">Delete</button>
+                                                    <form method="post" action="{{ route('admin.image.destroy', $image['id']) }}" style="display:inline;">
+                                                        @csrf
+                                                        @method('delete')
+                                                        <button type="submit" class="btn btn-outline-danger btn-sm"
+                                                                title="Delete" style="padding-bottom: 1px;"
+                                                                onclick="return confirm('Are you sure you want to delete?')">
+                                                            <i class="ri-delete-bin-line" title="Edit"></i>
+                                                        </button>
+                                                    </form>
                                                 </div>
                                             </div>
                                         </div>

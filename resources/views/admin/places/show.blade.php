@@ -58,7 +58,7 @@
                                 <div class="row">
                                     @foreach($place['gallery'] as $image)
                                         <div class="col-md-3">
-                                            <img src="{{ $image }}" alt="Gallery Image" class="img-fluid mb-3">
+                                            <img src="{{ $image['url'] }}" alt="Gallery Image" class="img-fluid mb-3">
                                         </div>
                                     @endforeach
                                 </div>

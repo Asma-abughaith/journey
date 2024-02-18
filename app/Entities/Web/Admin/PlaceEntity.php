@@ -431,8 +431,12 @@ class PlaceEntity
      */
     public function setGallery($gallery)
     {
+
         foreach ($gallery as $img) {
-            $this->gallery[] = $img->getUrl();
+            $this->gallery[] = [
+                'id'=>$img->id,
+                'url'=>$img->getUrl()
+            ];
         }
     }
 

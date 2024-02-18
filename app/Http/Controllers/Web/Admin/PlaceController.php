@@ -172,4 +172,15 @@ class PlaceController extends Controller
             return redirect()->back()->withInput();
         }
     }
+
+    public function deleteImage($id){
+        try {
+            $this->placeUseCase->deleteImage($id);
+            Toastr::success('The Image Deleted successfully!', 'Delete');
+            return redirect()->back()->withInput();
+        } catch (\Exception $e) {
+            Toastr::error($e->getMessage(), 'Error');
+            return redirect()->back()->withInput();
+        }
+    }
 }

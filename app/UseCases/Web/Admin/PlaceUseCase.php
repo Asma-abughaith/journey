@@ -80,4 +80,8 @@ class PlaceUseCase
     {
         return $this->placeRepository->deletePlace($place);
     }
+
+    public function deleteImage($id){
+        return $this->placeRepository->deleteImage($id);
+    }
 }
