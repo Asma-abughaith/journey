@@ -33,4 +33,14 @@ class Category extends Model implements HasMedia
         return $this->hasMany(SubCategory::class);
     }
 
+    public function places()
+    {
+        return $this->hasManyThrough(
+            Place::class,
+            SubCategory::class,
+            'category_id', // Foreign key on SubCategory table
+            'sub_category_id' // Foreign key on Place table
+        );
+    }
+
 }

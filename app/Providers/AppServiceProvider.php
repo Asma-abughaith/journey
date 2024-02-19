@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Interfaces\Gateways\Api\User\PlaceApiRepositoryInterface;
 use App\Interfaces\Gateways\Web\Admin\AdminRepositoryInterface;
 use App\Interfaces\Gateways\Web\Admin\CategoryRepositoryInterface;
 use App\Interfaces\Gateways\Web\Admin\FeatureRepositoryInterface;
@@ -11,6 +12,7 @@ use App\Interfaces\Gateways\Web\Admin\RegionRepositoryInterface;
 use App\Interfaces\Gateways\Web\Admin\RoleRepositoryInterface;
 use App\Interfaces\Gateways\Web\Admin\TagRepositoryInterface;
 use App\Interfaces\Gateways\Web\Setting\LanguageRepositoryInterface;
+use App\Repositories\Api\User\EloquentPlaceApiRepository;
 use App\Repositories\Web\Admin\EloquentAdminRepository;
 use App\Repositories\Web\Admin\EloquentCategoryRepository;
 use App\Repositories\Web\Admin\EloquentFeatureRepository;
@@ -44,6 +46,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(FeatureRepositoryInterface::class, EloquentFeatureRepository::class);
         $this->app->bind(TagRepositoryInterface::class, EloquentTagRepository::class);
         $this->app->bind(PlaceRepositoryInterface::class, EloquentPlaceRepository::class);
+        $this->app->bind(PlaceApiRepositoryInterface::class, EloquentPlaceApiRepository::class);
 
 
     }
