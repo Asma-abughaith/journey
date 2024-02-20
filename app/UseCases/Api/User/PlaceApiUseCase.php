@@ -13,10 +13,7 @@ class PlaceApiUseCase
         $this->placeApiRepository = $placeApiRepository;
     }
 
-    public function allPlacesByCategory($id)
-    {
-        return $this->placeApiRepository->allPlacesByCategory($id);
-    }
+
 
     public function singlePlace($id)
     {

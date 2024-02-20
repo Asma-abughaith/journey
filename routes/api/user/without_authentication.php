@@ -9,7 +9,7 @@ use  App\Validation\CategoryExistsRule;
 
 Route::get('all-categories', [CategoryApiController::class, 'index'])->name('categories');
 
-Route::get('places/category/{category_id}', [PlaceApiController::class, 'categoryPlaces'])
+Route::get('places/category/{category_id}', [CategoryApiController::class, 'categoryPlaces'])
     ->name('category.places');
 
 Route::get('place/{place_id}', [PlaceApiController::class, 'singlePlaces'])

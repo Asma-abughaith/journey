@@ -12,16 +12,7 @@ use App\Models\Place;
 class EloquentPlaceApiRepository implements PlaceApiRepositoryInterface
 {
 
-    public function allPlacesByCategory($id)
-    {
-        $category = Category::where('id', $id)->with(['subcategories' => function ($query) {
-                $query->orderBy('priority');
-            }, 'subcategories'])->first();
-//        $category = Category::where('id', $id)->with('subcategories.places.region')->first();
-        return new CategoryResource($category);
-//        return CategoryResource::collection([$category]);
 
-    }
 
     public function singlePlace($id)
     {

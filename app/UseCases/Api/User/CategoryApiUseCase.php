@@ -19,5 +19,10 @@ class CategoryApiUseCase
         return $this->categoryRepository->getAllCategories();
     }
 
+    public function allPlacesByCategory($id)
+    {
+        return $this->categoryRepository->allPlacesByCategory($id);
+    }
+
 
 }
