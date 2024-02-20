@@ -35,7 +35,7 @@ class EloquentPlaceRepository implements PlaceRepositoryInterface
         return $eloquentPlace ? $this->convertToEntity($eloquentPlace) : null;
     }
 
-    public function createPlace( $placeData,  $imageData,  $imageGallery,  $tags,  $opening_hours, $features)
+    public function createPlace( $placeData,  $imageData,  $imageGallery,  $tags,  $opening_hours, $features,$placeType)
     {
         $eloquentPlace = Place::create($placeData);
         $eloquentPlace->setTranslations('name', $placeData['name']);
@@ -54,6 +54,20 @@ class EloquentPlaceRepository implements PlaceRepositoryInterface
                 }
             }
         }
+
+
+        if (!empty($placeType)) {
+            if ($placeType[0]['placeType'] == 'popular') {
+                $eloquentPlace->popularPlaces()->create([
+                    'price' => $placeType[0]['price'],
+                ]);
+            } elseif ($placeType[0]['placeType'] == 'top_ten') {
+                $eloquentPlace->topTenPlaces()->create([
+                    'rank' => $placeType[0]['rank'],
+                ]);
+            }
+        }
+
 
         if(isset($features)){
             $eloquentPlace->features()->attach(array_values($features));

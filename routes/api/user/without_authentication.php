@@ -5,6 +5,8 @@ use App\Http\Controllers\Api\User\CategoryApiController;
 use App\Http\Controllers\Api\User\PlaceApiController;
 use  App\Validation\CategoryExistsRule;
 use App\Http\Controllers\Api\User\SubCategoryApiController;
+use App\Http\Controllers\Api\User\TopTenPlaceApiController;
+use App\Http\Controllers\Api\User\PopularPlaceApiController;
 
 
 
@@ -18,6 +20,12 @@ Route::get('place/{place_id}', [PlaceApiController::class, 'singlePlaces'])
 
 Route::get('places/subcategory/{subcategory_id}', [SubCategoryApiController::class, 'singleSubCategory'])
     ->name('subcategories.places');
+
+Route::get('top-ten-places', [TopTenPlaceApiController::class, 'topTenPlaces'])
+    ->name('topTen.places');
+
+Route::get('popular/places', [PopularPlaceApiController::class, 'topTenPlaces'])
+    ->name('popular.places');
 
 Route::fallback(function () {
     return response()->json(['msg'=>'this url not exists in this project walaa 7abibi fix the url :) ']);

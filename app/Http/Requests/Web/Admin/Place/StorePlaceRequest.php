@@ -8,6 +8,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Brian2694\Toastr\Facades\Toastr;
+use Illuminate\Validation\Rule;
 
 class StorePlaceRequest extends FormRequest
 {
@@ -54,6 +55,22 @@ class StorePlaceRequest extends FormRequest
             'opening_hours' => 'nullable',
             'closing_hours' => 'nullable',
             'feature_id' =>'nullable',
+            'place_type'=>'required',
+            'price' => [
+                function ($attribute, $value, $fail) {
+
+                    if (request('place_type') === 'popular' && !$value) {
+                        $fail(__('validation.required', ['attribute' => $attribute]));
+                    }
+                },
+            ],
+            'rank' => [Rule::unique('top_tens', 'rank'),
+                function ($attribute, $value, $fail) {
+                    if (request('place_type') === 'top_ten' && !$value) {
+                        $fail(__('validation.required', ['attribute' => $attribute]));
+                    }
+                },
+            ],
         ];
     }
 

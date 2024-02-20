@@ -26,6 +26,14 @@ class Place extends Model implements HasMedia
         return $this->hasMany(OpeningHour::class);
     }
 
+    public function popularPlaces(){
+        return $this->hasMany(PopularPlace::class);
+    }
+
+    public function topTenPlaces(){
+        return $this->hasMany(TopTen::class);
+    }
+
     public function tags()
     {
         return $this->morphToMany(Tag::class, 'taggable');

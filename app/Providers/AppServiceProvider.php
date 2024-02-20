@@ -2,8 +2,11 @@
 
 namespace App\Providers;
 
+use App\Http\Controllers\Api\User\TopTenPlaceApiController;
 use App\Interfaces\Gateways\Api\User\PlaceApiRepositoryInterface;
+use App\Interfaces\Gateways\Api\User\PopularPlaceApiRepositoryInterface;
 use App\Interfaces\Gateways\Api\User\SubCategoryApiRepositoryInterface;
+use App\Interfaces\Gateways\Api\User\TopTenPlaceApiRepositoryInterface;
 use App\Interfaces\Gateways\Web\Admin\AdminRepositoryInterface;
 use App\Interfaces\Gateways\Web\Admin\CategoryRepositoryInterface;
 use App\Interfaces\Gateways\Web\Admin\FeatureRepositoryInterface;
@@ -14,7 +17,9 @@ use App\Interfaces\Gateways\Web\Admin\RoleRepositoryInterface;
 use App\Interfaces\Gateways\Web\Admin\TagRepositoryInterface;
 use App\Interfaces\Gateways\Web\Setting\LanguageRepositoryInterface;
 use App\Repositories\Api\User\EloquentPlaceApiRepository;
+use App\Repositories\Api\User\EloquentPopularPlaceApiRepository;
 use App\Repositories\Api\User\EloquentSubCategoryApiRepository;
+use App\Repositories\Api\User\EloquentTopTenPlaceApiRepository;
 use App\Repositories\Web\Admin\EloquentAdminRepository;
 use App\Repositories\Web\Admin\EloquentCategoryRepository;
 use App\Repositories\Web\Admin\EloquentFeatureRepository;
@@ -50,6 +55,8 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(PlaceRepositoryInterface::class, EloquentPlaceRepository::class);
         $this->app->bind(PlaceApiRepositoryInterface::class, EloquentPlaceApiRepository::class);
         $this->app->bind(SubCategoryApiRepositoryInterface::class, EloquentSubCategoryApiRepository::class);
+        $this->app->bind(TopTenPlaceApiRepositoryInterface::class, EloquentTopTenPlaceApiRepository::class);
+        $this->app->bind(PopularPlaceApiRepositoryInterface::class, EloquentPopularPlaceApiRepository::class);
 
 
     }

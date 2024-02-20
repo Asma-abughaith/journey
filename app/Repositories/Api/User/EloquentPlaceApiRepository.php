@@ -12,8 +12,6 @@ use App\Models\Place;
 class EloquentPlaceApiRepository implements PlaceApiRepositoryInterface
 {
 
-
-
     public function singlePlace($id)
     {
         $place = Place::where('id', $id)->first();

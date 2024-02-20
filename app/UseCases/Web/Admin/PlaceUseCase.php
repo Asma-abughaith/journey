@@ -33,6 +33,19 @@ class PlaceUseCase
         $translator = ['en' => $request['name_en'], 'ar' => $request['name_ar']];
         $translatorDescription = ['en' => $request['description_en'], 'ar' => $request['description_ar']];
         $translatorAddress = ['en' => $request['address_en'], 'ar' => $request['address_ar']];
+        $placeType = [];
+
+        if ($request['place_type'] === 'popular') {
+            $placeType[] = [
+                'placeType' => 'popular',
+                'price' => $request['price']
+            ];
+        } elseif ($request['place_type'] === 'top_ten') {
+            $placeType[] = [
+                'placeType' => 'top_ten',
+                'rank' => $request['rank']
+            ];
+        }
 
         return $this->placeRepository->createPlace(
             [
@@ -60,6 +73,7 @@ class PlaceUseCase
                 'closing_hours' => isset($request['closing_hours'])?$request['closing_hours']:null
             ],
             isset($request['feature_id'])?$request['feature_id']:null,
+            $placeType
         );
     }
 

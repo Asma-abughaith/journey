@@ -291,6 +291,34 @@
                                 </div>
 
                                 <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <div class="form-group">
+                                                <label for="place_type">Place Type</label>
+                                                <select class="form-control" id="place_type" name="place_type">
+                                                    <option value="general">General</option>
+                                                    <option value="popular">Popular</option>
+                                                    <option value="top_ten">Top Ten</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <div class="form-group" id="price_field" style="display: none;">
+                                                <label for="integer">Price</label>
+                                                <input type="text" class="form-control" id="price" name="price" step="0.01">
+                                            </div>
+
+                                            <div class="form-group" id="rank_field" style="display: none;">
+                                                <label for="integer">Rank</label>
+                                                <input type="text" class="form-control" id="rank" name="rank">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
                                     <div class="col-md-12">
                                         <div class="mb-2">
                                             <label class="form-label" for="features">{{ __('app.features') }}</label>
@@ -558,6 +586,21 @@
                         reader.readAsDataURL(file);
                     });
                 }
+            }
+        });
+
+        $('#place_type').change(function() {
+            var placeType = $(this).val();
+            var priceField = $('#price_field');
+            var rankField = $('#rank_field');
+
+            priceField.hide();
+            rankField.hide();
+
+            if (placeType === 'popular') {
+                priceField.show();
+            } else if (placeType === 'top_ten') {
+                rankField.show();
             }
         });
     </script>
