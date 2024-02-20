@@ -42,4 +42,26 @@ class PlaceApiController extends Controller
         }
     }
 
+
+    public function singlePlaces(Request $request)
+    {
+        $id = $request->place_id;
+        $validator = Validator::make(['place_id' => $id], [
+            'place_id' => 'required|exists:places,id',
+        ]);
+
+        if ($validator->fails()) {
+            return ApiResponse::sendResponse(Response::HTTP_BAD_REQUEST, "Something Went Wrong", $validator->errors());
+        }
+        try{
+            $allPlaces = $this->placeApiUseCase->singlePlace($id);
+
+            return ApiResponse::sendResponse(200, 'Places Retrieved by id Successfully', $allPlaces);
+        } catch (\Exception $e) {
+            return ApiResponse::sendResponse(Response::HTTP_BAD_REQUEST, "Something Went Wrong", $e->getMessage());
+        }
+    }
+
+
+
 }

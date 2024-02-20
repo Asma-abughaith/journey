@@ -12,6 +12,9 @@ Route::get('all-categories', [CategoryApiController::class, 'index'])->name('cat
 Route::get('places/category/{category_id}', [PlaceApiController::class, 'categoryPlaces'])
     ->name('category.places');
 
+Route::get('place/{place_id}', [PlaceApiController::class, 'singlePlaces'])
+    ->name('place');
+
 Route::fallback(function () {
     return response()->json(['msg'=>'this url not exists in this project walaa 7abibi fix the url :) ']);
 });

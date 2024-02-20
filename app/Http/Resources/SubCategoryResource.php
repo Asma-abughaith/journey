@@ -19,7 +19,7 @@ class SubCategoryResource extends JsonResource
             'name' => $this->name,
             'priority'=>$this->priority,
             'image' => $this->getFirstMediaUrl('subcategory', 'subcategory_app'),
-            'places' => PlaceResource::collection($this->whenLoaded('places')),
+//            'places' => PlaceResource::collection($this->whenLoaded('places')),
 
         ];
     }

@@ -7,4 +7,6 @@ interface PlaceApiRepositoryInterface
 {
     public function allPlacesByCategory($id);
 
+    public function singlePlace($id);
+
 }

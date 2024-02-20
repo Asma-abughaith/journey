@@ -56,4 +56,16 @@ class Place extends Model implements HasMedia
                $this->addMediaConversion('place_gallery_website')->width(250)->height(250)->format('webp');
             });
     }
+
+    public function category()
+    {
+        return $this->hasOneThrough(
+            Category::class, // Target model
+            SubCategory::class, // Intermediate model
+            'id', // Foreign key on SubCategory table
+            'id', // Foreign key on Category table
+            'sub_category_id', // Local key on Place table
+            'category_id' // Local key on SubCategory table
+        );
+    }
 }

@@ -31,3 +31,31 @@ function businessStatusTranslation($lang, $request)
     ];
     return $business_status_translation[$lang][$request];
 }
+
+
+function daysTranslation($lang, $request)
+{
+    $dayTranslation = [
+        'en' => [
+            'Sunday' => 'Sunday',
+            'Monday' => 'Monday',
+            'Tuesday' => 'Tuesday',
+            'Wednesday' => 'Wednesday',
+            'Thursday' => 'Thursday',
+            'Friday' => 'Friday',
+            'Saturday' => 'Saturday',
+        ],
+        'ar' => [
+            'Sunday' => 'الأحد',
+            'Monday' => 'الاثنين',
+            'Tuesday' => 'الثلاثاء',
+            'Wednesday' => 'الأربعاء',
+            'Thursday' => 'الخميس',
+            'Friday' => 'الجمعة',
+            'Saturday' => 'السبت',
+        ],
+    ];
+
+    return $dayTranslation[$lang][$request];
+}
+
