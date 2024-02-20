@@ -23,9 +23,6 @@ class PlaceApiController extends Controller
      * Display a listing of the resource.
      */
 
-
-
-
     public function singlePlaces(Request $request)
     {
         $id = $request->place_id;
