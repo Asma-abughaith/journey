@@ -3,6 +3,8 @@
 
 namespace App\Http\Requests\Web\Admin\Place;
 
+use App\Validation\CheckPriceRule;
+use App\Validation\CheckRankRule;
 use App\Validation\OpenCloseTimeRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
@@ -56,21 +58,8 @@ class StorePlaceRequest extends FormRequest
             'closing_hours' => 'nullable',
             'feature_id' =>'nullable',
             'place_type'=>'required',
-            'price' => [
-                function ($attribute, $value, $fail) {
-
-                    if (request('place_type') === 'popular' && !$value) {
-                        $fail(__('validation.required', ['attribute' => $attribute]));
-                    }
-                },
-            ],
-            'rank' => [Rule::unique('top_tens', 'rank'),
-                function ($attribute, $value, $fail) {
-                    if (request('place_type') === 'top_ten' && !$value) {
-                        $fail(__('validation.required', ['attribute' => $attribute]));
-                    }
-                },
-            ],
+            'price' => new CheckPriceRule(),
+            'rank' => [Rule::unique('top_tens', 'rank'),new CheckRankRule()] ,
         ];
     }
 
