@@ -121,7 +121,6 @@ class PlaceController extends Controller
             Toastr::error($e->getMessage(), 'Error');
             return redirect()->back()->withInput();
         }
-
     }
 
     /**
@@ -141,9 +140,10 @@ class PlaceController extends Controller
 
             $subCategories = $this->subCategoryUseCase->allSubCategories();
             $subCategories = $this->subCategoryPresenter->presentAllSubCategoriesForOtherControllers($subCategories);
+
             $place = $this->placeUseCase->getPlace($place);
             $place = $this->placePresenter->presentPlace($place);
-            return view('admin.places.edit', compact('place','tags', 'regions', 'subCategories', 'features'));
+            return view('admin.places.edit', compact('place', 'tags', 'regions', 'subCategories', 'features'));
         } catch (\Exception $e) {
             Toastr::error($e->getMessage(), 'Error');
             return redirect()->back()->withInput();
@@ -155,7 +155,15 @@ class PlaceController extends Controller
      */
     public function update(UpdatePlaceRequest $request, Place $place)
     {
-        //
+        dd($request->all());
+        try {
+            $this->placeUseCase->updatePlace($place, $request->validated());
+            Toastr::success(__('validation.msg.place-updated-successfully!'), __('validation.msg.success'));
+            return redirect()->route('admin.places.indexv2');
+        } catch (\Exception $e) {
+            Toastr::error($e->getMessage(), 'Error');
+            return redirect()->back()->withInput();
+        }
     }
 
     /**
@@ -173,7 +181,8 @@ class PlaceController extends Controller
         }
     }
 
-    public function deleteImage($id){
+    public function deleteImage($id)
+    {
         try {
             $this->placeUseCase->deleteImage($id);
             Toastr::success('The Image Deleted successfully!', 'Delete');

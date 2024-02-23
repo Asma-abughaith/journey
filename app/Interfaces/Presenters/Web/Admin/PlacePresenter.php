@@ -47,10 +47,10 @@ class PlacePresenter
             'rating' => $place->getRating(),
             'total_user_rating' => $place->getTotalUserRating(),
             'region' => $place->getRegion(),
+            'place_type' => $place->getPlaceType(),
             'main_image' => $place->getMainImage(),
             'sub_category' => $place->getSubCategory(),
             'gallery' => $place->getGallery(),
-//            'gallery' => $place->getGallery(),
             'tags' => $place->getTags(),
             'features' => $place->getFeatures(),
             'opening_hours' => $place->getOpeningHours()

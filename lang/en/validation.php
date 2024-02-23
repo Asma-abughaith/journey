@@ -214,6 +214,7 @@ return [
         'tags-id' => 'Tags',
         'main-image' => 'Main Image',
         'gallery-images' => 'Gallery Images',
+        'place-type' => 'Place Type',
     ],
     "msg" => [
         "admin-updated-successfully" => 'Admin Updated Successfully!',
@@ -237,6 +238,8 @@ return [
         'category-created-successfully!' => 'Category created successfully!',
         'categories-updated-successfully!' => 'Categories Updated Successfully!',
         'categories-deleted-successfully!' => 'Categories Deleted Successfully!',
+        'place-created-successfully!' => 'Place Created Successfully!',
+        'place-updated-successfully!' => 'Place Updated Successfully!',
         'english-description-required' => 'English Description Is Required',
         'english-description-min-characters' => 'English Description Should Have Minimum Characters',
         'arabic-description-required' => 'Arabic Description Is Required',
@@ -272,7 +275,7 @@ return [
         'invalid-image-format' => 'Invalid Main Image Format',
         'invalid-gallery-image' => 'Invalid Gallery Image',
         'invalid-gallery-image-format' => 'Invalid Gallery Image Format',
-
+        'place-type' => 'Place Type'
     ]
 
 ];

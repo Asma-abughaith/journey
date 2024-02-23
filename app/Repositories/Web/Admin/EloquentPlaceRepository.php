@@ -35,7 +35,7 @@ class EloquentPlaceRepository implements PlaceRepositoryInterface
         return $eloquentPlace ? $this->convertToEntity($eloquentPlace) : null;
     }
 
-    public function createPlace( $placeData,  $imageData,  $imageGallery,  $tags,  $opening_hours, $features,$placeType)
+    public function createPlace($placeData,  $imageData,  $imageGallery,  $tags,  $opening_hours, $features, $placeType)
     {
         $eloquentPlace = Place::create($placeData);
         $eloquentPlace->setTranslations('name', $placeData['name']);
@@ -43,7 +43,7 @@ class EloquentPlaceRepository implements PlaceRepositoryInterface
         $eloquentPlace->setTranslations('address', $placeData['address']);
         $eloquentPlace->tags()->attach(array_values($tags));
 
-        if(isset($opening_hours['day_of_week'])){
+        if (isset($opening_hours['day_of_week'])) {
             foreach ($opening_hours['day_of_week'] as $key => $value) {
                 foreach (array_values($value) as $day) {
                     $openingHour = new OpeningHour();
@@ -69,7 +69,7 @@ class EloquentPlaceRepository implements PlaceRepositoryInterface
         }
 
 
-        if(isset($features)){
+        if (isset($features)) {
             $eloquentPlace->features()->attach(array_values($features));
         }
 
@@ -114,7 +114,8 @@ class EloquentPlaceRepository implements PlaceRepositoryInterface
         return;
     }
 
-    public function deleteImage($id){
+    public function deleteImage($id)
+    {
         if ($id) {
             Media::find($id)->delete();
         }
@@ -156,6 +157,11 @@ class EloquentPlaceRepository implements PlaceRepositoryInterface
         $place->setBusinessStatusEn(businessStatusTranslation('en', $eloquentPlace->business_status));
         $place->setBusinessStatusAr(businessStatusTranslation('ar', $eloquentPlace->business_status));
         $place->setTags($eloquentPlace->tags);
+        if (!empty($eloquentPlace->topTenPlaces)) {
+            $place->setPlaceType($eloquentPlace->topTenPlaces);
+        } else if (!empty($eloquentPlace->popularPlaces)) {
+            $place->setPlaceType($eloquentPlace->popularPlaces);
+        }
         $place->setFeatures($eloquentPlace->features);
         $place->setOpeningHours($openingHours);
         $place->setMainImage($eloquentPlace->getFirstMediaUrl('main_place', 'main_place_website'));

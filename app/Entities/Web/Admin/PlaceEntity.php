@@ -29,6 +29,7 @@ class PlaceEntity
     private $region;
     private $main_image;
     private $sub_category;
+    private $place_type = [];
     private $gallery = [];
     private $tags = [];
     private $features = [];
@@ -421,6 +422,26 @@ class PlaceEntity
     /**
      * @return mixed
      */
+    public function getPlaceType()
+    {
+        return $this->place_type;
+    }
+
+    /**
+     * @param mixed $place_type
+     */
+    public function setPlaceType($place_type): void
+    {
+        $this->place_type = [
+            'id' => $place_type->id,
+            'place_id' => $place_type->place_id,
+            'rank' => $place_type->rank
+        ];
+    }
+
+    /**
+     * @return mixed
+     */
     public function getGallery()
     {
         return $this->gallery;
@@ -434,8 +455,8 @@ class PlaceEntity
 
         foreach ($gallery as $img) {
             $this->gallery[] = [
-                'id'=>$img->id,
-                'url'=>$img->getUrl()
+                'id' => $img->id,
+                'url' => $img->getUrl()
             ];
         }
     }

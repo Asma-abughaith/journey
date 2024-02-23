@@ -294,11 +294,11 @@
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <div class="form-group">
-                                                <label for="place_type">Place Type</label>
-                                                <select class="form-control" id="place_type" name="place_type">
-                                                    <option value="general">General</option>
-                                                    <option value="popular">Popular</option>
-                                                    <option value="top_ten">Top Ten</option>
+                                                <label for="place_type">{{ __('app.place-type') }}</label>
+                                                <select class="form-control" id="place_type" name="place_type" required>
+                                                    <option value="general">{{ __('app.general') }}</option>
+                                                    <option value="popular">{{ __('app.popular') }}</option>
+                                                    <option value="top_ten">{{ __('app.top-ten') }}</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -307,12 +307,14 @@
                                         <div class="mb-3">
                                             <div class="form-group" id="price_field" style="display: none;">
                                                 <label for="integer">Price</label>
-                                                <input type="text" class="form-control" id="price" name="price" step="0.01">
+                                                <input type="text" class="form-control" id="price" name="price"
+                                                    step="0.01">
                                             </div>
 
                                             <div class="form-group" id="rank_field" style="display: none;">
                                                 <label for="integer">Rank</label>
-                                                <input type="text" class="form-control" id="rank" name="rank">
+                                                <input type="text" class="form-control" id="rank"
+                                                    name="rank">
                                             </div>
                                         </div>
                                     </div>
@@ -547,6 +549,10 @@
                 width: "100%",
             });
             $("#validationTooltip15").select2({
+                placeholder: "{{ __('app.select-one') }}",
+                width: "100%",
+            });
+            $("#place_type").select2({
                 placeholder: "{{ __('app.select-one') }}",
                 width: "100%",
             });

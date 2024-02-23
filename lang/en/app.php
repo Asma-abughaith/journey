@@ -147,5 +147,9 @@ return [
     'description' => 'Description',
     'address' => ' Address',
     'place Deleted successfully!' => 'Place Deleted successfully!',
-    'we-do-not-know' => 'We Do Not tKnow'
+    'we-do-not-know' => 'We Do Not tKnow',
+    'place-type' => 'Place Type',
+    'general' => 'General',
+    'popular' => 'Popular',
+    'top-ten' => 'Top Ten'
 ];

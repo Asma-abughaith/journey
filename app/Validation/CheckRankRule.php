@@ -4,8 +4,6 @@ namespace App\Validation;
 
 use Closure;
 use Illuminate\Contracts\Validation\ValidationRule;
-use Illuminate\Validation\Rule;
-use Illuminate\Support\Facades\Validator;
 
 
 class CheckRankRule implements ValidationRule
@@ -21,5 +19,4 @@ class CheckRankRule implements ValidationRule
             $fail(__('validation.required', ['attribute' => $attribute]));
         }
     }
-
 }

@@ -9,7 +9,7 @@ class PopularPlace extends Model
 {
     use HasFactory;
 
-    protected $guarded=[];
+    protected $guarded = [];
 
     public function place()
     {

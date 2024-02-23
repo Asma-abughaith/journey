@@ -5,7 +5,6 @@ namespace App\Http\Requests\Web\Admin\Place;
 
 use App\Validation\CheckPriceRule;
 use App\Validation\CheckRankRule;
-use App\Validation\OpenCloseTimeRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
@@ -56,10 +55,10 @@ class StorePlaceRequest extends FormRequest
             'day_of_week' => 'nullable|array',
             'opening_hours' => 'nullable',
             'closing_hours' => 'nullable',
-            'feature_id' =>'nullable',
-            'place_type'=>'required',
+            'feature_id' => 'nullable',
+            'place_type' => 'required',
             'price' => new CheckPriceRule(),
-            'rank' => [Rule::unique('top_tens', 'rank'),new CheckRankRule()] ,
+            'rank' => [Rule::unique('top_tens', 'rank'), new CheckRankRule()],
         ];
     }
 

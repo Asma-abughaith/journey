@@ -26,12 +26,14 @@ class Place extends Model implements HasMedia
         return $this->hasMany(OpeningHour::class);
     }
 
-    public function popularPlaces(){
-        return $this->hasMany(PopularPlace::class);
+    public function popularPlaces()
+    {
+        return $this->hasOne(PopularPlace::class);
     }
 
-    public function topTenPlaces(){
-        return $this->hasMany(TopTen::class);
+    public function topTenPlaces()
+    {
+        return $this->hasOne(TopTen::class);
     }
 
     public function tags()
@@ -61,7 +63,7 @@ class Place extends Model implements HasMedia
         $this->addMediaCollection('place_gallery')
             ->registerMediaConversions(function (Media $media) {
                 $this->addMediaConversion('place_gallery_app')->width(419)->height(419)->format('jpg');
-               $this->addMediaConversion('place_gallery_website')->width(250)->height(250)->format('webp');
+                $this->addMediaConversion('place_gallery_website')->width(250)->height(250)->format('webp');
             });
     }
 
