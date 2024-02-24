@@ -3,12 +3,12 @@
 namespace App\Http\Requests\Web\Admin\Place;
 
 use App\Models\Place;
-use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Contracts\Validation\Validator;
-use Illuminate\Http\Exceptions\HttpResponseException;
-use Brian2694\Toastr\Facades\Toastr;
 use App\Validation\CheckPriceRule;
 use App\Validation\CheckRankRule;
+use Brian2694\Toastr\Facades\Toastr;
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Validation\Rule;
 
 class UpdatePlaceRequest extends FormRequest

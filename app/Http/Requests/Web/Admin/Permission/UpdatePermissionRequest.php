@@ -3,10 +3,10 @@
 namespace App\Http\Requests\Web\Admin\Permission;
 
 use App\Validation\CheckNameAndGuardExistRule;
-use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Contracts\Validation\Validator;
-use Illuminate\Http\Exceptions\HttpResponseException;
 use Brian2694\Toastr\Facades\Toastr;
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class UpdatePermissionRequest extends FormRequest
 {

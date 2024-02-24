@@ -2,11 +2,11 @@
 
 namespace App\Http\Requests\Web\Admin\Admin;
 
+use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rules;
 use Illuminate\Http\Exceptions\HttpResponseException;
-use Brian2694\Toastr\Facades\Toastr;
+use Illuminate\Validation\Rules;
 
 class StoreAdminRequest extends FormRequest
 {

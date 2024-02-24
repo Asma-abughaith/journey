@@ -177,7 +177,7 @@
 
                 {{--                @if (AdminPermission('view places') || AdminPermission('create place')) --}}
                 <li>
-                    <a href="javascript: void(0);" class="has-arrow waves-effect" @yield('tag-active')>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect" @yield('place-active')>
                         <i class="ri-home-heart-fill"></i>
                         <span>{{ __('app.places') }}</span>
                     </a>
@@ -187,6 +187,23 @@
                         {{--                        @endif --}}
                         {{--                            @if (AdminPermission('create place')) --}}
                         <li><a href="{{ route('admin.places.create') }}">{{ __('app.create-place') }}</a></li>
+                        {{--                    @endif --}}
+                    </ul>
+                </li>
+                {{--                @endif --}}
+
+                {{--                @if (AdminPermission('view topTenPlaces') || AdminPermission('create topTenPlace')) --}}
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect" @yield('topTen-active')>
+                        <i class="ri-home-heart-fill"></i>
+                        <span>{{ __('app.topTenPlaces') }}</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        {{--                        @if (AdminPermission('view topTenPlaces')) --}}
+                        <li><a href="{{ route('admin.topTenPlaces.index') }}">{{ __('app.all-topTenPlaces') }}</a></li>
+                        {{--                        @endif --}}
+                        {{--                            @if (AdminPermission('create topTenPlace')) --}}
+                        <li><a href="{{ route('admin.topTenPlaces.create') }}">{{ __('app.create-topTenPlaces') }}</a></li>
                         {{--                    @endif --}}
                     </ul>
                 </li>

@@ -2,11 +2,11 @@
 
 namespace App\Http\Requests\Web\Admin\SubCategory;
 
+use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
-use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Validation\Rule;
 
 class UpdateSubCategoryRequest extends FormRequest
 {
