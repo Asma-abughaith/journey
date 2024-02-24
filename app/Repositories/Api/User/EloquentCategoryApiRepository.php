@@ -22,9 +22,7 @@ class EloquentCategoryApiRepository implements CategoryApiRepositoryInterface
         $category = Category::where('id', $id)->with(['subcategories' => function ($query) {
             $query->orderBy('priority');
         }, 'subcategories'])->first();
-//        $category = Category::where('id', $id)->with('subcategories.places.region')->first();
         return new CategoryResource($category);
-//        return CategoryResource::collection([$category]);
 
     }
 
