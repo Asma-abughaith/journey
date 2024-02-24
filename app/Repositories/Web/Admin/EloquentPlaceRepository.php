@@ -86,21 +86,78 @@ class EloquentPlaceRepository implements PlaceRepositoryInterface
         return $this->convertToEntity($eloquentPlace);
     }
 
-    public function updatePlace($place, array $placeData, array $imageData, array $imageGallery)
+    public function updatePlace($place,  $placeData,  $imageData,  $imageGallery,  $tags,  $opening_hours, $features, $placeType)
     {
 
+        // ======================= General Information =======================
         $place->update($placeData);
         $place->setTranslations('name', $placeData['name']);
         $place->setTranslations('description', $placeData['description']);
         $place->setTranslations('address', $placeData['address']);
 
-        if (isset($imageData['image']) && $imageData['image'] != null) {
-            $place->addMediaFromRequest('image')->toMediaCollection('main_place');
+        // ======================= Main Image =======================
+        if (isset($imageData['main_image']) && $imageData['main_image'] != null) {
+            $place->addMediaFromRequest('main_image')->toMediaCollection('main_place');
         }
 
-        // In Process
-        if (isset($imageGallery['image']) && $imageGallery['image'] != null) {
-            $place->addMediaFromRequest('image')->toMediaCollection('place_gallery');
+        // ======================= Gallery Image =======================
+        if ($imageGallery !== null) {
+            foreach ($imageGallery as $image) {
+                $place->addMedia($image)->toMediaCollection('place_gallery');
+            }
+        }
+
+        // ======================= Tags =======================
+        $place->tags()->sync(array_values($tags));
+
+        // ======================= Features =======================
+        $place->features()->sync(array_values($features));
+
+        // ======================= Place Type =======================
+        if (!empty($placeType)) {
+            if ($placeType[0]['placeType'] == 'popular') {
+                $place->popularPlaces()->updateOrCreate([], ['price' => $placeType[0]['price']]);
+                $place->topTenPlaces()->delete();
+            } elseif ($placeType[0]['placeType'] == 'top_ten') {
+                $place->topTenPlaces()->updateOrCreate([], ['rank' => $placeType[0]['rank']]);
+                $place->popularPlaces()->delete();
+            }
+        } else {
+            $place->popularPlaces()->delete();
+            $place->topTenPlaces()->delete();
+        }
+
+        // ======================= Opening Hours =======================
+        if (isset($opening_hours['day_of_week'])) {
+            $daysOfWeek = array_values($opening_hours['day_of_week']);
+            $openingTimes = array_values($opening_hours['opening_hours']);
+            $closingTimes = array_values($opening_hours['closing_hours']);
+
+
+            foreach ($daysOfWeek as $key => $days) {
+                foreach ($days as $day) {
+                    $existingOpeningHour = $place->openingHours()->where('day_of_week', $day)->first();
+                    if ($existingOpeningHour) {
+                        $existingOpeningHour->opening_time = $openingTimes[$key];
+                        $existingOpeningHour->closing_time = $closingTimes[$key];
+                        $existingOpeningHour->save();
+                    } else {
+                        $openingHour = new OpeningHour();
+                        $openingHour->day_of_week = $day;
+                        $openingHour->opening_time = $openingTimes[$key];
+                        $openingHour->closing_time = $closingTimes[$key];
+                        $place->openingHours()->save($openingHour);
+                    }
+                }
+            }
+            $flatDaysOfWeek = [];
+            foreach ($daysOfWeek as $days) {
+                $flatDaysOfWeek = array_merge($flatDaysOfWeek, $days);
+            }
+            $flatDaysOfWeek = array_unique($flatDaysOfWeek);
+            $place->openingHours()->whereNotIn('day_of_week', $flatDaysOfWeek)->delete();
+        } else {
+            $place->openingHours()->delete();
         }
 
         return $this->convertToEntity($place);
@@ -129,7 +186,7 @@ class EloquentPlaceRepository implements PlaceRepositoryInterface
         $descriptions = $eloquentPlace->getTranslations('description');
         $addresses = $eloquentPlace->getTranslations('address');
 
-        $openingHours = $eloquentPlace->openingHours->groupBy('opening_time');
+        $openingHours = $eloquentPlace->openingHours->groupBy(['opening_time', 'closing_time']);
         $openingHours = $openingHours->values();
 
         $place = new PlaceEntity();

@@ -17,62 +17,62 @@
 
                                 <h4 class="card-title"></h4>
                                 <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap"
-                                       style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                    style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                     <thead>
-                                    <tr>
-                                        <th class="text-center">{{ __('app.id') }}</th>
-                                        <th class="text-center">{{ __('app.name') }}</th>
-                                        <th class="text-center">{{ __('app.sub-categories') }}</th>
-                                        <th class="text-center">{{ __('app.address') }}</th>
-                                        <th class="text-center">{{ __('app.longitude') }}</th>
-                                        <th class="text-center">{{ __('app.latitude') }}</th>
-                                        <th class="text-center">{{ __('app.action') }}</th>
-                                    </tr>
+                                        <tr>
+                                            <th class="text-center">{{ __('app.id') }}</th>
+                                            <th class="text-center">{{ __('app.name') }}</th>
+                                            <th class="text-center">{{ __('app.sub-categories') }}</th>
+                                            <th class="text-center">{{ __('app.address') }}</th>
+                                            <th class="text-center">{{ __('app.longitude') }}</th>
+                                            <th class="text-center">{{ __('app.latitude') }}</th>
+                                            <th class="text-center">{{ __('app.action') }}</th>
+                                        </tr>
                                     </thead>
 
 
                                     <tbody>
-                                    @foreach ($places as $key => $place)
-                                        <tr>
-                                            <td class="text-center col-1">{{ ++$key }}</td>
-                                            <td class="text-center col-2">{{ $place['name'] }}</td>
-                                            <td class="text-center col-2">{{ $place['sub_category'] }}</td>
-                                            <td class="text-center col-2">{{ $place['address'] }}</td>
-                                            <td class="text-center col-2">{{ $place['longitude'] }}</td>
-                                            <td class="text-center col-2">{{ $place['latitude'] }}</td>
+                                        @foreach ($places as $key => $place)
+                                            <tr>
+                                                <td class="text-center col-1">{{ ++$key }}</td>
+                                                <td class="text-center col-2">{{ $place['name'] }}</td>
+                                                <td class="text-center col-2">{{ $place['sub_category'] }}</td>
+                                                <td class="text-center col-2">{{ $place['address'] }}</td>
+                                                <td class="text-center col-2">{{ $place['longitude'] }}</td>
+                                                <td class="text-center col-2">{{ $place['latitude'] }}</td>
 
-                                            <td class="text-center col-2">
-                                                {{--                                                    @if(AdminPermission('edit place'))--}}
-                                                <a class="btn btn-outline-warning btn-sm edit" title="Edit"
-                                                   href="{{ route('admin.places.edit', $place['id']) }}">
-                                                    <i class="fas fa-pencil-alt" title="Edit"></i>
-                                                </a>
-                                                {{--                                                    @endif--}}
+                                                <td class="text-center col-2">
+                                                    {{--                                                    @if (AdminPermission('edit place')) --}}
+                                                    <a class="btn btn-outline-warning btn-sm edit" title="Edit"
+                                                        href="{{ route('admin.places.edit', $place['id']) }}">
+                                                        <i class="fas fa-pencil-alt" title="Edit"></i>
+                                                    </a>
+                                                    {{--                                                    @endif --}}
 
-                                                {{--                                                    @if(AdminPermission('view places'))--}}
-                                                <a class="btn btn-outline-primary btn-sm edit" title="show"
-                                                   href="{{ route('admin.places.show', $place['id']) }}">
-                                                    <i class="ri-eye-fill" title="show"></i>
-                                                </a>
-                                                {{--                                                    @endif--}}
+                                                    {{--                                                    @if (AdminPermission('view places')) --}}
+                                                    <a class="btn btn-outline-primary btn-sm" title="Show"
+                                                        href="{{ route('admin.places.show', $place['id']) }}">
+                                                        <i class="fas fa-eye" title="show"></i>
+                                                    </a>
+                                                    {{--                                                    @endif --}}
 
-                                                {{--                                                        @if(AdminPermission('delete place'))--}}
-                                                <form method="post"
-                                                      action="{{ route('admin.places.destroy', $place['id']) }}"
-                                                      style="display:inline;">
-                                                    @csrf
-                                                    @method('delete')
-                                                    <button type="submit" class="btn btn-outline-danger btn-sm"
+                                                    {{--                                                        @if (AdminPermission('delete place')) --}}
+                                                    <form method="post"
+                                                        action="{{ route('admin.places.destroy', $place['id']) }}"
+                                                        style="display:inline;">
+                                                        @csrf
+                                                        @method('delete')
+                                                        <button type="submit" class="btn btn-outline-danger btn-sm"
                                                             title="Delete" style="padding-bottom: 1px;"
                                                             onclick="return confirm('Are you sure you want to delete?')">
-                                                        <i class="ri-delete-bin-line" title="Edit"></i>
-                                                    </button>
-                                                </form>
-                                                {{--                                                            @endif--}}
-                                            </td>
+                                                            <i class="ri-delete-bin-line" title="Edit"></i>
+                                                        </button>
+                                                    </form>
+                                                    {{--                                                            @endif --}}
+                                                </td>
 
-                                        </tr>
-                                    @endforeach
+                                            </tr>
+                                        @endforeach
 
 
                                     </tbody>

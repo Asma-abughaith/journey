@@ -289,7 +289,7 @@
                                                     <label class="form-label"
                                                         for="opening_time">{{ __('app.opening-time') }}</label>
                                                     <input type="time" class="form-control" name="opening_hours[]"
-                                                        value="{{ $opening[$key]['opening_time'] }}"
+                                                        value="{{ $opening[0]['opening_time'] }}"
                                                         id="opening_time{{ $key }}">
                                                 </div>
                                             </div>
@@ -298,7 +298,7 @@
                                                     <label class="form-label"
                                                         for="closing_time">{{ __('app.closing-time') }}</label>
                                                     <input type="time" class="form-control" name="closing_hours[]"
-                                                        value="{{ $opening[$key]['closing_time'] }}"
+                                                        value="{{ $opening[0]['closing_time'] }}"
                                                         id="closing_time{{ $key }}">
                                                 </div>
                                             </div>
@@ -431,7 +431,7 @@
                                 </div>
 
                                 <div style="text-align: end">
-                                    <button class="btn btn-primary" type="submit">{{ __('app.create') }}</button>
+                                    <button class="btn btn-primary" type="submit">{{ __('app.update') }}</button>
                                 </div>
                                 <hr>
                             </form>
@@ -676,6 +676,41 @@
                         }
 
                         reader.readAsDataURL(file);
+                    });
+                }
+            }
+
+            let counter = $('#count').val();
+            let days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+
+            let new_days = [];
+            for (let index = 0; index <= counter; index++) {
+                let new_values = $('#day_of_week' + index).val();
+                if (new_values) {
+                    for (let innerIndex = 0; innerIndex < new_values.length; innerIndex++) {
+                        new_days.push(new_values[innerIndex]);
+                    }
+                }
+            }
+
+            for (let index = 0; index <= counter; index++) {
+                let old_values = $('#day_of_week' + index).val();
+                if (old_values) {
+                    let new_array = days.filter(day => !new_days.includes(day));
+
+                    $('#day_of_week' + index).empty();
+
+                    old_values.forEach(old_value => {
+                        $('#day_of_week' + index).append($('<option></option>').attr('value', old_value)
+                            .text(
+                                old_value)
+                            .prop('selected', true));
+                    });
+
+                    new_array.forEach(new_value => {
+                        $('#day_of_week' + index).append($('<option></option>').attr('value', new_value)
+                            .text(
+                                new_value));
                     });
                 }
             }

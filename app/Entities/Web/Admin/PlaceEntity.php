@@ -435,8 +435,13 @@ class PlaceEntity
         $this->place_type = [
             'id' => $place_type->id,
             'place_id' => $place_type->place_id,
-            'rank' => $place_type->rank
         ];
+
+        if (isset($place_type->rank)) {
+            $this->place_type['rank'] = $place_type->rank;
+        } else {
+            $this->place_type['price'] = $place_type->price;
+        }
     }
 
     /**
@@ -494,17 +499,19 @@ class PlaceEntity
     public function setOpeningHours($openingHours)
     {
         $this->openingHours = [];
-
-        foreach ($openingHours as $key => $openingHour) {
-            foreach ($openingHour as $day_key => $day) {
-                $this->openingHours[$key][$day_key] = [
-                    'id' => $day->id,
-                    'day_of_week' => $day->day_of_week,
-                    'opening_time' => $day->opening_time,
-                    'closing_time' => $day->closing_time,
-                ];
+        foreach ($openingHours as  $openingHour) {
+            foreach ($openingHour as $key => $days) {
+                foreach ($days as $day) {
+                    $this->openingHours[$key][] = [
+                        'id' => $day->id,
+                        'day_of_week' => $day->day_of_week,
+                        'opening_time' => $day->opening_time,
+                        'closing_time' => $day->closing_time,
+                    ];
+                }
             }
         }
+        $this->openingHours = array_values($this->openingHours);
     }
 
 
