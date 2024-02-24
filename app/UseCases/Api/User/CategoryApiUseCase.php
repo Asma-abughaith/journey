@@ -19,6 +19,11 @@ class CategoryApiUseCase
         return $this->categoryRepository->getAllCategories();
     }
 
+    public function shuffleAllCategories()
+    {
+        return $this->categoryRepository->shuffleAllCategories();
+    }
+
     public function allPlacesByCategory($id)
     {
         return $this->categoryRepository->allPlacesByCategory($id);

@@ -20,7 +20,8 @@ class EloquentPopularPlaceApiRepository implements PopularPlaceApiRepositoryInte
     public function popularPlaces()
     {
         $popularPlace = PopularPlace::with('place')->get();
-        return new PopularPlaceResource($popularPlace);
+        $shuffledPopularPlaces = $popularPlace->shuffle();
+        return new PopularPlaceResource($shuffledPopularPlaces);
     }
 
 

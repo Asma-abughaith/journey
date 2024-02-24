@@ -17,6 +17,13 @@ class EloquentCategoryApiRepository implements CategoryApiRepositoryInterface
         return new ResourceCollection(AllCategoriesResource::collection($eloquentCategories));
     }
 
+    public function shuffleAllCategories()
+    {
+        $eloquentCategories = Category::all();
+        $shuffledCategories = $eloquentCategories->shuffle();
+        return new ResourceCollection(AllCategoriesResource::collection($shuffledCategories));
+    }
+
     public function allPlacesByCategory($id)
     {
         $category = Category::where('id', $id)->with(['subcategories' => function ($query) {

@@ -33,6 +33,16 @@ class CategoryApiController extends Controller
         }
     }
 
+    public function shuffleAllCategories()
+    {
+        try{
+            $categories = $this->categoryApiUseCase->shuffleAllCategories();
+            return ApiResponse::sendResponse(200, 'Categories Retrieved Successfully', $categories);
+        } catch (\Exception $e) {
+            return ApiResponse::sendResponse(Response::HTTP_BAD_REQUEST, "Something Went Wrong", $e->getMessage());
+        }
+    }
+
     public function categoryPlaces(Request $request)
     {
         $id = $request->category_id;

@@ -7,6 +7,8 @@ interface CategoryApiRepositoryInterface
 {
     public function getAllCategories();
 
+    public function shuffleAllCategories();
     public function allPlacesByCategory($id);
+
 
 }
