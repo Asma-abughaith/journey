@@ -17,7 +17,7 @@
 
 
 
-                            <form method="post" action="{{ route('admin.topTenPlaces.store') }}" >
+                            <form method="post" action="{{ route('admin.popularPlaces.store') }}" >
                                 @csrf
 
                                 <div class="row">
@@ -37,10 +37,10 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="mb-3">
-                                            <label class="form-label" for="rank">{{ __('app.rank') }}</label>
+                                            <label class="form-label" for="price">{{ __('app.price') }}</label>
                                             <input type="text" class="form-control"
-                                                placeholder="{{ __('app.rank') }}" name="rank"
-                                                value="{{ old('rank') }}" id="rank" required>
+                                                placeholder="{{ __('app.price') }}" name="price"
+                                                value="{{ old('rank') }}" id="price" required>
                                         </div>
                                     </div>
 

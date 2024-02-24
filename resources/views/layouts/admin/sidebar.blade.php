@@ -209,6 +209,23 @@
                 </li>
                 {{--                @endif --}}
 
+                {{--                @if (AdminPermission('view popularPlaces') || AdminPermission('create popularPlace')) --}}
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect" @yield('topTen-active')>
+                        <i class="ri-home-heart-fill"></i>
+                        <span>{{ __('app.popularPlaces') }}</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        {{--                        @if (AdminPermission('view popularPlaces')) --}}
+                        <li><a href="{{ route('admin.popularPlaces.index') }}">{{ __('app.all-popularPlaces') }}</a></li>
+                        {{--                        @endif --}}
+                        {{--                            @if (AdminPermission('create popularPlace')) --}}
+                        <li><a href="{{ route('admin.popularPlaces.create') }}">{{ __('app.create-popularPlaces') }}</a></li>
+                        {{--                    @endif --}}
+                    </ul>
+                </li>
+                {{--                @endif --}}
+
 
             </ul>
         </div>

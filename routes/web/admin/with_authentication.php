@@ -17,6 +17,7 @@ use App\Http\Controllers\Web\Admin\FeatureController;
 use App\Http\Controllers\Web\Admin\TagController;
 use App\Http\Controllers\Web\Admin\PlaceController;
 use App\Http\Controllers\Web\Admin\TopTenPlaceController;
+use App\Http\Controllers\Web\Admin\PopularPlaceController;
 
 use App\Models\Admin;
 use App\Http\Controllers\Web\Setting\LanguageController;
@@ -94,3 +95,6 @@ Route::delete('/delete/image/gallery/{id}', [PlaceController::class,'deleteImage
 
 //================= Routes For Top ten Places =================
 Route::resource('/topTenPlaces', TopTenPlaceController::class);
+
+//================= Routes For Popular Places =================
+Route::resource('/popularPlaces', PopularPlaceController::class);

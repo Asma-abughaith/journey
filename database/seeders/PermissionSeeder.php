@@ -353,6 +353,39 @@ class PermissionSeeder extends Seeder
                 ],
                 'guard_name' => 'admin',
             ],
+            // Permissions for Popular Places CRUD operations
+            [
+                'name' => 'create popularPlaces',
+                'translations' => [
+                    'ar' => 'إنشاء اماكن شائعة ',
+                    'en' => 'create popularPlaces',
+                ],
+                'guard_name' => 'admin',
+            ],
+            [
+                'name' => 'edit popularPlaces',
+                'translations' => [
+                    'ar' => 'تعديل  اماكن شائعة',
+                    'en' => 'edit popularPlaces',
+                ],
+                'guard_name' => 'admin',
+            ],
+            [
+                'name' => 'view popularPlaces',
+                'translations' => [
+                    'ar' => 'عرض  اماكن شائعة',
+                    'en' => 'view popularPlaces',
+                ],
+                'guard_name' => 'admin',
+            ],
+            [
+                'name' => 'delete popularPlaces',
+                'translations' => [
+                    'ar' => 'حذف  اماكن شائعة',
+                    'en' => 'delete popularPlaces',
+                ],
+                'guard_name' => 'admin',
+            ],
 
 
 
