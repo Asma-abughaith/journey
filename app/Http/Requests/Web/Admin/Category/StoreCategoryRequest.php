@@ -5,8 +5,8 @@ namespace App\Http\Requests\Web\Admin\Category;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Validation\Rule;
 
 class StoreCategoryRequest extends FormRequest
 {

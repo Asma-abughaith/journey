@@ -320,6 +320,40 @@ class PermissionSeeder extends Seeder
                 ],
                 'guard_name' => 'admin',
             ],
+            // Permissions for Top Ten Places CRUD operations
+            [
+                'name' => 'create topTenPlace',
+                'translations' => [
+                    'ar' => 'إنشاء افضل عشرة اماكن',
+                    'en' => 'create topTenPlace',
+                ],
+                'guard_name' => 'admin',
+            ],
+            [
+                'name' => 'edit topTenPlace',
+                'translations' => [
+                    'ar' => 'تعديل افضل عشرة اماكن',
+                    'en' => 'edit topTenPlace',
+                ],
+                'guard_name' => 'admin',
+            ],
+            [
+                'name' => 'view topTenPlaces',
+                'translations' => [
+                    'ar' => 'عرض افضل عشرة اماكن',
+                    'en' => 'view topTenPlaces',
+                ],
+                'guard_name' => 'admin',
+            ],
+            [
+                'name' => 'delete topTenPlace',
+                'translations' => [
+                    'ar' => 'حذف افضل عشرة اماكن',
+                    'en' => 'delete topTenPlace',
+                ],
+                'guard_name' => 'admin',
+            ],
+
 
 
 

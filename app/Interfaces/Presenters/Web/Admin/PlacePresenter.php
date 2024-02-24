@@ -22,6 +22,23 @@ class PlacePresenter
         return $this->formatPlace($place);
     }
 
+    public function presentAllPlacesForAnoterController($places){
+        $formattedPlaces = [];
+
+        foreach ($places as $place) {
+            $formattedPlaces[] = $this->formatPlaceForAnoterController($place);
+        }
+        return $formattedPlaces;
+    }
+
+    protected function formatPlaceForAnoterController(PlaceEntity $place)
+    {
+        return [
+            'id' => $place->getId(),
+            'name' => $place->getName(),
+        ];
+    }
+
     protected function formatPlace(PlaceEntity $place)
     {
         return [
