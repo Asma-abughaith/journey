@@ -10,6 +10,7 @@ use App\Interfaces\Gateways\Api\User\TopTenPlaceApiRepositoryInterface;
 use App\Interfaces\Gateways\Web\Admin\AdminRepositoryInterface;
 use App\Interfaces\Gateways\Web\Admin\CategoryRepositoryInterface;
 use App\Interfaces\Gateways\Web\Admin\FeatureRepositoryInterface;
+use App\Interfaces\Gateways\Web\Admin\OrganizerRepositoryInterface;
 use App\Interfaces\Gateways\Web\Admin\PermissionRepositoryInterface;
 use App\Interfaces\Gateways\Web\Admin\PlaceRepositoryInterface;
 use App\Interfaces\Gateways\Web\Admin\PopularPlaceRepositoryInterface;
@@ -25,6 +26,7 @@ use App\Repositories\Api\User\EloquentTopTenPlaceApiRepository;
 use App\Repositories\Web\Admin\EloquentAdminRepository;
 use App\Repositories\Web\Admin\EloquentCategoryRepository;
 use App\Repositories\Web\Admin\EloquentFeatureRepository;
+use App\Repositories\Web\Admin\EloquentOrganizerRepository;
 use App\Repositories\Web\Admin\EloquentPermissionRepository;
 use App\Repositories\Web\Admin\EloquentPlaceRepository;
 use App\Repositories\Web\Admin\EloquentPopularPlaceRepository;
@@ -63,6 +65,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(PopularPlaceApiRepositoryInterface::class, EloquentPopularPlaceApiRepository::class);
         $this->app->bind(TopTenPlaceRepositoryInterface::class, EloquentTopTenPlaceRepository::class);
         $this->app->bind(PopularPlaceRepositoryInterface::class, EloquentPopularPlaceRepository::class);
+        $this->app->bind(OrganizerRepositoryInterface::class, EloquentOrganizerRepository::class);
 
     }
 

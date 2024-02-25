@@ -226,6 +226,23 @@
                 </li>
                 {{--                @endif --}}
 
+                {{--                @if (AdminPermission('view organizers') || AdminPermission('create organizer')) --}}
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect" @yield('topTen-active')>
+                        <i class="ri-home-heart-fill"></i>
+                        <span>{{ __('app.organizers') }}</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        {{--                        @if (AdminPermission('view organizers')) --}}
+                        <li><a href="{{ route('admin.organizers.index') }}">{{ __('app.all-organizers') }}</a></li>
+                        {{--                        @endif --}}
+                        {{--                            @if (AdminPermission('create organizer')) --}}
+                        <li><a href="{{ route('admin.organizers.create') }}">{{ __('app.create-organizers') }}</a></li>
+                        {{--                    @endif --}}
+                    </ul>
+                </li>
+                {{--                @endif --}}
+
 
             </ul>
         </div>

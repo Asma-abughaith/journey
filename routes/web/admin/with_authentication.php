@@ -18,6 +18,7 @@ use App\Http\Controllers\Web\Admin\TagController;
 use App\Http\Controllers\Web\Admin\PlaceController;
 use App\Http\Controllers\Web\Admin\TopTenPlaceController;
 use App\Http\Controllers\Web\Admin\PopularPlaceController;
+use App\Http\Controllers\Web\Admin\OrganizerController;
 
 use App\Models\Admin;
 use App\Http\Controllers\Web\Setting\LanguageController;
@@ -98,3 +99,6 @@ Route::resource('/topTenPlaces', TopTenPlaceController::class);
 
 //================= Routes For Popular Places =================
 Route::resource('/popularPlaces', PopularPlaceController::class);
+
+//================= Routes For Organizers =================
+Route::resource('/organizers', OrganizerController::class);

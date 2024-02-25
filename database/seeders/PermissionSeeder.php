@@ -387,6 +387,40 @@ class PermissionSeeder extends Seeder
                 'guard_name' => 'admin',
             ],
 
+            // Permissions for Organizers CRUD operations
+            [
+                'name' => 'create organizer',
+                'translations' => [
+                    'ar' => 'إنشاء منظم ',
+                    'en' => 'create organizer',
+                ],
+                'guard_name' => 'admin',
+            ],
+            [
+                'name' => 'edit organizer',
+                'translations' => [
+                    'ar' => 'تعديل  منظم',
+                    'en' => 'edit organizer',
+                ],
+                'guard_name' => 'admin',
+            ],
+            [
+                'name' => 'view organizers',
+                'translations' => [
+                    'ar' => 'عرض  المنظمين',
+                    'en' => 'view organizers',
+                ],
+                'guard_name' => 'admin',
+            ],
+            [
+                'name' => 'delete organizer',
+                'translations' => [
+                    'ar' => 'حذف  منظم',
+                    'en' => 'delete organizer',
+                ],
+                'guard_name' => 'admin',
+            ],
+
 
 
 
