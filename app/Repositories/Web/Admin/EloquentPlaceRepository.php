@@ -7,6 +7,7 @@ use App\Interfaces\Gateways\Web\Admin\PlaceRepositoryInterface;
 use App\Models\OpeningHour;
 use App\Models\Place;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Illuminate\Support\Str;
 
 class EloquentPlaceRepository implements PlaceRepositoryInterface
 {
@@ -74,12 +75,16 @@ class EloquentPlaceRepository implements PlaceRepositoryInterface
         }
 
         if ($imageData !== null) {
-            $eloquentPlace->addMediaFromRequest('main_image')->toMediaCollection('main_place');
+            $extension = pathinfo($imageData['main_image']->getClientOriginalName(), PATHINFO_EXTENSION);
+            $filename = Str::random(10) . '_' . time() . '.' . $extension;
+            $eloquentPlace->addMediaFromRequest('main_image')->usingFileName($filename)->toMediaCollection('main_place');
         }
 
         if ($imageGallery !== null) {
             foreach ($imageGallery as $image) {
-                $eloquentPlace->addMedia($image)->toMediaCollection('place_gallery');
+                $extension = pathinfo($image->getClientOriginalName(), PATHINFO_EXTENSION);
+                $filename = Str::random(10) . '_' . time() . '.' . $extension;
+                $eloquentPlace->addMedia($image)->usingFileName($filename)->toMediaCollection('place_gallery');
             }
         }
 
@@ -97,13 +102,17 @@ class EloquentPlaceRepository implements PlaceRepositoryInterface
 
         // ======================= Main Image =======================
         if (isset($imageData['main_image']) && $imageData['main_image'] != null) {
-            $place->addMediaFromRequest('main_image')->toMediaCollection('main_place');
+            $extension = pathinfo($imageData['main_image']->getClientOriginalName(), PATHINFO_EXTENSION);
+            $filename = Str::random(10) . '_' . time() . '.' . $extension;
+            $place->addMediaFromRequest('main_image')->usingFileName($filename)->toMediaCollection('main_place');
         }
 
         // ======================= Gallery Image =======================
         if ($imageGallery !== null) {
             foreach ($imageGallery as $image) {
-                $place->addMedia($image)->toMediaCollection('place_gallery');
+                $extension = pathinfo($image->getClientOriginalName(), PATHINFO_EXTENSION);
+                $filename = Str::random(10) . '_' . time() . '.' . $extension;
+                $place->addMedia($image)->usingFileName($filename)->toMediaCollection('place_gallery');
             }
         }
 

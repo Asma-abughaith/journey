@@ -7,6 +7,7 @@ use App\Interfaces\Gateways\Web\Admin\AdminRepositoryInterface;
 use App\Models\Admin;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Permission;
+use Illuminate\Support\Str;
 
 
 class EloquentAdminRepository implements AdminRepositoryInterface
@@ -37,7 +38,11 @@ class EloquentAdminRepository implements AdminRepositoryInterface
     public function createAdmin(array $adminData, array $imageData, $role)
     {
         $eloquentAdmin = Admin::create($adminData);
-        isset($imageData) ?? $eloquentAdmin->addMediaFromRequest('image')->toMediaCollection('admin_profile');
+        if(isset($imageData)){
+            $extension = pathinfo($imageData['image']->getClientOriginalName(), PATHINFO_EXTENSION);
+            $filename = Str::random(10) . '_' . time() . '.' . $extension;
+            $eloquentAdmin->addMediaFromRequest('image')->usingFileName($filename)->toMediaCollection('admin_profile');
+        }
         if (isset($role)) $eloquentAdmin->assignRole($role);
         return $this->convertToEntity($eloquentAdmin);
     }
@@ -46,7 +51,9 @@ class EloquentAdminRepository implements AdminRepositoryInterface
     {
         $admin->update($adminData);
         if (isset($imageData['image']) && $imageData['image'] != null) {
-            $admin->addMediaFromRequest('image')->toMediaCollection('admin_profile');
+            $extension = pathinfo($imageData['image']->getClientOriginalName(), PATHINFO_EXTENSION);
+            $filename = Str::random(10) . '_' . time() . '.' . $extension;
+            $admin->addMediaFromRequest('image')->usingFileName($filename)->toMediaCollection('admin_profile');
         }
         $admin->syncRoles($role);
         return $this->convertToEntity($admin);

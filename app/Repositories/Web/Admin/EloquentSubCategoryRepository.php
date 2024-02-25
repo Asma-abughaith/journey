@@ -8,6 +8,7 @@ use App\Interfaces\Gateways\Web\Admin\CategoryRepositoryInterface;
 use App\Interfaces\Gateways\Web\Admin\SubCategoryRepositoryInterface;
 use App\Models\Category;
 use App\Models\SubCategory;
+use Illuminate\Support\Str;
 
 
 class EloquentSubCategoryRepository implements SubCategoryRepositoryInterface
@@ -42,7 +43,9 @@ class EloquentSubCategoryRepository implements SubCategoryRepositoryInterface
         $eloquentSubCategory->setTranslations('name', $subCategoryData['name']);
 
         if ($imageData !== null) {
-            $eloquentSubCategory->addMediaFromRequest('image')->toMediaCollection('subcategory');
+            $extension = pathinfo($imageData['image']->getClientOriginalName(), PATHINFO_EXTENSION);
+            $filename = Str::random(10) . '_' . time() . '.' . $extension;
+            $eloquentSubCategory->addMediaFromRequest('image')->usingFileName($filename)->toMediaCollection('subcategory');
         }
 
         return $this->convertToEntity($eloquentSubCategory);
@@ -54,7 +57,9 @@ class EloquentSubCategoryRepository implements SubCategoryRepositoryInterface
         $subCategory->update($subCategoryData);
         $subCategory->setTranslations('name', $subCategoryData['name']);
         if (isset($imageData['image']) && $imageData['image'] != null) {
-            $subCategory->addMediaFromRequest('image')->toMediaCollection('subcategory');
+            $extension = pathinfo($imageData['image']->getClientOriginalName(), PATHINFO_EXTENSION);
+            $filename = Str::random(10) . '_' . time() . '.' . $extension;
+            $subCategory->addMediaFromRequest('image')->usingFileName($filename)->toMediaCollection('subcategory');
         }
         return $this->convertToEntity($subCategory);
     }

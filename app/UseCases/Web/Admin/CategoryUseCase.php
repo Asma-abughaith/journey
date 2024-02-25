@@ -38,7 +38,7 @@ class CategoryUseCase
                 'name' => $translator,
                 'priority' =>  $request['priority'],
             ],
-            ['image' => isset($request['image']) ? isset($request['image']) : null]
+            ['image' => isset($request['image']) ? $request['image'] : null]
         );
     }
 
@@ -51,7 +51,7 @@ class CategoryUseCase
                 'name' => $translator,
                 'priority' =>  $request['priority'],
             ],
-            ['image' => isset($request['image']) ? isset($request['image']) : null]
+            ['image' => isset($request['image']) ? $request['image'] : null]
         );
     }
 

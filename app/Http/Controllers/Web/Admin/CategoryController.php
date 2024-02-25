@@ -55,6 +55,7 @@ class CategoryController extends Controller
     public function store(StoreCategoryRequest $request)
     {
         try {
+
             $this->categoryUseCase->createCategory( $request->validated());
             Toastr::success(__('validation.msg.category-created-successfully!'), __('validation.msg.success'));
             return redirect()->route('admin.categories.index');

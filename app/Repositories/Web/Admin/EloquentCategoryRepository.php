@@ -5,6 +5,7 @@ namespace App\Repositories\Web\Admin;
 use App\Entities\Web\Admin\CategoryEntity;
 use App\Interfaces\Gateways\Web\Admin\CategoryRepositoryInterface;
 use App\Models\Category;
+use Illuminate\Support\Str;
 
 
 class EloquentCategoryRepository implements CategoryRepositoryInterface
@@ -35,11 +36,17 @@ class EloquentCategoryRepository implements CategoryRepositoryInterface
 
     public function createCategory(array $categoryData, ?array $imageData)
     {
+        if ($imageData === null || !isset($imageData['image']) || !$imageData['image'] instanceof \Illuminate\Http\UploadedFile || !$imageData['image']->isValid()) {
+            throw new \InvalidArgumentException("Image data is required to create a category.");
+        }
+
         $eloquentCategory = Category::create($categoryData);
         $eloquentCategory->setTranslations('name', $categoryData['name']);
 
         if ($imageData !== null) {
-            $eloquentCategory->addMediaFromRequest('image')->toMediaCollection('category');
+            $extension = pathinfo($imageData['image']->getClientOriginalName(), PATHINFO_EXTENSION);
+            $filename = Str::random(10) . '_' . time() . '.' . $extension;
+            $eloquentCategory->addMediaFromRequest('image')->usingFileName($filename)->toMediaCollection('category');
         }
 
         return $this->convertToEntity($eloquentCategory);
@@ -51,7 +58,9 @@ class EloquentCategoryRepository implements CategoryRepositoryInterface
         $category->update($categoryData);
         $category->setTranslations('name', $categoryData['name']);
         if (isset($imageData['image']) && $imageData['image'] != null) {
-            $category->addMediaFromRequest('image')->toMediaCollection('category');
+            $extension = pathinfo($imageData['image']->getClientOriginalName(), PATHINFO_EXTENSION);
+            $filename = Str::random(10) . '_' . time() . '.' . $extension;
+            $category->addMediaFromRequest('image')->usingFileName($filename)->toMediaCollection('category');
         }
         return $this->convertToEntity($category);
     }

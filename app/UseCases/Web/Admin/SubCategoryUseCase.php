@@ -37,7 +37,7 @@ class SubCategoryUseCase
                 'priority' =>  $request['priority'],
                 'category_id'=>$request['category_id']
             ],
-            ['image' => isset($request['image']) ? isset($request['image']) : null],
+            ['image' => isset($request['image']) ? $request['image'] : null],
 
         );
     }
@@ -52,7 +52,7 @@ class SubCategoryUseCase
                 'priority' =>  $request['priority'],
                 'category_id'=>$request['category_id']
             ],
-            ['image' => isset($request['image']) ? isset($request['image']) : null]
+            ['image' => isset($request['image']) ? $request['image'] : null]
         );
     }
 
