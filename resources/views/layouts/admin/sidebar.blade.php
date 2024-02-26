@@ -244,6 +244,24 @@
                 {{--                @endif --}}
 
 
+                {{--                @if (AdminPermission('view events') || AdminPermission('create event')) --}}
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect" @yield('topTen-active')>
+                        <i class="ri-home-heart-fill"></i>
+                        <span>{{ __('app.event') }}</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        {{--                        @if (AdminPermission('view events')) --}}
+                        <li><a href="{{ route('admin.events.index') }}">{{ __('app.all-events') }}</a></li>
+                        {{--                        @endif --}}
+                        {{--                            @if (AdminPermission('create event')) --}}
+                        <li><a href="{{ route('admin.events.create') }}">{{ __('app.create-event') }}</a></li>
+                        {{--                    @endif --}}
+                    </ul>
+                </li>
+                {{--                @endif --}}
+
+
             </ul>
         </div>
         <!-- Sidebar -->

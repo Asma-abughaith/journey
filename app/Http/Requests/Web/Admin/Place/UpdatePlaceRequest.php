@@ -51,8 +51,6 @@ class UpdatePlaceRequest extends FormRequest
             'business_status' => 'nullable|string',
             'tags_id' => 'required|array',
             'tags_id.*' => 'exists:tags,id',
-            'main_image' => 'image|mimes:jpeg,png,jpg,gif,svg,webp',
-            'gallery_images.*' => 'image|mimes:jpeg,png,jpg,gif,svg,webp',
             'day_of_week' => 'nullable|array',
             'opening_hours' => 'nullable',
             'closing_hours' => 'nullable',

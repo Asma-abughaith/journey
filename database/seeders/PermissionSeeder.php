@@ -421,6 +421,40 @@ class PermissionSeeder extends Seeder
                 'guard_name' => 'admin',
             ],
 
+            // Permissions for Event CRUD operations
+            [
+                'name' => 'create event',
+                'translations' => [
+                    'ar' => 'إنشاء حدث ',
+                    'en' => 'create event',
+                ],
+                'guard_name' => 'admin',
+            ],
+            [
+                'name' => 'edit event',
+                'translations' => [
+                    'ar' => 'تعديل  حدث',
+                    'en' => 'edit event',
+                ],
+                'guard_name' => 'admin',
+            ],
+            [
+                'name' => 'view events',
+                'translations' => [
+                    'ar' => 'عرض  احداث',
+                    'en' => 'view events',
+                ],
+                'guard_name' => 'admin',
+            ],
+            [
+                'name' => 'delete event',
+                'translations' => [
+                    'ar' => 'حذف  حدث',
+                    'en' => 'delete event',
+                ],
+                'guard_name' => 'admin',
+            ],
+
 
 
 

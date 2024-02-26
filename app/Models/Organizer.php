@@ -16,15 +16,15 @@ class Organizer extends Model implements HasMedia
     public $translatable = ['name'];
     public $guarded = [];
 
-    public function eventOrganizerables()
+    public function organizerables()
     {
         return $this->morphedByMany(Event::class, 'organizerables');
     }
 
-    public function volunteeringOrganizerables()
-    {
-        return $this->morphedByMany(Volunteering::class, 'organizerables');
-    }
+//    public function volunteeringOrganizerables()
+//    {
+//        return $this->morphedByMany(Volunteering::class, 'organizerables');
+//    }
 
     public function registerMediaCollections(): void
     {
