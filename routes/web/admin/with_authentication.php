@@ -20,6 +20,7 @@ use App\Http\Controllers\Web\Admin\TopTenPlaceController;
 use App\Http\Controllers\Web\Admin\PopularPlaceController;
 use App\Http\Controllers\Web\Admin\OrganizerController;
 use App\Http\Controllers\Web\Admin\EventController;
+use App\Http\Controllers\Web\Admin\VolunteeringController;
 
 use App\Models\Admin;
 use App\Http\Controllers\Web\Setting\LanguageController;
@@ -106,3 +107,6 @@ Route::resource('/organizers', OrganizerController::class);
 
 //================= Routes For Organizers =================
 Route::resource('/events', EventController::class);
+
+//================= Routes For Organizers =================
+Route::resource('/volunteering', VolunteeringController::class);

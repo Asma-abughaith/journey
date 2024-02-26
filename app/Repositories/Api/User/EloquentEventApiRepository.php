@@ -23,7 +23,7 @@ class EloquentEventApiRepository implements EventApiRepositoryInterface
     {
         $now = now()->setTimezone('Asia/Amman');
         $eloquentEvents = Event::orderBy('start_datetime')->where('status', '1')->where('end_datetime', '>=', $now)->get();
-        Event::whereNotIn('id', $eloquentEvents->pluck('id'))->update(['status' => '0']);
+        Event::where('status','1')->whereNotIn('id', $eloquentEvents->pluck('id'))->update(['status' => '0']);
         return new ResourceCollection(EventResource::collection($eloquentEvents));
     }
 

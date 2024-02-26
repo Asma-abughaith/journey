@@ -8,6 +8,7 @@ use App\Interfaces\Gateways\Api\User\PlaceApiRepositoryInterface;
 use App\Interfaces\Gateways\Api\User\PopularPlaceApiRepositoryInterface;
 use App\Interfaces\Gateways\Api\User\SubCategoryApiRepositoryInterface;
 use App\Interfaces\Gateways\Api\User\TopTenPlaceApiRepositoryInterface;
+use App\Interfaces\Gateways\Api\User\VolunteeringApiRepositoryInterface;
 use App\Interfaces\Gateways\Web\Admin\AdminRepositoryInterface;
 use App\Interfaces\Gateways\Web\Admin\CategoryRepositoryInterface;
 use App\Interfaces\Gateways\Web\Admin\EventRepositoryInterface;
@@ -20,12 +21,14 @@ use App\Interfaces\Gateways\Web\Admin\RegionRepositoryInterface;
 use App\Interfaces\Gateways\Web\Admin\RoleRepositoryInterface;
 use App\Interfaces\Gateways\Web\Admin\TagRepositoryInterface;
 use App\Interfaces\Gateways\Web\Admin\TopTenPlaceRepositoryInterface;
+use App\Interfaces\Gateways\Web\Admin\VolunteeringRepositoryInterface;
 use App\Interfaces\Gateways\Web\Setting\LanguageRepositoryInterface;
 use App\Repositories\Api\User\EloquentEventApiRepository;
 use App\Repositories\Api\User\EloquentPlaceApiRepository;
 use App\Repositories\Api\User\EloquentPopularPlaceApiRepository;
 use App\Repositories\Api\User\EloquentSubCategoryApiRepository;
 use App\Repositories\Api\User\EloquentTopTenPlaceApiRepository;
+use App\Repositories\Api\User\EloquentVolunteeringApiRepository;
 use App\Repositories\Web\Admin\EloquentAdminRepository;
 use App\Repositories\Web\Admin\EloquentCategoryRepository;
 use App\Repositories\Web\Admin\EloquentEventRepository;
@@ -38,6 +41,7 @@ use App\Repositories\Web\Admin\EloquentRegionRepository;
 use App\Repositories\Web\Admin\EloquentRoleRepository;
 use App\Repositories\Web\Admin\EloquentTagRepository;
 use App\Repositories\Web\Admin\EloquentTopTenPlaceRepository;
+use App\Repositories\Web\Admin\EloquentVolunteeringRepository;
 use App\Repositories\Web\Setting\EloquentLanguageRepository;
 use App\Interfaces\Gateways\Api\User\CategoryApiRepositoryInterface;
 use App\Interfaces\Gateways\Web\Admin\SubCategoryRepositoryInterface;
@@ -72,6 +76,8 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(OrganizerRepositoryInterface::class, EloquentOrganizerRepository::class);
         $this->app->bind(EventRepositoryInterface::class, EloquentEventRepository::class);
         $this->app->bind(EventApiRepositoryInterface::class, EloquentEventApiRepository::class);
+        $this->app->bind(VolunteeringRepositoryInterface::class, EloquentVolunteeringRepository::class);
+        $this->app->bind(VolunteeringApiRepositoryInterface::class, EloquentVolunteeringApiRepository::class);
     }
 
     /**=

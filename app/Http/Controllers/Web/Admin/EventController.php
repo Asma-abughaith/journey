@@ -132,7 +132,7 @@ class EventController extends Controller
     public function update(UpdateEventRequest $request, Event $event)
     {
         try {
-            $this->eventUseCase->updatePlace($event, $request->validated());
+            $this->eventUseCase->updateEvent($event, $request->validated());
             Toastr::success(__('validation.msg.event-updated-successfully!'), __('validation.msg.success'));
             return redirect()->route('admin.events.index');
         } catch (\Exception $e) {

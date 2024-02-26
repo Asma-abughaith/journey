@@ -261,6 +261,23 @@
                 </li>
                 {{--                @endif --}}
 
+                {{--                @if (AdminPermission('view volunteerings') || AdminPermission('create volunteering')) --}}
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect" @yield('topTen-active')>
+                        <i class="ri-home-heart-fill"></i>
+                        <span>{{ __('app.volunteering') }}</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        {{--                        @if (AdminPermission('view volunteerings')) --}}
+                        <li><a href="{{ route('admin.volunteering.index') }}">{{ __('app.all-volunteerings') }}</a></li>
+                        {{--                        @endif --}}
+                        {{--                            @if (AdminPermission('create volunteering')) --}}
+                        <li><a href="{{ route('admin.volunteering.create') }}">{{ __('app.create-volunteerings') }}</a></li>
+                        {{--                    @endif --}}
+                    </ul>
+                </li>
+                {{--                @endif --}}
+
 
             </ul>
         </div>

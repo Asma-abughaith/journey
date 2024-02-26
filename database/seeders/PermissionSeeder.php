@@ -455,6 +455,40 @@ class PermissionSeeder extends Seeder
                 'guard_name' => 'admin',
             ],
 
+            // Permissions for Volunteering CRUD operations
+            [
+                'name' => 'create volunteering',
+                'translations' => [
+                    'ar' => 'إنشاء تطوع ',
+                    'en' => 'create volunteering',
+                ],
+                'guard_name' => 'admin',
+            ],
+            [
+                'name' => 'edit volunteering',
+                'translations' => [
+                    'ar' => 'تعديل  تطوع',
+                    'en' => 'edit volunteering',
+                ],
+                'guard_name' => 'admin',
+            ],
+            [
+                'name' => 'view volunteerings',
+                'translations' => [
+                    'ar' => 'عرض  التطوع',
+                    'en' => 'view volunteerings',
+                ],
+                'guard_name' => 'admin',
+            ],
+            [
+                'name' => 'delete volunteering',
+                'translations' => [
+                    'ar' => 'حذف  تطوع',
+                    'en' => 'delete volunteering',
+                ],
+                'guard_name' => 'admin',
+            ],
+
 
 
 

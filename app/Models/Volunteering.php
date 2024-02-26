@@ -22,7 +22,7 @@ class Volunteering extends Model implements HasMedia
     }
     public function organizers()
     {
-        return $this->morphToMany(Organizer::class, 'organizerables');
+        return $this->morphToMany(Organizer::class, 'organizerable');
     }
 
     public function registerMediaCollections(): void

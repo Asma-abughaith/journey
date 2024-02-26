@@ -4,39 +4,40 @@ namespace App\UseCases\Web\Admin;
 
 
 use App\Interfaces\Gateways\Web\Admin\EventRepositoryInterface;
+use App\Interfaces\Gateways\Web\Admin\VolunteeringRepositoryInterface;
 
-class EventUseCase
+class VolunteeringUseCase
 {
-    protected $eventRepository;
+    protected $volunteeringRepository;
 
-    public function __construct(EventRepositoryInterface $eventRepository)
+    public function __construct(VolunteeringRepositoryInterface $volunteeringRepository)
     {
-        $this->eventRepository = $eventRepository;
+        $this->volunteeringRepository = $volunteeringRepository;
     }
 
-    public function allEvents()
+    public function allVolunteerings()
     {
-        return $this->eventRepository->getAllEvents();
+        return $this->volunteeringRepository->getAllVolunteerings();
     }
 
-    public function getEvent($event)
+    public function getVolunteering($volunteering)
     {
-        return $this->eventRepository->getEvent($event);
+        return $this->volunteeringRepository->getVolunteering($volunteering);
     }
 
-    public function getEventById($eventId)
+    public function getVolunteeringById($volunteeringId)
     {
-        return $this->eventRepository->getEventById($eventId);
+        return $this->volunteeringRepository->getVolunteeringById($volunteeringId);
     }
 
-    public function createEvent($request)
+    public function createVolunteering($request)
     {
         $translator = ['en' => $request['name_en'], 'ar' => $request['name_ar']];
         $translatorDescription = ['en' => $request['description_en'], 'ar' => $request['description_ar']];
         $translatorAddress = ['en' => $request['address_en'], 'ar' => $request['address_ar']];
 
 
-        return $this->eventRepository->createEvent(
+        return $this->volunteeringRepository->createVolunteering(
             [
                 'name' => $translator,
                 'description' => $translatorDescription,
@@ -44,7 +45,7 @@ class EventUseCase
                 'region_id' => $request['region_id'],
                 'status'=> $request['status'],
                 'link'=> $request['link'],
-                'price'=> $request['price'],
+                'hours_worked'=> $request['hours_worked'],
                 'start_datetime'=>$request['start_datetime'],
                 'end_datetime'=>$request['end_datetime'],
 
@@ -55,7 +56,7 @@ class EventUseCase
         );
     }
 
-    public function updateEvent($event, $request)
+    public function updateVolunteering($event, $request)
     {
         $translator = ['en' => $request['name_en'], 'ar' => $request['name_ar']];
         $translatorDescription = ['en' => $request['description_en'], 'ar' => $request['description_ar']];
@@ -63,7 +64,7 @@ class EventUseCase
 
 
 
-        return $this->eventRepository->updateEvent(
+        return $this->volunteeringRepository->updateVolunteering(
             $event,
             [
                 'name' => $translator,
@@ -72,7 +73,7 @@ class EventUseCase
                 'region_id' => $request['region_id'],
                 'status'=> $request['status'],
                 'link'=> $request['link'],
-                'price'=> $request['price'],
+                'hours_worked'=> $request['hours_worked'],
                 'start_datetime'=>$request['start_datetime'],
                 'end_datetime'=>$request['end_datetime'],
             ],
@@ -82,9 +83,9 @@ class EventUseCase
         );
     }
 
-    public function deleteEvent($event)
+    public function deleteVolunteering($event)
     {
-        return $this->eventRepository->deleteEvent($event);
+        return $this->volunteeringRepository->deleteVolunteering($event);
     }
 
 
