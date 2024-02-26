@@ -19,7 +19,7 @@ return new class extends Migration
             $table->unsignedBigInteger('region_id');
             $table->dateTime('start_datetime');
             $table->dateTime('end_datetime');
-            $table->enum('status', ['0', '1']);
+            $table->enum('status', [0, 1]);
             $table->decimal('price', 8, 2)->nullable();
             $table->string('link');
             $table->timestamps();

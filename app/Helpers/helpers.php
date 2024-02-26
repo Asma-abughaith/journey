@@ -73,3 +73,9 @@ function daysTranslation($lang, $request)
     return $dayTranslation[$lang][$request];
 }
 
+function dateTime($dateTime)
+{
+    $timeFormat = new \DateTime($dateTime);
+    return $timeFormat;
+}
+

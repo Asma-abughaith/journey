@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Http\Controllers\Api\User\TopTenPlaceApiController;
+use App\Interfaces\Gateways\Api\User\EventApiRepositoryInterface;
 use App\Interfaces\Gateways\Api\User\PlaceApiRepositoryInterface;
 use App\Interfaces\Gateways\Api\User\PopularPlaceApiRepositoryInterface;
 use App\Interfaces\Gateways\Api\User\SubCategoryApiRepositoryInterface;
@@ -20,6 +21,7 @@ use App\Interfaces\Gateways\Web\Admin\RoleRepositoryInterface;
 use App\Interfaces\Gateways\Web\Admin\TagRepositoryInterface;
 use App\Interfaces\Gateways\Web\Admin\TopTenPlaceRepositoryInterface;
 use App\Interfaces\Gateways\Web\Setting\LanguageRepositoryInterface;
+use App\Repositories\Api\User\EloquentEventApiRepository;
 use App\Repositories\Api\User\EloquentPlaceApiRepository;
 use App\Repositories\Api\User\EloquentPopularPlaceApiRepository;
 use App\Repositories\Api\User\EloquentSubCategoryApiRepository;
@@ -69,7 +71,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(PopularPlaceRepositoryInterface::class, EloquentPopularPlaceRepository::class);
         $this->app->bind(OrganizerRepositoryInterface::class, EloquentOrganizerRepository::class);
         $this->app->bind(EventRepositoryInterface::class, EloquentEventRepository::class);
-
+        $this->app->bind(EventApiRepositoryInterface::class, EloquentEventApiRepository::class);
     }
 
     /**=
