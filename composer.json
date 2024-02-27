@@ -32,7 +32,7 @@
             "Database\\Seeders\\": "database/seeders/"
         }
     },
-    "autoload-dev": {
+   "autoload-dev": {
         "psr-4": {
             "Tests\\": "tests/"
         },
