@@ -37,7 +37,8 @@
             "Tests\\": "tests/"
         },
         "files": [
-            "App/Helpers/helpers.php"
+            "App/Helpers/helpers.php",
+            "App/Helpers/ApiResponse.php"
         ]
     },
     "scripts": {
