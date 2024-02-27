@@ -78,6 +78,7 @@ class EloquentVolunteeringRepository implements VolunteeringRepositoryInterface
     public function deleteVolunteering($volunteering)
     {
         if ($volunteering) {
+            $volunteering->organizers()->sync([]);
             $volunteering->delete();
         }
         return;

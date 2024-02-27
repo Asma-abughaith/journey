@@ -175,6 +175,7 @@ class EloquentPlaceRepository implements PlaceRepositoryInterface
     public function deletePlace($place)
     {
         if ($place) {
+            $place->tags()->sync([]);
             $place->delete();
         }
         return;

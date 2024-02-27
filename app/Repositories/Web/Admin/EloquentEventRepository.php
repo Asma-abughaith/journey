@@ -78,6 +78,7 @@ class EloquentEventRepository implements EventRepositoryInterface
     public function deleteEvent($event)
     {
         if ($event) {
+            $event->organizers()->sync([]);
             $event->delete();
         }
         return;
