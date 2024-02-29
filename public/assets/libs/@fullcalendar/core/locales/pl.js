@@ -17,7 +17,7 @@
             month: "Miesiąc",
             week: "Tydzień",
             day: "Dzień",
-            list: "Plan dnia"
+            list: "CreatePlan dnia"
         },
         weekLabel: "Tydz",
         allDayText: "Cały dzień",

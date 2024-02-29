@@ -16,6 +16,7 @@ use App\Interfaces\Gateways\Web\Admin\FeatureRepositoryInterface;
 use App\Interfaces\Gateways\Web\Admin\OrganizerRepositoryInterface;
 use App\Interfaces\Gateways\Web\Admin\PermissionRepositoryInterface;
 use App\Interfaces\Gateways\Web\Admin\PlaceRepositoryInterface;
+use App\Interfaces\Gateways\Web\Admin\PlanRepositoryInterface;
 use App\Interfaces\Gateways\Web\Admin\PopularPlaceRepositoryInterface;
 use App\Interfaces\Gateways\Web\Admin\RegionRepositoryInterface;
 use App\Interfaces\Gateways\Web\Admin\RoleRepositoryInterface;
@@ -36,6 +37,7 @@ use App\Repositories\Web\Admin\EloquentFeatureRepository;
 use App\Repositories\Web\Admin\EloquentOrganizerRepository;
 use App\Repositories\Web\Admin\EloquentPermissionRepository;
 use App\Repositories\Web\Admin\EloquentPlaceRepository;
+use App\Repositories\Web\Admin\EloquentPlanRepository;
 use App\Repositories\Web\Admin\EloquentPopularPlaceRepository;
 use App\Repositories\Web\Admin\EloquentRegionRepository;
 use App\Repositories\Web\Admin\EloquentRoleRepository;
@@ -69,15 +71,21 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(PlaceRepositoryInterface::class, EloquentPlaceRepository::class);
         $this->app->bind(PlaceApiRepositoryInterface::class, EloquentPlaceApiRepository::class);
         $this->app->bind(SubCategoryApiRepositoryInterface::class, EloquentSubCategoryApiRepository::class);
+
         $this->app->bind(TopTenPlaceApiRepositoryInterface::class, EloquentTopTenPlaceApiRepository::class);
         $this->app->bind(PopularPlaceApiRepositoryInterface::class, EloquentPopularPlaceApiRepository::class);
         $this->app->bind(TopTenPlaceRepositoryInterface::class, EloquentTopTenPlaceRepository::class);
         $this->app->bind(PopularPlaceRepositoryInterface::class, EloquentPopularPlaceRepository::class);
         $this->app->bind(OrganizerRepositoryInterface::class, EloquentOrganizerRepository::class);
+
         $this->app->bind(EventRepositoryInterface::class, EloquentEventRepository::class);
         $this->app->bind(EventApiRepositoryInterface::class, EloquentEventApiRepository::class);
+
         $this->app->bind(VolunteeringRepositoryInterface::class, EloquentVolunteeringRepository::class);
         $this->app->bind(VolunteeringApiRepositoryInterface::class, EloquentVolunteeringApiRepository::class);
+
+        $this->app->bind(PlanRepositoryInterface::class, EloquentPlanRepository::class);
+
     }
 
     /**=

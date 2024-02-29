@@ -69,4 +69,9 @@ class Admin extends Authenticatable implements MustVerifyEmail, HasMedia
             $this->addMediaConversion('image')->width(250)->height(250);
         });
     }
+
+    public function plans()
+    {
+        return $this->morphMany('App\Models\Plan', 'creator');
+    }
 }

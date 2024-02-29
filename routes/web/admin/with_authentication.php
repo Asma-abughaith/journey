@@ -1,29 +1,29 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Web\Admin\AdminAuth\AuthenticatedSessionController;
 use App\Http\Controllers\Web\Admin\AdminAuth\ConfirmablePasswordController;
 use App\Http\Controllers\Web\Admin\AdminAuth\EmailVerificationNotificationController;
 use App\Http\Controllers\Web\Admin\AdminAuth\EmailVerificationPromptController;
 use App\Http\Controllers\Web\Admin\AdminAuth\PasswordController;
 use App\Http\Controllers\Web\Admin\AdminAuth\VerifyEmailController;
-use App\Http\Controllers\Web\Admin\AdminAuth\AuthenticatedSessionController;
-use App\Http\Controllers\Web\Admin\PermissionController;
-use App\Http\Controllers\Web\Admin\RoleController;
 use App\Http\Controllers\Web\Admin\AdminController;
 use App\Http\Controllers\Web\Admin\CategoryController;
-use App\Http\Controllers\Web\Admin\SubCategoryController;
-use App\Http\Controllers\Web\Admin\RegionController;
-use App\Http\Controllers\Web\Admin\FeatureController;
-use App\Http\Controllers\Web\Admin\TagController;
-use App\Http\Controllers\Web\Admin\PlaceController;
-use App\Http\Controllers\Web\Admin\TopTenPlaceController;
-use App\Http\Controllers\Web\Admin\PopularPlaceController;
-use App\Http\Controllers\Web\Admin\OrganizerController;
 use App\Http\Controllers\Web\Admin\EventController;
+use App\Http\Controllers\Web\Admin\FeatureController;
+use App\Http\Controllers\Web\Admin\OrganizerController;
+use App\Http\Controllers\Web\Admin\PermissionController;
+use App\Http\Controllers\Web\Admin\PlaceController;
+use App\Http\Controllers\Web\Admin\PlanController;
+use App\Http\Controllers\Web\Admin\PopularPlaceController;
+use App\Http\Controllers\Web\Admin\RegionController;
+use App\Http\Controllers\Web\Admin\RoleController;
+use App\Http\Controllers\Web\Admin\SubCategoryController;
+use App\Http\Controllers\Web\Admin\TagController;
+use App\Http\Controllers\Web\Admin\TopTenPlaceController;
 use App\Http\Controllers\Web\Admin\VolunteeringController;
-
-use App\Models\Admin;
 use App\Http\Controllers\Web\Setting\LanguageController;
+use App\Models\Admin;
+use Illuminate\Support\Facades\Route;
 
 
 /*
@@ -105,8 +105,11 @@ Route::resource('/popularPlaces', PopularPlaceController::class);
 //================= Routes For Organizers =================
 Route::resource('/organizers', OrganizerController::class);
 
-//================= Routes For Organizers =================
+//================= Routes For events =================
 Route::resource('/events', EventController::class);
 
-//================= Routes For Organizers =================
+//================= Routes For Volunteering =================
 Route::resource('/volunteering', VolunteeringController::class);
+
+//================= Routes For Volunteering =================
+Route::resource('/plans', PlanController::class);

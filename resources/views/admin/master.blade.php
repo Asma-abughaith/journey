@@ -38,6 +38,7 @@
 <!-- JAVASCRIPT -->
 @include('layouts.admin.script')
 @stack('script')
+@livewireScripts
 </body>
 
 </html>
