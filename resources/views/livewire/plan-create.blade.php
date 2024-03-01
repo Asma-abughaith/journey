@@ -105,9 +105,9 @@
                     <div class="col-md-3">
                         <div class="mb-3">
                             <label class="form-label"
-                                   for="validationTooltip18">{{ __('app.places') }}</label>
+                                   for="">{{ __('app.places') }}</label>
                             <select class="select2 form-control " name="days[{{ $dayIndex }}][activities][{{ $activityIndex }}][places][]"
-                                    multiple data-placeholder="{{ __('app.choose...') }}" required
+                                     data-placeholder="{{ __('app.choose...') }}" required
                                     wire:model="days.{{ $dayIndex }}.activities.{{ $activityIndex }}.places">
                                 <option value="">{{ __('app.select-one') }}</option>
                                 @foreach ($places as $place)
