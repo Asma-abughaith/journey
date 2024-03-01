@@ -15,7 +15,8 @@
                         <div class="card-body">
                             <h4 class="card-title"></h4>
 
-                            @livewire('livewire.plan-create')
+                            <livewire:livewire.plan-create />
+                            {{-- @livewire('livewire.plan-create') --}}
 
                         </div>
                     </div>
@@ -27,5 +28,3 @@
         @include('layouts.admin.footer')
     </div>
 @endsection
-
-
