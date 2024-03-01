@@ -15,26 +15,28 @@ class PlanController extends Controller
     protected $planPresenter;
     protected $planUseCase;
 
-    public function __construct( PlanPresenter $planPresenter, PlanUseCase $planUseCase) {
+    public function __construct(PlanPresenter $planPresenter, PlanUseCase $planUseCase)
+    {
         $this->planPresenter = $planPresenter;
         $this->planUseCase = $planUseCase;
 
-//        $this->middleware('checkPermission:view plans')->only(['index']);
-//        $this->middleware('checkPermission:create plan')->only(['create', 'store']);
-//        $this->middleware('checkPermission:view plans')->only(['show']);
-//        $this->middleware('checkPermission:edit plan')->only(['edit', 'update']);
-//        $this->middleware('checkPermission:delete plan')->only(['destroy']);
+        //        $this->middleware('checkPermission:view plans')->only(['index']);
+        //        $this->middleware('checkPermission:create plan')->only(['create', 'store']);
+        //        $this->middleware('checkPermission:view plans')->only(['show']);
+        //        $this->middleware('checkPermission:edit plan')->only(['edit', 'update']);
+        //        $this->middleware('checkPermission:delete plan')->only(['destroy']);
 
     }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        try{
+        try {
             $allPlans = $this->planUseCase->getAllPlans();
             $plans = $this->planPresenter->presentAllPlan($allPlans);
-            return view('admin.plans.index',compact('plans'));
+            return view('admin.plans.index', compact('plans'));
         } catch (\Exception $e) {
             Toastr::error($e->getMessage(), 'Error');
             return redirect()->back()->withInput();
@@ -49,20 +51,6 @@ class PlanController extends Controller
         return view('admin.plans.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StorePlanRequest $request)
-    {
-        try {
-            $this->planUseCase->createPlan( $request->validated());
-            Toastr::success(__('validation.msg.plan-created-successfully!'), __('validation.msg.success'));
-            return redirect()->route('admin.plans.index');
-        } catch (\Exception $e) {
-            Toastr::error($e->getMessage(), 'Error');
-            return redirect()->back()->withInput();
-        }
-    }
 
     /**
      * Display the specified resource.
@@ -77,7 +65,7 @@ class PlanController extends Controller
      */
     public function edit(Plan $plan)
     {
-        //
+        return view('admin.plans.edit', compact('plan'));
     }
 
     /**
@@ -93,6 +81,13 @@ class PlanController extends Controller
      */
     public function destroy(Plan $plan)
     {
-        //
+        try {
+            $this->planUseCase->deletePlan($plan);
+            Toastr::success('plan Deleted successfully!', 'Delete');
+            return redirect()->route('admin.plans.index');
+        } catch (\Exception $e) {
+            Toastr::error($e->getMessage(), 'Error');
+            return redirect()->back()->withInput();
+        }
     }
 }

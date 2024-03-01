@@ -151,5 +151,10 @@ return [
     'place-type' => 'Place Type',
     'general' => 'General',
     'popular' => 'Popular',
-    'top-ten' => 'Top Ten'
+    'top-ten' => 'Top Ten',
+    "plan Deleted successfully!" => "Plan Deleted successfully!",
+    "topTenPlaces" => "Top Ten Places",
+    "all-topTenPlaces" => "All Top Ten Places",
+    "create-topTenPlaces" => "Create Top Ten Places",
+    "dashboard-topTen" => "Dashboard | Category"
 ];

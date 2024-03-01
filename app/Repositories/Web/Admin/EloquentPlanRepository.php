@@ -2,13 +2,9 @@
 
 namespace App\Repositories\Web\Admin;
 
-use App\Entities\Web\Admin\EventEntity;
-use App\Interfaces\Gateways\Web\Admin\EventRepositoryInterface;
+use App\Entities\Web\Admin\PlanEntity;
 use App\Interfaces\Gateways\Web\Admin\PlanRepositoryInterface;
-use App\Models\Event;
 use App\Models\Plan;
-use Spatie\MediaLibrary\MediaCollections\Models\Media;
-use Illuminate\Support\Str;
 
 class EloquentPlanRepository implements PlanRepositoryInterface
 {
@@ -63,7 +59,7 @@ class EloquentPlanRepository implements PlanRepositoryInterface
     public function deletePlan($plan)
     {
         if ($plan) {
-            $plan->activities()->sync([]);
+            $plan->activities()->delete();
             $plan->delete();
         }
         return;
@@ -71,14 +67,12 @@ class EloquentPlanRepository implements PlanRepositoryInterface
 
 
 
-    protected function convertToEntity(Event $eloquentEvent)
+    protected function convertToEntity(Plan $eloquentEvent)
     {
-        $lang = getLang();
         $names = $eloquentEvent->getTranslations('name');
         $descriptions = $eloquentEvent->getTranslations('description');
-        $addresses = $eloquentEvent->getTranslations('address');
 
-        $event = new EventEntity();
+        $event = new PlanEntity();
         $event->setId($eloquentEvent->id);
         $event->setName($eloquentEvent->name);
         $event->setNameEn($names['en']);
@@ -86,17 +80,6 @@ class EloquentPlanRepository implements PlanRepositoryInterface
         $event->setDescription($eloquentEvent->description);
         $event->setDescriptionEn($descriptions['en']);
         $event->setDescriptionAr($descriptions['ar']);
-        $event->setAddress($eloquentEvent->address);
-        $event->setAddressEn($addresses['en']);
-        $event->setAddressAr($addresses['ar']);
-        $event->setRegion($eloquentEvent->region->name);
-        $event->setOrganizers($eloquentEvent->organizers);
-        $event->setPrice($eloquentEvent->price);
-        $event->setStatus($eloquentEvent->status);
-        $event->setLink($eloquentEvent->link);
-        $event->setStartDatetime($eloquentEvent->start_datetime);
-        $event->setEndDatetime($eloquentEvent->end_datetime);
-        $event->setImage($eloquentEvent->getFirstMediaUrl('event', 'event_website'));
         return $event;
     }
 }

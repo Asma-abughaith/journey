@@ -3,13 +3,42 @@
 namespace App\Livewire;
 
 use App\Models\Place;
-use Brian2694\Toastr\Facades\Toastr;
-use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
-class PlanCreate extends Component
+class PlanUpdate extends Component
 {
+    public $plan;
     public $name_en, $name_ar, $description_en, $description_ar, $places, $days = [];
+
+
+    public function mount()
+    {
+        $this->places = Place::all();
+
+        $planNames = $this->plan->getTranslations('name');
+        $planDescription = $this->plan->getTranslations('description');
+
+        $this->name_en = $planNames['en'];
+        $this->name_ar = $planNames['ar'];
+        $this->description_en = $planDescription['en'];
+        $this->description_ar = $planDescription['ar'];
+
+        $days = [];
+        foreach ($this->plan->activities->groupBy('day_number') as $dayIndex => $activities) {
+            --$dayIndex;
+            foreach ($activities as $activityIndex => $activity) {
+                $names = $activity->getTranslations('activity_name');
+                $notes = $activity->getTranslations('notes');
+                $this->days[$dayIndex]['activities'][$activityIndex]['place_id'] = $activity->place_id;
+                $this->days[$dayIndex]['activities'][$activityIndex]['name_en'] = $names['en'];
+                $this->days[$dayIndex]['activities'][$activityIndex]['name_ar'] = $names['ar'];
+                $this->days[$dayIndex]['activities'][$activityIndex]['start_time'] = $activity->start_time;
+                $this->days[$dayIndex]['activities'][$activityIndex]['end_time'] = $activity->end_time;
+                $this->days[$dayIndex]['activities'][$activityIndex]['note_en'] = $notes['en'];
+                $this->days[$dayIndex]['activities'][$activityIndex]['note_ar'] = $notes['ar'];
+            }
+        }
+    }
 
     protected $rules = [
         'name_en' => 'required',
@@ -17,12 +46,6 @@ class PlanCreate extends Component
         'description_en' => 'required',
         'description_ar' => 'required',
     ];
-
-    public function mount()
-    {
-        $this->places = Place::all();
-        $this->addDay();
-    }
 
     public function addDay()
     {
@@ -107,28 +130,8 @@ class PlanCreate extends Component
         ];
     }
 
-    public function submit()
-    {
-        $this->updateValidationRules();
-        $this->validate($this->rules, [], $this->messages());
-
-        $admin = Auth::guard('admin')->user();
-        $translatorName = ['en' => $this->name_en, 'ar' => $this->name_ar];
-        $translatorDescription = ['en' => $this->description_en, 'ar' => $this->description_ar];
-        $newPlan = $admin->plans()->create(['name' => $translatorName, 'description' => $translatorDescription]);
-        foreach ($this->days as $key => $day) {
-            $dayNumber = ++$key;
-            $activities = $day['activities'];
-            foreach ($activities as $activity) {
-                $translatorActivityName = ['en' => $activity['name_en'], 'ar' => $activity['name_ar']];
-                $translatorActivityNote = ['en' => $activity['note_en'], 'ar' => $activity['note_ar']];
-                $newPlan->activities()->create(['plan_id' => $newPlan->id, 'day_number' => $dayNumber, 'activity_name' => $translatorActivityName, 'start_time' => $activity['start_time'], 'end_time' => $activity['end_time'], 'place_id' => $activity['place_id'], 'notes' => $translatorActivityNote]);
-            }
-        }
-    }
-
     public function render()
     {
-        return view('livewire.plan-create');
+        return view('livewire.plan-update');
     }
 }

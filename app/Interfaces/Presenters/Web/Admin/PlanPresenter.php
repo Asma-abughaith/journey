@@ -13,7 +13,7 @@ class PlanPresenter
         $formattedPlans = [];
 
         foreach ($plans as $plan) {
-            $formattedPlans[] = $this->formatPlace($plan);
+            $formattedPlans[] = $this->formatPlan($plan);
         }
         return $formattedPlans;
     }
@@ -34,7 +34,7 @@ class PlanPresenter
             'description' => $plan->getDescription(),
             'description_en' => $plan->getDescriptionEn(),
             'description_ar' => $plan->getDescriptionAr(),
-            'creator'=>$plan->getCreator(),
+            'creator' => $plan->getCreator(),
             'activities' => $plan->getActivities()
         ];
     }

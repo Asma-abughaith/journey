@@ -144,5 +144,8 @@ return [
     'add' => 'إضافة',
     'at-least-on-day' => 'الرجاء تحديد يوم واحد على الأقل من الأيام',
     'remove' => 'إزالة',
-
+    "plan Deleted successfully!" => "تم حذف الخطة بنجاح!",
+    "topTenPlaces" => "أفضل عشرة أماكن",
+    "all-topTenPlaces" => "جميع أفضل عشرة أماكن",
+    "create-topTenPlaces" => "إنشاء افضل عشرة أماكن"
 ];

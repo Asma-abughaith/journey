@@ -195,15 +195,17 @@
                 {{--                @if (AdminPermission('view topTenPlaces') || AdminPermission('create topTenPlace')) --}}
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect" @yield('topTen-active')>
-                        <i class="ri-home-heart-fill"></i>
+                        <i class="ri-arrow-up-fill"></i>
                         <span>{{ __('app.topTenPlaces') }}</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
                         {{--                        @if (AdminPermission('view topTenPlaces')) --}}
-                        <li><a href="{{ route('admin.topTenPlaces.index') }}">{{ __('app.all-topTenPlaces') }}</a></li>
+                        <li><a href="{{ route('admin.topTenPlaces.index') }}">{{ __('app.all-topTenPlaces') }}</a>
+                        </li>
                         {{--                        @endif --}}
                         {{--                            @if (AdminPermission('create topTenPlace')) --}}
-                        <li><a href="{{ route('admin.topTenPlaces.create') }}">{{ __('app.create-topTenPlaces') }}</a></li>
+                        <li><a href="{{ route('admin.topTenPlaces.create') }}">{{ __('app.create-topTenPlaces') }}</a>
+                        </li>
                         {{--                    @endif --}}
                     </ul>
                 </li>
@@ -217,10 +219,13 @@
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
                         {{--                        @if (AdminPermission('view popularPlaces')) --}}
-                        <li><a href="{{ route('admin.popularPlaces.index') }}">{{ __('app.all-popularPlaces') }}</a></li>
+                        <li><a href="{{ route('admin.popularPlaces.index') }}">{{ __('app.all-popularPlaces') }}</a>
+                        </li>
                         {{--                        @endif --}}
                         {{--                            @if (AdminPermission('create popularPlace')) --}}
-                        <li><a href="{{ route('admin.popularPlaces.create') }}">{{ __('app.create-popularPlaces') }}</a></li>
+                        <li><a
+                                href="{{ route('admin.popularPlaces.create') }}">{{ __('app.create-popularPlaces') }}</a>
+                        </li>
                         {{--                    @endif --}}
                     </ul>
                 </li>
@@ -237,7 +242,8 @@
                         <li><a href="{{ route('admin.organizers.index') }}">{{ __('app.all-organizers') }}</a></li>
                         {{--                        @endif --}}
                         {{--                            @if (AdminPermission('create organizer')) --}}
-                        <li><a href="{{ route('admin.organizers.create') }}">{{ __('app.create-organizers') }}</a></li>
+                        <li><a href="{{ route('admin.organizers.create') }}">{{ __('app.create-organizers') }}</a>
+                        </li>
                         {{--                    @endif --}}
                     </ul>
                 </li>
@@ -269,10 +275,13 @@
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
                         {{--                        @if (AdminPermission('view volunteerings')) --}}
-                        <li><a href="{{ route('admin.volunteering.index') }}">{{ __('app.all-volunteerings') }}</a></li>
+                        <li><a href="{{ route('admin.volunteering.index') }}">{{ __('app.all-volunteerings') }}</a>
+                        </li>
                         {{--                        @endif --}}
                         {{--                            @if (AdminPermission('create volunteering')) --}}
-                        <li><a href="{{ route('admin.volunteering.create') }}">{{ __('app.create-volunteerings') }}</a></li>
+                        <li><a
+                                href="{{ route('admin.volunteering.create') }}">{{ __('app.create-volunteerings') }}</a>
+                        </li>
                         {{--                    @endif --}}
                     </ul>
                 </li>
