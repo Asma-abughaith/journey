@@ -107,7 +107,7 @@
                             <label class="form-label"
                                    for="">{{ __('app.places') }}</label>
                             <select class="select2 form-control " name="days[{{ $dayIndex }}][activities][{{ $activityIndex }}][places][]"
-                                     data-placeholder="{{ __('app.choose...') }}" required
+                                     multiple data-placeholder="{{ __('app.choose...') }}" required
                                     wire:model="days.{{ $dayIndex }}.activities.{{ $activityIndex }}.places">
                                 <option value="">{{ __('app.select-one') }}</option>
                                 @foreach ($places as $place)
