@@ -14,13 +14,6 @@ class PlanCreate extends Component
         'name_ar' => 'required',
         'description_en' => 'required',
         'description_ar' => 'required',
-        'days.*.activities.*.name_en' => 'required',
-        'days.*.activities.*.name_ar' => 'required',
-        'days.*.activities.*.start_datetime' => 'required|date_format:H:i',
-        'days.*.activities.*.end_datetime' => 'required|date_format:H:i|after:days.*.activities.*.start_datetime',
-        'days.*.activities.*.places' => 'required|array',
-        'days.*.activities.*.note_en' => 'required',
-        'days.*.activities.*.note_ar' => 'required',
     ];
 
     public function mount()
@@ -38,12 +31,13 @@ class PlanCreate extends Component
                     'name_ar' => '',
                     'start_datetime' => '',
                     'end_datetime' => '',
-                    'places' => [],
+                    'place_id' => '',
                     'note_en' => '',
                     'note_ar' => '',
                 ]
             ]
         ];
+        $this->updateValidationRules();
     }
 
     public function addActivity($dayIndex)
@@ -53,34 +47,64 @@ class PlanCreate extends Component
             'name_ar' => '',
             'start_datetime' => '',
             'end_datetime' => '',
-            'places' => [],
+            'place_id' => '',
             'note_en' => '',
             'note_ar' => '',
         ];
+        $this->updateValidationRules();
     }
 
     public function removeActivity($dayIndex, $activityIndex)
     {
         unset($this->days[$dayIndex]['activities'][$activityIndex]);
         $this->days[$dayIndex]['activities'] = array_values($this->days[$dayIndex]['activities']);
+        $this->updateValidationRules();
     }
 
     public function removeDay($dayIndex)
     {
         unset($this->days[$dayIndex]);
         $this->days = array_values($this->days);
+        $this->updateValidationRules();
+    }
+
+    public function updated($propertyName)
+    {
+        // If start_datetime or end_datetime of any activity is updated, update validation rules
+        if (strpos($propertyName, 'start_datetime') !== false || strpos($propertyName, 'end_datetime') !== false) {
+            $this->updateValidationRules();
+        }
+    }
+
+    protected function updateValidationRules()
+    {
+        $rules = $this->rules;
+        foreach ($this->days as $dayIndex => $day) {
+            foreach ($day['activities'] as $activityIndex => $activity) {
+                $activityRule = "required|date_format:H:i";
+                if ($activityIndex > 0) {
+                    // Ensure start time is after end time of previous activity
+                    $previousEndTime = $this->days[$dayIndex]['activities'][$activityIndex - 1]['end_datetime'];
+                    $activityRule .= "|after:$previousEndTime";
+                }
+                $rules["days.$dayIndex.activities.$activityIndex.start_datetime"] = $activityRule;
+                $rules["days.$dayIndex.activities.$activityIndex.end_datetime"] = $activityRule;
+            }
+        }
+        $this->rules = $rules;
     }
 
     public function submit()
     {
+
         $this->validate();
-        dd($this->validate());
 
-        // Do something with the submitted data
-        // Example: Saving to the database
-        // Plan::create([...]);
+        // Perform submission logic
+        // For demonstration, just dump the validated data
 
+        // After submission logic, you may want to redirect or show a success message
         session()->flash('message', 'Plan created successfully!');
+        return redirect()->to('/'); // Redirect to desired page
     }
 
     public function render()

@@ -4,6 +4,16 @@
     <form wire:submit.prevent="submit">
         @csrf
 
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
         <div class="row">
             <div class="col-md-6">
                 <div class="mb-3">
@@ -106,8 +116,8 @@
                         <div class="mb-3">
                             <label class="form-label"
                                    for="">{{ __('app.places') }}</label>
-                            <select class="select2 form-control " name="days[{{ $dayIndex }}][activities][{{ $activityIndex }}][places][]"
-                                     multiple data-placeholder="{{ __('app.choose...') }}" required
+                            <select class="select2 form-control " name="days[{{ $dayIndex }}][activities][{{ $activityIndex }}][places]"
+                                      data-placeholder="{{ __('app.choose...') }}" required
                                     wire:model="days.{{ $dayIndex }}.activities.{{ $activityIndex }}.places">
                                 <option value="">{{ __('app.select-one') }}</option>
                                 @foreach ($places as $place)
