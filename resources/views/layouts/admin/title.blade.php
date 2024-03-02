@@ -1,4 +1,4 @@
-<div class="row" style="background-color: #fff;  padding-top: 1.5% ;margin: -45px -25px 0 -25px;">
+<div class="row" style="background-color: #fff;  padding-top: 1.5% ;margin: -22px -25px 0 -25px;">
     <div class="col-12">
         <div class="page-title-box d-sm-flex align-items-center justify-content-between">
             <h4 class="mb-sm-0">{{ $title }}</h4>
