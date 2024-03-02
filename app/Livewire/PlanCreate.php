@@ -125,6 +125,8 @@ class PlanCreate extends Component
                 $newPlan->activities()->create(['plan_id' => $newPlan->id, 'day_number' => $dayNumber, 'activity_name' => $translatorActivityName, 'start_time' => $activity['start_time'], 'end_time' => $activity['end_time'], 'place_id' => $activity['place_id'], 'notes' => $translatorActivityNote]);
             }
         }
+        Toastr::success(__('validation.msg.plan-created-successfully!'), __('validation.msg.success'));
+        return redirect()->route('admin.plans.index');
     }
 
     public function render()
