@@ -133,7 +133,8 @@
                                     wire:model="days.{{ $dayIndex }}.activities.{{ $activityIndex }}.place_id">
                                     <option value="">{{ __('app.select-one') }}</option>
                                     @foreach ($places as $place)
-                                        <option value="{{ $place['id'] }}">{{ $place['name'] }}
+                                        <option value="{{ $place['id'] }}" wire:key="{{ $place['id'] }}">
+                                            {{ $place['name'] }}
                                         </option>
                                     @endforeach
                                 </select>

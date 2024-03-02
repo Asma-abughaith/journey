@@ -156,5 +156,7 @@ return [
     "topTenPlaces" => "Top Ten Places",
     "all-topTenPlaces" => "All Top Ten Places",
     "create-topTenPlaces" => "Create Top Ten Places",
-    "dashboard-topTen" => "Dashboard | Category"
+    "dashboard-topTen" => "Dashboard | Category",
+    "place" => "Place",
+    "rank" => 'Rank'
 ];

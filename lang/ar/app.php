@@ -147,5 +147,7 @@ return [
     "plan Deleted successfully!" => "تم حذف الخطة بنجاح!",
     "topTenPlaces" => "أفضل عشرة أماكن",
     "all-topTenPlaces" => "جميع أفضل عشرة أماكن",
-    "create-topTenPlaces" => "إنشاء افضل عشرة أماكن"
+    "create-topTenPlaces" => "إنشاء افضل عشرة أماكن",
+    "place" => "الموقع",
+    "rank" => 'التصنيف'
 ];

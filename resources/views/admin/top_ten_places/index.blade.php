@@ -7,7 +7,7 @@
         <div class="page-content">
             <div class="container-fluid">
                 <!-- start page title -->
-                @include('layouts.admin.title', ['title' => __('app.topTen')])
+                @include('layouts.admin.title', ['title' => __('app.top-ten')])
                 <!-- end page title -->
 
                 <div class="row" style="margin-top: 2.5%;">
@@ -35,13 +35,13 @@
                                                 <td class="text-center col-2">{{ $topTenPlace['place'] }}</td>
                                                 <td class="text-center col-2">{{ $topTenPlace['rank'] }}</td>
                                                 <td class="text-center col-2">
-{{--                                                    @if(AdminPermission('edit category'))--}}
+                                                    {{--                                                    @if (AdminPermission('edit category')) --}}
                                                     <a class="btn btn-outline-warning btn-sm edit" title="Edit"
                                                         href="{{ route('admin.topTenPlaces.edit', $topTenPlace['id']) }}">
                                                         <i class="fas fa-pencil-alt" title="Edit"></i>
                                                     </a>
-{{--                                                    @endif--}}
-{{--                                                    @if(AdminPermission('delete category'))--}}
+                                                    {{--                                                    @endif --}}
+                                                    {{--                                                    @if (AdminPermission('delete category')) --}}
                                                     <form method="post"
                                                         action="{{ route('admin.topTenPlaces.destroy', $topTenPlace['id']) }}"
                                                         style="display:inline;">
@@ -53,7 +53,7 @@
                                                             <i class="ri-delete-bin-line" title="Edit"></i>
                                                         </button>
                                                     </form>
-{{--                                                    @endif--}}
+                                                    {{--                                                    @endif --}}
                                                 </td>
 
                                             </tr>

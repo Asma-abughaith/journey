@@ -3,6 +3,8 @@
 namespace App\Livewire;
 
 use App\Models\Place;
+use Brian2694\Toastr\Facades\Toastr;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class PlanUpdate extends Component
@@ -96,7 +98,7 @@ class PlanUpdate extends Component
         $rules = $this->rules;
         foreach ($this->days as $dayIndex => $day) {
             foreach ($day['activities'] as $activityIndex => $activity) {
-                $activityRule = "required|date_format:H:i";
+                $activityRule = "required";
                 if ($activityIndex > 0) {
                     $previousEndTime = $this->days[$dayIndex]['activities'][$activityIndex - 1]['end_time'];
                     $activityRule .= "|after:$previousEndTime";
@@ -128,6 +130,31 @@ class PlanUpdate extends Component
             'days.*.activities.*.end_time.date_format' => 'The end time must be in the format H:i.',
             'days.*.activities.*.end_time.after' => 'The end time must be after the start time.',
         ];
+    }
+
+    public function submit()
+    {
+        $this->updateValidationRules();
+        $this->validate($this->rules, [], $this->messages());
+
+        $this->plan->activities()->delete();
+        $this->plan->delete();
+
+        $admin = Auth::guard('admin')->user();
+        $translatorName = ['en' => $this->name_en, 'ar' => $this->name_ar];
+        $translatorDescription = ['en' => $this->description_en, 'ar' => $this->description_ar];
+        $newPlan = $admin->plans()->create(['name' => $translatorName, 'description' => $translatorDescription]);
+        foreach ($this->days as $key => $day) {
+            $dayNumber = ++$key;
+            $activities = $day['activities'];
+            foreach ($activities as $activity) {
+                $translatorActivityName = ['en' => $activity['name_en'], 'ar' => $activity['name_ar']];
+                $translatorActivityNote = ['en' => $activity['note_en'], 'ar' => $activity['note_ar']];
+                $newPlan->activities()->create(['plan_id' => $newPlan->id, 'day_number' => $dayNumber, 'activity_name' => $translatorActivityName, 'start_time' => $activity['start_time'], 'end_time' => $activity['end_time'], 'place_id' => $activity['place_id'], 'notes' => $translatorActivityNote]);
+            }
+        }
+        Toastr::success(__('validation.msg.plan-created-successfully!'), __('validation.msg.success'));
+        return redirect()->route('admin.plans.index');
     }
 
     public function render()

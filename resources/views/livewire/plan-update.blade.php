@@ -76,8 +76,7 @@
                             <div class="mb-3">
                                 <label class="form-label"
                                     for="validationTooltip05">{{ __('app.activity-name-en') }}</label>
-                                <input type="text" class="form-control"
-                                    placeholder="{{ __('app.start_time-enter-en') }}"
+                                <input type="text" class="form-control" placeholder="{{ __('app.name-enter-en') }}"
                                     name="days[{{ $dayIndex }}][activities][{{ $activityIndex }}][name_en]"
                                     wire:model="days.{{ $dayIndex }}.activities.{{ $activityIndex }}.name_en">
                                 @error("days.$dayIndex.activities.$activityIndex.name_en")
@@ -127,13 +126,14 @@
                         <div class="col-md-3">
                             <div class="mb-3">
                                 <label class="form-label" for="">{{ __('app.places') }}</label>
-                                <select class="select2 form-control "
+                                <select class="form-control "
                                     name="days[{{ $dayIndex }}][activities][{{ $activityIndex }}][place_id]"
                                     data-placeholder="{{ __('app.choose...') }}"
                                     wire:model="days.{{ $dayIndex }}.activities.{{ $activityIndex }}.place_id">
                                     <option value="">{{ __('app.select-one') }}</option>
                                     @foreach ($places as $place)
-                                        <option value="{{ $place['id'] }}">{{ $place['name'] }}
+                                        <option value="{{ $place['id'] }}" wire:key="{{ $place['id'] }}">
+                                            {{ $place['name'] }}
                                         </option>
                                     @endforeach
                                 </select>
