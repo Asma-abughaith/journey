@@ -23,9 +23,9 @@ class Api implements IRoutesProvider
                     Route::group([], base_path('routes/api/user/without_authentication.php'));
                 });
 
-//                Route::middleware("auth")->group(function () {
-//                    Route::group([], base_path('routes/api/user/with_authentication.php'));
-//                });
+                Route::middleware('auth:api')->prefix('/{lang}/')->group(function () {
+                    Route::group([], base_path('routes/api/user/with_authentication.php'));
+                });
             });
         });
 

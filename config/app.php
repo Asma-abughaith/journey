@@ -166,6 +166,7 @@ return [
          */
         Brian2694\Toastr\ToastrServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
+        Laravel\Passport\PassportServiceProvider::class,
         /*
          * Application Service Providers...
          */

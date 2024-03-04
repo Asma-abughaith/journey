@@ -46,6 +46,9 @@ Route::get('volunteering/{volunteering_id}', [VolunteeringApiController::class, 
 
 Route::get('date/volunteering', [VolunteeringApiController::class, 'dateVolunteering'])->name('date.volunteering');
 
+Route::post('/register', [\App\Http\Controllers\Api\User\AuthUser\AuthUserController::class, 'register'])->name('register');
+Route::post('/login', [\App\Http\Controllers\Api\User\AuthUser\AuthUserController::class, 'login'])->name('login');
+
 
 
 
