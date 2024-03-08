@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\User\TopTenPlaceApiController;
 use App\Http\Controllers\Api\User\PopularPlaceApiController;
 use App\Http\Controllers\Api\User\EventApiController;
 use App\Http\Controllers\Api\User\VolunteeringApiController;
+use App\Http\Controllers\Api\User\AuthUser\AuthUserController;
 
 
 
@@ -46,11 +47,8 @@ Route::get('volunteering/{volunteering_id}', [VolunteeringApiController::class, 
 
 Route::get('date/volunteering', [VolunteeringApiController::class, 'dateVolunteering'])->name('date.volunteering');
 
-Route::post('/register', [\App\Http\Controllers\Api\User\AuthUser\AuthUserController::class, 'register'])->name('register');
-Route::post('/login', [\App\Http\Controllers\Api\User\AuthUser\AuthUserController::class, 'login'])->name('login');
 
-
-
+require __DIR__ . '/auth_user.php';
 
 Route::fallback(function () {
     return response()->json(['msg'=>'this url not exists in this project walaa 7abibi fix the url :) ']);

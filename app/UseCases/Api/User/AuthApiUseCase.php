@@ -7,21 +7,22 @@ use App\Interfaces\Gateways\Api\User\AuthApiRepositoryInterface;
 
 class AuthApiUseCase
 {
-    protected $AuthRepository;
+    protected $authRepository;
 
-    public function __construct(AuthApiRepositoryInterface $AuthRepository)
+    public function __construct(AuthApiRepositoryInterface $authRepository)
     {
-        $this->AuthRepository = $AuthRepository;
+        $this->authRepository = $authRepository;
     }
 
-    public function register($request)
+    public function register($request,$lang)
     {
-        return $this->AuthRepository->register($request);
+        $request['lang']=$lang;
+        return $this->authRepository->register($request,$lang);
     }
 
     public function login($request)
     {
-        return $this->AuthRepository->login($request);
+        return $this->authRepository->login($request);
     }
 
 

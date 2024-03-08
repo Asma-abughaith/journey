@@ -18,7 +18,6 @@ class UserResource extends JsonResource
             'id' => $this->id,
             'username' => $this->username,
             'email' => $this->email,
-            'token' => $this->token // Assuming accessToken is a property of your user model.
         ];
     }
 

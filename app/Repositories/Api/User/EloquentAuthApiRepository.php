@@ -9,7 +9,9 @@ use App\Interfaces\Gateways\Api\User\AuthApiRepositoryInterface;
 use App\Interfaces\Gateways\Api\User\CategoryApiRepositoryInterface;
 use App\Models\Category;
 use App\Models\User;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Resources\Json\ResourceCollection;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -19,9 +21,7 @@ class EloquentAuthApiRepository implements AuthApiRepositoryInterface
     public function register($userData)
     {
         $user = User::create($userData);
-        $token = $user->createToken('asma')->accessToken;
-        $user->token = $token;
-        Auth::login($user);
+        event(new Registered($user));
         return (new UserResource($user));
     }
 

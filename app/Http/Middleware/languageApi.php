@@ -19,7 +19,7 @@ class languageApi
      */
     public function handle(Request $request, Closure $next)
     {
-        $lang = $request->lang;
+        $lang = request()->lang;
         $availableLocales = array_keys(Config::get('app.available_locales', []));
 
         if (in_array($lang,$availableLocales)) {
