@@ -46,6 +46,8 @@ class Kernel extends HttpKernel
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             \App\Http\Middleware\languageApi::class,
             \Laravel\Passport\Http\Middleware\CreateFreshApiToken::class,
+            \Illuminate\Session\Middleware\StartSession::class,
+
         ],
     ];
 
@@ -68,13 +70,10 @@ class Kernel extends HttpKernel
         'signed' => \App\Http\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        'verifiedEmail' =>\App\Http\Middleware\EnsureEmailVerified::class,
         'admin' => \App\Http\Middleware\Admin::class,
-
         'checkPermission'=>\App\Http\Middleware\AdminCheckPermission::class,
         'lang'=> \App\Http\Middleware\language::class,
         'langApi'=> \App\Http\Middleware\languageApi::class,
-
-
-
     ];
 }

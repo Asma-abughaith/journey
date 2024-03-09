@@ -2,11 +2,12 @@
 
 namespace App\Http\Middleware;
 
+use App\Helpers\ApiResponse;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class EnsureEmailIsVerified
+class EnsureEmailVerified
 {
     /**
      * Handle an incoming request.
@@ -16,9 +17,7 @@ class EnsureEmailIsVerified
     public function handle(Request $request, Closure $next)
     {
         if ($request->user() && !$request->user()->hasVerifiedEmail() && !$request->is('email/verify', 'email/verify/*', 'logout')) {
-            return $request->expectsJson()
-                ? abort(403, 'Your email address is not verified.')
-                : redirect()->route('api.verification.send');
+            return ApiResponse::sendResponse(403,__('you-should-verify-email-first'),[]);
         }
 
         return $next($request);

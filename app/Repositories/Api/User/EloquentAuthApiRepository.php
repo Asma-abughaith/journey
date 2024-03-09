@@ -4,6 +4,7 @@ namespace App\Repositories\Api\User;
 
 use App\Http\Resources\AllCategoriesResource;
 use App\Http\Resources\CategoryResource;
+use App\Http\Resources\UserLoginResource;
 use App\Http\Resources\UserResource;
 use App\Interfaces\Gateways\Api\User\AuthApiRepositoryInterface;
 use App\Interfaces\Gateways\Api\User\CategoryApiRepositoryInterface;
@@ -49,10 +50,11 @@ class EloquentAuthApiRepository implements AuthApiRepositoryInterface
             $user = Auth::user();
             $token = $user->createToken('asma')->accessToken;
             $user->token = $token;
-            return new UserResource($user);
+            return new UserLoginResource($user);
+        }else{
+            throw new \Exception('Invalid credentials.');
         }
 
-        return response()->json(['error' => 'Unauthorized'], 401);
     }
 
 

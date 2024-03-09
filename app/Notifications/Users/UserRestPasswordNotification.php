@@ -37,7 +37,9 @@ class UserRestPasswordNotification extends Notification
      */
     public function toMail(object $notifiable): MailMessage
     {
-        $url = url(route('password.reset', [
+        //$url from user with user email to redirect the use to form
+        $url = url(route('api.password.reset', [
+            'lang' => app()->getLocale(),
             'token' => $this->token,
             'email' => $notifiable->getEmailForPasswordReset(),
         ], false));
