@@ -14,10 +14,10 @@ class AuthApiUseCase
         $this->authRepository = $authRepository;
     }
 
-    public function register($request,$lang)
+    public function register($request, $lang)
     {
-        $request['lang']=$lang;
-        return $this->authRepository->register($request,$lang);
+        $request['lang'] = $lang;
+        return $this->authRepository->register($request, $lang);
     }
 
     public function login($request)
@@ -25,6 +25,8 @@ class AuthApiUseCase
         return $this->authRepository->login($request);
     }
 
-
-
+    public function logout()
+    {
+        return $this->authRepository->logout();
+    }
 }

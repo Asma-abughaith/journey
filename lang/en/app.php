@@ -158,5 +158,9 @@ return [
     "create-topTenPlaces" => "Create Top Ten Places",
     "dashboard-topTen" => "Dashboard | Category",
     "place" => "Place",
-    "rank" => 'Rank'
+    "rank" => 'Rank',
+    "you-have-already-verified" => "You Have Already Verified",
+    "you-have-verified-email-successfully" => "You Have Verified Your Email Successfully",
+    "email-already-verified" => "Email Already Verified",
+    "email-sent-successfully" => "Email Sent Successfully",
 ];

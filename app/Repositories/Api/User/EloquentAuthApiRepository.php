@@ -26,8 +26,6 @@ class EloquentAuthApiRepository implements AuthApiRepositoryInterface
         return (new UserResource($user));
     }
 
-
-
     public function login($userData)
     {
         $credentials = [];
@@ -51,14 +49,18 @@ class EloquentAuthApiRepository implements AuthApiRepositoryInterface
             $token = $user->createToken('asma')->accessToken;
             $user->token = $token;
             return new UserLoginResource($user);
-        }else{
+        } else {
             throw new \Exception('Invalid credentials.');
         }
-
     }
 
+    public function logout()
+    {
+        $user = Auth::guard('api')->user();
+        $user->tokens()->each(function ($token) {
+            $token->delete();
+        });
 
-
-
-
+        return response()->json(['message' => 'Successfully logged out']);
+    }
 }

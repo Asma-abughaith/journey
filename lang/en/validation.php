@@ -215,6 +215,7 @@ return [
         'main-image' => 'Main Image',
         'gallery-images' => 'Gallery Images',
         'place-type' => 'Place Type',
+        'token' => 'Token',
     ],
     "msg" => [
         "admin-updated-successfully" => 'Admin Updated Successfully!',
@@ -275,7 +276,11 @@ return [
         'invalid-image-format' => 'Invalid Main Image Format',
         'invalid-gallery-image' => 'Invalid Gallery Image',
         'invalid-gallery-image-format' => 'Invalid Gallery Image Format',
-        'place-type' => 'Place Type'
+        'place-type' => 'Place Type',
+        'token-required' => 'Token Is Required',
+        'email-valid' => 'Email Is Valid',
+        'password-required' => 'Password Is Required',
+        'password-confirm' => 'Password Confirmation Is Required',
     ]
 
 ];

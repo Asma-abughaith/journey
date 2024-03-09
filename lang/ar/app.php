@@ -150,5 +150,5 @@ return [
     "create-topTenPlaces" => "إنشاء افضل عشرة أماكن",
     "place" => "الموقع",
     "rank" => 'التصنيف',
-    'you-have-already-verified'=>'لقد تم التحقق من بريدك الالكتروني بنجاح مسبقا'
+    'you-have-already-verified' => 'لقد تم التحقق من بريدك الالكتروني بنجاح مسبقا',
 ];
