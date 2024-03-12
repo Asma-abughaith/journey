@@ -9,6 +9,7 @@ use App\Interfaces\Gateways\Api\User\PlaceApiRepositoryInterface;
 use App\Interfaces\Gateways\Api\User\PopularPlaceApiRepositoryInterface;
 use App\Interfaces\Gateways\Api\User\SubCategoryApiRepositoryInterface;
 use App\Interfaces\Gateways\Api\User\TopTenPlaceApiRepositoryInterface;
+use App\Interfaces\Gateways\Api\User\UserProfileApiRepositoryInterface;
 use App\Interfaces\Gateways\Api\User\VolunteeringApiRepositoryInterface;
 use App\Interfaces\Gateways\Web\Admin\AdminRepositoryInterface;
 use App\Interfaces\Gateways\Web\Admin\CategoryRepositoryInterface;
@@ -31,6 +32,7 @@ use App\Repositories\Api\User\EloquentPlaceApiRepository;
 use App\Repositories\Api\User\EloquentPopularPlaceApiRepository;
 use App\Repositories\Api\User\EloquentSubCategoryApiRepository;
 use App\Repositories\Api\User\EloquentTopTenPlaceApiRepository;
+use App\Repositories\Api\User\EloquentUserProfileApiRepository;
 use App\Repositories\Api\User\EloquentVolunteeringApiRepository;
 use App\Repositories\Web\Admin\EloquentAdminRepository;
 use App\Repositories\Web\Admin\EloquentCategoryRepository;
@@ -89,6 +91,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(PlanRepositoryInterface::class, EloquentPlanRepository::class);
 
         $this->app->bind(AuthApiRepositoryInterface::class, EloquentAuthApiRepository::class);
+        $this->app->bind(UserProfileApiRepositoryInterface::class, EloquentUserProfileApiRepository::class);
 
     }
 
