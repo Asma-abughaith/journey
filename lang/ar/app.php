@@ -151,4 +151,5 @@ return [
     "place" => "الموقع",
     "rank" => 'التصنيف',
     'you-have-already-verified' => 'لقد تم التحقق من بريدك الالكتروني بنجاح مسبقا',
+    'verify-email-address'=>'تحقق من البريد الالكتروني'
 ];

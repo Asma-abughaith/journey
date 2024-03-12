@@ -6,7 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules;
 
 
-class NewPasswordRequest extends FormRequest
+class PasswordRestLinkRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,29 +24,25 @@ class NewPasswordRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'token' => ['required'],
             'email' => ['required', 'email'],
-            'password' => ['required', 'confirmed', Rules\Password::default()],
         ];
     }
 
     public function messages(): array
     {
         return [
-            'token.required' => __('validation.msg.token-required'),
             'email.required' => __('validation.msg.email-required'),
             'email.email' => __('validation.msg.email-valid'),
-            'password.required' => __('validation.msg.password-required'),
-            'password.confirmed' => __('validation.msg.password-confirm'),
+
         ];
     }
 
     public function attributes()
     {
         return [
-            'token' => __('validation.attributes.token'),
+
             'email' => __('validation.attributes.email'),
-            'password' => __('validation.attributes.password'),
+
         ];
     }
 }

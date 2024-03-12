@@ -8,6 +8,7 @@ use App\Http\Requests\Api\User\Auth\LoginApiUserRequest;
 use App\Http\Requests\Api\User\Auth\RegisterApiUserRequest;
 use App\UseCases\Api\User\AuthApiUseCase;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Request;
 
 class AuthUserController extends Controller
 {
@@ -47,5 +48,10 @@ class AuthUserController extends Controller
         } catch (\Exception $e) {
             return ApiResponse::sendResponse(Response::HTTP_BAD_REQUEST, "Something Went Wrong", $e->getMessage());
         }
+    }
+
+    public function resetPassword($lang)
+    {
+        return view('users.auth.rest_password',compact('lang'));
     }
 }

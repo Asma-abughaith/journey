@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\Api\User\AuthUser;
 
+use App\Helpers\ApiResponse;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\User\Auth\PasswordRestLinkRequest;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Password;
 
 class PasswordResetLinkController extends Controller
@@ -11,21 +14,23 @@ class PasswordResetLinkController extends Controller
     /**
      * Handle the incoming request.
      */
-    public function __invoke(Request $request)
+    public function __invoke(PasswordRestLinkRequest $request)
     {
-        $request->validate([
-            'email' => ['required', 'email'],
+        try {
+            $status = Password::sendResetLink(
+                $request->only('email')
+            );
 
-        ]);
-        // We will send the password reset link to this user. Once we have attempted
-        // to send the link, we will examine the response then see the message we
-        // need to show to the user. Finally, we'll send out a proper response.
-        $status = Password::sendResetLink(
-            $request->only('email')
-        );
-        //        return $status == Password::RESET_LINK_SENT
-        //            ? back()->with('status', __($status))
-        //            : back()->withInput($request->only('email'))
-        //    
+            if ($status == Password::RESET_LINK_SENT) {
+                return ApiResponse::sendResponse(200, 'the link for reset password sent successfully', null);
+
+            } else {
+                return ApiResponse::sendResponse(400, 'Unable to send the link for reset password', null);
+
+            }
+        } catch (\Exception $e) {
+            return ApiResponse::sendResponse(Response::HTTP_BAD_REQUEST, "Something Went Wrong", $e->getMessage());
+        }
+
     }
 }

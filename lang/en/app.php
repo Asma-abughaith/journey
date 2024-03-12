@@ -163,4 +163,5 @@ return [
     "you-have-verified-email-successfully" => "You Have Verified Your Email Successfully",
     "email-already-verified" => "Email Already Verified",
     "email-sent-successfully" => "Email Sent Successfully",
+    'verify-email-address'=>'Verify Email Address'
 ];
