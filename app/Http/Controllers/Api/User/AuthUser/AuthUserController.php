@@ -25,7 +25,7 @@ class AuthUserController extends Controller
             $user = $this->authApiUseCase->login($request->validated());
             return ApiResponse::sendResponse(200, 'user logged in Successfully', $user);
         } catch (\Exception $e) {
-            return ApiResponse::sendResponse(401, $e->getMessage(), null);
+            return ApiResponse::sendResponseError(401, $e->getMessage());
         }
     }
 

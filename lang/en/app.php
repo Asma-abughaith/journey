@@ -163,5 +163,6 @@ return [
     "you-have-verified-email-successfully" => "You Have Verified Your Email Successfully",
     "email-already-verified" => "Email Already Verified",
     "email-sent-successfully" => "Email Sent Successfully",
-    'verify-email-address'=>'Verify Email Address'
+    'verify-email-address'=>'Verify Email Address',
+    'you-must-verify-your-email-first' => 'You Must Verify Your Email First'
 ];

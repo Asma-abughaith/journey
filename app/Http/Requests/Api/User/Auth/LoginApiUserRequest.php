@@ -5,6 +5,10 @@ namespace App\Http\Requests\Api\User\Auth;
 use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules;
+use App\Helpers\ApiResponse;
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Http\Response;
 
 class LoginApiUserRequest extends FormRequest
 {
@@ -24,9 +28,16 @@ class LoginApiUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'username' => ['nullable', 'string', 'max:255'],
-            'email' => ['nullable', 'string', 'lowercase', 'email', 'max:255'],
+            'usernameOrEmail' => ['required', 'string', 'max:255'],
             'password' => ['required',  Rules\Password::defaults()],
         ];
+    }
+
+    protected function failedValidation(Validator $validator)
+    {
+        $errors = $validator->errors()->all();
+        throw new HttpResponseException(
+            ApiResponse::sendResponseError(Response::HTTP_BAD_REQUEST, $errors)
+        );
     }
 }

@@ -30,22 +30,22 @@ class EloquentAuthApiRepository implements AuthApiRepositoryInterface
     {
         $credentials = [];
 
-        if (isset($userData['username']) && isset($userData['password'])) {
+        if (isset($userData['usernameOrEmail']) && isset($userData['password'])) {
+            $usernameOrEmail = $userData['usernameOrEmail'];
+            $field = filter_var($usernameOrEmail, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
             $credentials = [
-                'username' => $userData['username'],
+                $field => $usernameOrEmail,
                 'password' => $userData['password']
             ];
-        } elseif (isset($userData['email']) && isset($userData['password'])) {
-            $credentials = [
-                'email' => $userData['email'],
-                'password' => $userData['password']
-            ];
-        } else {
-            return response()->json(['error' => 'Invalid credentials you should at least to enter username or email'], 400);
         }
 
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
+
+            // CHeck If This User Verify Email
+            if(!$user->hasVerifiedEmail())
+                throw new \Exception(__('app.you-must-verify-your-email-first'));
+
             $token = $user->createToken('asma')->accessToken;
             $user->token = $token;
             return new UserLoginResource($user);
