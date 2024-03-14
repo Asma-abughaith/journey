@@ -78,4 +78,9 @@ class Place extends Model implements HasMedia
             'category_id' // Local key on SubCategory table
         );
     }
+
+    public function favoritedBy()
+    {
+        return $this->morphToMany(User::class, 'favorable');
+    }
 }

@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Api\User;
 use App\Helpers\ApiResponse;
 use App\Http\Controllers\Controller;
 
+use App\Http\Requests\Api\User\Place\CreateFavoritePlaceRequest;
+use App\Rules\CheckIfExistsInFavoratblesRule;
+use App\Rules\CheckIfNotExistsInFavoratblesRule;
 use App\UseCases\Api\User\PlaceApiUseCase;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -42,6 +45,45 @@ class PlaceApiController extends Controller
         }
     }
 
+    public function createFavoritePlace(Request $request)
+    {
+        $id = $request->place_id;
 
+        $validator = Validator::make(['place_id' => $id], [
+            'place_id' => ['required','exists:places,id',new CheckIfExistsInFavoratblesRule('App\Models\Place')],
+        ]);
+
+        if ($validator->fails()) {
+            return ApiResponse::sendResponseError(Response::HTTP_BAD_REQUEST,  $validator->errors()->messages()['place_id'][0]);
+        }
+
+        try{
+            $createFavPlace = $this->placeApiUseCase->createFavoritePlace($id);
+
+            return ApiResponse::sendResponse(200, 'Favorite Places Created  Successfully', $createFavPlace);
+        } catch (\Exception $e) {
+            return ApiResponse::sendResponseError(Response::HTTP_BAD_REQUEST,  $e->getMessage());
+        }
+
+    }
+
+    public  function deleteFavoritePlace(Request $request){
+        $id = $request->place_id;
+
+        $validator = Validator::make(['place_id' => $id], [
+            'place_id' => ['required','exists:places,id',new CheckIfNotExistsInFavoratblesRule('App\Models\Place')],
+        ]);
+
+        if ($validator->fails()) {
+            return ApiResponse::sendResponseError(Response::HTTP_BAD_REQUEST,  $validator->errors()->messages()['place_id'][0]);
+        }
+
+        try{
+            $deleteFavPlace = $this->placeApiUseCase->deleteFavoritePlace($id);
+            return ApiResponse::sendResponse(200, 'Favorite Place Deleted Successfully', $deleteFavPlace);
+        } catch (\Exception $e) {
+            return ApiResponse::sendResponse(Response::HTTP_BAD_REQUEST, "Something Went Wrong", $e->getMessage());
+        }
+    }
 
 }

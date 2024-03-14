@@ -24,4 +24,9 @@ class Plan extends Model
     {
         return $this->hasMany(PlanActivity::class);
     }
+
+    public function favoritedBy()
+    {
+        return $this->morphToMany(User::class, 'favorable');
+    }
 }

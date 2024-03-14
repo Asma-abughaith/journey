@@ -62,4 +62,16 @@ class User extends Authenticatable implements MustVerifyEmail
     public function findForPassport($username) {
         return $this->where('email', $username)->orWhere('username', $username)->first();
     }
+
+    public function favoritePlaces()
+    {
+        return $this->morphedByMany(Place::class, 'favorable');
+    }
+
+    public function favoritePlans()
+    {
+        return $this->morphedByMany(Plan::class, 'favorable');
+    }
+
+
 }
