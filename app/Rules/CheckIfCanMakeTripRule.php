@@ -25,5 +25,15 @@ class CheckIfCanMakeTripRule implements ValidationRule
                 $fail(__('app.cant-make-trip-in-less-than-one-month'));
             }
         }
+
+        $date = request()->date;
+        $time = request()->time;
+
+        $date_time = Carbon::createFromFormat('Y-m-d H:i:s', $date . ' ' . $time, 'Asia/Riyadh');
+        $now = Carbon::now('Asia/Riyadh');
+
+        if ($date_time < $now) {
+            $fail('The time should not be in the future.');
+        }
     }
 }

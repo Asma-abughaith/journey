@@ -13,6 +13,11 @@ class TripApiUseCase
         $this->tripApiRepository = $tripApiRepository;
     }
 
+    public function trips()
+    {
+        return $this->tripApiRepository->trips();
+    }
+
     public function tags()
     {
         return $this->tripApiRepository->tags();
@@ -21,5 +26,10 @@ class TripApiUseCase
     public function createTrip($request)
     {
         return $this->tripApiRepository->createTrip($request);
+    }
+
+    public function joinTrip($trip_id)
+    {
+        return $this->tripApiRepository->joinTrip($trip_id);
     }
 }

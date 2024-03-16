@@ -7,12 +7,19 @@ use App\Http\Resources\TripResource;
 use App\Interfaces\Gateways\Api\User\TripApiRepositoryInterface;
 use App\Models\Tag;
 use App\Models\Trip;
+use App\Models\UsersTrip;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 
 class EloquentTripApiRepository implements TripApiRepositoryInterface
 {
+
+    public function trips()
+    {
+        $trips = Trip::all();
+        return TripResource::collection($trips);
+    }
 
     public function tags()
     {
@@ -23,7 +30,7 @@ class EloquentTripApiRepository implements TripApiRepositoryInterface
     public function createTrip($request)
     {
         $tags = json_decode($request->tags);
-        $age_range = json_encode(['min' => $request->age_min, 'max' => $request->max]);
+        $age_range = json_encode(['min' => $request->age_min, 'max' => $request->age_max]);
         $date_time = Carbon::createFromFormat('Y-m-d H:i:s', $request->date . ' ' . $request->time);
 
         $eloquentTrip = new Trip();
@@ -39,5 +46,13 @@ class EloquentTripApiRepository implements TripApiRepositoryInterface
         $eloquentTrip->save();
         $eloquentTrip->tags()->attach($tags);
         return new TripResource($eloquentTrip);
+    }
+
+    public function joinTrip($trip_id)
+    {
+        $eloquentJoinTrip = new UsersTrip();
+        $eloquentJoinTrip->user_id = Auth::guard('api')->user()->id;
+        $eloquentJoinTrip->trip_id = $trip_id;
+        $eloquentJoinTrip->save();
     }
 }

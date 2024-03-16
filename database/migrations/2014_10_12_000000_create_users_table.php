@@ -16,12 +16,13 @@ return new class extends Migration
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
             $table->string('username')->unique();
-            $table->enum('gender', ['male', 'female']);
+            $table->date('birthday')->nullable();
+            $table->enum('sex', [1, 2])->nullable()->comment('1 => male, 2 => female');
             $table->string('email')->unique();
             $table->text('description')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->enum('lang', ['en', 'ar'])->default("en");
+            $table->enum('lang', ['en', 'ar'])->default("ar");
             $table->string('phone_number')->nullable();
             $table->integer('points')->default(0);
             $table->decimal('longitude', 9, 6)->nullable();

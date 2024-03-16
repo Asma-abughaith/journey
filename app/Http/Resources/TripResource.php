@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -23,9 +24,10 @@ class TripResource extends JsonResource
             'age_min' => json_decode($this->age_range)->min,
             'age_max' => json_decode($this->age_range)->max,
             'sex' => $this->gender(),
-            'date' => $this->date_time->format('Y-m-d'),
-            'time' => $this->date_time->format('H:i:s'),
+            'date' => Carbon::parse($this->date_time)->format('Y-m-d'),
+            'time' => Carbon::parse($this->date_time)->format('H:i:s'),
             'attendance_number' => $this->attendance_number,
+            'users_number' => [],
         ];
     }
 }

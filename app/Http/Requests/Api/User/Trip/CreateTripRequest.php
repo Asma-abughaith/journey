@@ -25,6 +25,7 @@ class CreateTripRequest extends FormRequest
      */
     public function rules(): array
     {
+
         return [
             'place_id' => ['required', 'integer', 'exists:places,id'],
             'name' => ['required', 'string', 'max:255'],
@@ -42,7 +43,10 @@ class CreateTripRequest extends FormRequest
                     }
                 },
             ],
-            'time' => ['required', 'date_format:H:i:s', new CheckIfCanMakeTripRule],
+            'time' => [
+                'required', 'date_format:H:i:s', new CheckIfCanMakeTripRule,
+
+            ],
             'attendance_number' => ['required', 'integer', 'min:1'],
             'tags' => ['required'],
         ];

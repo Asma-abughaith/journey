@@ -20,20 +20,20 @@ class EloquentVolunteeringApiRepository implements VolunteeringApiRepositoryInte
     public function getAllVolunteerings()
     {
         $eloquentVolunteerings = Volunteering::OrderBy('start_datetime')->get();
-       return new ResourceCollection(VolunteeringResource::collection($eloquentVolunteerings));
+        return new ResourceCollection(VolunteeringResource::collection($eloquentVolunteerings));
     }
 
     public function activeVolunteerings()
     {
-        $now = now()->setTimezone('Asia/Amman');
+        $now = now()->setTimezone('Asia/Riyadh');
         $eloquentVolunteerings = Volunteering::orderBy('start_datetime')->where('status', '1')->where('end_datetime', '>=', $now)->get();
-        Volunteering::where('status','1')->whereNotIn('id', $eloquentVolunteerings->pluck('id'))->update(['status' => '0']);
+        Volunteering::where('status', '1')->whereNotIn('id', $eloquentVolunteerings->pluck('id'))->update(['status' => '0']);
         return new ResourceCollection(VolunteeringResource::collection($eloquentVolunteerings));
     }
 
     public function volunteering($id)
     {
-        $eloquentVolunteerings = Volunteering::where('id',$id)->first();
+        $eloquentVolunteerings = Volunteering::where('id', $id)->first();
         return new SingleVolunteeringResource($eloquentVolunteerings);
     }
 
@@ -42,7 +42,4 @@ class EloquentVolunteeringApiRepository implements VolunteeringApiRepositoryInte
         $eloquentVolunteerings = Volunteering::whereDate('start_datetime', '<=', $date)->whereDate('end_datetime', '>=', $date)->where('status', '1')->get();
         return new ResourceCollection(VolunteeringResource::collection($eloquentVolunteerings));
     }
-
-
-
 }
