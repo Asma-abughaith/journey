@@ -13,7 +13,7 @@ class CheckIfExistsInFavoratblesRule implements ValidationRule
 
     public function __construct($favarable_type)
     {
-        $this->favarable_type= $favarable_type;
+        $this->favarable_type = $favarable_type;
     }
     /**
      * Run the validation rule.

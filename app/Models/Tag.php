@@ -8,10 +8,10 @@ use Spatie\Translatable\HasTranslations;
 
 class Tag extends Model
 {
-    use HasFactory,HasTranslations;
+    use HasFactory, HasTranslations;
 
     public $translatable = ['name'];
-    public $guarded=[];
+    protected $fillable = ['id', 'name', 'icon'];
 
     public function taggables()
     {

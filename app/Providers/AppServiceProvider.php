@@ -50,8 +50,10 @@ use App\Repositories\Web\Admin\EloquentTopTenPlaceRepository;
 use App\Repositories\Web\Admin\EloquentVolunteeringRepository;
 use App\Repositories\Web\Setting\EloquentLanguageRepository;
 use App\Interfaces\Gateways\Api\User\CategoryApiRepositoryInterface;
+use App\Interfaces\Gateways\Api\User\TripApiRepositoryInterface;
 use App\Interfaces\Gateways\Web\Admin\SubCategoryRepositoryInterface;
 use App\Repositories\Api\User\EloquentCategoryApiRepository;
+use App\Repositories\Api\User\EloquentTripApiRepository;
 use App\Repositories\Web\Admin\EloquentSubCategoryRepository;
 use Illuminate\Support\ServiceProvider;
 
@@ -93,6 +95,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(AuthApiRepositoryInterface::class, EloquentAuthApiRepository::class);
         $this->app->bind(UserProfileApiRepositoryInterface::class, EloquentUserProfileApiRepository::class);
 
+        $this->app->bind(TripApiRepositoryInterface::class, EloquentTripApiRepository::class);
     }
 
     /**=

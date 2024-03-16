@@ -163,6 +163,10 @@ return [
     "you-have-verified-email-successfully" => "You Have Verified Your Email Successfully",
     "email-already-verified" => "Email Already Verified",
     "email-sent-successfully" => "Email Sent Successfully",
-    'verify-email-address'=>'Verify Email Address',
-    'you-must-verify-your-email-first' => 'You Must Verify Your Email First'
+    'verify-email-address' => 'Verify Email Address',
+    'you-must-verify-your-email-first' => 'You Must Verify Your Email First',
+    'both' => 'Both',
+    'male' => 'Male',
+    'female' => 'Female',
+    'cant-make-trip-in-less-than-one-month' => 'New trip date must be at least one full month older than the date of the last trip.'
 ];

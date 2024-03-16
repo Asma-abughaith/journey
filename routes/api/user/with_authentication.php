@@ -3,8 +3,15 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\User\UserProfileController;
 use App\Http\Controllers\Api\User\PlaceApiController;
+use App\Http\Controllers\Api\User\TripApiController;
 
-Route::get('/user/profile',[UserProfileController::class, 'userDetails'])->name('user.profile');
-Route::post('favorite/place/{place_id}',[PlaceApiController::class,'createFavoritePlace']);
-Route::delete('favorite/place/{place_id}/delete',[PlaceApiController::class,'deleteFavoritePlace']);
+Route::get('/user/profile', [UserProfileController::class, 'userDetails'])->name('user.profile');
+Route::post('favorite/place/{place_id}', [PlaceApiController::class, 'createFavoritePlace']);
+Route::delete('favorite/place/{place_id}/delete', [PlaceApiController::class, 'deleteFavoritePlace']);
 
+
+// All Routes For Trip 
+Route::group(['prefix' => 'trip'], function () {
+    Route::get('/tags', [TripApiController::class, 'tags']);
+    Route::post('/create', [TripApiController::class, 'create']);
+});
