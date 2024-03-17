@@ -10,10 +10,11 @@ Route::post('favorite/place/{place_id?}', [PlaceApiController::class, 'createFav
 Route::delete('favorite/place/{place_id?}/delete', [PlaceApiController::class, 'deleteFavoritePlace']);
 
 
-// All Routes For Trip 
+// All Routes For Trip
 Route::group(['prefix' => 'trip'], function () {
     Route::get('/tags', [TripApiController::class, 'tags']);
     Route::get('/', [TripApiController::class, 'index']);
     Route::post('/create', [TripApiController::class, 'create']);
     Route::post('/join/{trip_id?}', [TripApiController::class, 'join']);
+    Route::delete('/join/cancel/{trip_id?}',[TripApiController::class, 'cancelJoin']);
 });

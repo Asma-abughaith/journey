@@ -21,13 +21,16 @@ class CheckAgeGenderExistenceRule implements ValidationRule
 
         $user = Auth::guard('api')->user();
         $birthday = $user->birthday;
+        if(!$birthday){
+            $fail('you should enter your birthday first');
+        }
 
         $birthday = new \DateTime($birthday);
         $currentDate = new \DateTime();
         $age = $currentDate->diff($birthday)->y;
 
         if (!(json_decode($trip->age_range)->min <= $age && json_decode($trip->age_range)->max >= $age) && ($trip->sex == $user->sex || $trip->sex == 0)) {
-            $fail('You are not allowed to join this trip.');
+            $fail('You are not allowed to join this trip. because your age or sex not acceptable');
         }
 
         if (UsersTrip::where('trip_id', request()->trip_id)->where('user_id', Auth::guard('api')->user()->id)->exists()) {

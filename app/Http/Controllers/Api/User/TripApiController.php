@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\User;
 
 use App\Http\Controllers\Controller;
+use App\Rules\CheckUserTripExistsRule;
 use App\UseCases\Api\User\TripApiUseCase;
 use Illuminate\Http\Response;
 use App\Helpers\ApiResponse;
@@ -63,10 +64,31 @@ class TripApiController extends Controller
         }
 
         try {
+            $cancelJoinTrip = $this->tripApiUseCase->cancelJoinTrip($id);
+            return ApiResponse::sendResponse(200, 'You Join To Trip Successfully', []);
+        } catch (\Exception $e) {
+            return ApiResponse::sendResponseError(Response::HTTP_BAD_REQUEST,  $e->getMessage());
+        }
+    }
+
+    public function cancelJoin(Request $request)
+    {
+        $id = $request->trip_id;
+
+        $validator = Validator::make(['trip_id' => $id], [
+            'trip_id' => ['required', 'exists:trips,id', new CheckUserTripExistsRule()],
+        ]);
+
+        if ($validator->fails()) {
+            return ApiResponse::sendResponseError(Response::HTTP_BAD_REQUEST,  $validator->errors()->messages()['trip_id'][0]);
+        }
+
+        try {
             $createTrip = $this->tripApiUseCase->joinTrip($id);
             return ApiResponse::sendResponse(200, 'You Join To Trip Successfully', []);
         } catch (\Exception $e) {
             return ApiResponse::sendResponseError(Response::HTTP_BAD_REQUEST,  $e->getMessage());
         }
+
     }
 }

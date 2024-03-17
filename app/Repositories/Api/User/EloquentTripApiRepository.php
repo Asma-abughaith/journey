@@ -55,4 +55,9 @@ class EloquentTripApiRepository implements TripApiRepositoryInterface
         $eloquentJoinTrip->trip_id = $trip_id;
         $eloquentJoinTrip->save();
     }
+
+    public function cancelJoinTrip($trip_id)
+    {
+        UsersTrip::where('trip_id',$trip_id)->where('user_id',Auth::guard('api')->user()->id)->delete();
+    }
 }

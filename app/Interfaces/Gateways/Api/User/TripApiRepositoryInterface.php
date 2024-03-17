@@ -12,4 +12,5 @@ interface TripApiRepositoryInterface
     public function createTrip($data);
 
     public function joinTrip($trip_id);
+    public function cancelJoinTrip($trip_id);
 }

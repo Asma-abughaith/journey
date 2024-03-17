@@ -32,4 +32,9 @@ class TripApiUseCase
     {
         return $this->tripApiRepository->joinTrip($trip_id);
     }
+
+    public function cancelJoinTrip($trip_id)
+    {
+        return $this->tripApiRepository->cancelJoinTrip($trip_id);
+    }
 }
