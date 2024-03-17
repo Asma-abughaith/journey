@@ -17,13 +17,16 @@ class CheckUserTripExistsRule implements ValidationRule
      */
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        if (Trip::where('id',$value)->where('user_id', Auth::guard('api')->user()->id)->exists()) {
+        if (Trip::where('id', $value)->where('user_id', Auth::guard('api')->user()->id)->exists()) {
             $fail('You are the owner of trip so you can\'t cancel the join ');
         }
-        if (!UsersTrip::where('user_id', Auth::guard('api')->user()->id)->whereIn('status',[0,1])->where($attribute,$value)->exists()) {
+
+        if (!UsersTrip::where('user_id', Auth::guard('api')->user()->id)->where($attribute, $value)->exists()) {
             $fail('You didn\'t have join trip to cancel');
         }
 
-
+        if (UsersTrip::where('user_id', Auth::guard('api')->user()->id)->where('status', '2')->where($attribute, $value)->first()) {
+            $fail('the owner of trip already cancel the join');
+        }
     }
 }

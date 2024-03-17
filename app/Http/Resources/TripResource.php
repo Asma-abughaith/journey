@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Trip;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -15,19 +16,20 @@ class TripResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+
+        $trip = Trip::findOrFail($this->id);
+        $trip->load('usersTrip.user');
+        $users = UserResource::collection($trip->usersTrip->pluck('user'));
+
+
         return [
             'id' => $this->id,
             'place' => $this->place->name,
             'name' => $this->name,
-            'description' => $this->description,
             'cost' => $this->cost,
-            'age_min' => json_decode($this->age_range)->min,
-            'age_max' => json_decode($this->age_range)->max,
-            'sex' => $this->gender(),
-            'date' => Carbon::parse($this->date_time)->format('Y-m-d'),
-            'time' => Carbon::parse($this->date_time)->format('H:i:s'),
             'attendance_number' => $this->attendance_number,
-            'users_number' => [],
+            'trip_image' => $this->place->getFirstMediaUrl('main_place', 'main_place_app'),
+            'users_number' =>$users,
         ];
     }
 }

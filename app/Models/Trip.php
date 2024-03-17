@@ -37,4 +37,9 @@ class Trip extends Model
                 return __('app.female');
         }
     }
+
+    public function usersTrip()
+    {
+        return $this->hasMany(UsersTrip::class);
+    }
 }

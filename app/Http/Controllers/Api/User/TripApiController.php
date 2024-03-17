@@ -64,7 +64,7 @@ class TripApiController extends Controller
         }
 
         try {
-            $cancelJoinTrip = $this->tripApiUseCase->cancelJoinTrip($id);
+            $cancelJoinTrip = $this->tripApiUseCase->joinTrip($id);
             return ApiResponse::sendResponse(200, 'You Join To Trip Successfully', []);
         } catch (\Exception $e) {
             return ApiResponse::sendResponseError(Response::HTTP_BAD_REQUEST,  $e->getMessage());
@@ -84,11 +84,10 @@ class TripApiController extends Controller
         }
 
         try {
-            $createTrip = $this->tripApiUseCase->joinTrip($id);
-            return ApiResponse::sendResponse(200, 'You Join To Trip Successfully', []);
+            $createTrip = $this->tripApiUseCase->cancelJoinTrip($id);
+            return ApiResponse::sendResponse(200, 'You Are Left From The Trip Successfully', []);
         } catch (\Exception $e) {
             return ApiResponse::sendResponseError(Response::HTTP_BAD_REQUEST,  $e->getMessage());
         }
-
     }
 }
