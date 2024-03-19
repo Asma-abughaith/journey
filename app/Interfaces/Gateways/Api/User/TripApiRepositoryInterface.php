@@ -7,6 +7,10 @@ interface TripApiRepositoryInterface
 {
     public function trips();
 
+    public function privateTrips();
+
+    public function tripDetails($trip_id);
+
     public function tags();
 
     public function createTrip($data);

@@ -37,4 +37,14 @@ class TripApiUseCase
     {
         return $this->tripApiRepository->cancelJoinTrip($trip_id);
     }
+
+    public function privateTrips()
+    {
+        return $this->tripApiRepository->privateTrips();
+    }
+
+    public function tripDetails($trip_id)
+    {
+        return $this->tripApiRepository->tripDetails($trip_id);
+    }
 }

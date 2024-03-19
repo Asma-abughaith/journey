@@ -90,4 +90,24 @@ class TripApiController extends Controller
             return ApiResponse::sendResponseError(Response::HTTP_BAD_REQUEST,  $e->getMessage());
         }
     }
+
+    public function privateTrips()
+    {
+        try {
+            $tags = $this->tripApiUseCase->privateTrips();
+            return ApiResponse::sendResponse(200, 'Trips Retrieved Successfully', $tags);
+        } catch (\Exception $e) {
+            return ApiResponse::sendResponseError(Response::HTTP_BAD_REQUEST,  $e->getMessage());
+        }
+    }
+
+    public function tripDetails(Request $request)
+    {
+        try {
+            $tags = $this->tripApiUseCase->tripDetails($request->trip_id);
+            return ApiResponse::sendResponse(200, 'Trips Details Retrieved Successfully', $tags);
+        } catch (\Exception $e) {
+            return ApiResponse::sendResponseError(Response::HTTP_BAD_REQUEST,  $e->getMessage());
+        }
+    }
 }
