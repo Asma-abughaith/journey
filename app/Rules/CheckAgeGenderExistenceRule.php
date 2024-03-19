@@ -34,8 +34,12 @@ class CheckAgeGenderExistenceRule implements ValidationRule
                 $fail('You are not allowed to join this trip. because your age or sex not acceptable');
             }
 
-            if (UsersTrip::where('trip_id', request()->trip_id)->where('user_id', Auth::guard('api')->user()->id)->exists()) {
-                $fail('You have already joined this trip.');
+            if (UsersTrip::where('trip_id', request()->trip_id)->where('user_id', Auth::guard('api')->user()->id)->where('status', '2')->exists()) {
+                $fail('Your Join request Cancelled by Owner so you can\'t to join this trip again.');
+            }
+
+            if (UsersTrip::where('trip_id', request()->trip_id)->where('user_id', Auth::guard('api')->user()->id)->whereIn('status',['0','1'])->exists()) {
+                $fail('You already join this trip.');
             }
 
             if (Trip::where('user_id', Auth::guard('api')->user()->id)->exists()) {
