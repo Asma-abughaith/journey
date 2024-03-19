@@ -71,6 +71,16 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="mb-3">
+                                            <label class="form-label" for="icon">{{ __('app.icon') }}</label>
+                                            <input type="text" class="form-control"
+                                                   placeholder="{{ __('app.subCategory-icon') }}" name="icon"
+                                                   value="{{ old('icon') }}" id="icon" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
                                             <label class="form-label" for="imageInput">{{ __('app.image') }}</label>
                                             <div class="input-group">
                                                 <input type="file" class="form-control" name="image" id="imageInput">

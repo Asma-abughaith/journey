@@ -43,7 +43,7 @@ class EloquentSubCategoryRepository implements SubCategoryRepositoryInterface
         $eloquentSubCategory->setTranslations('name', $subCategoryData['name']);
 
         if ($imageData !== null) {
-            $extension = pathinfo($imageData['image']->getClientOriginalName(), PATHINFO_EXTENSION);
+            $extension = pathinfo($imageData['image']?->getClientOriginalName(), PATHINFO_EXTENSION);
             $filename = Str::random(10) . '_' . time() . '.' . $extension;
             $eloquentSubCategory->addMediaFromRequest('image')->usingFileName($filename)->toMediaCollection('subcategory');
         }

@@ -83,4 +83,10 @@ class Place extends Model implements HasMedia
     {
         return $this->morphToMany(User::class, 'favorable');
     }
+
+
+    public function visitors()
+    {
+        return $this->belongsToMany(User::class, 'visited_places', 'place_id', 'user_id');
+    }
 }

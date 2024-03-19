@@ -34,5 +34,20 @@ class PlaceApiUseCase
         return $this->placeApiRepository->deleteFavoritePlace($id);
     }
 
+    public function createVisitedPlace($id)
+    {
+        $user_id = Auth::guard('api')->user()->id;
+        $data=[
+            'place_id'=>$id,
+            'user_id'=>$user_id
+        ];
+        return $this->placeApiRepository->createVisitedPlace($data);
+    }
+
+    public function deleteVisitedPlace($id)
+    {
+        return $this->placeApiRepository->deleteVisitedPlace($id);
+    }
+
 
 }

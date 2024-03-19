@@ -8,6 +8,8 @@ use App\Http\Controllers\Api\User\TripApiController;
 Route::get('/user/profile', [UserProfileController::class, 'userDetails'])->name('user.profile');
 Route::post('favorite/place/{place_id?}', [PlaceApiController::class, 'createFavoritePlace']);
 Route::delete('favorite/place/{place_id?}/delete', [PlaceApiController::class, 'deleteFavoritePlace']);
+Route::post('visited/place/{place_id?}', [PlaceApiController::class, 'createVisitedPlace']);
+Route::delete('visited/place/{place_id?}/delete', [PlaceApiController::class, 'deleteVisitedPlace']);
 
 
 // All Routes For Trip

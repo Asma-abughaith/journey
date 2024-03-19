@@ -35,7 +35,8 @@ class SubCategoryUseCase
             [
                 'name' => $translator,
                 'priority' =>  $request['priority'],
-                'category_id'=>$request['category_id']
+                'category_id'=>$request['category_id'],
+                'icon'=>$request['icon'],
             ],
             ['image' => isset($request['image']) ? $request['image'] : null],
 
@@ -50,7 +51,8 @@ class SubCategoryUseCase
             [
                 'name' => $translator,
                 'priority' =>  $request['priority'],
-                'category_id'=>$request['category_id']
+                'category_id'=>$request['category_id'],
+                'icon'=>$request['icon'],
             ],
             ['image' => isset($request['image']) ? $request['image'] : null]
         );

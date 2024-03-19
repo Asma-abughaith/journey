@@ -31,4 +31,15 @@ class EloquentPlaceApiRepository implements PlaceApiRepositoryInterface
         $user= Auth::guard('api')->user();
         $user->favoritePlaces()->detach($id);
     }
+
+    public function createVisitedPlace($data)
+    {
+        $user= User::find($data['user_id']);
+        $user->visitedPlace()->attach([$data['place_id']]);
+    }
+
+    public function deleteVisitedPlace($id){
+        $user= Auth::guard('api')->user();
+        $user->visitedPlace()->detach($id);
+    }
 }

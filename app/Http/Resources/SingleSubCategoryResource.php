@@ -20,6 +20,7 @@ class SingleSubCategoryResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'image' => $this->getFirstMediaUrl('subcategory', 'subcategory_app'),
+            'icon'=>$this->icon,
             'places' => PlaceResource::collection(
                 $this->places()
                     ->selectRaw('*, ( 6371 * acos( cos( radians(?) ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians(?) ) + sin( radians(?) ) * sin( radians( latitude ) ) ) ) AS distance', [$userLat, $userLng, $userLat])

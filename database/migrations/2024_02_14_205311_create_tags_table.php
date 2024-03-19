@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('tags', function (Blueprint $table) {
             $table->id();
             $table->json('name');
-            $table->text('icon');
+            $table->longText('icon');
             $table->timestamps();
         });
     }

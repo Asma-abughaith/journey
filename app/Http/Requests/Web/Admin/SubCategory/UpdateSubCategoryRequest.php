@@ -32,6 +32,7 @@ class UpdateSubCategoryRequest extends FormRequest
             'category_id' => ['required'],
             'priority' => ['required', Rule::unique('sub_categories')->ignore($subCategoryId)],
             'image' => ['nullable', 'max:1024'],
+            'icon'=>'required'
 
         ];
     }
@@ -45,8 +46,9 @@ class UpdateSubCategoryRequest extends FormRequest
             'name_ar.min' => 'Arabic name must be at least :min characters.',
             'priority.required' => 'Priority is required.',
             'priority.min' => 'priority must be at least :min characters.',
-            'image.required' => 'The Image is required.',
+//            'image.required' => 'The Image is required.',
             'image.max' => 'The image size must be 1024.',
+            'icon.required'=>'The Icon is required'
         ];
     }
 

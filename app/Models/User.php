@@ -73,5 +73,9 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->morphedByMany(Plan::class, 'favorable');
     }
 
+    public function visitedPlace()
+    {
+        return $this->belongsToMany(Place::class, 'visited_places', 'user_id', 'place_id');
+    }
 
 }

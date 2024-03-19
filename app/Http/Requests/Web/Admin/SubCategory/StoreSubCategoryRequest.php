@@ -30,7 +30,8 @@ class StoreSubCategoryRequest extends FormRequest
             'name_ar' => ['required', 'string', 'min:3', Rule::unique('sub_categories', 'name->ar')],
             'category_id' => ['required'],
             'priority' => ['required', Rule::unique('sub_categories')],
-            'image' => 'required',
+            'image' => ['nullable', 'max:1024'],
+            'icon'=>'required'
 
         ];
     }
@@ -44,8 +45,9 @@ class StoreSubCategoryRequest extends FormRequest
             'name_ar.min' => 'Arabic name must be at least :min characters.',
             'priority.required' => 'Priority is required.',
             'priority.min' => 'priority must be at least :min characters.',
-            'image.required' => 'The Image is required.',
+//            'image.required' => 'The Image is required.',
             'image.max' => 'The image size must be 1024.',
+            'icon.required'=>'The Icon is required'
         ];
     }
 

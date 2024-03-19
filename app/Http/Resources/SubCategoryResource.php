@@ -18,6 +18,7 @@ class SubCategoryResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'priority'=>$this->priority,
+            'icon'=>$this->icon,
             'image' => $this->getFirstMediaUrl('subcategory', 'subcategory_app'),
 
         ];
