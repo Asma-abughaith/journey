@@ -53,7 +53,7 @@ class EloquentTripApiRepository implements TripApiRepositoryInterface
         $eloquentTrip->description = $request->description;
         $eloquentTrip->cost = $request->cost;
         $eloquentTrip->age_range = $age_range;
-        $eloquentTrip->sex = $request->sex;
+        $eloquentTrip->sex = $request->gender;
         $eloquentTrip->date_time = $date_time;
         $eloquentTrip->attendance_number = $request->attendance_number;
         $eloquentTrip->save();

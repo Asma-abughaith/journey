@@ -33,7 +33,7 @@ class CreateTripRequest extends FormRequest
             'cost' => ['required', 'numeric', 'min:0'],
             'age_min' => ['required', 'integer'],
             'age_max' => ['required', 'integer'],
-            'sex' => ['required'],
+            'gender' => ['required'],
             'date' => [
                 'required',
                 'date',
