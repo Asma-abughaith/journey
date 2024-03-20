@@ -7,6 +7,7 @@ use App\Rules\CheckUserTripExistsRule;
 use App\UseCases\Api\User\TripApiUseCase;
 use Illuminate\Http\Response;
 use App\Helpers\ApiResponse;
+use App\Http\Requests\Api\User\Trip\AcceptCancelUserRequest;
 use App\Http\Requests\Api\User\Trip\CreateTripRequest;
 use App\Rules\CheckAgeGenderExistenceRule;
 use Illuminate\Http\Request;
@@ -24,8 +25,8 @@ class TripApiController extends Controller
     public function index()
     {
         try {
-            $tags = $this->tripApiUseCase->trips();
-            return ApiResponse::sendResponse(200, 'Trips Retrieved Successfully', $tags);
+            $trips = $this->tripApiUseCase->trips();
+            return ApiResponse::sendResponse(200, __('app.trips-retrieved-successfully'), $trips);
         } catch (\Exception $e) {
             return ApiResponse::sendResponseError(Response::HTTP_BAD_REQUEST,  $e->getMessage());
         }
@@ -35,7 +36,7 @@ class TripApiController extends Controller
     {
         try {
             $tags = $this->tripApiUseCase->tags();
-            return ApiResponse::sendResponse(200, 'Tags Retrieved Successfully', $tags);
+            return ApiResponse::sendResponse(200, __('app.tags-retrieved-successfully'), $tags);
         } catch (\Exception $e) {
             return ApiResponse::sendResponseError(Response::HTTP_BAD_REQUEST,  $e->getMessage());
         }
@@ -45,7 +46,7 @@ class TripApiController extends Controller
     {
         try {
             $createTrip = $this->tripApiUseCase->createTrip($request);
-            return ApiResponse::sendResponse(200, 'Trip Created Successfully', $createTrip);
+            return ApiResponse::sendResponse(200, __('app.trip-created-successfully'), $createTrip);
         } catch (\Exception $e) {
             return ApiResponse::sendResponseError(Response::HTTP_BAD_REQUEST,  $e->getMessage());
         }
@@ -64,8 +65,8 @@ class TripApiController extends Controller
         }
 
         try {
-            $cancelJoinTrip = $this->tripApiUseCase->joinTrip($id);
-            return ApiResponse::sendResponse(200, 'You Join To Trip Successfully', []);
+            $this->tripApiUseCase->joinTrip($id);
+            return ApiResponse::sendResponse(200, __('app.you-join-to-trip-successfully'), []);
         } catch (\Exception $e) {
             return ApiResponse::sendResponseError(Response::HTTP_BAD_REQUEST,  $e->getMessage());
         }
@@ -84,8 +85,8 @@ class TripApiController extends Controller
         }
 
         try {
-            $createTrip = $this->tripApiUseCase->cancelJoinTrip($id);
-            return ApiResponse::sendResponse(200, 'You Are Left From The Trip Successfully', []);
+            $this->tripApiUseCase->cancelJoinTrip($id);
+            return ApiResponse::sendResponse(200, __('app.you-are-left-from-the-trip-successfully'), []);
         } catch (\Exception $e) {
             return ApiResponse::sendResponseError(Response::HTTP_BAD_REQUEST,  $e->getMessage());
         }
@@ -94,8 +95,8 @@ class TripApiController extends Controller
     public function privateTrips()
     {
         try {
-            $tags = $this->tripApiUseCase->privateTrips();
-            return ApiResponse::sendResponse(200, 'Trips Retrieved Successfully', $tags);
+            $trips = $this->tripApiUseCase->privateTrips();
+            return ApiResponse::sendResponse(200, __('app.trips-retrieved-successfully'), $trips);
         } catch (\Exception $e) {
             return ApiResponse::sendResponseError(Response::HTTP_BAD_REQUEST,  $e->getMessage());
         }
@@ -104,8 +105,18 @@ class TripApiController extends Controller
     public function tripDetails(Request $request)
     {
         try {
-            $tags = $this->tripApiUseCase->tripDetails($request->trip_id);
-            return ApiResponse::sendResponse(200, 'Trips Details Retrieved Successfully', $tags);
+            $details = $this->tripApiUseCase->tripDetails($request->trip_id);
+            return ApiResponse::sendResponse(200, __('app.trips-details-retrieved-successfully'), $details);
+        } catch (\Exception $e) {
+            return ApiResponse::sendResponseError(Response::HTTP_BAD_REQUEST,  $e->getMessage());
+        }
+    }
+
+    public function acceptCancel(AcceptCancelUserRequest $request)
+    {
+        try {
+            $this->tripApiUseCase->changeStatus($request);
+            return ApiResponse::sendResponse(200, __('app.the-status-change-successfully'), []);
         } catch (\Exception $e) {
             return ApiResponse::sendResponseError(Response::HTTP_BAD_REQUEST,  $e->getMessage());
         }

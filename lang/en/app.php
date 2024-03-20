@@ -168,5 +168,19 @@ return [
     'both' => 'Both',
     'male' => 'Male',
     'female' => 'Female',
-    'cant-make-trip-in-less-than-one-month' => 'New trip date must be at least one full month older than the date of the last trip.'
+    'cant-make-trip-in-less-than-one-month' => 'New trip date must be at least one full month older than the date of the last trip.',
+    'this-user-has-already-joined-this-trip' => 'This user has already joined this trip',
+    'this-user-has-been-rejected-from-this-trip' => 'This user has been rejected from this trip',
+    'this-journey-has-already-moved-on.-you-can-return-to-the-home-page-and-search-for-another-trip' => 'This journey has already moved on. You can return to the home page and search for another trip',
+    'you-are-not-allowed-to-join-this-trip.-because-your-age-or-sex-not-acceptable' => 'You are not allowed to join this trip. because your age or sex not acceptable',
+    'your-Join-request-cancelled-by-owner-so-you-cant-to-join-this-trip-again.' => 'Your Join request Cancelled by Owner so you can\'t to join this trip again.',
+    'you-already-join-this-trip.' => 'You already join this trip.',
+    'you-the-creator-of-trip-you-cant-to-join-this-trip.' => 'You the creator of trip you can\'t to join this trip.',
+    'trips-retrieved-successfully' => 'Trips Retrieved Successfully',
+    'tags-retrieved-successfully' => 'Tags Retrieved Successfully',
+    'trip-created-successfully' => 'Trip Created Successfully',
+    'you-join-to-trip-successfully' => 'You Join To Trip Successfully',
+    'you-are-left-from-the-trip-successfully' => 'You Are Left From The Trip Successfully',
+    'trips-details-retrieved-successfully' => 'Trip Details Retrieved Successfully',
+    'the-status-change-successfully' => 'The Status Change Successfully'
 ];

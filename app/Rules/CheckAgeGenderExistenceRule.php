@@ -28,22 +28,29 @@ class CheckAgeGenderExistenceRule implements ValidationRule
 
             $birthday = new \DateTime($birthday);
             $currentDate = new \DateTime();
+            $currentDate->setTimezone(new \DateTimeZone('Asia/Riyadh'));
             $age = $currentDate->diff($birthday)->y;
+            $tripDateTime = new \DateTime($trip->date_time);
+
+
+            if ($currentDate->format('Y-m-d H:i:s') > $tripDateTime->format('Y-m-d H:i:s')) {
+                $fail('app.this-journey-has-already-moved-on.-you-can-return-to-the-home-page-and-search-for-another-trip');
+            }
 
             if (!(json_decode($trip->age_range)->min <= $age && json_decode($trip->age_range)->max >= $age) && ($trip->sex == $user->sex || $trip->sex == 0)) {
-                $fail('You are not allowed to join this trip. because your age or sex not acceptable');
+                $fail('app.you-are-not-allowed-to-join-this-trip.-because-your-age-or-sex-not-acceptable');
             }
 
             if (UsersTrip::where('trip_id', request()->trip_id)->where('user_id', Auth::guard('api')->user()->id)->where('status', '2')->exists()) {
-                $fail('Your Join request Cancelled by Owner so you can\'t to join this trip again.');
+                $fail('app.your-Join-request-cancelled-by-owner-so-you-cant-to-join-this-trip-again.');
             }
 
-            if (UsersTrip::where('trip_id', request()->trip_id)->where('user_id', Auth::guard('api')->user()->id)->whereIn('status',['0','1'])->exists()) {
-                $fail('You already join this trip.');
+            if (UsersTrip::where('trip_id', request()->trip_id)->where('user_id', Auth::guard('api')->user()->id)->whereIn('status', ['0', '1'])->exists()) {
+                $fail('app.you-already-join-this-trip.');
             }
 
             if (Trip::where('user_id', Auth::guard('api')->user()->id)->exists()) {
-                $fail('You the creator of trip you can\'t to join this trip.');
+                $fail('app.you-the-creator-of-trip-you-cant-to-join-this-trip.');
             }
         }
     }

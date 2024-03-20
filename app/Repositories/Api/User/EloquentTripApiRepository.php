@@ -87,4 +87,11 @@ class EloquentTripApiRepository implements TripApiRepositoryInterface
         }
         return true;
     }
+
+    public function changeStatus($request)
+    {
+        $userTrip = UsersTrip::where('user_id', $request->user_id)->where('trip_id', $request->trip_id)->first();
+        $userTrip->status = $request->status;
+        $userTrip->save();
+    }
 }

@@ -15,7 +15,7 @@ class ApiResponse
         return response()->json($response, $code);
     }
 
-    static function sendResponseError($code =401 ,$msg =null)
+    static function sendResponseError($code = 401, $msg = null)
     {
         $response = [
             'status'    => $code,
@@ -23,6 +23,5 @@ class ApiResponse
         ];
 
         return response()->json($response, $code);
-
     }
 }

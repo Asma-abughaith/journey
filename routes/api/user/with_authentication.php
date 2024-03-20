@@ -20,7 +20,8 @@ Route::group(['prefix' => 'trip'], function () {
     Route::post('/create', [TripApiController::class, 'create']);
     Route::post('/join/{trip_id?}', [TripApiController::class, 'join']);
     Route::delete('/join/cancel/{trip_id?}', [TripApiController::class, 'cancelJoin']);
+    Route::get('/trip/details/{trip_id}', [TripApiController::class, 'tripDetails']);
     // ============ private Trips ============
     Route::get('/private', [TripApiController::class, 'privateTrips']);
-    Route::get('/private/trip/details/{trip_id}', [TripApiController::class, 'tripDetails']);
+    Route::post('/accept/cancel/user', [TripApiController::class, 'acceptCancel']);
 });

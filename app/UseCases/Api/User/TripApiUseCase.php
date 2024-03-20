@@ -47,4 +47,9 @@ class TripApiUseCase
     {
         return $this->tripApiRepository->tripDetails($trip_id);
     }
+
+    public function changeStatus($request)
+    {
+        return $this->tripApiRepository->changeStatus($request);
+    }
 }
