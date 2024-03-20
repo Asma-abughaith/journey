@@ -8,7 +8,9 @@ use App\Http\Resources\SingleEventResource;
 use App\Interfaces\Gateways\Api\User\EventApiRepositoryInterface;
 use App\Models\Category;
 use App\Models\Event;
+use App\Models\User;
 use Illuminate\Http\Resources\Json\ResourceCollection;
+use Illuminate\Support\Facades\Auth;
 
 
 class EloquentEventApiRepository implements EventApiRepositoryInterface
@@ -21,7 +23,7 @@ class EloquentEventApiRepository implements EventApiRepositoryInterface
 
     public function activeEvents()
     {
-        $now = now()->setTimezone('Asia/Amman');
+        $now = now()->setTimezone('Asia/Riyadh');
         $eloquentEvents = Event::orderBy('start_datetime')->where('status', '1')->where('end_datetime', '>=', $now)->get();
         Event::where('status','1')->whereNotIn('id', $eloquentEvents->pluck('id'))->update(['status' => '0']);
         return new ResourceCollection(EventResource::collection($eloquentEvents));
@@ -39,6 +41,18 @@ class EloquentEventApiRepository implements EventApiRepositoryInterface
         return new ResourceCollection(EventResource::collection($eloquentEvents));
     }
 
+    public function createInterestEvent($data)
+    {
+        $user= User::find($data['user_id']);
+        $user->eventInterestables()->attach([$data['event_id']]);
+    }
+
+    public function disinterestEvent($id)
+    {
+        $user= Auth::guard('api')->user();
+        $user->eventInterestables()->detach($id);
+
+    }
 
 
 }

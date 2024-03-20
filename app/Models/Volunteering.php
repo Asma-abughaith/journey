@@ -34,4 +34,9 @@ class Volunteering extends Model implements HasMedia
                 $this->addMediaConversion('volunteering_website')->width(250)->height(250)->format('webp');
             });
     }
+
+    public function interestedUsers()
+    {
+        return $this->morphToMany(User::class, 'interestable')->withTimestamps();
+    }
 }

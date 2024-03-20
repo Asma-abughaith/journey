@@ -41,6 +41,7 @@ class StoreEventRequest extends FormRequest
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp',
             'start_datetime' => 'required|date|after_or_equal:today',
             'end_datetime' => 'required|date|after:start_datetime',
+            'attendance_number'=>'nullable|numeric'
            ];
     }
 

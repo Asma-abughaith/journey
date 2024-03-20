@@ -23,6 +23,24 @@ class EventEntity
     private $start_datetime;
     private $end_datetime;
     private $organizers =[];
+    private $attendance_number;
+
+    /**
+     * @return mixed
+     */
+    public function getAttendanceNumber()
+    {
+        return $this->attendance_number;
+    }
+
+    /**
+     * @param mixed $attendance_number
+     */
+    public function setAttendanceNumber($attendance_number): void
+    {
+        $this->attendance_number = $attendance_number;
+    }
+
 
     /**
      * @return mixed

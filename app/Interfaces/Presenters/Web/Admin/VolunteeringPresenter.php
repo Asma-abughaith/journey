@@ -46,6 +46,8 @@ class VolunteeringPresenter
             'hours_worked'=>$volunteering->getHoursWorked(),
             'status'=>$status,
             'organizers'=>$volunteering->getOrganizers(),
+            'attendance_number'=>$volunteering->getAttendanceNumber(),
+
         ];
     }
 }

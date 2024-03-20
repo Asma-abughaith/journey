@@ -22,6 +22,7 @@ return new class extends Migration
             $table->enum('status', ['0', '1']);
             $table->decimal('price', 8, 2)->nullable();
             $table->string('link');
+            $table->integer('attendance_number')->nullable();
             $table->timestamps();
             $table->foreign('region_id')->references('id')->on('regions')->cascadeOnDelete()->cascadeOnUpdate();
         });

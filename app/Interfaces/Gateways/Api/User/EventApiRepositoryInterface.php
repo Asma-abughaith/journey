@@ -9,6 +9,8 @@ interface EventApiRepositoryInterface
     public function activeEvents();
     public function event($id);
     public function dateEvents($date);
+    public function createInterestEvent($data);
+    public function disinterestEvent($id);
 
 
 

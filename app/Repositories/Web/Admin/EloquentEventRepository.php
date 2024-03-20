@@ -111,6 +111,7 @@ class EloquentEventRepository implements EventRepositoryInterface
         $event->setLink($eloquentEvent->link);
         $event->setStartDatetime($eloquentEvent->start_datetime);
         $event->setEndDatetime($eloquentEvent->end_datetime);
+        $event->setAttendanceNumber($eloquentEvent->attendance_number);
         $event->setImage($eloquentEvent->getFirstMediaUrl('event', 'event_website'));
         return $event;
     }
