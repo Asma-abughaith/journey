@@ -3,6 +3,7 @@
 namespace App\UseCases\Api\User;
 
 use App\Interfaces\Gateways\Api\User\VolunteeringApiRepositoryInterface;
+use Illuminate\Support\Facades\Auth;
 
 class VolunteeringApiUseCase
 {
@@ -32,6 +33,23 @@ class VolunteeringApiUseCase
     {
         return $this->volunteeringRepository->dateVolunteerings($date);
     }
+
+    public function interestVolunteering($id)
+    {
+        $user_id = Auth::guard('api')->user()->id;
+        $data=[
+            'volunteering_id'=>$id,
+            'user_id'=>$user_id
+        ];
+        return $this->volunteeringRepository->createInterestVolunteering($data);
+
+    }
+
+    public function disinterestVolunteering($id)
+    {
+        return $this->volunteeringRepository->disinterestVolunteering($id);
+    }
+
 
 
 

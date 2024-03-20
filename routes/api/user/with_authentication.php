@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\User\UserProfileController;
 use App\Http\Controllers\Api\User\PlaceApiController;
 use App\Http\Controllers\Api\User\TripApiController;
+use App\Http\Controllers\Api\User\EventApiController;
+use App\Http\Controllers\Api\User\VolunteeringApiController;
 
 Route::get('/user/profile', [UserProfileController::class, 'userDetails'])->name('user.profile');
 Route::post('favorite/place/{place_id?}', [PlaceApiController::class, 'createFavoritePlace']);
@@ -23,4 +25,16 @@ Route::group(['prefix' => 'trip'], function () {
     // ============ private Trips ============
     Route::get('/private', [TripApiController::class, 'privateTrips']);
     Route::get('/private/trip/details/{trip_id}', [TripApiController::class, 'tripDetails']);
+});
+
+// All Routes For event
+Route::group(['prefix' => 'event'], function () {
+    Route::post('/interest/{event_id?}', [EventApiController::class, 'interest']);
+    Route::delete('/disinterest/{event_id?}', [EventApiController::class, 'disinterest']);
+});
+
+// All Routes For event
+Route::group(['prefix' => 'volunteering'], function () {
+    Route::post('/interest/{volunteering_id?}', [VolunteeringApiController::class, 'interest']);
+    Route::delete('/disinterest/{volunteering_id?}', [VolunteeringApiController::class, 'disinterest']);
 });

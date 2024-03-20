@@ -11,8 +11,10 @@ use App\Interfaces\Gateways\Api\User\EventApiRepositoryInterface;
 use App\Interfaces\Gateways\Api\User\VolunteeringApiRepositoryInterface;
 use App\Models\Category;
 use App\Models\Event;
+use App\Models\User;
 use App\Models\Volunteering;
 use Illuminate\Http\Resources\Json\ResourceCollection;
+use Illuminate\Support\Facades\Auth;
 
 
 class EloquentVolunteeringApiRepository implements VolunteeringApiRepositoryInterface
@@ -41,5 +43,17 @@ class EloquentVolunteeringApiRepository implements VolunteeringApiRepositoryInte
     {
         $eloquentVolunteerings = Volunteering::whereDate('start_datetime', '<=', $date)->whereDate('end_datetime', '>=', $date)->where('status', '1')->get();
         return new ResourceCollection(VolunteeringResource::collection($eloquentVolunteerings));
+    }
+
+    public function createInterestVolunteering($data)
+    {
+        $user= User::find($data['user_id']);
+        $user->volunteeringInterestables()->attach([$data['volunteering_id']]);
+    }
+    public function disinterestVolunteering($id)
+    {
+        $user= Auth::guard('api')->user();
+        $user->volunteeringInterestables()->detach($id);
+
     }
 }

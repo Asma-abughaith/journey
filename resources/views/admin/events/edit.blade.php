@@ -146,6 +146,16 @@
                                             </select>
                                         </div>
                                     </div>
+
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label class="form-label"
+                                                   for="validationTooltip11">{{ __('app.attendance-number') }}</label>
+                                            <input type="number" class="form-control"
+                                                   placeholder="{{ __('app.attendance-number') }}" name="attendance_number"
+                                                   value="{{ old('attendance_number',$event['attendance_number']) }}" id="validationTooltip11"  >
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <div class="row">

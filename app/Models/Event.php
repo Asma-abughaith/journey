@@ -36,4 +36,9 @@ class Event extends Model implements HasMedia
             });
     }
 
+    public function interestedUsers()
+    {
+        return $this->morphToMany(User::class, 'interestable')->withTimestamps();
+    }
+
 }

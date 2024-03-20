@@ -46,6 +46,7 @@ class EventPresenter
             'price'=>$event->getPrice(),
             'status'=>$status,
             'organizers'=>$event->getOrganizers(),
+            'attendance_number'=>$event->getAttendanceNumber(),
         ];
     }
 }

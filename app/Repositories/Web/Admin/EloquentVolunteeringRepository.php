@@ -111,6 +111,7 @@ class EloquentVolunteeringRepository implements VolunteeringRepositoryInterface
         $volunteering->setLink($eloquentVolunteering->link);
         $volunteering->setStartDatetime($eloquentVolunteering->start_datetime);
         $volunteering->setEndDatetime($eloquentVolunteering->end_datetime);
+        $volunteering->setAttendanceNumber($eloquentVolunteering->attendance_number);
         $volunteering->setImage($eloquentVolunteering->getFirstMediaUrl('volunteering', 'volunteering_website'));
         return $volunteering;
     }

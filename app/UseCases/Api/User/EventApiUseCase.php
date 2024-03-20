@@ -5,6 +5,7 @@ namespace App\UseCases\Api\User;
 
 use App\Interfaces\Gateways\Api\User\CategoryApiRepositoryInterface;
 use App\Interfaces\Gateways\Api\User\EventApiRepositoryInterface;
+use Illuminate\Support\Facades\Auth;
 
 class EventApiUseCase
 {
@@ -33,6 +34,24 @@ class EventApiUseCase
     public function dateEvents($date)
     {
         return $this->eventRepository->dateEvents($date);
+    }
+
+    public function interestEvent($id)
+    {
+        $user_id = Auth::guard('api')->user()->id;
+        $data=[
+            'event_id'=>$id,
+            'user_id'=>$user_id
+        ];
+        return $this->eventRepository->createInterestEvent($data);
+
+    }
+
+    public function disinterestEvent($id)
+    {
+
+        return $this->eventRepository->disinterestEvent($id);
+
     }
 
 

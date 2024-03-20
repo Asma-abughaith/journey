@@ -78,4 +78,14 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->belongsToMany(Place::class, 'visited_places', 'user_id', 'place_id');
     }
 
+    public function eventInterestables()
+    {
+        return $this->morphedByMany(Event::class, 'interestable')->withTimestamps();
+    }
+
+    public function volunteeringInterestables()
+    {
+        return $this->morphedByMany(Volunteering::class, 'interestable')->withTimestamps();
+    }
+
 }

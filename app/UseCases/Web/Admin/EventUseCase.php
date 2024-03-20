@@ -47,6 +47,7 @@ class EventUseCase
                 'price'=> $request['price'],
                 'start_datetime'=>$request['start_datetime'],
                 'end_datetime'=>$request['end_datetime'],
+                'attendance_number'=>$request['attendance_number']
 
             ],
             ['image' => isset($request['image']) ? $request['image'] : null],
@@ -75,6 +76,7 @@ class EventUseCase
                 'price'=> $request['price'],
                 'start_datetime'=>$request['start_datetime'],
                 'end_datetime'=>$request['end_datetime'],
+                'attendance_number'=>$request['attendance_number']
             ],
             ['image' => isset($request['image']) ? $request['image'] : null],
             $request['organizers_id'],

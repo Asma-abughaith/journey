@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api\User;
 use App\Helpers\ApiResponse;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\User\Event\DayRequest;
+use App\Rules\CheckUserInterestExistsRule;
+use App\Rules\CheckUserInterestRule;
 use App\UseCases\Api\User\EventApiUseCase;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -68,5 +70,43 @@ class EventApiController extends Controller
             return ApiResponse::sendResponse(Response::HTTP_BAD_REQUEST, "Something Went Wrong", $e->getMessage());
         }
 
+    }
+
+    public function interest(Request $request)
+    {
+        $id = $request->event_id;
+        $validator = Validator::make(['event_id' => $id], [
+            'event_id' => ['required','exists:events,id',new CheckUserInterestRule('App\Models\Event')],
+        ]);
+
+
+        if ($validator->fails()) {
+            return ApiResponse::sendResponseError(Response::HTTP_BAD_REQUEST,  $validator->errors()->messages()['event_id'][0]);
+        }
+        try{
+            $events = $this->eventApiUseCase->interestEvent($id);
+            return ApiResponse::sendResponse(200, 'You Add Event in Interest  Successfully', $events);
+        } catch (\Exception $e) {
+            return ApiResponse::sendResponseError(Response::HTTP_BAD_REQUEST, $e->getMessage());
+        }
+    }
+
+    public function disinterest(Request $request)
+    {
+        $id = $request->event_id;
+        $validator = Validator::make(['event_id' => $id], [
+            'event_id' => ['required','exists:events,id',new CheckUserInterestExistsRule('App\Models\Event')],
+        ]);
+
+
+        if ($validator->fails()) {
+            return ApiResponse::sendResponseError(Response::HTTP_BAD_REQUEST,  $validator->errors()->messages()['event_id'][0]);
+        }
+        try{
+            $events = $this->eventApiUseCase->disinterestEvent($id);
+            return ApiResponse::sendResponse(200, 'You delete Event in Interest  Successfully', $events);
+        } catch (\Exception $e) {
+            return ApiResponse::sendResponseError(Response::HTTP_BAD_REQUEST, $e->getMessage());
+        }
     }
 }
