@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api\User;
 use App\Helpers\ApiResponse;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\User\Event\DayRequest;
+use App\Rules\CheckIfExistsInFavoratblesRule;
+use App\Rules\CheckIfNotExistsInFavoratblesRule;
 use App\Rules\CheckUserInterestExistsRule;
 use App\Rules\CheckUserInterestRule;
 use App\UseCases\Api\User\VolunteeringApiUseCase;
@@ -110,5 +112,45 @@ class VolunteeringApiController extends Controller
         } catch (\Exception $e) {
             return ApiResponse::sendResponseError(Response::HTTP_BAD_REQUEST, $e->getMessage());
         }
+    }
+
+    public function favorite(Request $request)
+    {
+        $id = $request->volunteering_id;
+        $validator = Validator::make(['volunteering_id' => $id], [
+            'volunteering_id' => ['required','exists:volunteerings,id',new CheckIfExistsInFavoratblesRule('App\Models\Volunteering')],
+        ]);
+
+
+        if ($validator->fails()) {
+            return ApiResponse::sendResponseError(Response::HTTP_BAD_REQUEST,  $validator->errors()->messages()['volunteering_id'][0]);
+        }
+        try{
+            $events = $this->volunteeringApiUseCase->favorite($id);
+            return ApiResponse::sendResponse(200, 'You Add volunteering in favorite  Successfully', $events);
+        } catch (\Exception $e) {
+            return ApiResponse::sendResponseError(Response::HTTP_BAD_REQUEST, $e->getMessage());
+        }
+
+    }
+
+    public function deleteFavorite(Request $request)
+    {
+        $id = $request->volunteering_id;
+        $validator = Validator::make(['volunteering_id' => $id], [
+            'volunteering_id' => ['required','exists:volunteerings,id',new CheckIfNotExistsInFavoratblesRule('App\Models\Volunteering')],
+        ]);
+
+
+        if ($validator->fails()) {
+            return ApiResponse::sendResponseError(Response::HTTP_BAD_REQUEST,  $validator->errors()->messages()['volunteering_id'][0]);
+        }
+        try{
+            $events = $this->volunteeringApiUseCase->deleteFavorite($id);
+            return ApiResponse::sendResponse(200, 'You delete volunteering from favorite Successfully', $events);
+        } catch (\Exception $e) {
+            return ApiResponse::sendResponseError(Response::HTTP_BAD_REQUEST, $e->getMessage());
+        }
+
     }
 }

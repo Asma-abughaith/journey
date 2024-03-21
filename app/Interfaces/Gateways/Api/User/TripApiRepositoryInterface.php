@@ -20,4 +20,6 @@ interface TripApiRepositoryInterface
     public function cancelJoinTrip($trip_id);
 
     public function changeStatus($data);
+    public function favorite($id);
+    public function deleteFavorite($id);
 }

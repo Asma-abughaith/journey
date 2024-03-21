@@ -11,6 +11,8 @@ interface VolunteeringApiRepositoryInterface
     public function dateVolunteerings($date);
     public function createInterestVolunteering($data);
     public function disinterestVolunteering($id);
+    public function favorite($id);
+    public function deleteFavorite($id);
 
 
 

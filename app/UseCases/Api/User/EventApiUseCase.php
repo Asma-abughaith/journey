@@ -54,6 +54,18 @@ class EventApiUseCase
 
     }
 
+    public function favorite($id)
+    {
+        return $this->eventRepository->favorite($id);
+
+    }
+
+    public function deleteFavorite($id)
+    {
+        return $this->eventRepository->deleteFavorite($id);
+
+    }
+
 
 
 }

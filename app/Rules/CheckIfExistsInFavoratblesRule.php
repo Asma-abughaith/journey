@@ -29,7 +29,7 @@ class CheckIfExistsInFavoratblesRule implements ValidationRule
             ->exists();
 
         if ($exists) {
-            $fail(__('app.you-already-make-this-place-as-favorite'));
+            $fail(__('app.you-already-make-this-as-favorite'));
         }
     }
 }
