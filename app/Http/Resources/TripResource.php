@@ -24,12 +24,14 @@ class TripResource extends JsonResource
 
         return [
             'id' => $this->id,
-            'place' => $this->place->name,
-            'name' => $this->name,
+            'image' => $this->place->getFirstMediaUrl('main_place', 'main_place_app'),
             'date' => Carbon::parse($this->date_time)->format('Y-m-d'),
-            'cost' => $this->cost,
+            'name' => $this->name,
+            'place_name' => $this->place->name,
+            'price' => $this->cost,
             'attendance_number' => $this->attendance_number,
-            'trip_image' => $this->place->getFirstMediaUrl('main_place', 'main_place_app'),
+            'location' => $this->place->region->name . ' ' . $this->place->address,
+            'attendance_number' => $this->attendance_number,
             'users_number' => $users,
         ];
     }
