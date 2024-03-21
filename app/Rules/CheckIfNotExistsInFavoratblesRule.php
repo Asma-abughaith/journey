@@ -30,7 +30,7 @@ class CheckIfNotExistsInFavoratblesRule implements ValidationRule
             ->exists();
 
         if (!$exists) {
-            $fail(__('app.there-is-nothing-favorite-place-belong-to-this-user'));
+            $fail(__('app.there-is-nothing-favorite-belong-to-this-user'));
         }
     }
 }

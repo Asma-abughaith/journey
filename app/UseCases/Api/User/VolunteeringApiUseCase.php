@@ -50,6 +50,18 @@ class VolunteeringApiUseCase
         return $this->volunteeringRepository->disinterestVolunteering($id);
     }
 
+    public function favorite($id)
+    {
+        return $this->volunteeringRepository->favorite($id);
+
+    }
+
+    public function deleteFavorite($id)
+    {
+        return $this->volunteeringRepository->deleteFavorite($id);
+
+    }
+
 
 
 

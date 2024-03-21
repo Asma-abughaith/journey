@@ -56,4 +56,14 @@ class EloquentVolunteeringApiRepository implements VolunteeringApiRepositoryInte
         $user->volunteeringInterestables()->detach($id);
 
     }
+    public function favorite($id)
+    {
+        $user= Auth::guard('api')->user();
+        $user->favoriteVolunteering()->attach($id);
+    }
+
+    public function deleteFavorite($id){
+        $user= Auth::guard('api')->user();
+        $user->favoriteVolunteering()->detach($id);
+    }
 }

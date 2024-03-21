@@ -52,4 +52,14 @@ class TripApiUseCase
     {
         return $this->tripApiRepository->changeStatus($request);
     }
+
+    public function favorite($id)
+    {
+        return $this->tripApiRepository->favorite($id);
+    }
+
+    public function deleteFavorite($id)
+    {
+        return $this->tripApiRepository->deleteFavorite($id);
+    }
 }

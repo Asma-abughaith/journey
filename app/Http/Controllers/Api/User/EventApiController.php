@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api\User;
 use App\Helpers\ApiResponse;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\User\Event\DayRequest;
+use App\Rules\CheckIfExistsInFavoratblesRule;
+use App\Rules\CheckIfNotExistsInFavoratblesRule;
 use App\Rules\CheckUserInterestExistsRule;
 use App\Rules\CheckUserInterestRule;
 use App\UseCases\Api\User\EventApiUseCase;
@@ -108,5 +110,45 @@ class EventApiController extends Controller
         } catch (\Exception $e) {
             return ApiResponse::sendResponseError(Response::HTTP_BAD_REQUEST, $e->getMessage());
         }
+    }
+
+    public function favorite(Request $request)
+    {
+
+        $id = $request->event_id;
+        $validator = Validator::make(['event_id' => $id], [
+            'event_id' => ['required','exists:events,id',new CheckIfExistsInFavoratblesRule('App\Models\Event')],
+        ]);
+
+
+        if ($validator->fails()) {
+            return ApiResponse::sendResponseError(Response::HTTP_BAD_REQUEST,  $validator->errors()->messages()['event_id'][0]);
+        }
+        try{
+            $events = $this->eventApiUseCase->favorite($id);
+            return ApiResponse::sendResponse(200, 'You Add Event in favorite  Successfully', $events);
+        } catch (\Exception $e) {
+            return ApiResponse::sendResponseError(Response::HTTP_BAD_REQUEST, $e->getMessage());
+        }
+    }
+
+    public function deleteFavorite(Request $request)
+    {
+        $id = $request->event_id;
+        $validator = Validator::make(['event_id' => $id], [
+            'event_id' => ['required','exists:events,id',new CheckIfNotExistsInFavoratblesRule('App\Models\Event')],
+        ]);
+
+
+        if ($validator->fails()) {
+            return ApiResponse::sendResponseError(Response::HTTP_BAD_REQUEST,  $validator->errors()->messages()['event_id'][0]);
+        }
+        try{
+            $events = $this->eventApiUseCase->deleteFavorite($id);
+            return ApiResponse::sendResponse(200, 'You delete Event from favorite  Successfully', $events);
+        } catch (\Exception $e) {
+            return ApiResponse::sendResponseError(Response::HTTP_BAD_REQUEST, $e->getMessage());
+        }
+
     }
 }
