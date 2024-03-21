@@ -25,7 +25,7 @@ Route::group(['prefix' => 'trip'], function () {
     Route::get('/trip/details/{trip_id}', [TripApiController::class, 'tripDetails']);
     // ============ private Trips ============
     Route::get('/private', [TripApiController::class, 'privateTrips']);
-    Route::post('/accept/cancel/user', [TripApiController::class, 'acceptCancel']);
+    Route::post('/user/{status?}', [TripApiController::class, 'acceptCancel']);
 });
 
 // All Routes For event

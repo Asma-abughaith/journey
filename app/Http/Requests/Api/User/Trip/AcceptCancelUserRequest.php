@@ -25,8 +25,6 @@ class AcceptCancelUserRequest extends FormRequest
         return [
             'trip_id' => ['required', 'integer', 'exists:trips,id', new CheckUserTripStatus],
             'user_id' => ['required', 'integer', 'exists:users,id'],
-            'status' => ['required', 'integer']
-
         ];
     }
 }

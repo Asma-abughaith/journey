@@ -12,6 +12,7 @@ use App\Http\Requests\Api\User\Trip\CreateTripRequest;
 use App\Rules\CheckAgeGenderExistenceRule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class TripApiController extends Controller
 {
@@ -114,6 +115,15 @@ class TripApiController extends Controller
 
     public function acceptCancel(AcceptCancelUserRequest $request)
     {
+        $validator = Validator::make(
+            ['status' => $request->status],
+            ['status' => ['required', Rule::in(['accept', 'cancel'])],]
+        );
+
+        if ($validator->fails()) {
+            return ApiResponse::sendResponseError(Response::HTTP_BAD_REQUEST, $validator->errors()->first('status'));
+        }
+
         try {
             $this->tripApiUseCase->changeStatus($request);
             return ApiResponse::sendResponse(200, __('app.the-status-change-successfully'), []);
