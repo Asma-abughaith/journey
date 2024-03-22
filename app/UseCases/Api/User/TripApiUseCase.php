@@ -80,4 +80,9 @@ class TripApiUseCase
         return $this->tripApiRepository->deleteReview($id);
 
     }
+
+    public function allReviews($id)
+    {
+        return $this->tripApiRepository->allReviews($id);
+    }
 }

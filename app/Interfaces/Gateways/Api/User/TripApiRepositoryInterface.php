@@ -25,4 +25,5 @@ interface TripApiRepositoryInterface
     public function addReview($data);
     public function updateReview($data);
     public function deleteReview($id);
+    public function allReviews($id);
 }

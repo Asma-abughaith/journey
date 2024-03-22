@@ -129,4 +129,9 @@ class EloquentTripApiRepository implements TripApiRepositoryInterface
         $user= Auth::guard('api')->user();
         $user->reviewTrip()->detach($id);
     }
+
+    public function allReviews($id)
+    {
+        //you should first make like for reviews and then retrieve it
+    }
 }

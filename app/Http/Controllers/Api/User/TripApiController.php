@@ -243,4 +243,23 @@ class TripApiController extends Controller
             return ApiResponse::sendResponseError(Response::HTTP_BAD_REQUEST, $e->getMessage());
         }
     }
+
+    public function reviews(Request $request)
+    {
+        $validator = Validator::make([
+            'trip_id' => $request->trip_id,
+        ], [
+            'trip_id' => ['required','exists:trips,id'],
+        ]);
+
+        if ($validator->fails()) {
+            return ApiResponse::sendResponseError(Response::HTTP_BAD_REQUEST,  $validator->errors()->messages());
+        }
+        try{
+            $trip = $this->tripApiUseCase->allReviews($validator->validated());
+            return ApiResponse::sendResponse(200, 'You got all the  reviews in trip Successfully', $trip);
+        } catch (\Exception $e) {
+            return ApiResponse::sendResponseError(Response::HTTP_BAD_REQUEST, $e->getMessage());
+        }
+    }
 }
