@@ -15,10 +15,10 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('review_id');
+            $table->enum('status', ['0', '1'])->comment('0=>dislike, 1=>like');
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreign('review_id')->references('id')->on('reviewables')->cascadeOnDelete()->cascadeOnUpdate();
-
         });
     }
 

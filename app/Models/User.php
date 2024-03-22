@@ -9,20 +9,21 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\DB;
 //use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 use Laravel\Passport\HasApiTokens;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use HasApiTokens, HasFactory, Notifiable,HasRoles;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles;
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
-    protected $guarded=[];
+    protected $guarded = [];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -59,7 +60,8 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->morphMany('App\Models\Plan', 'creator');
     }
 
-    public function findForPassport($username) {
+    public function findForPassport($username)
+    {
         return $this->where('email', $username)->orWhere('username', $username)->first();
     }
 
@@ -108,4 +110,8 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->morphedByMany(Trip::class, 'reviewable')->withTimestamps();
     }
 
+    public function reviewLike()
+    {
+        return $this->hasMany(Reviewable::class, 'review_likes');
+    }
 }

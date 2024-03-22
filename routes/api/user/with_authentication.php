@@ -27,16 +27,15 @@ Route::group(['prefix' => 'trip'], function () {
     Route::get('/private', [TripApiController::class, 'privateTrips']);
     Route::post('/user/{status?}', [TripApiController::class, 'acceptCancel']);
 
-
-
-
     Route::post('/favorite/{trip_id?}', [TripApiController::class, 'favorite']);
     Route::delete('/favorite/{trip_id?}/delete', [TripApiController::class, 'deleteFavorite']);
 
-    Route::post('add/review/{trip_id?}',[TripApiController::class, 'addReview']);
-    Route::post('update/review/{trip_id?}',[TripApiController::class, 'updateReview']);
-    Route::delete('delete/review/{trip_id?}',[TripApiController::class, 'deleteReview']);
-    Route::get('all/reviews/{trip_id?}',[TripApiController::class, 'reviews']);
+    Route::post('add/review/{trip_id?}', [TripApiController::class, 'addReview']);
+    Route::post('update/review/{trip_id?}', [TripApiController::class, 'updateReview']);
+    Route::delete('delete/review/{trip_id?}', [TripApiController::class, 'deleteReview']);
+    Route::get('all/reviews/{trip_id?}', [TripApiController::class, 'reviews']);
+
+    Route::get('review/{status?}/{review_id?}', [TripApiController::class, 'likeDislike']);
 });
 
 // All Routes For event

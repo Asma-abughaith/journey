@@ -6,6 +6,7 @@ use App\Http\Resources\TagsResource;
 use App\Http\Resources\TripDetailsResource;
 use App\Http\Resources\TripResource;
 use App\Interfaces\Gateways\Api\User\TripApiRepositoryInterface;
+use App\Models\Reviewable;
 use App\Models\Tag;
 use App\Models\Trip;
 use App\Models\UsersTrip;
@@ -98,17 +99,19 @@ class EloquentTripApiRepository implements TripApiRepositoryInterface
 
     public function favorite($id)
     {
-        $user= Auth::guard('api')->user();
+        $user = Auth::guard('api')->user();
         $user->favoriteTrip()->attach($id);
     }
 
-    public function deleteFavorite($id){
-        $user= Auth::guard('api')->user();
+    public function deleteFavorite($id)
+    {
+        $user = Auth::guard('api')->user();
         $user->favoriteTrip()->detach($id);
     }
+
     public function addReview($data)
     {
-        $user= Auth::guard('api')->user();
+        $user = Auth::guard('api')->user();
         $user->reviewTrip()->attach($data['trip_id'], [
             'rating' => $data['rating'],
             'comment' => $data['comment']
@@ -117,7 +120,7 @@ class EloquentTripApiRepository implements TripApiRepositoryInterface
 
     public function updateReview($data)
     {
-        $user= Auth::guard('api')->user();
+        $user = Auth::guard('api')->user();
         $user->reviewTrip()->sync([$data['trip_id'] => [
             'rating' => $data['rating'],
             'comment' => $data['comment']
@@ -126,12 +129,27 @@ class EloquentTripApiRepository implements TripApiRepositoryInterface
 
     public function deleteReview($id)
     {
-        $user= Auth::guard('api')->user();
+        $user = Auth::guard('api')->user();
         $user->reviewTrip()->detach($id);
     }
 
     public function allReviews($id)
     {
         //you should first make like for reviews and then retrieve it
+    }
+
+    public function reviewsLike($request)
+    {
+        $status = $request->status == "like" ? '1' : '0';
+        $user = Auth::guard('api')->user();
+
+        $review = Reviewable::find($request->review_id);
+        $review->like->attach(['user_id' => $user->id, 'status' => $status]);
+
+        // $user->reviewLike()->attach($request->review_id, ['status' => $status]);
+        // $user->reviewLike()->create(
+        //     ['review_id' => $request->review_id],
+        //     ['status' => $status]
+        // );
     }
 }

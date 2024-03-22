@@ -178,25 +178,24 @@ class TripApiController extends Controller
     {
         $validator = Validator::make([
             'trip_id' => $request->trip_id,
-            'rating'=>$request->rating,
-            'comment'=>$request->comment
-            ], [
-            'trip_id' => ['required','exists:trips,id',new CheckIfExistsInReviewsRule('App\Models\Trip')],
-            'rating'=>['required','numeric'],
-            'comment'=>['nullable','string']
+            'rating' => $request->rating,
+            'comment' => $request->comment
+        ], [
+            'trip_id' => ['required', 'exists:trips,id', new CheckIfExistsInReviewsRule('App\Models\Trip')],
+            'rating' => ['required', 'numeric'],
+            'comment' => ['nullable', 'string']
         ]);
 
 
         if ($validator->fails()) {
             return ApiResponse::sendResponseError(Response::HTTP_BAD_REQUEST,  $validator->errors()->messages()['trip_id'][0]);
         }
-        try{
+        try {
             $trip = $this->tripApiUseCase->addReview($validator->validated());
             return ApiResponse::sendResponse(200, 'You Add review in trip Successfully', $trip);
         } catch (\Exception $e) {
             return ApiResponse::sendResponseError(Response::HTTP_BAD_REQUEST, $e->getMessage());
         }
-
     }
 
     public function updateReview(Request $request)
@@ -204,25 +203,24 @@ class TripApiController extends Controller
 
         $validator = Validator::make([
             'trip_id' => $request->trip_id,
-            'rating'=>$request->rating,
-            'comment'=>$request->comment
+            'rating' => $request->rating,
+            'comment' => $request->comment
         ], [
-            'trip_id' => ['required','exists:trips,id',new CheckIfExistsInToUpdateReviewsRule('App\Models\Trip')],
-            'rating'=>['required','numeric'],
-            'comment'=>['nullable','string']
+            'trip_id' => ['required', 'exists:trips,id', new CheckIfExistsInToUpdateReviewsRule('App\Models\Trip')],
+            'rating' => ['required', 'numeric'],
+            'comment' => ['nullable', 'string']
         ]);
 
 
         if ($validator->fails()) {
             return ApiResponse::sendResponseError(Response::HTTP_BAD_REQUEST,  $validator->errors()->messages());
         }
-        try{
+        try {
             $trip = $this->tripApiUseCase->updateReview($validator->validated());
             return ApiResponse::sendResponse(200, 'You update review in trip Successfully', $trip);
         } catch (\Exception $e) {
             return ApiResponse::sendResponseError(Response::HTTP_BAD_REQUEST, $e->getMessage());
         }
-
     }
 
     public function deleteReview(Request $request)
@@ -230,13 +228,13 @@ class TripApiController extends Controller
         $validator = Validator::make([
             'trip_id' => $request->trip_id,
         ], [
-            'trip_id' => ['required','exists:trips,id',new CheckIfExistsInToUpdateReviewsRule('App\Models\Trip')],
+            'trip_id' => ['required', 'exists:trips,id', new CheckIfExistsInToUpdateReviewsRule('App\Models\Trip')],
         ]);
 
         if ($validator->fails()) {
             return ApiResponse::sendResponseError(Response::HTTP_BAD_REQUEST,  $validator->errors()->messages());
         }
-        try{
+        try {
             $trip = $this->tripApiUseCase->deleteReview($validator->validated());
             return ApiResponse::sendResponse(200, 'You delete the review in trip Successfully', $trip);
         } catch (\Exception $e) {
@@ -249,17 +247,42 @@ class TripApiController extends Controller
         $validator = Validator::make([
             'trip_id' => $request->trip_id,
         ], [
-            'trip_id' => ['required','exists:trips,id'],
+            'trip_id' => ['required', 'exists:trips,id'],
         ]);
 
         if ($validator->fails()) {
             return ApiResponse::sendResponseError(Response::HTTP_BAD_REQUEST,  $validator->errors()->messages());
         }
-        try{
+        try {
             $trip = $this->tripApiUseCase->allReviews($validator->validated());
             return ApiResponse::sendResponse(200, 'You got all the  reviews in trip Successfully', $trip);
         } catch (\Exception $e) {
             return ApiResponse::sendResponseError(Response::HTTP_BAD_REQUEST, $e->getMessage());
+        }
+    }
+
+    public function likeDislike(Request $request)
+    {
+        $validator = Validator::make(
+            [
+                'status' => $request->status,
+                'review_id' => $request->review_id,
+            ],
+            [
+                'status' => ['required', Rule::in(['like', 'dislike'])],
+                'review_id' => ['required', 'integer', 'exists:reviewables,id'],
+            ]
+        );
+
+        if ($validator->fails()) {
+            return ApiResponse::sendResponseError(Response::HTTP_BAD_REQUEST,  $validator->errors()->messages());
+        }
+
+        try {
+            $this->tripApiUseCase->reviewsLike($request);
+            return ApiResponse::sendResponse(200, __('app.the-status-change-successfully'), []);
+        } catch (\Exception $e) {
+            return ApiResponse::sendResponseError(Response::HTTP_BAD_REQUEST,  $e->getMessage());
         }
     }
 }
