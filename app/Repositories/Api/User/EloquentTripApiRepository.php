@@ -144,12 +144,9 @@ class EloquentTripApiRepository implements TripApiRepositoryInterface
         $user = Auth::guard('api')->user();
 
         $review = Reviewable::find($request->review_id);
-        $review->like->attach(['user_id' => $user->id, 'status' => $status]);
 
-        // $user->reviewLike()->attach($request->review_id, ['status' => $status]);
-        // $user->reviewLike()->create(
-        //     ['review_id' => $request->review_id],
-        //     ['status' => $status]
-        // );
+        $review->like()->attach([$user->id => [
+            'status' => $status
+        ]]);
     }
 }
