@@ -23,8 +23,9 @@ class AcceptCancelUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'trip_id' => ['required', 'integer', 'exists:trips,id', new CheckUserTripStatus],
             'user_id' => ['required', 'integer', 'exists:users,id'],
+            'user_id' => ['exists:users_trips,user_id'],
+            'trip_id' => ['required', 'integer', 'exists:trips,id', new CheckUserTripStatus]
         ];
     }
 }
