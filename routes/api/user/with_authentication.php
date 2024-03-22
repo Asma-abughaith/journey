@@ -22,7 +22,7 @@ Route::group(['prefix' => 'trip'], function () {
     Route::post('/create', [TripApiController::class, 'create']);
     Route::post('/join/{trip_id?}', [TripApiController::class, 'join']);
     Route::delete('/join/cancel/{trip_id?}', [TripApiController::class, 'cancelJoin']);
-    Route::get('/trip/details/{trip_id}', [TripApiController::class, 'tripDetails']);
+    Route::get('/details/{trip_id}', [TripApiController::class, 'tripDetails']);
     // ============ private Trips ============
     Route::get('/private', [TripApiController::class, 'privateTrips']);
     Route::post('/user/{status?}', [TripApiController::class, 'acceptCancel']);
@@ -30,7 +30,6 @@ Route::group(['prefix' => 'trip'], function () {
 
     Route::post('/favorite/{trip_id?}', [TripApiController::class, 'favorite']);
     Route::delete('/favorite/{trip_id?}/delete', [TripApiController::class, 'deleteFavorite']);
-
 });
 
 // All Routes For event
@@ -47,8 +46,4 @@ Route::group(['prefix' => 'volunteering'], function () {
     Route::delete('/disinterest/{volunteering_id?}', [VolunteeringApiController::class, 'disinterest']);
     Route::post('/favorite/{volunteering_id?}', [VolunteeringApiController::class, 'favorite']);
     Route::delete('/favorite/{volunteering_id?}/delete', [VolunteeringApiController::class, 'deleteFavorite']);
-
 });
-
-
-

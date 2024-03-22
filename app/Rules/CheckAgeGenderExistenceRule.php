@@ -33,24 +33,28 @@ class CheckAgeGenderExistenceRule implements ValidationRule
             $tripDateTime = new \DateTime($trip->date_time);
 
 
+            if ($trip->attendance_number == UsersTrip::where('trip_id', request()->trip_id)->where('status', '1')->count()) {
+                $fail(__('app.this-trip-has-exceeded-the-required-number-You-can-return-to-the-home-page-and-search-for-another-trip'));
+            }
+
             if ($currentDate->format('Y-m-d H:i:s') > $tripDateTime->format('Y-m-d H:i:s')) {
-                $fail('app.this-journey-has-already-moved-on.-you-can-return-to-the-home-page-and-search-for-another-trip');
+                $fail(__('app.this-journey-has-already-moved-on.-you-can-return-to-the-home-page-and-search-for-another-trip'));
             }
 
             if (!(json_decode($trip->age_range)->min <= $age && json_decode($trip->age_range)->max >= $age) && ($trip->sex == $user->sex || $trip->sex == 0)) {
-                $fail('app.you-are-not-allowed-to-join-this-trip.-because-your-age-or-sex-not-acceptable');
+                $fail(__('app.you-are-not-allowed-to-join-this-trip.-because-your-age-or-sex-not-acceptable'));
             }
 
             if (UsersTrip::where('trip_id', request()->trip_id)->where('user_id', Auth::guard('api')->user()->id)->where('status', '2')->exists()) {
-                $fail('app.your-Join-request-cancelled-by-owner-so-you-cant-to-join-this-trip-again.');
+                $fail(__('app.your-Join-request-cancelled-by-owner-so-you-cant-to-join-this-trip-again.'));
             }
 
             if (UsersTrip::where('trip_id', request()->trip_id)->where('user_id', Auth::guard('api')->user()->id)->whereIn('status', ['0', '1'])->exists()) {
-                $fail('app.you-already-join-this-trip.');
+                $fail(__('app.you-already-join-this-trip.'));
             }
 
             if (Trip::where('user_id', Auth::guard('api')->user()->id)->exists()) {
-                $fail('app.you-the-creator-of-trip-you-cant-to-join-this-trip.');
+                $fail(__('app.you-the-creator-of-trip-you-cant-to-join-this-trip.'));
             }
         }
     }

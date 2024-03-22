@@ -182,5 +182,6 @@ return [
     'you-join-to-trip-successfully' => 'You Join To Trip Successfully',
     'you-are-left-from-the-trip-successfully' => 'You Are Left From The Trip Successfully',
     'trips-details-retrieved-successfully' => 'Trip Details Retrieved Successfully',
-    'the-status-change-successfully' => 'The Status Change Successfully'
+    'the-status-change-successfully' => 'The Status Change Successfully',
+    'this-trip-has-exceeded-the-required-number-You-can-return-to-the-home-page-and-search-for-another-trip' => 'This trip has exceeded the required number. You can return to the home page and search for another trip'
 ];

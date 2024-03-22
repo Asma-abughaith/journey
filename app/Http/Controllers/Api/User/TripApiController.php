@@ -138,39 +138,37 @@ class TripApiController extends Controller
     {
         $id = $request->trip_id;
         $validator = Validator::make(['trip_id' => $id], [
-            'trip_id' => ['required','exists:trips,id',new CheckIfExistsInFavoratblesRule('App\Models\Trip')],
+            'trip_id' => ['required', 'exists:trips,id', new CheckIfExistsInFavoratblesRule('App\Models\Trip')],
         ]);
 
 
         if ($validator->fails()) {
             return ApiResponse::sendResponseError(Response::HTTP_BAD_REQUEST,  $validator->errors()->messages()['trip_id'][0]);
         }
-        try{
+        try {
             $trip = $this->tripApiUseCase->favorite($id);
             return ApiResponse::sendResponse(200, 'You Add Trip in favorite  Successfully', $trip);
         } catch (\Exception $e) {
             return ApiResponse::sendResponseError(Response::HTTP_BAD_REQUEST, $e->getMessage());
         }
-
     }
 
     public function deleteFavorite(Request $request)
     {
         $id = $request->trip_id;
         $validator = Validator::make(['trip_id' => $id], [
-            'trip_id' => ['required','exists:trips,id',new CheckIfNotExistsInFavoratblesRule('App\Models\Trip')],
+            'trip_id' => ['required', 'exists:trips,id', new CheckIfNotExistsInFavoratblesRule('App\Models\Trip')],
         ]);
 
 
         if ($validator->fails()) {
             return ApiResponse::sendResponseError(Response::HTTP_BAD_REQUEST,  $validator->errors()->messages()['trip_id'][0]);
         }
-        try{
+        try {
             $trip = $this->tripApiUseCase->deleteFavorite($id);
             return ApiResponse::sendResponse(200, 'You Add Trip in favorite  Successfully', $trip);
         } catch (\Exception $e) {
             return ApiResponse::sendResponseError(Response::HTTP_BAD_REQUEST, $e->getMessage());
         }
-
     }
 }
