@@ -14,6 +14,7 @@ use App\Helpers\ApiResponse;
 use App\Http\Requests\Api\User\Trip\AcceptCancelUserRequest;
 use App\Http\Requests\Api\User\Trip\CreateTripRequest;
 use App\Rules\CheckAgeGenderExistenceRule;
+use App\Rules\checkLikeReviewUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
@@ -264,14 +265,8 @@ class TripApiController extends Controller
     public function likeDislike(Request $request)
     {
         $validator = Validator::make(
-            [
-                'status' => $request->status,
-                'review_id' => $request->review_id,
-            ],
-            [
-                'status' => ['required', Rule::in(['like', 'dislike'])],
-                'review_id' => ['required', 'integer', 'exists:reviewables,id'],
-            ]
+            ['status' => $request->status, 'review_id' => $request->review_id,],
+            ['status' => ['required', Rule::in(['like', 'dislike'])], 'review_id' => ['required', 'integer', 'exists:reviewables,id'],]
         );
 
         if ($validator->fails()) {

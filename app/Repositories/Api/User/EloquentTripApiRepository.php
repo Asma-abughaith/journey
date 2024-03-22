@@ -140,13 +140,19 @@ class EloquentTripApiRepository implements TripApiRepositoryInterface
 
     public function reviewsLike($request)
     {
-        $status = $request->status == "like" ? '1' : '0';
-        $user = Auth::guard('api')->user();
-
         $review = Reviewable::find($request->review_id);
+        $status = $request->status == "like" ? '1' : '0';
 
-        $review->like()->attach([$user->id => [
-            'status' => $status
-        ]]);
+        $existingLike = $review->like()->where('user_id', Auth::guard('api')->user()->id)->first();
+
+        if ($existingLike) {
+            if ($existingLike->pivot->status != $status) {
+                $review->like()->updateExistingPivot(Auth::guard('api')->user()->id, ['status' => $status]);
+            } else {
+                $review->like()->detach(Auth::guard('api')->user()->id);
+            }
+        } else {
+            $review->like()->attach(Auth::guard('api')->user()->id, ['status' => $status]);
+        }
     }
 }

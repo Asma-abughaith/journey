@@ -15,6 +15,6 @@ class Reviewable extends Model
 
     public function like()
     {
-        return $this->belongsToMany(User::class, 'review_likes', 'review_id', 'user_id');
+        return $this->belongsToMany(User::class, 'review_likes', 'review_id', 'user_id')->withPivot('status');
     }
 }

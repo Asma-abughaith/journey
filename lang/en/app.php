@@ -184,5 +184,6 @@ return [
     'trips-details-retrieved-successfully' => 'Trip Details Retrieved Successfully',
     'the-status-change-successfully' => 'The Status Change Successfully',
     'this-trip-has-exceeded-the-required-number-You-can-return-to-the-home-page-and-search-for-another-trip' => 'This trip has exceeded the required number. You can return to the home page and search for another trip',
-    'user-not-exist' => 'User Not Exist'
+    'user-not-exist' => 'User Not Exist',
+    'you-have-responded-to-the-comment-before' => 'You have responded to the comment before'
 ];

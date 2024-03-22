@@ -110,8 +110,8 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->morphedByMany(Trip::class, 'reviewable')->withTimestamps();
     }
 
-    public function reviewLike()
+    public function likeReview()
     {
-        return $this->hasMany(Reviewable::class, 'review_likes');
+        return $this->belongsTo(ReviewLike::class, 'user_id');
     }
 }
