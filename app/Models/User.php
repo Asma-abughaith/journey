@@ -103,4 +103,9 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->morphedByMany(Trip::class, 'favorable')->withTimestamps();
     }
 
+    public function reviewTrip()
+    {
+        return $this->morphedByMany(Trip::class, 'reviewable')->withTimestamps();
+    }
+
 }

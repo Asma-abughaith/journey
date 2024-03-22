@@ -28,8 +28,15 @@ Route::group(['prefix' => 'trip'], function () {
     Route::post('/user/{status?}', [TripApiController::class, 'acceptCancel']);
 
 
+
+
     Route::post('/favorite/{trip_id?}', [TripApiController::class, 'favorite']);
     Route::delete('/favorite/{trip_id?}/delete', [TripApiController::class, 'deleteFavorite']);
+
+    Route::post('add/review/{trip_id?}',[TripApiController::class, 'addReview']);
+    Route::post('update/review/{trip_id?}',[TripApiController::class, 'updateReview']);
+    Route::delete('delete/review/{trip_id?}',[TripApiController::class, 'deleteReview']);
+
 });
 
 // All Routes For event

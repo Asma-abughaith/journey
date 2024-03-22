@@ -106,4 +106,27 @@ class EloquentTripApiRepository implements TripApiRepositoryInterface
         $user= Auth::guard('api')->user();
         $user->favoriteTrip()->detach($id);
     }
+    public function addReview($data)
+    {
+        $user= Auth::guard('api')->user();
+        $user->reviewTrip()->attach($data['trip_id'], [
+            'rating' => $data['rating'],
+            'comment' => $data['comment']
+        ]);
+    }
+
+    public function updateReview($data)
+    {
+        $user= Auth::guard('api')->user();
+        $user->reviewTrip()->sync([$data['trip_id'] => [
+            'rating' => $data['rating'],
+            'comment' => $data['comment']
+        ]]);
+    }
+
+    public function deleteReview($id)
+    {
+        $user= Auth::guard('api')->user();
+        $user->reviewTrip()->detach($id);
+    }
 }

@@ -22,4 +22,7 @@ interface TripApiRepositoryInterface
     public function changeStatus($data);
     public function favorite($id);
     public function deleteFavorite($id);
+    public function addReview($data);
+    public function updateReview($data);
+    public function deleteReview($id);
 }

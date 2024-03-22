@@ -62,4 +62,27 @@ class TripApiUseCase
     {
         return $this->tripApiRepository->deleteFavorite($id);
     }
+
+    public function addReview($data)
+    {
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+        return $this->tripApiRepository->addReview($data);
+
+    }
+
+    public function updateReview($data)
+    {
+        return $this->tripApiRepository->updateReview($data);
+
+    }
+    public function deleteReview($id)
+    {
+        return $this->tripApiRepository->deleteReview($id);
+=======
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
+
+    }
 }
