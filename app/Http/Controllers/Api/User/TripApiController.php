@@ -5,13 +5,7 @@ namespace App\Http\Controllers\Api\User;
 use App\Http\Controllers\Controller;
 use App\Rules\CheckIfExistsInFavoratblesRule;
 use App\Rules\CheckIfExistsInReviewsRule;
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
 use App\Rules\CheckIfExistsInToUpdateReviewsRule;
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
 use App\Rules\CheckIfNotExistsInFavoratblesRule;
 use App\Rules\CheckUserTripExistsRule;
 use App\UseCases\Api\User\TripApiUseCase;
@@ -205,8 +199,6 @@ class TripApiController extends Controller
 
     }
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
     public function updateReview(Request $request)
     {
 
@@ -217,51 +209,21 @@ class TripApiController extends Controller
         ], [
             'trip_id' => ['required','exists:trips,id',new CheckIfExistsInToUpdateReviewsRule('App\Models\Trip')],
             'rating'=>['required','numeric'],
-=======
-=======
->>>>>>> Stashed changes
-    public function addReview(Request $request)
-    {
-        $id = $request->trip_id;
-        $validator = Validator::make(['trip_id' => $id], [
-            'trip_id' => ['required','exists:trips,id',new CheckIfExistsInReviewsRule('App\Models\Trip')],
-            'rating'=>['required,numeric'],
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
             'comment'=>['nullable','string']
         ]);
 
 
         if ($validator->fails()) {
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
             return ApiResponse::sendResponseError(Response::HTTP_BAD_REQUEST,  $validator->errors()->messages());
         }
         try{
             $trip = $this->tripApiUseCase->updateReview($validator->validated());
             return ApiResponse::sendResponse(200, 'You update review in trip Successfully', $trip);
-=======
-=======
->>>>>>> Stashed changes
-            return ApiResponse::sendResponseError(Response::HTTP_BAD_REQUEST,  $validator->errors()->messages()['trip_id'][0]);
-        }
-        try{
-            dd($validator);
-            $trip = $this->tripApiUseCase->addReview($id);
-            return ApiResponse::sendResponse(200, 'You Add review in trip Successfully', $trip);
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
         } catch (\Exception $e) {
             return ApiResponse::sendResponseError(Response::HTTP_BAD_REQUEST, $e->getMessage());
         }
 
     }
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
 
     public function deleteReview(Request $request)
     {
@@ -281,8 +243,4 @@ class TripApiController extends Controller
             return ApiResponse::sendResponseError(Response::HTTP_BAD_REQUEST, $e->getMessage());
         }
     }
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
 }

@@ -65,8 +65,7 @@ class TripApiUseCase
 
     public function addReview($data)
     {
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
+
         return $this->tripApiRepository->addReview($data);
 
     }
@@ -79,10 +78,6 @@ class TripApiUseCase
     public function deleteReview($id)
     {
         return $this->tripApiRepository->deleteReview($id);
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
 
     }
 }
