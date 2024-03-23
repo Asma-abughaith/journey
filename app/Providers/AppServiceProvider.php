@@ -24,6 +24,7 @@ use App\Interfaces\Gateways\Web\Admin\RegionRepositoryInterface;
 use App\Interfaces\Gateways\Web\Admin\RoleRepositoryInterface;
 use App\Interfaces\Gateways\Web\Admin\TagRepositoryInterface;
 use App\Interfaces\Gateways\Web\Admin\TopTenPlaceRepositoryInterface;
+use App\Interfaces\Gateways\Web\Admin\TripRepositoryInterface;
 use App\Interfaces\Gateways\Web\Admin\VolunteeringRepositoryInterface;
 use App\Interfaces\Gateways\Web\Setting\LanguageRepositoryInterface;
 use App\Repositories\Api\User\EloquentAuthApiRepository;
@@ -47,6 +48,7 @@ use App\Repositories\Web\Admin\EloquentRegionRepository;
 use App\Repositories\Web\Admin\EloquentRoleRepository;
 use App\Repositories\Web\Admin\EloquentTagRepository;
 use App\Repositories\Web\Admin\EloquentTopTenPlaceRepository;
+use App\Repositories\Web\Admin\EloquentTripRepository;
 use App\Repositories\Web\Admin\EloquentVolunteeringRepository;
 use App\Repositories\Web\Setting\EloquentLanguageRepository;
 use App\Interfaces\Gateways\Api\User\CategoryApiRepositoryInterface;
@@ -96,6 +98,8 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(UserProfileApiRepositoryInterface::class, EloquentUserProfileApiRepository::class);
 
         $this->app->bind(TripApiRepositoryInterface::class, EloquentTripApiRepository::class);
+        $this->app->bind(TripRepositoryInterface::class, EloquentTripRepository::class);
+
     }
 
     /**=

@@ -21,6 +21,7 @@ use App\Http\Controllers\Web\Admin\SubCategoryController;
 use App\Http\Controllers\Web\Admin\TagController;
 use App\Http\Controllers\Web\Admin\TopTenPlaceController;
 use App\Http\Controllers\Web\Admin\VolunteeringController;
+use App\Http\Controllers\Web\Admin\TripController;
 use App\Http\Controllers\Web\Setting\LanguageController;
 use App\Models\Admin;
 use Illuminate\Support\Facades\Route;
@@ -111,5 +112,14 @@ Route::resource('/events', EventController::class);
 //================= Routes For Volunteering =================
 Route::resource('/volunteering', VolunteeringController::class);
 
-//================= Routes For Volunteering =================
+//================= Routes For Plans =================
 Route::resource('/plans', PlanController::class);
+
+//================= Routes For Trips =================
+
+Route::group(['prefix' => 'trip'], function () {
+    Route::get('/', [TripController::class, 'index']);
+    Route::get('/show/{id}', [TripController::class, 'show'])->name('trip.show');
+    Route::get('/delete/{id}', [TripController::class, 'delete'])->name('trip.destroy');
+
+});
