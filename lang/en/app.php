@@ -185,5 +185,7 @@ return [
     'the-status-change-successfully' => 'The Status Change Successfully',
     'this-trip-has-exceeded-the-required-number-You-can-return-to-the-home-page-and-search-for-another-trip' => 'This trip has exceeded the required number. You can return to the home page and search for another trip',
     'user-not-exist' => 'User Not Exist',
-    'you-have-responded-to-the-comment-before' => 'You have responded to the comment before'
+    'you-have-responded-to-the-comment-before' => 'You have responded to the comment before',
+    'check-update-message-trip' => 'Any modification to the trip could affect the users within the trip, so you cannot make any modifications until the trip is empty of users',
+    'you-already-join-has-trip.' => 'You cannot join for this trip because you have already joined for a trip on the same date'
 ];

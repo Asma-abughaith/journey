@@ -22,7 +22,7 @@ return new class extends Migration
             $table->enum('sex', [0, 1, 2])->comment('0: Both, 1: Male, 2: Female');
             $table->dateTime('date_time');
             $table->integer('attendance_number');
-            $table->enum('status', [0, 1])->comment('0: inactive, 1: active')->default(1);
+            $table->enum('status', [0, 1, 2, 3])->comment('0: inactive, 1: active, 2: deleted_by_creator, 3: deleted_by_admin')->default(1);
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreign('place_id')->references('id')->on('places')->cascadeOnDelete()->cascadeOnUpdate();

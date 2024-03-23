@@ -17,12 +17,14 @@ class CheckIfCanMakeTripRule implements ValidationRule
      */
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        $last_trip = Trip::where('user_id', Auth::guard('api')->user()->id)->latest()->first();
-        $date_time = Carbon::createFromFormat('Y-m-d H:i:s', request()->date . ' ' . request()->time);
-        if ($last_trip) {
-            $last_trip_date = Carbon::createFromFormat('Y-m-d H:i:s', $last_trip->date_time);
-            if ($date_time->diffInMonths($last_trip_date) < 1) {
-                $fail(__('app.cant-make-trip-in-less-than-one-month'));
+        if (!isset(request()->trip_id)) {
+            $last_trip = Trip::where('user_id', Auth::guard('api')->user()->id)->latest()->first();
+            $date_time = Carbon::createFromFormat('Y-m-d H:i:s', request()->date . ' ' . request()->time);
+            if ($last_trip) {
+                $last_trip_date = Carbon::createFromFormat('Y-m-d H:i:s', $last_trip->date_time);
+                if ($date_time->diffInMonths($last_trip_date) < 1) {
+                    $fail(__('app.cant-make-trip-in-less-than-one-month'));
+                }
             }
         }
 

@@ -13,8 +13,9 @@ use Illuminate\Http\Response;
 use App\Helpers\ApiResponse;
 use App\Http\Requests\Api\User\Trip\AcceptCancelUserRequest;
 use App\Http\Requests\Api\User\Trip\CreateTripRequest;
+use App\Http\Requests\Api\User\Trip\UpdateTripRequest;
 use App\Rules\CheckAgeGenderExistenceRule;
-use App\Rules\checkLikeReviewUser;
+use App\Rules\CheckIfCanUpdateTripRule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
@@ -163,13 +164,12 @@ class TripApiController extends Controller
             'trip_id' => ['required', 'exists:trips,id', new CheckIfNotExistsInFavoratblesRule('App\Models\Trip')],
         ]);
 
-
         if ($validator->fails()) {
             return ApiResponse::sendResponseError(Response::HTTP_BAD_REQUEST,  $validator->errors()->messages()['trip_id'][0]);
         }
         try {
             $trip = $this->tripApiUseCase->deleteFavorite($id);
-            return ApiResponse::sendResponse(200, 'You Add Trip in favorite  Successfully', $trip);
+            return ApiResponse::sendResponse(200, 'You Deleted the Trip from favorite Successfully', $trip);
         } catch (\Exception $e) {
             return ApiResponse::sendResponseError(Response::HTTP_BAD_REQUEST, $e->getMessage());
         }
@@ -276,6 +276,43 @@ class TripApiController extends Controller
         try {
             $this->tripApiUseCase->reviewsLike($request);
             return ApiResponse::sendResponse(200, __('app.the-status-change-successfully'), []);
+        } catch (\Exception $e) {
+            return ApiResponse::sendResponseError(Response::HTTP_BAD_REQUEST,  $e->getMessage());
+        }
+    }
+
+    public function remove(Request $request)
+    {
+        $validator = Validator::make(['trip_id' => $request->trip_id], [
+            'trip_id' => ['required', 'exists:trips,id'],
+        ]);
+
+        if ($validator->fails()) {
+            return ApiResponse::sendResponseError(Response::HTTP_BAD_REQUEST,  $validator->errors()->messages()['trip_id'][0]);
+        }
+
+        try {
+            $this->tripApiUseCase->remove($request->trip_id);
+            // Send Notification For All Users In This Trip
+            return ApiResponse::sendResponse(200, __('app.the-trip-deleted-successfully'), []);
+        } catch (\Exception $e) {
+            return ApiResponse::sendResponseError(Response::HTTP_BAD_REQUEST,  $e->getMessage());
+        }
+    }
+
+    public function update(UpdateTripRequest $request)
+    {
+        $validator = Validator::make(['trip_id' => $request->trip_id], [
+            'trip_id' => ['required', 'exists:trips,id', new CheckIfCanUpdateTripRule],
+        ]);
+
+        if ($validator->fails()) {
+            return ApiResponse::sendResponseError(Response::HTTP_BAD_REQUEST,  $validator->errors()->messages()['trip_id'][0]);
+        }
+
+        try {
+            $this->tripApiUseCase->update($request);
+            return ApiResponse::sendResponse(200, __('app.the-trip-updated-successfully'), []);
         } catch (\Exception $e) {
             return ApiResponse::sendResponseError(Response::HTTP_BAD_REQUEST,  $e->getMessage());
         }

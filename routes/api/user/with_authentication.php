@@ -36,6 +36,9 @@ Route::group(['prefix' => 'trip'], function () {
     Route::get('all/reviews/{trip_id?}', [TripApiController::class, 'reviews']);
 
     Route::get('review/{status?}/{review_id?}', [TripApiController::class, 'likeDislike']);
+
+    Route::delete('/delete/{trip_id?}', [TripApiController::class, 'remove']);
+    Route::post('/update/{trip_id?}', [TripApiController::class, 'update']);
 });
 
 // All Routes For event

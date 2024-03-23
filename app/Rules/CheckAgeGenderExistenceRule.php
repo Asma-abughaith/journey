@@ -4,6 +4,7 @@ namespace App\Rules;
 
 use App\Models\Trip;
 use App\Models\UsersTrip;
+use Carbon\Carbon;
 use Closure;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Support\Facades\Auth;
@@ -29,7 +30,7 @@ class CheckAgeGenderExistenceRule implements ValidationRule
             $birthday = new \DateTime($birthday);
             $currentDate = new \DateTime();
             $currentDate->setTimezone(new \DateTimeZone('Asia/Riyadh'));
-            $age = $currentDate->diff($birthday)->y;
+            $age = abs($currentDate->diff($birthday)->y);
             $tripDateTime = new \DateTime($trip->date_time);
 
 
@@ -53,8 +54,22 @@ class CheckAgeGenderExistenceRule implements ValidationRule
                 $fail(__('app.you-already-join-this-trip.'));
             }
 
-            if (Trip::where('user_id', Auth::guard('api')->user()->id)->exists()) {
+            if (Trip::where('user_id', Auth::guard('api')->user()->id)->where('id', request()->trip_id)->exists()) {
                 $fail(__('app.you-the-creator-of-trip-you-cant-to-join-this-trip.'));
+            }
+
+            // Check if the user is already on a trip and wants to join another trip on the same date.
+            // Retrieve the first active trip that the user has joined.
+            $hasJoinTrip = UsersTrip::where('user_id', Auth::guard('api')->user()->id)->where('status', '1')->first();
+            // Check if the user has joined any trip.
+            if ($hasJoinTrip) {
+                // Parse the dates of the current trip and the trip the user wants to join.
+                $dateJoinTrip = Carbon::parse($hasJoinTrip->trip->date_time)->format('Y-m-d');
+                $dateTrip =  Carbon::parse($trip->date_time)->format('Y-m-d');
+                // Check if the user is trying to join a trip on the same date as the one they're already on.
+                if ($dateJoinTrip == $dateTrip) {
+                    $fail(__('app.you-already-join-has-trip.'));
+                }
             }
         }
     }

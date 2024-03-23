@@ -83,8 +83,18 @@ class TripApiUseCase
         return $this->tripApiRepository->allReviews($id);
     }
 
-    public function reviewsLike($date)
+    public function reviewsLike($data)
     {
-        return $this->tripApiRepository->reviewsLike($date);
+        return $this->tripApiRepository->reviewsLike($data);
+    }
+
+    public function remove($trip_id)
+    {
+        return $this->tripApiRepository->remove($trip_id);
+    }
+
+    public function update($data)
+    {
+        return $this->tripApiRepository->update($data);
     }
 }

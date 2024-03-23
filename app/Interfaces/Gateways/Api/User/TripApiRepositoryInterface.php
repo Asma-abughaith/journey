@@ -33,5 +33,9 @@ interface TripApiRepositoryInterface
 
     public function allReviews($id);
 
-    public function reviewsLike($date);
+    public function reviewsLike($data);
+
+    public function remove($trip_id);
+
+    public function update($data);
 }

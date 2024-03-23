@@ -19,7 +19,7 @@ class EloquentTripApiRepository implements TripApiRepositoryInterface
 
     public function trips()
     {
-        $trips = Trip::all();
+        $trips = Trip::where('status', '0')->orWhere('status', '1')->get();
         return TripResource::collection($trips);
     }
 
@@ -153,6 +153,43 @@ class EloquentTripApiRepository implements TripApiRepositoryInterface
             }
         } else {
             $review->like()->attach(Auth::guard('api')->user()->id, ['status' => $status]);
+        }
+    }
+
+    public function remove($trip_id)
+    {
+        $trip = Trip::find($trip_id);
+        $trip->status = '2';
+        $trip->save();
+        $trip->usersTrip()->update(['status' => '2']);
+    }
+
+    public function update($request)
+    {
+        $trip = Trip::find($request->trip_id);
+
+        $trip->place_id = $request->place_id ?? $trip->place_id;
+        $trip->name = $request->name ?? $trip->name;
+        $trip->description = $request->description ?? $trip->description;
+        $trip->cost = $request->cost ?? $trip->cost;
+        $trip->sex = $request->gender ?? $trip->gender;
+        $trip->attendance_number = $request->attendance_number ?? $trip->attendance_number;
+
+        if (isset($request->age_min) && isset($request->age_max)) {
+            $age_range = json_encode(['min' => $request->age_min, 'max' => $request->age_max]);
+            $trip->age_range = $age_range;
+        }
+
+        if (isset($request->date) && isset($request->time)) {
+            $date_time = Carbon::createFromFormat('Y-m-d H:i:s', $request->date . ' ' . $request->time);
+            $trip->date_time = $date_time;
+        }
+
+        $trip->save();
+
+        if (isset($request->tags)) {
+            $tags = json_decode($request->tags);
+            $trip->tags()->sync($tags);
         }
     }
 }
