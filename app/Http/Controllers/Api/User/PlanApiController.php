@@ -24,6 +24,16 @@ class PlanApiController extends Controller
 
     }
 
+    public function index()
+    {
+        try {
+            $plans = $this->planApiUseCase->allPlans();
+            return ApiResponse::sendResponse(200, __('app.plans-retrieved-successfully'), $plans);
+        } catch (\Exception $e) {
+            return ApiResponse::sendResponseError(Response::HTTP_BAD_REQUEST,  $e->getMessage());
+        }
+    }
+
 
     public function create(CreatePlanApiRequest $request)
     {

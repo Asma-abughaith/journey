@@ -25,6 +25,11 @@ class PlanApiUseCase
         return $this->planRepository->deletePlan($id);
     }
 
+    public function allPlans()
+    {
+        return $this->planRepository->allPlans();
+    }
+
 
 
 

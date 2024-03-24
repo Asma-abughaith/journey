@@ -22,6 +22,23 @@ use Psr\Log\NullLogger;
 
 class EloquentPlanApiRepository implements PlanApiRepositoryInterface
 {
+    public function allPlans()
+    {
+        $userId = Auth::guard('api')->user()->id;
+
+        $plans = Plan::with('activities')
+            ->where(function ($query) use ($userId) {
+                $query->where('creator_type', 'App\Models\Admin')
+                    ->orWhere(function ($query) use ($userId) {
+                        $query->where('creator_type', 'App\Models\User')
+                            ->where('creator_id', $userId);
+                    });
+            })
+            ->get();
+
+        return $plans;
+
+    }
     public function createPlan($validatedData)
     {
         // Create a new plan
@@ -54,5 +71,7 @@ class EloquentPlanApiRepository implements PlanApiRepositoryInterface
     {
         $plan = Plan::find($id)->delete();
     }
+
+
 
 }
