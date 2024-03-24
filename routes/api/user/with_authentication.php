@@ -6,6 +6,8 @@ use App\Http\Controllers\Api\User\PlaceApiController;
 use App\Http\Controllers\Api\User\TripApiController;
 use App\Http\Controllers\Api\User\EventApiController;
 use App\Http\Controllers\Api\User\VolunteeringApiController;
+use App\Http\Controllers\Api\User\PlanApiController;
+
 
 Route::get('/user/profile', [UserProfileController::class, 'userDetails'])->name('user.profile');
 Route::post('favorite/place/{place_id?}', [PlaceApiController::class, 'createFavoritePlace']);
@@ -55,4 +57,10 @@ Route::group(['prefix' => 'volunteering'], function () {
     Route::delete('/disinterest/{volunteering_id?}', [VolunteeringApiController::class, 'disinterest']);
     Route::post('/favorite/{volunteering_id?}', [VolunteeringApiController::class, 'favorite']);
     Route::delete('/favorite/{volunteering_id?}/delete', [VolunteeringApiController::class, 'deleteFavorite']);
+});
+
+// All Routes For Plan
+Route::group(['prefix' => 'plan'], function () {
+    Route::post('/create', [PlanApiController::class, 'create']);
+
 });

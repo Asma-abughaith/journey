@@ -12,6 +12,7 @@ use App\Interfaces\Gateways\Api\User\PlanApiRepositoryInterface;
 use App\Interfaces\Gateways\Api\User\VolunteeringApiRepositoryInterface;
 use App\Models\Category;
 use App\Models\Event;
+use App\Models\Plan;
 use App\Models\User;
 use App\Models\Volunteering;
 use Illuminate\Http\Resources\Json\ResourceCollection;
@@ -20,5 +21,32 @@ use Illuminate\Support\Facades\Auth;
 
 class EloquentPlanApiRepository implements PlanApiRepositoryInterface
 {
+    public function createPlan($validatedData)
+    {
+        // Create a new plan
+        $plan = new Plan();
+        $plan->name = json_encode(['en' => $validatedData['name'], 'ar' => $validatedData['name']]);
+        $plan->description = json_encode(['en' => $validatedData['description'], 'ar' => $validatedData['description']]);
+        $plan->creator_type = 'App\Models\User';
+        $plan->creator_id = Auth::guard('api')->user()->id;
+        $plan->save();
+
+        // Iterate through days and activities to create them
+        foreach ($validatedData['days'] as $index =>$day) {
+            foreach ($day['activities'] as $activity) {
+                $translatorName = json_encode(['en' => $activity['name'], 'ar' => $activity['name']]);
+                $translatorNote = json_encode(['en' => $activity['note'], 'ar' => $activity['note']]);
+                $plan->activities()->create([
+                    'activity_name' => $translatorName,
+                    'day_number'=>$index+1,
+                    'start_time' => $activity['start_time'],
+                    'end_time' => $activity['end_time'],
+                    'place_id' => $activity['place_id'],
+                    'notes' => $translatorNote ?? null,
+                ]);
+            }
+        }
+
+    }
 
 }

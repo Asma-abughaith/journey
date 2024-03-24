@@ -15,6 +15,11 @@ class PlanApiUseCase
         $this->planRepository = $planRepository;
     }
 
+    public function createPlan($validatedData)
+    {
+        return $this->planRepository->createPlan($validatedData);
+    }
+
 
 
 

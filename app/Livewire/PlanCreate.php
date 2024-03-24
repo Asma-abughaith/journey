@@ -83,8 +83,8 @@ class PlanCreate extends Component
                 $rules["days.$dayIndex.activities.$activityIndex.start_time"] = $activityRule;
                 $rules["days.$dayIndex.activities.$activityIndex.end_time"] = $activityRule . "|after:days.$dayIndex.activities.$activityIndex.start_time";
                 $rules["days.$dayIndex.activities.$activityIndex.place_id"] = "required";
-                $rules["days.$dayIndex.activities.$activityIndex.note_en"] = "max:255";
-                $rules["days.$dayIndex.activities.$activityIndex.note_ar"] = "max:255";
+                $rules["days.$dayIndex.activities.$activityIndex.note_en"] = "max:2000";
+                $rules["days.$dayIndex.activities.$activityIndex.note_ar"] = "max:2000";
             }
         }
         $this->rules = $rules;

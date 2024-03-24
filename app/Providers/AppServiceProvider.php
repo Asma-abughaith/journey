@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\User\TopTenPlaceApiController;
 use App\Interfaces\Gateways\Api\User\AuthApiRepositoryInterface;
 use App\Interfaces\Gateways\Api\User\EventApiRepositoryInterface;
 use App\Interfaces\Gateways\Api\User\PlaceApiRepositoryInterface;
+use App\Interfaces\Gateways\Api\User\PlanApiRepositoryInterface;
 use App\Interfaces\Gateways\Api\User\PopularPlaceApiRepositoryInterface;
 use App\Interfaces\Gateways\Api\User\SubCategoryApiRepositoryInterface;
 use App\Interfaces\Gateways\Api\User\TopTenPlaceApiRepositoryInterface;
@@ -30,6 +31,7 @@ use App\Interfaces\Gateways\Web\Setting\LanguageRepositoryInterface;
 use App\Repositories\Api\User\EloquentAuthApiRepository;
 use App\Repositories\Api\User\EloquentEventApiRepository;
 use App\Repositories\Api\User\EloquentPlaceApiRepository;
+use App\Repositories\Api\User\EloquentPlanApiRepository;
 use App\Repositories\Api\User\EloquentPopularPlaceApiRepository;
 use App\Repositories\Api\User\EloquentSubCategoryApiRepository;
 use App\Repositories\Api\User\EloquentTopTenPlaceApiRepository;
@@ -93,6 +95,8 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(VolunteeringApiRepositoryInterface::class, EloquentVolunteeringApiRepository::class);
 
         $this->app->bind(PlanRepositoryInterface::class, EloquentPlanRepository::class);
+        $this->app->bind(PlanApiRepositoryInterface::class, EloquentPlanApiRepository::class);
+
 
         $this->app->bind(AuthApiRepositoryInterface::class, EloquentAuthApiRepository::class);
         $this->app->bind(UserProfileApiRepositoryInterface::class, EloquentUserProfileApiRepository::class);
