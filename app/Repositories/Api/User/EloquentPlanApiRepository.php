@@ -17,6 +17,7 @@ use App\Models\User;
 use App\Models\Volunteering;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 use Illuminate\Support\Facades\Auth;
+use Psr\Log\NullLogger;
 
 
 class EloquentPlanApiRepository implements PlanApiRepositoryInterface
@@ -47,6 +48,11 @@ class EloquentPlanApiRepository implements PlanApiRepositoryInterface
             }
         }
 
+    }
+
+    public function deletePlan($id)
+    {
+        $plan = Plan::find($id)->delete();
     }
 
 }
