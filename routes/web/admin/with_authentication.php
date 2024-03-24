@@ -117,9 +117,9 @@ Route::resource('/plans', PlanController::class);
 
 //================= Routes For Trips =================
 
-Route::group(['prefix' => 'trip'], function () {
-    Route::get('/', [TripController::class, 'index']);
-    Route::get('/show/{id}', [TripController::class, 'show'])->name('trip.show');
-    Route::get('/delete/{id}', [TripController::class, 'delete'])->name('trip.destroy');
+Route::group(['prefix' => 'trips'], function () {
+    Route::get('/', [TripController::class, 'index'])->name('trips.index');
+    Route::get('/show/{id}', [TripController::class, 'show'])->name('trips.show');
+    Route::get('/delete/{id}', [TripController::class, 'delete'])->name('trips.destroy');
 
 });

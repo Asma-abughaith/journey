@@ -304,6 +304,21 @@
                 </li>
                 {{--                @endif --}}
 
+                {{--                @if (AdminPermission('view Trips') ) --}}
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect" @yield('trips-active')>
+                        <i class="ri-home-heart-fill"></i>
+                        <span>{{ __('app.trips') }}</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        {{--                        @if (AdminPermission('view Trips')) --}}
+                        <li><a href="{{ route('admin.trips.index') }}">{{ __('app.all-trips') }}</a></li>
+                        {{--                        @endif --}}
+
+                    </ul>
+                </li>
+                {{--                @endif --}}
+
 
             </ul>
         </div>

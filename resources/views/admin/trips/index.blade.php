@@ -48,14 +48,14 @@
 
                                                     {{--                                                    @if (AdminPermission('view events')) --}}
                                                     <a class="btn btn-outline-primary btn-sm" title="Show"
-                                                        href="{{ route('admin.trip.show', $trip['id']) }}">
+                                                        href="{{ route('admin.trips.show', $trip['id']) }}">
                                                         <i class="fas fa-eye" title="show"></i>
                                                     </a>
                                                     {{--                                                    @endif --}}
 
                                                     {{--                                                        @if (AdminPermission('delete event')) --}}
                                                     <form method="post"
-                                                        action="{{ route('admin.trip.destroy', $trip['id']) }}"
+                                                        action="{{ route('admin.trips.destroy', $trip['id']) }}"
                                                         style="display:inline;">
                                                         @csrf
                                                         @method('delete')

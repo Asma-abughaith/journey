@@ -489,6 +489,74 @@ class PermissionSeeder extends Seeder
                 'guard_name' => 'admin',
             ],
 
+            // Permissions for Plan CRUD operations
+            [
+                'name' => 'create plan',
+                'translations' => [
+                    'ar' => 'إنشاء مخطط رحلات ',
+                    'en' => 'create plan',
+                ],
+                'guard_name' => 'admin',
+            ],
+            [
+                'name' => 'edit plan',
+                'translations' => [
+                    'ar' => 'تعديل  مخطط رحلات ',
+                    'en' => 'edit plan',
+                ],
+                'guard_name' => 'admin',
+            ],
+            [
+                'name' => 'view plans',
+                'translations' => [
+                    'ar' => 'عرض  مخطط رحلات ',
+                    'en' => 'view plans',
+                ],
+                'guard_name' => 'admin',
+            ],
+            [
+                'name' => 'delete plan',
+                'translations' => [
+                    'ar' => 'حذف  مخطط رحلات ',
+                    'en' => 'delete plan',
+                ],
+                'guard_name' => 'admin',
+            ],
+
+            // Permissions for Volunteering CRUD operations
+            [
+                'name' => 'create trip',
+                'translations' => [
+                    'ar' => 'إنشاء رحلة ',
+                    'en' => 'create trip',
+                ],
+                'guard_name' => 'admin',
+            ],
+            [
+                'name' => 'edit trip',
+                'translations' => [
+                    'ar' => 'تعديل  رحلة',
+                    'en' => 'edit trip',
+                ],
+                'guard_name' => 'admin',
+            ],
+            [
+                'name' => 'view trips',
+                'translations' => [
+                    'ar' => 'عرض  رحلة',
+                    'en' => 'view trips',
+                ],
+                'guard_name' => 'admin',
+            ],
+            [
+                'name' => 'delete trip',
+                'translations' => [
+                    'ar' => 'حذف  رحلة',
+                    'en' => 'delete trip',
+                ],
+                'guard_name' => 'admin',
+            ],
+
 
 
 
