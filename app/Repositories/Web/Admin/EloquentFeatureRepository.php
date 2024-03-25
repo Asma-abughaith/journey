@@ -58,7 +58,7 @@ class EloquentFeatureRepository implements FeatureRepositoryInterface
 
     protected function convertToEntity(Feature $eloquentFeature)
     {
-        $names =$eloquentFeature->getTranslations('name');
+        $names = $eloquentFeature->getTranslations('name');
         $feature = new FeatureEntity();
         $feature->setId($eloquentFeature->id);
         $feature->setName($eloquentFeature->name);

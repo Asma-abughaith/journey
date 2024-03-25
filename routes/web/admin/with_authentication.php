@@ -95,7 +95,7 @@ Route::resource('/tags', TagController::class);
 Route::resource('/places', PlaceController::class);
 
 //================= Routes For Delete image =================
-Route::delete('/delete/image/gallery/{id}', [PlaceController::class,'deleteImage'])->name('image.destroy');
+Route::delete('/delete/image/gallery/{id}', [PlaceController::class, 'deleteImage'])->name('image.destroy');
 
 //================= Routes For Top ten Places =================
 Route::resource('/topTenPlaces', TopTenPlaceController::class);
@@ -116,10 +116,8 @@ Route::resource('/volunteering', VolunteeringController::class);
 Route::resource('/plans', PlanController::class);
 
 //================= Routes For Trips =================
-
 Route::group(['prefix' => 'trips'], function () {
     Route::get('/', [TripController::class, 'index'])->name('trips.index');
     Route::get('/show/{id}', [TripController::class, 'show'])->name('trips.show');
-    Route::get('/delete/{id}', [TripController::class, 'delete'])->name('trips.destroy');
-
+    Route::delete('/delete/{id}', [TripController::class, 'destroy'])->name('trips.destroy');
 });

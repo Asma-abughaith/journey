@@ -16,8 +16,7 @@
                             <div class="card-body">
 
                                 <h4 class="card-title"></h4>
-                                <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap"
-                                    style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                     <thead>
                                         <tr>
                                             <th class="text-center">{{ __('app.id') }}</th>
@@ -40,31 +39,28 @@
                                                 <td class="text-center col-2">{{ $trip['place'] }}</td>
                                                 <td class="text-center col-2">{{ $trip['datetime'] }}</td>
                                                 <td class="text-center col-2">
-                                                    {{$trip['status'] == 1? __('app.active')  : __('app.inactive')}}
+                                                    {{ $trip['status'] == 1 ? __('app.active') : __('app.inactive') }}
                                                 </td>
 
                                                 <td class="text-center col-2">
 
 
                                                     {{--                                                    @if (AdminPermission('view events')) --}}
-                                                    <a class="btn btn-outline-primary btn-sm" title="Show"
-                                                        href="{{ route('admin.trips.show', $trip['id']) }}">
+                                                    <a class="btn btn-outline-primary btn-sm" title="Show" href="{{ route('admin.trips.show', $trip['id']) }}">
                                                         <i class="fas fa-eye" title="show"></i>
                                                     </a>
                                                     {{--                                                    @endif --}}
 
                                                     {{--                                                        @if (AdminPermission('delete event')) --}}
-                                                    <form method="post"
-                                                        action="{{ route('admin.trips.destroy', $trip['id']) }}"
-                                                        style="display:inline;">
+                                                    <form method="post" action="{{ route('admin.trips.destroy', $trip['id']) }}" style="display:inline;">
                                                         @csrf
                                                         @method('delete')
-                                                        <button type="submit" class="btn btn-outline-danger btn-sm"
-                                                            title="Delete" style="padding-bottom: 1px;"
+                                                        <button type="submit" class="btn btn-outline-danger btn-sm" title="Delete" style="padding-bottom: 1px;"
                                                             onclick="return confirm('Are you sure you want to delete?')">
                                                             <i class="ri-delete-bin-line" title="Edit"></i>
                                                         </button>
                                                     </form>
+
                                                     {{--                                                            @endif --}}
                                                 </td>
 

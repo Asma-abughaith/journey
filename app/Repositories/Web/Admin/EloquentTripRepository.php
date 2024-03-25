@@ -24,7 +24,7 @@ class EloquentTripRepository implements TripRepositoryInterface
 
     public function getTrip($id)
     {
-        $eloquentTrip = Trip::where('id',$id)->with('usersTrip.user')->first();
+        $eloquentTrip = Trip::where('id', $id)->with('usersTrip.user')->first();
         $trip = $this->convertToEntity($eloquentTrip);
         return $trip;
     }
@@ -35,26 +35,25 @@ class EloquentTripRepository implements TripRepositoryInterface
 
         if ($eloquentTrip) {
             $eloquentTrip->update([
-                'status' => '2'
+                'status' => '3'
             ]);
 
             foreach ($eloquentTrip->usersTrip as $userTrip) {
                 $userTrip->update([
-                    'status' => '2'
+                    'status' => '4'
                 ]);
             }
         }
-
     }
 
 
 
     protected function convertToEntity(Trip $eloquentTrip)
     {
-        $users_trip =[];
-       foreach ($eloquentTrip->usersTrip as $user_trip){
-           $users_trip[]= $user_trip->user->username;
-       }
+        $users_trip = [];
+        foreach ($eloquentTrip->usersTrip as $user_trip) {
+            $users_trip[] = $user_trip->user->username;
+        }
 
         $trip = new TripEntity();
         $trip->setId($eloquentTrip->id);

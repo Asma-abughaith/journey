@@ -13,15 +13,16 @@ class TripController extends Controller
     protected $tripPresenter;
     protected $tripUseCase;
 
-    public function __construct( TripPresenter $tripPresenter, TripUseCase $tripUseCase) {
+    public function __construct(TripPresenter $tripPresenter, TripUseCase $tripUseCase)
+    {
         $this->tripPresenter = $tripPresenter;
         $this->tripUseCase = $tripUseCase;
 
-//        $this->middleware('checkPermission:view categories')->only(['index']);
-//        $this->middleware('checkPermission:create category')->only(['create', 'store']);
-//        $this->middleware('checkPermission:view categories')->only(['show']);
-//        $this->middleware('checkPermission:edit category')->only(['edit', 'update']);
-//        $this->middleware('checkPermission:delete category')->only(['destroy']);
+        //        $this->middleware('checkPermission:view categories')->only(['index']);
+        //        $this->middleware('checkPermission:create category')->only(['create', 'store']);
+        //        $this->middleware('checkPermission:view categories')->only(['show']);
+        //        $this->middleware('checkPermission:edit category')->only(['edit', 'update']);
+        //        $this->middleware('checkPermission:delete category')->only(['destroy']);
 
     }
     /**
@@ -29,10 +30,10 @@ class TripController extends Controller
      */
     public function index()
     {
-        try{
+        try {
             $allTrips = $this->tripUseCase->getAllTrips();
             $trips = $this->tripPresenter->presentAllTrip($allTrips);
-            return view('admin.trips.index',compact('trips'));
+            return view('admin.trips.index', compact('trips'));
         } catch (\Exception $e) {
             Toastr::error($e->getMessage(), 'Error');
             return redirect()->back()->withInput();
@@ -41,10 +42,10 @@ class TripController extends Controller
 
     public function show($id)
     {
-        try{
+        try {
             $trip = $this->tripUseCase->getTrip($id);
             $trip = $this->tripPresenter->presentTrip($trip);
-            return view('admin.trips.show',compact('trip'));
+            return view('admin.trips.show', compact('trip'));
         } catch (\Exception $e) {
             Toastr::error($e->getMessage(), 'Error');
             return redirect()->back()->withInput();
@@ -62,5 +63,4 @@ class TripController extends Controller
             return redirect()->back()->withInput();
         }
     }
-
 }

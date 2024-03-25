@@ -22,7 +22,7 @@ class CheckUserTripStatus implements ValidationRule
                 $fail('app.this-user-has-already-joined-this-trip');
             }
 
-            if ($userTrip->status == '2' || $userTrip->status == '3') {
+            if ($userTrip->status == '2') {
                 $fail('app.this-user-has-been-rejected-from-this-trip');
             }
         }

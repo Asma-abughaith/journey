@@ -73,6 +73,7 @@ class EloquentTripApiRepository implements TripApiRepositoryInterface
         }
     }
 
+    // When User Leaving
     public function cancelJoinTrip($trip_id)
     {
         UsersTrip::where('trip_id', $trip_id)->where('user_id', Auth::guard('api')->user()->id)->update(['status' => '3']);
@@ -89,6 +90,7 @@ class EloquentTripApiRepository implements TripApiRepositoryInterface
         return true;
     }
 
+    //When Creator Accept Or Reject User
     public function changeStatus($request)
     {
         $status = $request->status == 'accept' ? '1' : '2';
