@@ -82,7 +82,7 @@ class PlanCreate extends Component
                 $rules["days.$dayIndex.activities.$activityIndex.name_ar"] = "required ";
                 $rules["days.$dayIndex.activities.$activityIndex.start_time"] = $activityRule;
                 $rules["days.$dayIndex.activities.$activityIndex.end_time"] = $activityRule . "|after:days.$dayIndex.activities.$activityIndex.start_time";
-                $rules["days.$dayIndex.activities.$activityIndex.place_id"] = "required"."|exists:plans,id";
+                $rules["days.$dayIndex.activities.$activityIndex.place_id"] = "required" . "|exists:places,id";
                 $rules["days.$dayIndex.activities.$activityIndex.note_en"] = "max:2000";
                 $rules["days.$dayIndex.activities.$activityIndex.note_ar"] = "max:2000";
             }
@@ -116,13 +116,18 @@ class PlanCreate extends Component
         $translatorName = ['en' => $this->name_en, 'ar' => $this->name_ar];
         $translatorDescription = ['en' => $this->description_en, 'ar' => $this->description_ar];
         $newPlan = $admin->plans()->create(['name' => $translatorName, 'description' => $translatorDescription]);
+        $newPlan->setTranslations('name', $translatorName);
+        $newPlan->setTranslations('description', $translatorDescription);
+
         foreach ($this->days as $key => $day) {
             $dayNumber = ++$key;
             $activities = $day['activities'];
             foreach ($activities as $activity) {
                 $translatorActivityName = ['en' => $activity['name_en'], 'ar' => $activity['name_ar']];
                 $translatorActivityNote = ['en' => $activity['note_en'], 'ar' => $activity['note_ar']];
-                $newPlan->activities()->create(['plan_id' => $newPlan->id, 'day_number' => $dayNumber, 'activity_name' => $translatorActivityName, 'start_time' => $activity['start_time'], 'end_time' => $activity['end_time'], 'place_id' => $activity['place_id'], 'notes' => $translatorActivityNote]);
+                $activity = $newPlan->activities()->create(['plan_id' => $newPlan->id, 'day_number' => $dayNumber, 'activity_name' => $translatorActivityName, 'start_time' => $activity['start_time'], 'end_time' => $activity['end_time'], 'place_id' => $activity['place_id'], 'notes' => $translatorActivityNote]);
+                $activity->setTranslations('activity_name', $translatorActivityName);
+                $activity->setTranslations('notes', $translatorActivityNote);
             }
         }
         Toastr::success(__('validation.msg.plan-created-successfully!'), __('validation.msg.success'));
