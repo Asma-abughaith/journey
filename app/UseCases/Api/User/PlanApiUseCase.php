@@ -20,6 +20,12 @@ class PlanApiUseCase
         return $this->planRepository->createPlan($validatedData);
     }
 
+    public function updatePlan($validatedData)
+    {
+        return $this->planRepository->updatePlan($validatedData);
+
+    }
+
     public function deletePlan($id)
     {
         return $this->planRepository->deletePlan($id);

@@ -5,13 +5,11 @@ namespace App\Http\Controllers\Api\User;
 use App\Helpers\ApiResponse;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\User\Plan\CreatePlanApiRequest;
-use App\Models\Plan;
-use App\Rules\CheckIfNotExistsInFavoratblesRule;
+use App\Http\Requests\Api\User\Plan\UpdatePlanApiRequest;
 use App\Rules\CheckIfPlanBelongsToUser;
 use App\UseCases\Api\User\PlanApiUseCase;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class PlanApiController extends Controller
@@ -37,12 +35,24 @@ class PlanApiController extends Controller
 
     public function create(CreatePlanApiRequest $request)
     {
-        // Validated data will be available in the $request->validated() method
         $validatedData = $request->validated();
 
         try {
             $createTrip = $this->planApiUseCase->createPlan($validatedData);
             return ApiResponse::sendResponse(200, __('app.plan-created-successfully'), $createTrip);
+        } catch (\Exception $e) {
+            return ApiResponse::sendResponseError(Response::HTTP_BAD_REQUEST,  $e->getMessage());
+        }
+
+    }
+
+    public function update(UpdatePlanApiRequest $request)
+    {
+        $validatedData = $request->validated();
+
+        try {
+            $createTrip = $this->planApiUseCase->updatePlan($validatedData);
+            return ApiResponse::sendResponse(200, __('app.plan-updated-successfully'), $createTrip);
         } catch (\Exception $e) {
             return ApiResponse::sendResponseError(Response::HTTP_BAD_REQUEST,  $e->getMessage());
         }

@@ -3,12 +3,13 @@
 namespace App\Http\Requests\Api\User\Plan;
 
 use App\Helpers\ApiResponse;
+use App\Rules\CheckIfPlanBelongsToUser;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\Response;
 
-class CreatePlanApiRequest extends FormRequest
+class UpdatePlanApiRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,6 +27,7 @@ class CreatePlanApiRequest extends FormRequest
     public function rules(): array
     {
         $rules = [
+            'plan_id'=>['required','exists:plans,id',new CheckIfPlanBelongsToUser()],
             'name' => 'required',
             'description' => 'required',
             'days' => 'required|array',
@@ -41,7 +43,7 @@ class CreatePlanApiRequest extends FormRequest
                 $rules["days.$dayIndex.activities.$activityIndex.name"] = "required";
                 $rules["days.$dayIndex.activities.$activityIndex.start_time"] = $activityRule;
                 $rules["days.$dayIndex.activities.$activityIndex.end_time"] = $activityRule . "|after:days.$dayIndex.activities.$activityIndex.start_time";
-                $rules["days.$dayIndex.activities.$activityIndex.place_id"] = "required|exists:places,id";;
+                $rules["days.$dayIndex.activities.$activityIndex.place_id"] = "required|exists:places,id";
                 $rules["days.$dayIndex.activities.$activityIndex.note"] = "max:255";
             }
         }

@@ -63,6 +63,7 @@ Route::group(['prefix' => 'volunteering'], function () {
 Route::group(['prefix' => 'plan'], function () {
     Route::get('/', [PlanApiController::class, 'index']);
     Route::post('/create', [PlanApiController::class, 'create']);
+    Route::post('/update/{plan_id?}', [PlanApiController::class, 'update']);
     Route::delete('/{plan_id?}/delete', [PlanApiController::class, 'destroy']);
 
 });

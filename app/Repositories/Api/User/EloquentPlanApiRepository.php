@@ -67,6 +67,31 @@ class EloquentPlanApiRepository implements PlanApiRepositoryInterface
 
     }
 
+    public function updatePlan($validatedData)
+    {
+        $plan = Plan::find($validatedData['plan_id']);
+        $plan->activities()->delete();
+        $plan->update([
+            'name' => ['en' => $validatedData['name'], 'ar' => $validatedData['name']],
+            'description' => ['en' => $validatedData['description'], 'ar' => $validatedData['description']],
+        ]);
+
+        foreach ($validatedData['days'] as $index => $day) {
+            foreach ($day['activities'] as $activity) {
+                $translatorActivityName = ['en' => $activity['name'], 'ar' => $activity['name']];
+                $translatorActivityNote = ['en' => $activity['note'], 'ar' => $activity['note']];
+                $plan->activities()->create([
+                    'day_number' => $index+1,
+                    'activity_name' => $translatorActivityName,
+                    'start_time' => $activity['start_time'],
+                    'end_time' => $activity['end_time'],
+                    'place_id' => $activity['place_id'],
+                    'notes' => $translatorActivityNote ?? null,
+                ]);
+            }
+        }
+    }
+
     public function deletePlan($id)
     {
         $plan = Plan::find($id)->delete();
