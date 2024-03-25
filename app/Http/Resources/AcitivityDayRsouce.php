@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class DaySinglePlanResource extends JsonResource
+class AcitivityDayRsouce extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -15,8 +15,11 @@ class DaySinglePlanResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'day_number' => $this->first()->day_number,
-            'activities' => AcitivityDayRsouce::collection($this),
+            'name' => $this->activity_name,
+            'place'=>$this->place->name,
+            'note'=>$this->notes,
+            'start_time' => $this->start_time,
+            'end_time' => $this->end_time,
         ];
     }
 }

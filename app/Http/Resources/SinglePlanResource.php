@@ -17,7 +17,7 @@ class SinglePlanResource extends JsonResource
         return [
             'name' => $this->name,
             'description' =>  $this->description,
-            'days' => DaySinglePlanResource::collection($this->activities),
+            'days' => DaySinglePlanResource::collection($this->activities->groupBy('day_number')),
         ];
     }
 }
