@@ -16,10 +16,10 @@ class PlanApiController extends Controller
 {
     protected $planApiUseCase;
 
-    public function __construct(PlanApiUseCase $planApiUseCase) {
+    public function __construct(PlanApiUseCase $planApiUseCase)
+    {
 
         $this->planApiUseCase = $planApiUseCase;
-
     }
 
     public function index()
@@ -32,7 +32,6 @@ class PlanApiController extends Controller
         }
     }
 
-
     public function create(CreatePlanApiRequest $request)
     {
         $validatedData = $request->validated();
@@ -43,7 +42,6 @@ class PlanApiController extends Controller
         } catch (\Exception $e) {
             return ApiResponse::sendResponseError(Response::HTTP_BAD_REQUEST,  $e->getMessage());
         }
-
     }
 
     public function update(UpdatePlanApiRequest $request)
@@ -56,14 +54,30 @@ class PlanApiController extends Controller
         } catch (\Exception $e) {
             return ApiResponse::sendResponseError(Response::HTTP_BAD_REQUEST,  $e->getMessage());
         }
+    }
 
+    public function show(Request $request)
+    {
+        $validator = Validator::make(['plan_id' => $request->plan_id], [
+            'plan_id' => ['required', 'exists:plans,id', new CheckIfPlanBelongsToUser()],
+        ]);
+
+        if ($validator->fails()) {
+            return ApiResponse::sendResponseError(Response::HTTP_BAD_REQUEST,  $validator->errors()->messages()['plan_id'][0]);
+        }
+        try {
+            $plan = $this->planApiUseCase->show($request->plan_id);
+            return ApiResponse::sendResponse(200, __('app.you-are-left-from-the-trip-successfully'), $plan);
+        } catch (\Exception $e) {
+            return ApiResponse::sendResponseError(Response::HTTP_BAD_REQUEST,  $e->getMessage());
+        }
     }
 
     public function destroy(Request $request)
     {
         $id = $request->plan_id;
         $validator = Validator::make(['plan_id' => $id], [
-            'plan_id' => ['required', 'exists:plans,id',new CheckIfPlanBelongsToUser()],
+            'plan_id' => ['required', 'exists:plans,id', new CheckIfPlanBelongsToUser()],
         ]);
 
         if ($validator->fails()) {
@@ -76,9 +90,5 @@ class PlanApiController extends Controller
         } catch (\Exception $e) {
             return ApiResponse::sendResponseError(Response::HTTP_BAD_REQUEST,  $e->getMessage());
         }
-
     }
-
-
-
 }

@@ -21,10 +21,8 @@ class PlaceResource extends JsonResource
             'image' => $this->getFirstMediaUrl('main_place', 'main_place_app'),
             'region' => $this->region->name,
             'address' => $this->address,
-            'rating'=>$this->rating,
+            'rating' => $this->rating,
             'distance' => $this->distance,
         ];
     }
-
-
 }

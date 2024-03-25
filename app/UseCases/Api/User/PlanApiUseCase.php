@@ -23,7 +23,6 @@ class PlanApiUseCase
     public function updatePlan($validatedData)
     {
         return $this->planRepository->updatePlan($validatedData);
-
     }
 
     public function deletePlan($id)
@@ -36,9 +35,8 @@ class PlanApiUseCase
         return $this->planRepository->allPlans();
     }
 
-
-
-
-
-
+    public function show($id)
+    {
+        return $this->planRepository->show($id);
+    }
 }

@@ -65,5 +65,5 @@ Route::group(['prefix' => 'plan'], function () {
     Route::post('/create', [PlanApiController::class, 'create']);
     Route::post('/update/{plan_id?}', [PlanApiController::class, 'update']);
     Route::delete('/{plan_id?}/delete', [PlanApiController::class, 'destroy']);
-
+    Route::get('/{plan_id?}', [PlanApiController::class, 'show']);
 });

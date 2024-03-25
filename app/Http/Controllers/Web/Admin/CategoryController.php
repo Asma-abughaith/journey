@@ -15,15 +15,16 @@ class CategoryController extends Controller
     protected $categoryPresenter;
     protected $categoryUseCase;
 
-    public function __construct( CategoryPresenter $categoryPresenter, CategoryUseCase $categoryUseCase) {
+    public function __construct(CategoryPresenter $categoryPresenter, CategoryUseCase $categoryUseCase)
+    {
         $this->categoryPresenter = $categoryPresenter;
         $this->categoryUseCase = $categoryUseCase;
 
-//        $this->middleware('checkPermission:view categories')->only(['index']);
-//        $this->middleware('checkPermission:create category')->only(['create', 'store']);
-//        $this->middleware('checkPermission:view categories')->only(['show']);
-//        $this->middleware('checkPermission:edit category')->only(['edit', 'update']);
-//        $this->middleware('checkPermission:delete category')->only(['destroy']);
+        //        $this->middleware('checkPermission:view categories')->only(['index']);
+        //        $this->middleware('checkPermission:create category')->only(['create', 'store']);
+        //        $this->middleware('checkPermission:view categories')->only(['show']);
+        //        $this->middleware('checkPermission:edit category')->only(['edit', 'update']);
+        //        $this->middleware('checkPermission:delete category')->only(['destroy']);
 
     }
     /**
@@ -31,10 +32,10 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        try{
+        try {
             $allCategories = $this->categoryUseCase->allCategories();
             $categories = $this->categoryPresenter->presentAllCategories($allCategories);
-            return view('admin.categories.index',compact('categories'));
+            return view('admin.categories.index', compact('categories'));
         } catch (\Exception $e) {
             Toastr::error($e->getMessage(), 'Error');
             return redirect()->back()->withInput();
@@ -56,7 +57,7 @@ class CategoryController extends Controller
     {
         try {
 
-            $this->categoryUseCase->createCategory( $request->validated());
+            $this->categoryUseCase->createCategory($request->validated());
             Toastr::success(__('validation.msg.category-created-successfully!'), __('validation.msg.success'));
             return redirect()->route('admin.categories.index');
         } catch (\Exception $e) {
@@ -81,7 +82,7 @@ class CategoryController extends Controller
         try {
             $category = $this->categoryUseCase->getCategory($category);
             $category = $this->categoryPresenter->persentCategory($category);
-            return view('admin.categories.edit',compact('category'));
+            return view('admin.categories.edit', compact('category'));
         } catch (\Exception $e) {
             Toastr::error($e->getMessage(), 'Error');
             return redirect()->back()->withInput();

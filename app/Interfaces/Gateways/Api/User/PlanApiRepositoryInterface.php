@@ -9,8 +9,5 @@ interface PlanApiRepositoryInterface
     public function createPlan($validatedData);
     public function updatePlan($validatedData);
     public function deletePlan($id);
-
-
-
-
+    public function show($id);
 }
