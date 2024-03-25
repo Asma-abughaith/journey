@@ -16,7 +16,7 @@ class DaySinglePlanResource extends JsonResource
     {
         return [
             'day_number' => $this->first()->day_number,
-            'activities' => AcitivityDayRsouce::collection($this),
+            'activities' => ActivityDayResource::collection($this),
         ];
     }
 }
