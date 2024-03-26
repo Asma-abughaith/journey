@@ -8,6 +8,7 @@ use App\Interfaces\Gateways\Api\User\EventApiRepositoryInterface;
 use App\Interfaces\Gateways\Api\User\PlaceApiRepositoryInterface;
 use App\Interfaces\Gateways\Api\User\PlanApiRepositoryInterface;
 use App\Interfaces\Gateways\Api\User\PopularPlaceApiRepositoryInterface;
+use App\Interfaces\Gateways\Api\User\PostApiRepositoryInterface;
 use App\Interfaces\Gateways\Api\User\SubCategoryApiRepositoryInterface;
 use App\Interfaces\Gateways\Api\User\TopTenPlaceApiRepositoryInterface;
 use App\Interfaces\Gateways\Api\User\UserProfileApiRepositoryInterface;
@@ -33,6 +34,7 @@ use App\Repositories\Api\User\EloquentEventApiRepository;
 use App\Repositories\Api\User\EloquentPlaceApiRepository;
 use App\Repositories\Api\User\EloquentPlanApiRepository;
 use App\Repositories\Api\User\EloquentPopularPlaceApiRepository;
+use App\Repositories\Api\User\EloquentPostApiRepository;
 use App\Repositories\Api\User\EloquentSubCategoryApiRepository;
 use App\Repositories\Api\User\EloquentTopTenPlaceApiRepository;
 use App\Repositories\Api\User\EloquentUserProfileApiRepository;
@@ -103,6 +105,9 @@ class AppServiceProvider extends ServiceProvider
 
         $this->app->bind(TripApiRepositoryInterface::class, EloquentTripApiRepository::class);
         $this->app->bind(TripRepositoryInterface::class, EloquentTripRepository::class);
+
+        $this->app->bind(PostApiRepositoryInterface::class, EloquentPostApiRepository::class);
+
 
     }
 

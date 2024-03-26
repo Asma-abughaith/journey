@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\User\TripApiController;
 use App\Http\Controllers\Api\User\EventApiController;
 use App\Http\Controllers\Api\User\VolunteeringApiController;
 use App\Http\Controllers\Api\User\PlanApiController;
+use App\Http\Controllers\Api\User\PostApiController;
 
 
 Route::get('/user/profile', [UserProfileController::class, 'userDetails'])->name('user.profile');
@@ -66,4 +67,11 @@ Route::group(['prefix' => 'plan'], function () {
     Route::post('/update/{plan_id?}', [PlanApiController::class, 'update']);
     Route::delete('/{plan_id?}/delete', [PlanApiController::class, 'destroy']);
     Route::get('/{plan_id?}', [PlanApiController::class, 'show']);
+});
+
+// All Routes For Plan
+Route::group(['prefix' => 'post'], function () {
+    Route::get('/', [PostApiController::class, 'index']);
+    Route::post('/store',[PostApiController::class, 'store']);
+
 });

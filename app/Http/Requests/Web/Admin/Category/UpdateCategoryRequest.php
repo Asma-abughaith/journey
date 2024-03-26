@@ -30,7 +30,7 @@ class UpdateCategoryRequest extends FormRequest
             'name_en' => ['required', 'string' ,'min:3', Rule::unique('categories', 'name->en')->ignore($categoryId)],
             'name_ar' => ['required', 'string' ,'min:3', Rule::unique('categories', 'name->ar')->ignore($categoryId)],
             'priority' => ['required', Rule::unique('categories', 'priority')->ignore($categoryId)],
-            'image' => ['image', 'mimes:jpeg,png,jpg,gif,svg'],
+            'image' => ['image', 'mimes:jpeg,png,jpg,gif,svg,webp'],
         ];
     }
 

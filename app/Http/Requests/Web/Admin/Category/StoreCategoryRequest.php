@@ -29,7 +29,7 @@ class StoreCategoryRequest extends FormRequest
             'name_en' => ['required', 'string', 'min:3', Rule::unique('categories', 'name->en')],
             'name_ar' => ['required', 'string', 'min:3', Rule::unique('categories', 'name->ar')],
             'priority' => ['required', Rule::unique('categories')],
-            'image' => ['required', 'image', 'mimes:jpeg,png,jpg,gif,svg'],
+            'image' => ['required', 'image', 'mimes:jpeg,png,jpg,gif,svg,webp'],
         ];
     }
 
