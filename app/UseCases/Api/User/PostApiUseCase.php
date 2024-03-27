@@ -16,12 +16,13 @@ class PostApiUseCase
 
     public function createPost($validatedData)
     {
-        return $this->postRepository->createPost([
-            'user_id'=>Auth::guard('api')->user()->id,
-            'visitable_type'=>$validatedData['visitable_type'],
-            'visitable_id'=>$validatedData['visitable_id'],
-            'content'=>$validatedData['content'],
-            'privacy'=>$validatedData['privacy'],
+        return $this->postRepository->createPost(
+            [
+                'user_id' => Auth::guard('api')->user()->id,
+                'visitable_type' => $validatedData['visitable_type'],
+                'visitable_id' => $validatedData['visitable_id'],
+                'content' => $validatedData['content'],
+                'privacy' => $validatedData['privacy'],
             ],
             isset($validatedData['media']) ? $validatedData['media'] : null,
         );
@@ -29,14 +30,15 @@ class PostApiUseCase
 
     public function updatePost($validatedData)
     {
-        return $this->postRepository->updatePost([
-            'user_id'=>Auth::guard('api')->user()->id,
-            'visitable_type'=>$validatedData['visitable_type'],
-            'visitable_id'=>$validatedData['visitable_id'],
-            'content'=>$validatedData['content'],
-            'privacy'=>$validatedData['privacy'],
-            'post_id'=>$validatedData['post_id']
-        ],
+        return $this->postRepository->updatePost(
+            [
+                'user_id' => Auth::guard('api')->user()->id,
+                'visitable_type' => $validatedData['visitable_type'],
+                'visitable_id' => $validatedData['visitable_id'],
+                'content' => $validatedData['content'],
+                'privacy' => $validatedData['privacy'],
+                'post_id' => $validatedData['post_id']
+            ],
             isset($validatedData['media']) ? $validatedData['media'] : null,
         );
     }
@@ -50,6 +52,4 @@ class PostApiUseCase
     {
         return $this->postRepository->allPosts();
     }
-
-
 }

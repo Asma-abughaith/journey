@@ -10,8 +10,8 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class Post extends Model implements HasMedia
 {
-    use HasFactory,InteractsWithMedia;
-    protected $guarded=[];
+    use HasFactory, InteractsWithMedia;
+    protected $guarded = [];
 
     public function place()
     {
@@ -25,7 +25,6 @@ class Post extends Model implements HasMedia
     public function registerMediaCollections(): void
     {
         $this->addMediaCollection('post')
-            ->singleFile()
             ->registerMediaConversions(function (Media $media) {
                 $this->addMediaConversion('post_app')->width(295)->height(220)->format('webp');
                 $this->addMediaConversion('post_website')->width(400)->height(365)->format('webp');

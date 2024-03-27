@@ -13,10 +13,9 @@ class EloquentPostApiRepository implements PostApiRepositoryInterface
 {
     public function allPosts()
     {
-
     }
 
-    public function createPost($validatedData,$media)
+    public function createPost($validatedData, $media)
     {
         $eloquentPost = Post::create($validatedData);
         if ($media !== null) {
@@ -26,12 +25,13 @@ class EloquentPostApiRepository implements PostApiRepositoryInterface
                 $eloquentPost->addMedia($image)->usingFileName($filename)->toMediaCollection('post');
             }
         }
-
     }
 
-    public function updatePost($validatedData,$media)
+    public function updatePost($validatedData, $media)
     {
-        $eloquentPost = Post::create($validatedData);
+        $eloquentPost = Post::findOrFail($validatedData['post_id']);
+        unset($validatedData['post_id']);
+        $eloquentPost->update($validatedData);
         if ($media !== null) {
             foreach ($media as $image) {
                 $extension = pathinfo($image->getClientOriginalName(), PATHINFO_EXTENSION);
@@ -44,8 +44,5 @@ class EloquentPostApiRepository implements PostApiRepositoryInterface
 
     public function deletePost($id)
     {
-
     }
-
-
 }

@@ -72,8 +72,8 @@ Route::group(['prefix' => 'plan'], function () {
 // All Routes For Plan
 Route::group(['prefix' => 'post'], function () {
     Route::get('/', [PostApiController::class, 'index']);
-    Route::post('/store',[PostApiController::class, 'store']);
-    Route::post('/update/{post_id}',[PostApiController::class, 'update']);
-    Route::delete('/delete/{post_id}',[PostApiController::class, 'delete']);
-
+    Route::post('/store', [PostApiController::class, 'store']);
+    Route::post('/update/{post_id}', [PostApiController::class, 'update']);
+    Route::get('/get/imges/{post_id}', [PostApiController::class, 'images']);
+    Route::delete('/delete/{post_id}', [PostApiController::class, 'delete']);
 });

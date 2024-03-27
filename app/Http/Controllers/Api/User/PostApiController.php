@@ -32,9 +32,7 @@ class PostApiController extends Controller
      */
     public function store(CreatePostApiRequest $request)
     {
-
         $validatedData = $request->validated();
-
         try {
             $createTrip = $this->postApiUseCase->createPost($validatedData);
             return ApiResponse::sendResponse(200, __('app.post-created-successfully'), $createTrip);
@@ -43,15 +41,12 @@ class PostApiController extends Controller
         }
     }
 
-
-
     /**
      * Update the specified resource in storage.
      */
     public function update(UpdatePostApiRequest $request, string $id)
     {
         $validatedData = $request->validated();
-        dd($validatedData);
         try {
             $createTrip = $this->postApiUseCase->updatePost($validatedData);
             return ApiResponse::sendResponse(200, __('app.post-created-successfully'), $createTrip);

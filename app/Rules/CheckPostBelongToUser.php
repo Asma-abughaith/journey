@@ -17,8 +17,8 @@ class CheckPostBelongToUser implements ValidationRule
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
         $userId = Auth::guard('api')->user()->id;
-        $plan = Post::where('id', $value)->where('user_id', $userId)->exists();
-        if (!$plan) {
+        $post = Post::where('id', $value)->where('user_id', $userId)->exists();
+        if (!$post) {
             $fail('__(you_are_not_the_owner_of_this_post)');
         }
     }
