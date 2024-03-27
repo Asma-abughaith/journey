@@ -3,11 +3,17 @@
 namespace App\Repositories\Api\User;
 
 
+use App\Helpers\ApiResponse;
+use App\Http\Resources\SinglePostResource;
 use App\Interfaces\Gateways\Api\User\PostApiRepositoryInterface;
 
 use App\Models\Post;
+use App\Rules\CheckUserTripExistsRule;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class EloquentPostApiRepository implements PostApiRepositoryInterface
 {
@@ -41,8 +47,27 @@ class EloquentPostApiRepository implements PostApiRepositoryInterface
         }
     }
 
-
-    public function deletePost($id)
+    public function showPost($id)
     {
+        $eloquentPost = Post::findOrFail($id);
+        return new SinglePostResource($eloquentPost);
+
+
+    }
+
+    public function deleteImage($id)
+    {
+        if ($id) {
+            Media::find($id)->delete();
+        }
+        return;
+
+
+    }
+
+
+    public function delete($id)
+    {
+        Post::find($id)->delete();
     }
 }

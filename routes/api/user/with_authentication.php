@@ -74,6 +74,7 @@ Route::group(['prefix' => 'post'], function () {
     Route::get('/', [PostApiController::class, 'index']);
     Route::post('/store', [PostApiController::class, 'store']);
     Route::post('/update/{post_id}', [PostApiController::class, 'update']);
-    Route::get('/get/imges/{post_id}', [PostApiController::class, 'images']);
-    Route::delete('/delete/{post_id}', [PostApiController::class, 'delete']);
+    Route::get('show/{post_id}', [PostApiController::class, 'show']);
+    Route::delete('/image/delete/{media_id}', [PostApiController::class, 'DeleteImage']);
+    Route::delete('/delete/{post_id}', [PostApiController::class, 'destroy']);
 });

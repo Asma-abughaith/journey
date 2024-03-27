@@ -30,14 +30,14 @@ class CreatePostApiRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'visitable_type'=> ['required', Rule::in(['place', 'plan', 'trip'])],
+            'visitable_type'=> ['required', Rule::in(['Place', 'Plan', 'Trip'])],
             'visitable_id' => ['required', function ($attribute, $value, $fail) {
                 $type = $this->input('visitable_type');
-                if ($type === 'place' && !Place::where('id', $value)->exists()) {
+                if ($type === 'Place' && !Place::where('id', $value)->exists()) {
                     $fail('The selected place does not exist.');
-                } elseif ($type === 'plan' && !Plan::where('id', $value)->exists()) {
+                } elseif ($type === 'Plan' && !Plan::where('id', $value)->exists()) {
                     $fail('The selected plan does not exist.');
-                } elseif ($type === 'trip' && !Trip::where('id', $value)->exists()) {
+                } elseif ($type === 'Trip' && !Trip::where('id', $value)->exists()) {
                     $fail('The selected trip does not exist.');
                 }
             }],

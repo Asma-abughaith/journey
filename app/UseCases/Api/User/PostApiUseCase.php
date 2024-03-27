@@ -16,6 +16,17 @@ class PostApiUseCase
 
     public function createPost($validatedData)
     {
+        switch ($validatedData['visitable_type']){
+            case "place":
+                $validatedData['visitable_type']='App\Models\Place';
+                break;
+            case "plan":
+                $validatedData['visitable_type']='App\Models\Plan';
+                break;
+            case "trip":
+                $validatedData['visitable_type']='App\Models\Trip';
+                break;
+        }
         return $this->postRepository->createPost(
             [
                 'user_id' => Auth::guard('api')->user()->id,
@@ -30,6 +41,17 @@ class PostApiUseCase
 
     public function updatePost($validatedData)
     {
+        switch ($validatedData['visitable_type']){
+            case "place":
+                $validatedData['visitable_type']='App\Models\Place';
+                break;
+            case "plan":
+                $validatedData['visitable_type']='App\Models\Plan';
+                break;
+            case "trip":
+                $validatedData['visitable_type']='App\Models\Trip';
+                break;
+        }
         return $this->postRepository->updatePost(
             [
                 'user_id' => Auth::guard('api')->user()->id,
@@ -43,9 +65,24 @@ class PostApiUseCase
         );
     }
 
+    public function showPost($id)
+    {
+        return $this->postRepository->showPost($id);
+    }
+
     public function deletePost($id)
     {
         return $this->postRepository->deletePost($id);
+    }
+
+    public function deleteImage($id)
+    {
+        return $this->postRepository->deleteImage($id);
+    }
+
+    public function delete($id)
+    {
+        return $this->postRepository->delete($id);
     }
 
     public function allPosts()
