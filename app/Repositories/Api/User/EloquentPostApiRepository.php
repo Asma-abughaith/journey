@@ -31,7 +31,14 @@ class EloquentPostApiRepository implements PostApiRepositoryInterface
 
     public function updatePost($validatedData,$media)
     {
-
+        $eloquentPost = Post::create($validatedData);
+        if ($media !== null) {
+            foreach ($media as $image) {
+                $extension = pathinfo($image->getClientOriginalName(), PATHINFO_EXTENSION);
+                $filename = Str::random(10) . '_' . time() . '.' . $extension;
+                $eloquentPost->addMedia($image)->usingFileName($filename)->toMediaCollection('post');
+            }
+        }
     }
 
 

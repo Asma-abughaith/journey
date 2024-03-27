@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\User;
 use App\Helpers\ApiResponse;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\User\Post\CreatePostApiRequest;
+use App\Http\Requests\Api\User\Post\UpdatePostApiRequest;
 use App\UseCases\Api\User\PostApiUseCase;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -42,20 +43,21 @@ class PostApiController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
+
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdatePostApiRequest $request, string $id)
     {
-        //
+        $validatedData = $request->validated();
+        dd($validatedData);
+        try {
+            $createTrip = $this->postApiUseCase->updatePost($validatedData);
+            return ApiResponse::sendResponse(200, __('app.post-created-successfully'), $createTrip);
+        } catch (\Exception $e) {
+            return ApiResponse::sendResponseError(Response::HTTP_BAD_REQUEST,  $e->getMessage());
+        }
     }
 
     /**

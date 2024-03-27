@@ -29,7 +29,16 @@ class PostApiUseCase
 
     public function updatePost($validatedData)
     {
-        return $this->postRepository->updatePost($validatedData,[]);
+        return $this->postRepository->updatePost([
+            'user_id'=>Auth::guard('api')->user()->id,
+            'visitable_type'=>$validatedData['visitable_type'],
+            'visitable_id'=>$validatedData['visitable_id'],
+            'content'=>$validatedData['content'],
+            'privacy'=>$validatedData['privacy'],
+            'post_id'=>$validatedData['post_id']
+        ],
+            isset($validatedData['media']) ? $validatedData['media'] : null,
+        );
     }
 
     public function deletePost($id)
